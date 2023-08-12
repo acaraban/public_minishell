@@ -18,9 +18,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 	{
 		if ((boo == 1 || boo == 0) && txt[i] == '$')
 		{
+			ft_printf("estoy en el caracter %c\n ", txt[i]);
 			txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
 			if (txt == NULL)
 				return (NULL);
+			ft_printf("estoy en el caracter %s\n ", txt);
 		}
 		else if (boo == 1 && (txt[i] == '\"'))
 			boo = 0;
@@ -91,6 +93,10 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		if (vue == NULL)
 			return (NULL);
 	}
+	int rj = 0;
+	ft_printf("este es vue: ");
+	while (vue[rj])
+		ft_printf("%s\n", vue[rj++]);
 	return (vue);
 }
 

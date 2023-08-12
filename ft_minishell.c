@@ -1,7 +1,13 @@
 #include "minishell.h"
 
+void ctrlChandler(int signal){
+	(void)signal;
+	printf("\n");
+}
+
 int main(int argc, char **argv, char **env)
 {
+	//signal(SIGINT, ctrlChandler);
 	char *txt;
 	t_global *glb;
 

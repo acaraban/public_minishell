@@ -17,20 +17,26 @@ int all_chr(char *txt, int pos)
 	int i;
 	int j;
 	int k;
+	int r;
 
 	if (txt + pos)
 	{
 		i = frst_chr(txt + pos, ' ');
 		j = frst_chr(txt + pos, '\"');
 		k = frst_chr(txt + pos, '\'');
-		if (i < j && i < k && i > -1)
-			return (i + pos);
-		if (j < i && j < k && j > -1)
-			return (j + pos);
-		if (k < i && k < j && k > -1)
-			return (k + pos);
+		r = frst_chr(txt + pos, '$');
+		if (r < j && r < k && r < i && r > -1)
+			return (r + pos);
+		else
+		{
+			if (i < j && i < k && i > -1)
+				return (i + pos);
+			if (j < i && j < k && j > -1)
+				return (j + pos);
+			if (k < i && k < j && k > -1)
+				return (k + pos);
+		}
 	}
-
 	return (-1);
 }
 
@@ -46,8 +52,8 @@ int str_cmp(char *txt, int pos, char *cmp, char car)
 	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i + pos] != car)
 	{
 		if (i == 0)
-			printf("esto coincide:\n");
-		printf("%c", txt[i + pos]);
+			ft_printf("esto coincide:\n");
+		ft_printf("%c", txt[i + pos]);
 		i++;
 	}
 		
