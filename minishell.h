@@ -7,6 +7,11 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <stdlib.h>
 
 //valido
 # define VLD 0
@@ -30,7 +35,9 @@ typedef struct s_content
 	char *cmd;
 	char **full_comand;
 	char *infile;
+	int infile_fd; // coge valor con el open
 	char *outfile;
+    int outfile_fd;
 	int nfl;
 	int tfl;
 	t_global *global;
