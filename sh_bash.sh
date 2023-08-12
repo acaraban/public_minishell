@@ -35,6 +35,7 @@ typedef struct s_global
 {
 	char **env;
 	int err_stat;
+	int new_stat;
 }t_global;
 
 typedef struct s_content

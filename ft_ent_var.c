@@ -1,38 +1,51 @@
 #include "minishell.h"
 
-/*char	*ft_strdup_mod(const char *s1, int pos, int last)
-{
-	char		*s2;
-	size_t		len;
-
-	if (last < 0)
-	{
-		len = ft_strlen(s1) + 1;
-		s2 = malloc(len - pos);
-		if (!s2)
-			return (0);
-		ft_memcpy(s2, s1 + pos, len);
-	}
-	else
-	{
-		s2 = malloc(last - pos + 1);
-		if (!s2)
-			return (0);
-		ft_memcpy(s2, s1 + pos, last - pos + 1);
-		s2[last - pos] = '\0';
-	}
-	
-	return (s2);
-}*/
-
-int str_cmp(char *txt, int pos, char *cmp, char car, char o_car)
+int frst_chr(char *txt, char car)
 {
 	int i;
 
 	i = 0;
-	while (txt[i + pos] == cmp[i] && txt[i + pos] != car && txt[i + pos] && txt[i + pos] != o_car)
+	while (txt[i] != car && txt[i])
 		i++;
-	if ((!txt[i + pos] || txt[i + pos] == car) || txt[i + pos] == o_car)
+	if (!txt)
+		return (-1);
+	return (i);
+}
+
+int all_chr(char *txt, int pos)
+{
+	int i;
+	int j;
+	int k;
+
+	if (txt + pos)
+	{
+		i = frst_chr(txt + pos, ' ');
+		j = frst_chr(txt + pos, '\"');
+		k = frst_chr(txt + pos, '\'');
+		if (i < j && i < k && i > -1)
+			return (i + pos);
+		if (j < i && j < k && j > -1)
+			return (j + pos);
+		if (k < i && k < j && k > -1)
+			return (k + pos);
+	}
+
+	return (-1);
+}
+
+int str_cmp(char *txt, int pos, char *cmp, char car)
+{
+	int i;
+	int lstpos;
+
+	i = 0;
+	lstpos = all_chr(txt, pos);
+	if (lstpos < 0)
+		lstpos = ft_strlen(txt);
+	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i + pos] != car)
+		i++;
+	if (!txt[i + pos] || (cmp[i] == car && txt[i + pos] == lstpos))
 		return (i + 1);
 	return (0);
 }
@@ -61,9 +74,11 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	else
 	{
+		ft_printf("aqui llega\n");
+		ft_printf("ultima posicion %d\n", all_chr(txt, pos + 1));
 		while (env[i] && !par)
 		{
-			par = str_cmp(txt, pos + 1, env[i], ' ', '\"');
+			par = str_cmp(txt, pos + 1, env[i], '=');
 			i++;
 		}
 		if (par)
@@ -88,7 +103,7 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	if (aux2 == NULL)
 		return (NULL);
 	add = ft_strjoin(aux, aux2);
-	while (txt[pos + i] != ' ' && txt[pos + i])
+	while ((txt[pos + i] != ' ' && txt[pos + i] != '\"') && txt[pos + i])
 		i++;
 	aux = ft_substr(txt, pos + i, ft_strlen(env[i - 1]) - 1);
 	add = ft_strjoin(add, aux);
