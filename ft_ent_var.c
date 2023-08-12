@@ -44,8 +44,14 @@ int str_cmp(char *txt, int pos, char *cmp, char car)
 	if (lstpos < 0)
 		lstpos = ft_strlen(txt);
 	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i + pos] != car)
+	{
+		if (i == 0)
+			printf("esto coincide:\n");
+		printf("%c", txt[i + pos]);
 		i++;
-	if (!txt[i + pos] || (cmp[i] == car && txt[i + pos] == lstpos))
+	}
+		
+	if (!txt[i + pos] || (cmp[i] == car && i + pos == lstpos))
 		return (i + 1);
 	return (0);
 }
