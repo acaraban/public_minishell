@@ -19,6 +19,7 @@ typedef struct s_global
 {
 	int num_cmds;
 	char **env;
+	char	*environ_path;
 	int err_stat;
 	int new_stat;
 }t_global;
@@ -26,7 +27,6 @@ typedef struct s_global
 typedef struct s_content
 {
 	char	*access_path; // ACARABAN que lo inicie a nulo, yo le doy luego valor
-	char	*environ_path;
 	char *cmd;
 	char **full_comand;
 	char *infile;
@@ -56,5 +56,10 @@ int err_redsegred(char **arr, t_content *cont);
 int	err_sim_red(char *txt, int i, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
 int start_end_red(char **vue, t_content *cont);
+
+void	ft_executor(t_content *cont);
+char	*ft_access_program(char *environ_path, char *command);
+char	*ft_env_path(char **envp);
+char	*ft_access_program(char *environ_path, char *command);
 
 #endif

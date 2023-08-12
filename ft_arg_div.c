@@ -100,8 +100,11 @@ void ft_arg_div(char *txt, t_global *glb)
 		i++;
 	}
 
+	// aqui ??
+	ft_executor(cont);
+
 	////////////imprimir el struct //////////////////////
-	int l;
+	/*int l;
 
 	l = 0;
 	while (l < tam2)
@@ -123,7 +126,7 @@ void ft_arg_div(char *txt, t_global *glb)
 			ft_printf("%s\n", cont[l].outfile);
 		ft_printf("\n\n-------------------------------\n");
 		l++;
-	}
+	}*/
 
 	//////////////parte del codigo////////////////
 	cont[0].global[0].new_stat = cont[0].global[0].err_stat;
