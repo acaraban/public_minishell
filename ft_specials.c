@@ -16,7 +16,13 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 	vue[0] = NULL;
 	while (txt[i])
 	{
-		if (boo == 1 && (txt[i] == '\"'))
+		if ((boo == 1 || boo == 0) && txt[i] == '$')
+		{
+			txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
+			if (txt == NULL)
+				return (NULL);
+		}
+		else if (boo == 1 && (txt[i] == '\"'))
 			boo = 0;
 		else if (boo == 2 && (txt[i] == '\''))
 			boo = 0;
@@ -26,13 +32,6 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			boo = 2;
 		else if (boo)
 			boo = boo + 1 - 1;
-		else if ((boo == 1 || boo == 0) && txt[i] == '$')
-		{
-			txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
-			if (txt == NULL)
-				return (NULL);
-			ft_printf("el error esta despues de esto\n");
-		}
 		else if (txt[i] == '>' && txt[i + 1] == '>')
 		{
 			if (err_red(i, txt, cant))
@@ -84,7 +83,6 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		vue = dobl_prt(vue, txt, cont, i);
 	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
 	{
-		ft_printf("aqui entra?\n");
 		return (NULL);
 	}
 	if (errors)
@@ -92,10 +90,6 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		vue = start_end_pip(vue, cant);
 		if (vue == NULL)
 			return (NULL);
-		int rj = 0;
-		ft_printf("este es vue: \n");
-		while (vue[rj])
-			ft_printf("%s\n", vue[rj++]);
 	}
 	return (vue);
 }

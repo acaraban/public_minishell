@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-void ft_arg_div(char *txt, char **env)
+
+void ft_arg_div(char *txt, t_global *glb)
 {
 	char **final;
 	char ***cmd_str;
 	t_content *cont;
-	t_global *glb;
 	int tam;
 	int tam2;
 	int h;
@@ -22,7 +22,6 @@ void ft_arg_div(char *txt, char **env)
 	tam2 = tam;
 	i = 0;
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
-	glb = (t_global *)calloc(sizeof(t_content), 1);
 	tam = 0;
 	while (tam < tam2)
 	{
@@ -31,8 +30,6 @@ void ft_arg_div(char *txt, char **env)
 		cont[tam].tfl = 0;
 		tam++;
 	}
-	cont[0].global[0].env = env;
-	cont[0].global[0].err_stat = 0;
 	final = ft_specials(txt, cont, 1);
 	if (final == NULL)
 		return;
@@ -102,6 +99,8 @@ void ft_arg_div(char *txt, char **env)
 		}
 		i++;
 	}
+
+	////////////imprimir el struct //////////////////////
 	int l;
 
 	l = 0;
@@ -122,7 +121,11 @@ void ft_arg_div(char *txt, char **env)
 		ft_printf("outfile: %d ", cont[l].tfl);
 		if (cont[l].tfl)
 			ft_printf("%s\n", cont[l].outfile);
-		ft_printf("\n");
+		ft_printf("\n\n-------------------------------\n");
 		l++;
 	}
+
+	//////////////parte del codigo////////////////
+	cont[0].global[0].new_stat = cont[0].global[0].err_stat;
+	cont[0].global[0].err_stat = 0;
 }

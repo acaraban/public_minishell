@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*ft_strdup_mod(const char *s1, int pos, int last)
+/*char	*ft_strdup_mod(const char *s1, int pos, int last)
 {
 	char		*s2;
 	size_t		len;
@@ -23,16 +23,16 @@ char	*ft_strdup_mod(const char *s1, int pos, int last)
 	}
 	
 	return (s2);
-}
+}*/
 
-int str_cmp(char *txt, int pos, char *cmp, char car)
+int str_cmp(char *txt, int pos, char *cmp, char car, char o_car)
 {
 	int i;
 
 	i = 0;
-	while (txt[i + pos] == cmp[i] && txt[i + pos] != car && txt[i + pos])
+	while (txt[i + pos] == cmp[i] && txt[i + pos] != car && txt[i + pos] && txt[i + pos] != o_car)
 		i++;
-	if (txt[i + pos] && txt[i + pos] != car)
+	if ((!txt[i + pos] || txt[i + pos] == car) || txt[i + pos] == o_car)
 		return (i + 1);
 	return (0);
 }
@@ -45,10 +45,9 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 
 	i = 0;
 	par = 0;
-	if (txt[pos + 1] == '?' && (!txt[2] || txt[2] == ' '))
+	if (txt[pos + 1] == '?')
 	{
-		res = (char *)calloc(sizeof(char ), 2);
-		res[0] = cont[0].global[0].err_stat + 48;
+		res = ft_itoa(cont[0].global[0].new_stat);
 		return (res);
 	}
 	else if (txt[pos + 1] == '(')
@@ -57,19 +56,19 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 		if (!par)
 			return (NULL);
 		res = (char *)calloc(sizeof(char ), 2);
-		res[0] = cont[0].global[0].err_stat + 48;
+		res = ft_itoa(cont[0].global[0].new_stat);
 		return (res);
 	}
 	else
 	{
 		while (env[i] && !par)
 		{
-			par = str_cmp(txt, pos + 1, env[i], ' ');
+			par = str_cmp(txt, pos + 1, env[i], ' ', '\"');
 			i++;
 		}
 		if (par)
 		{
-			res = ft_strdup_mod(env[i - 1], par, -1);
+			res = ft_substr(env[i - 1], par, ft_strlen(env[i - 1]) - 1);
 			return (res);
 		}
 	}
@@ -84,14 +83,14 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	char *add;
 
 	i = 0;
-	aux = ft_strdup_mod(txt, 0, pos);
+	aux = ft_substr(txt, 0, pos);
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
 		return (NULL);
 	add = ft_strjoin(aux, aux2);
 	while (txt[pos + i] != ' ' && txt[pos + i])
 		i++;
-	aux = ft_strdup_mod(txt, pos + i, -1);
+	aux = ft_substr(txt, pos + i, ft_strlen(env[i - 1]) - 1);
 	add = ft_strjoin(add, aux);
 	return (add);
 }
