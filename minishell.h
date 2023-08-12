@@ -17,6 +17,7 @@
 
 typedef struct s_global
 {
+	int num_cmds;
 	char **env;
 	int err_stat;
 	int new_stat;
@@ -24,6 +25,8 @@ typedef struct s_global
 
 typedef struct s_content
 {
+	char	*access_path; // ACARABAN que lo inicie a nulo, yo le doy luego valor
+	char	*environ_path;
 	char *cmd;
 	char **full_comand;
 	char *infile;
