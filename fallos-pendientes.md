@@ -1,7 +1,5 @@
 # 1
-al ejecutar esto lo hace bien pero se queda abierto algun end de pipe y no cierra shell
 
-wc -l < forever.md | grep minni < forever.md | cat -e
 
 # 2
 

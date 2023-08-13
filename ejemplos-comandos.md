@@ -46,7 +46,7 @@ wc -l < forever.md | grep minni < forever.md | wc -w | cat -e
 grep hoy < forever.md | grep feria < forever.md | grep gusta < forever.md | wc -w
 
 
-# outfile en primer comando
+# outfile en comandos
 # con 3 comandos
 
 
