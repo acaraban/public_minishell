@@ -10,7 +10,7 @@ void	ft_executor(t_content *cont)
 
 
     i = 0;
-    num_of_commands = 4; // tmp
+    num_of_commands = 2; // tmp
     int fds[num_of_commands][2]; // tmp num of commands var
 
     
@@ -57,8 +57,30 @@ void	ft_executor(t_content *cont)
                 printf("antes de dup2 \n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
                 printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
-                dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
-                close(fds[i][WRITE_END]); // cierra duplicado
+                // gestionar que haya un outfile
+                if (cont[i].outfile)
+                {
+                    printf("outfile is: %s\n", cont[i].outfile);
+                    // abrir en modo append o en modo sobreescribir
+                    if (cont[i].tfl == 1) // modo sobre escribir
+                    {
+                        cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644); // no tengo claro porque RDWR
+                    }
+                    else if (cont[i].tfl == 2) // modo append
+                    {
+                        cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
+                    }
+                    // como ha habido outfile, tiene que escribir en el fichero de salida
+                    dup2(cont->outfile_fd, STDOUT_FILENO);
+                    close(cont->outfile_fd); // cierra duplicado
+                }
+                // si solo hay un comando, la salida no debe ser el pipe, sino el stdout
+                // si hay mas de 1 comando y no hay fichero de salida, que escriba en el pipe
+                if ((num_of_commands > 1) && !(cont[i].outfile))
+                {
+                    dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
+                    close(fds[i][WRITE_END]); // cierra duplicado
+                }
                 
                 execve(cont[i].access_path, cont[i].full_comand, cont->global->env); 
                 // controlar error de este, pero debe sacar otro mensaje en bash
@@ -130,7 +152,28 @@ void	ft_executor(t_content *cont)
                     dup2(fds[i - 1][READ_END], STDIN_FILENO);
                     close(fds[i - 1][READ_END]);
                 }
-                // esta saliendo por la salida estandar ahora mismo
+                
+                //outfiles_management();
+                // si hubiera outfile, que salga por ahi
+                if (cont[i].outfile)
+                {
+                    printf("outfile is: %s\n", cont[i].outfile);
+                    printf("y tipo de redir de salida es: %d\n", cont[i].tfl);
+                    printf("y tipo de redir de entrada es: %d\n", cont[i].nfl);
+                    // abrir en modo append o en modo sobreescribir
+                    if (cont[i].tfl == 1) // modo sobre escribir
+                    {
+                        cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644); // no tengo claro porque RDWR
+                    }
+                    else if (cont[i].tfl == 2) // modo append
+                    {
+                        cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
+                    }
+                    // child escribe, y es el ultimo, escribe en el fichero de salida
+                    dup2(cont->outfile_fd, STDOUT_FILENO);
+                    close(cont->outfile_fd); // cierra duplicado
+                }
+                // sino tiene outfile, saldra por la salida estandar xq es el ultimo                
                 
                 execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
                 // controlar error de este

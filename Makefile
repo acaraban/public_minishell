@@ -18,7 +18,9 @@ SRCS =	builtins/echo.c \
 		pruebas/prueba_env.c \
 		pruebas/prueba_ft_strjoin.c \
 		ft_executor.c \
-		ft_mini-utils.c
+		ft_mini-utils.c \
+		ft_exec_files.c \
+		ft_exec_opens.c
 
 INC = -I libft -lreadline
 NAME = minishell.a
