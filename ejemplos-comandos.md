@@ -25,31 +25,32 @@ ping -c 5 claudiajuan.com | grep rtt | cat -e
 *****************************************************************************
 
 # infile en primer comando
-
 grep estamos < forever.md | wc -l | cat -e
-
-# resultados distintos, en bash 1 linea, en minishell 2 lineas
-#hecho!! :)
-
-grep hoy < forever.md | grep feria < forever.md | wc -w
-# perfecto
 
 
 # infile en segundo comando
-
-wc -l < forever.md | grep minni < forever.md | cat -e
-
-grep hoy | grep feria < forever.md | wc -w
-ping -c 5 claudiajuan.com | grep rtt | cat -e
-
-
 ls | grep feria < forever.md | wc -w
 ls | grep feria < forever.md | wc -w | cat -e
 
 
 # infile en primer y segundo comandos
-
 grep hoy < forever.md | grep feria < forever.md | wc -w
+grep hoy < forever.md | grep feria < forever.md | wc -w | cat -e
+wc -l < forever.md | grep minni < forever.md | cat -e
+wc -l < forever.md | grep minni < forever.md | wc -w | cat -e
+## perfecto
+
+
+# infile en los 4 comandos
+
+grep hoy < forever.md | grep feria < forever.md | grep gusta < forever.md | wc -w
+ping -c 5 claudiajuan.com | grep rtt | cat -e
+
+
+
+
+
+
 
 
 grep hoy < forever.md | grep feria < forever.md | wc -w | cat -e
@@ -62,6 +63,7 @@ grep hoy < forever.md | grep feria < forever.md | grep semana < forever.md | gre
 
 
 xx en el ultimo un infile
+grep hoy < forever.md | grep feria < forever.md | grep semana < forever.md
 
 ****************************************************************************
 
@@ -73,6 +75,58 @@ xx en el ultimo un infile
 grep hoy < forever.md | grep feria < forever.md | wc -w | cat -e
 
 # funciona perfe (pero no ha comprobado el segundo)
+
+
+
+****************************************************************************
+
+# ejemplos de comandos "con infiles y outfiles"
+# con 3 y 4 comandos
+
+*******************************
+
+ls -l > resultado.txt | grep mini < resultado.txt | grep ft < resultado.txt > final.txt
+
+
+
+if (access(argv[argc - 1], F_OK) != 0 || access(argv[argc - 1], W_OK) == 0)
+		data->outfile = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0644);
+	else if (access(argv[argc - 1], W_OK) != 0)
+	{
+		perror(argv[argc - 1]);
+		exit(1);
+	}
+	if (data->outfile < 0)
+		exit(1);
+
+
+****************************************************************************
+
+# ejemplo "con outfile"
+# con 2 comandos
+
+*******************************
+
+ls -l | grep mini > otro.txt
+
+ls -l > otro.txt | wc -l < otro.txt
+
+
+
+
+
+*************************
+
+# ejemplo "con outfile"
+# con 2 comandos
+
+*******************************
+
+
+
+
+
+
 
 
 ****************************************************************************

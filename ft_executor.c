@@ -10,7 +10,7 @@ void	ft_executor(t_content *cont)
 
 
     i = 0;
-    num_of_commands = 2; // tmp
+    num_of_commands = 4; // tmp
     int fds[num_of_commands][2]; // tmp num of commands var
 
     
@@ -40,19 +40,7 @@ void	ft_executor(t_content *cont)
                 /* infile stuff */
                 if (cont[i].infile)
                 {
-                    printf("infile: %s\n", cont[i].infile);
-                    cont->infile_fd = open(cont[i].infile, O_RDONLY); // controlar error del open
-                    if (cont->infile_fd == -1) {
-                        perror("Failed to open the file");
-                        return ;
-                    }
-                    printf("infile descriptor number %d\n", cont->infile_fd);
-                    if (cont->infile_fd)
-                    {
-                        printf("inside if \n");
-                        dup2(cont->infile_fd, STDIN_FILENO);
-                        close(cont->infile_fd);
-                    }
+                    manage_infiles(cont, i);
                 }
                 printf("antes de dup2 \n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
@@ -96,18 +84,7 @@ void	ft_executor(t_content *cont)
                 // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
-                    printf("infile dentro second: %s\n", cont[i].infile);
-                    cont->infile_fd = open(cont[i].infile, O_RDONLY); // si es el mismo infile lo esta abriendo por segunda vez!!
-                    if (cont->infile_fd == -1) {
-                        perror("Failed to open the file");
-                        return ;
-                    }
-                    //printf("infile descriptor number %d\n", cont->infile_fd);
-                    if (cont->infile_fd)
-                    {
-                        dup2(cont->infile_fd, STDIN_FILENO);
-                        close(cont->infile_fd);
-                    }
+                    manage_infiles(cont, i);
                 }
                 else // sino, que coja info del child anterior
                 {
@@ -133,18 +110,7 @@ void	ft_executor(t_content *cont)
                 // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
-                    //printf("infile: %s\n", cont[i].infile);
-                    cont->infile_fd = open(cont[i].infile, O_RDONLY);
-                    if (cont->infile_fd == -1) {
-                        perror("Failed to open the file");
-                        return ;
-                    }
-                    //printf("infile descriptor number %d\n", cont->infile_fd);
-                    if (cont->infile_fd)
-                    {
-                        dup2(cont->infile_fd, STDIN_FILENO);
-                        close(cont->infile_fd);
-                    }
+                    manage_infiles(cont, i);
                 }
                 else
                 {

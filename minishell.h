@@ -72,5 +72,6 @@ void	ft_executor(t_content *cont);
 char	*ft_access_program(char *environ_path, char *command);
 char	*ft_env_path(char **envp);
 char	*ft_access_program(char *environ_path, char *command);
+void manage_infiles(t_content *cont, int i);
 
 #endif
