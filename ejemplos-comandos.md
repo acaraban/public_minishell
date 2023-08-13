@@ -44,6 +44,34 @@ wc -l < forever.md | grep minni < forever.md | wc -w | cat -e
 # infile en los 4 comandos
 
 grep hoy < forever.md | grep feria < forever.md | grep gusta < forever.md | wc -w
+
+
+# outfile en primer comando
+# con 3 comandos
+
+
+ls -l > probando.md | grep ft < probando.md | cat -e
+# ok resultado pero bash avisa de que no existia el fichero
+# y minishell no avisa, lo hace todo
+
+
+# con 3 comandos
+# outfile en primer comando y en ultimo, infile en todos
+grep hoy < forever.md > mas.md | grep feria < mas.md | grep gusta < mas.md > quepasa.md
+# bash protesta porque dice que no existe mas.md
+bash: mas.md: No such file or directory
+bash: mas.md: No such file or directory
+# minishell lo hace bien
+
+grep hoy < forever.md >> mas.md | grep feria < mas.md | grep gusta < mas.md >> quepasa.md
+
+
+
+
+
+
+
+
 ping -c 5 claudiajuan.com | grep rtt | cat -e
 
 
@@ -89,15 +117,7 @@ ls -l > resultado.txt | grep mini < resultado.txt | grep ft < resultado.txt > fi
 
 
 
-if (access(argv[argc - 1], F_OK) != 0 || access(argv[argc - 1], W_OK) == 0)
-		data->outfile = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0644);
-	else if (access(argv[argc - 1], W_OK) != 0)
-	{
-		perror(argv[argc - 1]);
-		exit(1);
-	}
-	if (data->outfile < 0)
-		exit(1);
+
 
 
 ****************************************************************************
@@ -112,18 +132,7 @@ ls -l | grep mini > otro.txt
 ls -l > otro.txt | wc -l < otro.txt
 
 
-
-
-
-*************************
-
-# ejemplo "con outfile"
-# con 2 comandos
-
-*******************************
-
-
-
+***********************************************************
 
 
 
@@ -131,7 +140,7 @@ ls -l > otro.txt | wc -l < otro.txt
 
 ****************************************************************************
 
-/* ejemplos de comandos con fallos a proposito para que saquen error */
+# ejemplos de comandos con fallos a proposito para que saquen error 
 
 *****************************************************************************
 
