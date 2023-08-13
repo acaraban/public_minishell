@@ -57,7 +57,15 @@ void	ft_executor(t_content *cont)
                     close(fds[i][WRITE_END]); // cierra duplicado
                 }
                 // comprobar si es builtin o no
-                execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
+                if (is_builtin(cont, i)) // por hacer: funcion que comprueba si el comando es echo, unset, etc
+                {
+                    printf("es un builtin\n");
+                    //exec_builtin(); // por hacer
+                }
+                else
+                {
+                    execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
+                }
                 // controlar error de este, pero debe sacar otro mensaje en bash
                 //ft_putstr_fd("Error: Command does not exist.\n", 2);
 		        //return ;

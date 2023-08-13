@@ -20,7 +20,8 @@ SRCS =	builtins/echo.c \
 		ft_executor.c \
 		ft_mini-utils.c \
 		ft_exec_files.c \
-		ft_exec_opens.c
+		ft_exec_opens.c \
+		ft_builtins.c
 
 INC = -I libft -lreadline
 NAME = minishell.a

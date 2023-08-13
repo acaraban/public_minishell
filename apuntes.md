@@ -19,12 +19,3 @@ The constant O_TRUNC is a flag used with the open() function in C to specify tha
 fd = open("example.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
 
-// comprobar si es builtin o no
-                if (is_builtin)
-                {
-                    exec_builtin();
-                }
-                else
-                {
-                    execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
-                }
