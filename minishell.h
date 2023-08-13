@@ -19,6 +19,10 @@
 # define NOT_FND 127
 //error sintactico
 # define STX_ERR 2
+// read end of pipe
+# define READ_END 0
+// write end of pipe
+# define WRITE_END 1
 
 typedef struct s_global
 {
@@ -31,12 +35,12 @@ typedef struct s_global
 
 typedef struct s_content
 {
-	char	*access_path; // ACARABAN que lo inicie a nulo, yo le doy luego valor
+	char	*access_path;
 	char *cmd;
 	char **full_comand;
 	char *infile;
-	int infile_fd; // coge valor con el open
 	char *outfile;
+	int infile_fd; // coge valor con el open
     int outfile_fd;
 	int nfl;
 	int tfl;
