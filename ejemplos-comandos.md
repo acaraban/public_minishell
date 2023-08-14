@@ -4,6 +4,7 @@ pwd | cat -e
 pwd | head
 
 pwd | wc -w | cat -e
+ls -l > aquis.md | echo hola | cat -e
 
 
 ****************************************************************************
@@ -14,9 +15,9 @@ pwd | wc -w | cat -e
 *****************************************************************************
 
 
-
 ls -l | grep mini | cat -e
 echo hola > outputi.txt | < outputi.txt grep hola | cat -e
+# este falla
 
 ping -c 5 claudiajuan.com | grep rtt | cat -e
 
