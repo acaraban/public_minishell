@@ -22,6 +22,8 @@ echo "#ifndef MINISHELL_H
 #include \"ft_printf/ft_printf.h\"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
+#include <sys/ioctl.h>
 #include <string.h>
 
 //valido
@@ -33,6 +35,7 @@ echo "#ifndef MINISHELL_H
 
 typedef struct s_global
 {
+	int tam;
 	char **env;
 	int err_stat;
 	int new_stat;

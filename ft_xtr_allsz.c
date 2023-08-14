@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+void free_dbl(char **new)
+{
+	int h;
+
+	h = 0;
+	while (new[h])
+		free (new[h++]);
+	free(new[h]);
+	free(new);
+}
+
 char **ft_xtr_allsz(char **arr, char **add, int posadd)
 {
 	char **jj;
@@ -31,6 +42,7 @@ char **ft_xtr_allsz(char **arr, char **add, int posadd)
 		}
 		l++;
 	}
+	free_dbl(arr);
 	return (jj);
 }
 
