@@ -87,5 +87,7 @@ void exec_builtin(t_content *cont, int i);
 int	custom_pwd(void);
 void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
+void write_on_the_pipe(int (*fds)[2], int num);
+void read_from_the_pipe(int (*fds)[2], int num);
 
 #endif

@@ -62,15 +62,13 @@ void	ft_executor(t_content *cont)
                 // si hay mas de 1 comando y no hay fichero de salida, que escriba en el pipe
                 if ((num_of_commands > 1) && !(cont[i].outfile))
                 {
-                    dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
+                    write_on_the_pipe(fds, i);
+                    /*dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
                     close(fds[i][WRITE_END]); // cierra duplicado
+                    */
                 }
                 // aqui ya todo sale por el pipe, no se ve en consola
                 execute_command(cont, i);
-                
-                // controlar error de este, pero debe sacar otro mensaje en bash
-                //ft_putstr_fd("Error: Command does not exist.\n", 2);
-		        //return ;
             }
             // si NO es el primer child ni el ultimo
             else if (i > 0 && i < num_of_commands -1)
@@ -78,15 +76,15 @@ void	ft_executor(t_content *cont)
                 //printf("second child\n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
                 //printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
-                // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
                     manage_infiles(cont, i);
                 }
                 else // sino, que coja info del child anterior
                 {
-                    dup2(fds[i - 1][READ_END], STDIN_FILENO);
-                    close(fds[i - 1][READ_END]);
+                    read_from_the_pipe(fds, i);
+                    /*dup2(fds[i - 1][READ_END], STDIN_FILENO);
+                    close(fds[i - 1][READ_END]);*/
                 }
                 // child escribe, y como no es el ultimo, escribe en el end write del siguiente pipe
                 // o en el outfile si lo hubiera
@@ -96,8 +94,10 @@ void	ft_executor(t_content *cont)
                 }
                 else // si no hay outfile, escribe en el write end del pipe
                 {
-                    dup2(fds[i][WRITE_END], STDOUT_FILENO);
+                    write_on_the_pipe(fds, i);
+                    /*dup2(fds[i][WRITE_END], STDOUT_FILENO);
                     close(fds[i][WRITE_END]); // cierra duplicado
+                    */
                 }
                 execute_command(cont, i); 
             }
@@ -116,8 +116,9 @@ void	ft_executor(t_content *cont)
                 else
                 {
                     // que coja info del child anterior
-                    dup2(fds[i - 1][READ_END], STDIN_FILENO);
-                    close(fds[i - 1][READ_END]);
+                    read_from_the_pipe(fds, i);
+                    /*dup2(fds[i - 1][READ_END], STDIN_FILENO);
+                    close(fds[i - 1][READ_END]);*/
                 }
                 
                 // si hubiera outfile, que salga por ahi
