@@ -25,11 +25,11 @@
 # define WRITE_END 1
 
 
-typedef struct s_specials
+/*typedef struct s_builtins
 {
 	int which_cmd;
 
-}t_specials;
+}t_builtins;*/
 
 typedef struct s_global
 {
@@ -51,8 +51,9 @@ typedef struct s_content
     int outfile_fd;
 	int nfl;
 	int tfl;
-	int builtin; // test
-	//t_specials *specials;
+	int builtin;
+	//t_builtins *builtins;
+	int which_builtin;
 	t_global *global;
 }t_content;
 
@@ -87,8 +88,8 @@ char	*ft_access_program(char *environ_path, char *command);
 void manage_infiles(t_content *cont, int i);
 void manage_outfiles(t_content *cont, int i);
 int is_builtin(t_content *cont, int i);
-void exec_builtin(void);
-//void exec_builtin(t_content *cont, int i);
+//void exec_builtin(void);
+void exec_builtin(t_content *cont, int i);
 int	custom_pwd(void);
 
 #endif
