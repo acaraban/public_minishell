@@ -10,7 +10,7 @@ void	ft_executor(t_content *cont)
 
 
     i = 0;
-    num_of_commands = 3; // tmp
+    num_of_commands = 2; // tmp
     int fds[num_of_commands][2]; // tmp num of commands var
 
     cont->global->environ_path = ft_env_path(cont->global->env);
@@ -19,6 +19,7 @@ void	ft_executor(t_content *cont)
     while (i < num_of_commands)
     {
         printf("cmd %s %d\n", cont[i].cmd, i);
+        cont[i].builtin = 0; // tmp, only testing
         if (pipe(fds[i]) == -1) // controlar error del pipe -1
         {
             return ;
@@ -41,7 +42,6 @@ void	ft_executor(t_content *cont)
                 {
                     manage_infiles(cont, i);
                 }
-                printf("antes de dup2 \n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
                 printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
                 // gestionar que haya un outfile
@@ -49,23 +49,36 @@ void	ft_executor(t_content *cont)
                 {
                     manage_outfiles(cont, i);
                 }
+                // comprobar si es builtin antes del dup
+                printf("antes de comprobar si es un builtin\n");
+                if (is_builtin(cont, i) == 0) // por hacer: funcion que comprueba si el comando es echo, unset, etc
+                {
+                    printf("es un builtin\n");
+                    printf("el comando es: %s\n", cont[i].cmd);
+                    cont[i].builtin = 1; // tmp, only testing
+                    //exec_builtin(); // por hacer
+                }
                 // si solo hay un comando, la salida no debe ser el pipe, sino el stdout
                 // si hay mas de 1 comando y no hay fichero de salida, que escriba en el pipe
+                printf("aqui llega ?????\n");
                 if ((num_of_commands > 1) && !(cont[i].outfile))
                 {
                     dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
                     close(fds[i][WRITE_END]); // cierra duplicado
                 }
-                // comprobar si es builtin o no
-                if (is_builtin(cont, i)) // por hacer: funcion que comprueba si el comando es echo, unset, etc
+                // aqui ya todo sale por el pipe, no se ve en consola
+                printf("after dup2 llega ?????\n");
+                if (cont[i].builtin == 1)
                 {
-                    printf("es un builtin\n");
-                    //exec_builtin(); // por hacer
+                    printf("voy a ejecutar un builtin\n"); // esto no imprime ni de coña porque ya el dup esta en el pipe
+                    //exec_builtin(cont, i);
+                    exec_builtin();
                 }
                 else
                 {
                     execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
                 }
+                
                 // controlar error de este, pero debe sacar otro mensaje en bash
                 //ft_putstr_fd("Error: Command does not exist.\n", 2);
 		        //return ;

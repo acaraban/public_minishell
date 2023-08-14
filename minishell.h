@@ -44,6 +44,7 @@ typedef struct s_content
     int outfile_fd;
 	int nfl;
 	int tfl;
+	int builtin;
 	t_global *global;
 }t_content;
 
@@ -74,5 +75,8 @@ char	*ft_env_path(char **envp);
 char	*ft_access_program(char *environ_path, char *command);
 void manage_infiles(t_content *cont, int i);
 void manage_outfiles(t_content *cont, int i);
+int is_builtin(t_content *cont, int i);
+void exec_builtin(void);
+int	custom_pwd(void);
 
 #endif

@@ -1,3 +1,9 @@
+# ejemplo 2 comandos con builtin
+
+pwd | cat -e
+
+
+
 ****************************************************************************
 
  ejemplos de comandos "sin infile ni outfile"
@@ -8,6 +14,7 @@
 
 
 ls -l | grep mini | cat -e
+echo hola > outputi.txt | < outputi.txt grep hola | cat -e
 
 ping -c 5 claudiajuan.com | grep rtt | cat -e
 
