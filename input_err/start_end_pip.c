@@ -7,6 +7,7 @@ char **start_end_pip(char **vue, t_content *cont)
 	char *readli;
 	char *camb;
 	char **new;
+	char **aux;
 
 	i = 0;
 	h = 0;
@@ -24,10 +25,13 @@ char **start_end_pip(char **vue, t_content *cont)
 			new = ft_specials(readli, cont, 0);
 			if (new == NULL)
 				return (NULL);
-			vue = ft_xtr_allsz(vue, new, 0);
+			aux = ft_xtr_allsz(vue, new, 0);
+			free_dbl(vue);
+			vue = aux;
 			while (vue[i])
 				i++;
 			free (readli);
+			free_dbl(new);
 		}
 	}
 	return (vue);
