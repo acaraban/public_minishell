@@ -7,10 +7,12 @@ void	ft_executor(t_content *cont)
     //printf("empiezo\n");
     //printf("numero de comandos\n"); // falta que me pase el numero de comandos
     int num_of_commands; // tmp
+    
 
     i = 0;
-    num_of_commands = 1; // tmp
-    int fds[num_of_commands][2]; // tmp num of commands var
+    num_of_commands = cont[i].global->num_cmd;
+    int fds[num_of_commands][2];
+    
 
     cont->global->environ_path = ft_env_path(cont->global->env);
     //printf("environ path %s\n", cont->global->environ_path);
@@ -18,8 +20,8 @@ void	ft_executor(t_content *cont)
     while (i < num_of_commands)
     {
         //printf("cmd %s %d\n", cont[i].cmd, i);
-        cont[i].builtin = 0; // tmp, only testing
-        cont[i].which_builtin = 0; // inicializo como que no hay builtin todavia
+        cont[i].builtin = 0;
+        cont[i].which_builtin = 0;
         //printf("which cmd: %d\n", cont[i].which_builtin);
         if (pipe(fds[i]) == -1) // controlar error del pipe -1
         {
@@ -37,8 +39,7 @@ void	ft_executor(t_content *cont)
         {
             if (i == 0) // si es el primer child
             {
-                printf("primer child\n");
-                /* infile stuff */
+                //printf("primer child\n");
                 if (cont[i].infile)
                 {
                     manage_infiles(cont, i);
@@ -53,8 +54,8 @@ void	ft_executor(t_content *cont)
                 // comprobar si es builtin antes del dup2 ?? no se seguro si tiene que ser antes del dup2
                 if (is_builtin(cont, i) == 0)
                 {
-                    printf("es un builtin\n");
-                    printf("el comando es: %s\n", cont[i].cmd);
+                    //printf("es un builtin\n");
+                    //printf("el comando es: %s\n", cont[i].cmd);
                     cont[i].builtin = 1; // tmp
                 }
                 // si solo hay un comando, la salida no debe ser el pipe, sino el stdout
@@ -66,14 +67,7 @@ void	ft_executor(t_content *cont)
                 }
                 // aqui ya todo sale por el pipe, no se ve en consola
                 execute_command(cont, i);
-                /*if (cont[i].builtin == 1)
-                {
-                    exec_builtin(cont, i);
-                }
-                else
-                {
-                    execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
-                }*/
+                
                 // controlar error de este, pero debe sacar otro mensaje en bash
                 //ft_putstr_fd("Error: Command does not exist.\n", 2);
 		        //return ;
@@ -81,9 +75,9 @@ void	ft_executor(t_content *cont)
             // si NO es el primer child ni el ultimo
             else if (i > 0 && i < num_of_commands -1)
             {
-                printf("second child\n");
+                //printf("second child\n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-                printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
+                //printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
                 // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
@@ -105,19 +99,15 @@ void	ft_executor(t_content *cont)
                     dup2(fds[i][WRITE_END], STDOUT_FILENO);
                     close(fds[i][WRITE_END]); // cierra duplicado
                 }
-                execute_command(cont, i);
-                //execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
-                // controlar error de este
-                //ft_putstr_fd("Error: Command does not exist.\n", 2);
-		        //return ;
+                execute_command(cont, i); 
             }
             // si es el ultimo child, que escriba en la salida estandar o en el outfile
             else if (i == num_of_commands - 1)
             {
                 // last child
-                printf("last child\n");
+                //printf("last child\n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-                printf("access path %s\n", cont[i].access_path); // built in or not
+                //printf("access path %s\n", cont[i].access_path); // built in or not
                 // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
@@ -137,10 +127,6 @@ void	ft_executor(t_content *cont)
                 }
                 // sino tiene outfile, saldra por la salida estandar xq es el ultimo                
                 execute_command(cont, i);
-                //execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
-                // controlar error de este
-                //ft_putstr_fd("Error: Command does not exist.\n", 2);
-		        //return ;
             }
             else // quitar esto
             {

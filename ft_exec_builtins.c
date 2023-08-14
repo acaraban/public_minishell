@@ -8,8 +8,11 @@ void execute_command(t_content *cont, int i)
     }
     else
     {
-        printf("comando normal\n");
+        //printf("comando normal\n");
         execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
+        // controlar error de este
+        //ft_putstr_fd("Error: Command does not exist.\n", 2);
+        //return ;
     }
 }
 

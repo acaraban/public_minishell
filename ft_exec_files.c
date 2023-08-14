@@ -12,10 +12,10 @@ void manage_infiles(t_content *cont, int i)
     }
     printf("infile descriptor number %d\n", cont->infile_fd);
     // comprobar si me pasan fichero sin < o con < (hace lo mismo)
-    //if (cont->infile_fd && (cont[i].nfl == 0 || cont[i].nfl == 1)) 
     // lo anterior da error esto:  echo hola > outputi.txt | < outputi.txt grep hola | cat -e
     // se cree que hola en el segundo comando es el infile y son los args    
-    if (cont->infile_fd && cont[i].nfl == 1)
+    if (cont->infile_fd && (cont[i].nfl == 0 || cont[i].nfl == 1)) 
+    //if (cont->infile_fd && cont[i].nfl == 1)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
