@@ -75,6 +75,10 @@ bash: mas.md: No such file or directory
 
 grep hoy < forever.md >> mas.md | grep feria < mas.md | grep gusta < mas.md >> quepasa.md
 
+# el infile del segundo comando sin < signo
+
+grep hoy < forever.md >> mas.md | grep feria mas.md | grep gusta < mas.md >> quepasa.md
+
 
 
 
