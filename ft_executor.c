@@ -49,31 +49,41 @@ void	ft_executor(t_content *cont)
                 {
                     manage_outfiles(cont, i);
                 }
-                // comprobar si es builtin antes del dup
-                printf("antes de comprobar si es un builtin\n");
+                // comprobar si es builtin antes del dup2
+                /* ----------- */
                 if (is_builtin(cont, i) == 0) // por hacer: funcion que comprueba si el comando es echo, unset, etc
                 {
                     printf("es un builtin\n");
                     printf("el comando es: %s\n", cont[i].cmd);
                     cont[i].builtin = 1; // tmp, only testing
-                    //exec_builtin(); // por hacer
                 }
+                /* ----------- */
                 // si solo hay un comando, la salida no debe ser el pipe, sino el stdout
                 // si hay mas de 1 comando y no hay fichero de salida, que escriba en el pipe
                 printf("aqui llega ?????\n");
+                printf("valor %d\n", cont[i].builtin);
                 if ((num_of_commands > 1) && !(cont[i].outfile))
                 {
                     dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
                     close(fds[i][WRITE_END]); // cierra duplicado
                 }
                 // aqui ya todo sale por el pipe, no se ve en consola
-                printf("after dup2 llega ?????\n");
+                /* ----------- */
                 if (cont[i].builtin == 1)
                 {
+                    
                     printf("voy a ejecutar un builtin\n"); // esto no imprime ni de coña porque ya el dup esta en el pipe
                     //exec_builtin(cont, i);
                     exec_builtin();
                 }
+                /* ----------- */
+                /*if (is_builtin(cont, i) == 0)
+                {
+                    //exec_builtin();
+                    printf("no se imprime x el dup.");
+                    printf("which cmd debe ser 1: %d\n", cont[i].specials->which_cmd);
+                    //exec_builtin(cont, i);
+                }*/
                 else
                 {
                     execve(cont[i].access_path, cont[i].full_comand, cont->global->env);

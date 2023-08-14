@@ -13,8 +13,9 @@ int is_builtin(t_content *cont, int i)
     }
     else if (ft_strnstr(cont[i].cmd, "pwd", 3))
     {
-        //mini_pwd();
-        printf("execute mini pwd\n");
+        printf("yes, soy built in.\n");
+        //cont[i].specials->which_cmd = 1;
+        //exec_builtin(cont, i);
         return(0);
     }
     else
@@ -23,12 +24,26 @@ int is_builtin(t_content *cont, int i)
     }
 }
 
-//void exec_builtin(t_content *cont, int i)
 void exec_builtin(void)
+//void exec_builtin(t_content *cont, int i)
 {
-    //execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
-    printf("dentro de exec  builtin\n");
+    /*char *args[3];
+    char **envp;
+
+    args[0] = "/bin/pwd";
+    args[1] = NULL;
+    args[2] = NULL;
+    envp = NULL;
+    execve(args[0], args, envp);*/
+    //printf("dentro de exec builtin cmd: %s\n", cont[i].cmd);
     custom_pwd();
+    ft_putstr_fd("after dup2 llega ?????\n", 2);
+    exit (1);
+    /*if (cont[i].specials->which_cmd == 1)
+    {
+        printf("execute custom pwd\n");
+        custom_pwd();
+    }*/
 }
 
 /* temporal */

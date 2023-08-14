@@ -24,6 +24,13 @@
 // write end of pipe
 # define WRITE_END 1
 
+
+typedef struct s_specials
+{
+	int which_cmd;
+
+}t_specials;
+
 typedef struct s_global
 {
 	int num_cmds;
@@ -44,9 +51,13 @@ typedef struct s_content
     int outfile_fd;
 	int nfl;
 	int tfl;
-	int builtin;
+	int builtin; // test
+	//t_specials *specials;
 	t_global *global;
 }t_content;
+
+
+
 
 void echo(char *txt, int flag);
 void err_stx(char *txt, t_content *cont);
@@ -77,6 +88,7 @@ void manage_infiles(t_content *cont, int i);
 void manage_outfiles(t_content *cont, int i);
 int is_builtin(t_content *cont, int i);
 void exec_builtin(void);
+//void exec_builtin(t_content *cont, int i);
 int	custom_pwd(void);
 
 #endif

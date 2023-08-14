@@ -1,6 +1,7 @@
 # ejemplo 2 comandos con builtin
 
 pwd | cat -e
+pwd | head
 
 
 
