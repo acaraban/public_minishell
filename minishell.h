@@ -1,11 +1,11 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 #include "ft_printf/ft_printf.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <signal.h>
 #include <sys/ioctl.h>
 #include <string.h>

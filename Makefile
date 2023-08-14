@@ -23,7 +23,12 @@ SRCS =	builtins/echo.c \
 		ft_exec_opens.c \
 		ft_exec_builtins.c
 
-INC = -I libft -lreadline
+#INC = -I libft -lreadline
+INCLUDES = -I . -I /Users/acaraban/.brew/opt/readline/include
+LIBS = -L /Users/acaraban/.brew/opt/readline/lib -lreadline
+#INC = -I . -L /Users/acaraban/.brew/opt/readline/lib -I /Users/acaraban/.brew/opt/readline/include -lreadline
+#INC = -I libft -L /Users/acaraban/.brew/opt/readline/lib -I /Users/acaraban/.brew/opt/readline/include -lreadline
+#INC = -I libft -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline
 NAME = minishell.a
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./libft/libft.a
@@ -33,8 +38,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
+%.o: %.c
+	gcc $(CFLAGS) -o $@ -c $< $(INCLUDES)
+
 $(NAME):	$(LIBFT) $(GNLINE) $(PRINTF) $(OBJS)
-	@gcc $(CFLAGS) $(SRCS) $(LIBFT) $(GNLINE) $(PRINTF) $(INC) -g -o minishell
+	@gcc $(CFLAGS) $(SRCS) $(LIBFT) $(GNLINE) $(PRINTF) $(LIBS) -o minishell
 	@ar rc $(NAME) $(OBJS)
 
 $(LIBFT):
