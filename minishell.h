@@ -9,6 +9,11 @@
 #include <signal.h>
 #include <sys/ioctl.h>
 #include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <stdlib.h>
 
 //valido
 # define VLD 0
@@ -16,23 +21,41 @@
 # define NOT_FND 127
 //error sintactico
 # define STX_ERR 2
+// read end of pipe
+# define READ_END 0
+// write end of pipe
+# define WRITE_END 1
+
+
+/*typedef struct s_builtins
+{
+	int which_cmd;
+
+}t_builtins;*/
 
 typedef struct s_global
 {
 	int tam;
 	char **env;
+	char	*environ_path;
 	int err_stat;
 	int new_stat;
 }t_global;
 
 typedef struct s_content
 {
+	char	*access_path;
 	char *cmd;
 	char **full_comand;
 	char *infile;
 	char *outfile;
+	int infile_fd; // coge valor con el open
+    int outfile_fd;
 	int nfl;
 	int tfl;
+	int builtin;
+	//t_builtins *builtins;
+	int which_builtin;
 	t_global *global;
 }t_content;
 
@@ -59,5 +82,16 @@ int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
 void echo(char *txt, int flag);
+
+void	ft_executor(t_content *cont);
+char	*ft_access_program(char *environ_path, char *command);
+char	*ft_env_path(char **envp);
+char	*ft_access_program(char *environ_path, char *command);
+void manage_infiles(t_content *cont, int i);
+void manage_outfiles(t_content *cont, int i);
+int is_builtin(t_content *cont, int i);
+//void exec_builtin(void);
+void exec_builtin(t_content *cont, int i);
+int	custom_pwd(void);
 
 #endif
