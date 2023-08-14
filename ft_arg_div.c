@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-
 void ft_arg_div(char *txt, t_global *glb)
 {
 	char **final;
 	char ***cmd_str;
 	t_content *cont;
+	char *ot;
 	int tam;
 	int tam2;
 	int h;
@@ -13,12 +13,19 @@ void ft_arg_div(char *txt, t_global *glb)
 
 	tam = 1;
 	i = 0;
+	ot = ft_strdup(txt);
+	free(txt);
+	txt = ft_strtrim(ot, " ");
+	free (ot);
 	while (txt[i])
 	{
 		if (txt[i] == '|')
 			tam++;
 		i++;
 	}
+	if (ft_strlen(txt) == 0)
+		tam = 0;
+	glb->tam = tam;
 	tam2 = tam;
 	i = 0;
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
@@ -49,7 +56,7 @@ void ft_arg_div(char *txt, t_global *glb)
 	{
 		if (final[i][0] != '<' && final[i][0] != '>' && final[i][0] != '|')
 		{
-			cmd_str[i] = ft_com_split(final[i], ' ', cont);
+			cmd_str[i] = ft_shell_split(final[i], ' ');
 			cont[h].cmd = cmd_str[i][0];
 			cont[h].full_comand = cmd_str[i];
 		}
@@ -61,7 +68,7 @@ void ft_arg_div(char *txt, t_global *glb)
 			if (final[i][0] == '<' && final[i][1] == '<')
 			{
 				i++;
-				cmd_str[i] = ft_com_split(final[i], ' ', cont);
+				cmd_str[i] = ft_shell_split(final[i], ' ');
 				cont[h].infile = cmd_str[i][0];
 				cont[h].nfl = 2;
 				if (cmd_str[i][1])
@@ -70,7 +77,9 @@ void ft_arg_div(char *txt, t_global *glb)
 			else if (final[i][0] == '<')
 			{
 				i++;
-				cmd_str[i] = ft_com_split(final[i], ' ', cont);
+				if (cmd_str[i] != NULL)
+					free_dbl(cmd_str[i]);
+				cmd_str[i] = ft_shell_split(final[i], ' ');
 				while (cmd_str[i][r])
 					r++;
 				cont[h].infile = cmd_str[i][r - 1];
@@ -80,7 +89,7 @@ void ft_arg_div(char *txt, t_global *glb)
 			else if (final[i][0] == '>' && final[i][1] == '>')
 			{
 				i++;
-				cmd_str[i] = ft_com_split(final[i], ' ', cont);
+				cmd_str[i] = ft_shell_split(final[i], ' ');
 				cont[h].outfile = cmd_str[i][0];
 				cont[h].tfl = 2;
 				if (cmd_str[i][1])
@@ -89,7 +98,7 @@ void ft_arg_div(char *txt, t_global *glb)
 			else if (final[i][0] == '>')
 			{
 				i++;
-				cmd_str[i] = ft_com_split(final[i], ' ', cont);
+				cmd_str[i] = ft_shell_split(final[i], ' ');
 				cont[h].outfile = cmd_str[i][0];
 				cont[h].tfl = 1;
 				if (cmd_str[i][1])
@@ -128,7 +137,9 @@ void ft_arg_div(char *txt, t_global *glb)
 		l++;
 	}*/
 
+
 	//////////////parte del codigo////////////////
 	cont[0].global[0].new_stat = cont[0].global[0].err_stat;
 	cont[0].global[0].err_stat = 0;
+	
 }

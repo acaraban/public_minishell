@@ -34,7 +34,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):	$(LIBFT) $(GNLINE) $(PRINTF) $(OBJS)
-	@gcc $(CFLAGS) $(SRCS) $(LIBFT) $(GNLINE) $(PRINTF) $(INC) -o minishell
+	@gcc $(CFLAGS) $(SRCS) $(LIBFT) $(GNLINE) $(PRINTF) $(INC) -g -o minishell
 	@ar rc $(NAME) $(OBJS)
 
 $(LIBFT):
