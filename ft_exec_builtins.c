@@ -21,7 +21,6 @@ void execute_command(t_content *cont, int i)
 int is_builtin(t_content *cont, int i)
 {
     //printf("el comando que llega es: %s\n", cont[i].cmd);
-    //if (ft_strnstr(cont[i].cmd, "echo", 4))
     if (ft_strnstr(cont[i].full_comand[0], "echo", 4) && ft_strnstr(cont[i].full_comand[1], "-n", 2) && cont[i].full_comand[2] && !cont[i].full_comand[3])
     {
         printf("dentro de echo\n");

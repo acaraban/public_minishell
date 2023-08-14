@@ -89,5 +89,6 @@ void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void write_on_the_pipe(int (*fds)[2], int num);
 void read_from_the_pipe(int (*fds)[2], int num);
+void execute_first_child(t_content *cont, int i, int (*fds)[2]);
 
 #endif

@@ -63,9 +63,6 @@ void	ft_executor(t_content *cont)
                 if ((num_of_commands > 1) && !(cont[i].outfile))
                 {
                     write_on_the_pipe(fds, i);
-                    /*dup2(fds[i][WRITE_END], STDOUT_FILENO); // redir standar output
-                    close(fds[i][WRITE_END]); // cierra duplicado
-                    */
                 }
                 // aqui ya todo sale por el pipe, no se ve en consola
                 execute_command(cont, i);
@@ -83,8 +80,6 @@ void	ft_executor(t_content *cont)
                 else // sino, que coja info del child anterior
                 {
                     read_from_the_pipe(fds, i);
-                    /*dup2(fds[i - 1][READ_END], STDIN_FILENO);
-                    close(fds[i - 1][READ_END]);*/
                 }
                 // child escribe, y como no es el ultimo, escribe en el end write del siguiente pipe
                 // o en el outfile si lo hubiera
@@ -95,9 +90,6 @@ void	ft_executor(t_content *cont)
                 else // si no hay outfile, escribe en el write end del pipe
                 {
                     write_on_the_pipe(fds, i);
-                    /*dup2(fds[i][WRITE_END], STDOUT_FILENO);
-                    close(fds[i][WRITE_END]); // cierra duplicado
-                    */
                 }
                 execute_command(cont, i); 
             }
@@ -108,17 +100,13 @@ void	ft_executor(t_content *cont)
                 //printf("last child\n");
                 cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
                 //printf("access path %s\n", cont[i].access_path); // built in or not
-                // si hay infile que coja info del infile
                 if (cont[i].infile)
                 {
                     manage_infiles(cont, i);
                 }
                 else
                 {
-                    // que coja info del child anterior
                     read_from_the_pipe(fds, i);
-                    /*dup2(fds[i - 1][READ_END], STDIN_FILENO);
-                    close(fds[i - 1][READ_END]);*/
                 }
                 
                 // si hubiera outfile, que salga por ahi

@@ -14,8 +14,10 @@ void manage_infiles(t_content *cont, int i)
     // comprobar si me pasan fichero sin < o con < (hace lo mismo)
     // lo anterior da error esto:  echo hola > outputi.txt | < outputi.txt grep hola | cat -e
     // se cree que hola en el segundo comando es el infile y son los args    
-    if (cont->infile_fd && (cont[i].nfl == 0 || cont[i].nfl == 1)) 
-    //if (cont->infile_fd && cont[i].nfl == 1)
+    //if (cont->infile_fd && (cont[i].nfl == 0 || cont[i].nfl == 1)) 
+    // si == 0 significa que no tiene infile
+    // si == 2 hacer lo mismo que == 1 pero luego borrar el archivo que me han pasado
+    if (cont->infile_fd && cont[i].nfl == 1)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
