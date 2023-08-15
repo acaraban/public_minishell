@@ -1,4 +1,6 @@
-SRCS =	builtins/echo.c \
+SRCS =	builtins/custom_echo.c \
+		builtins/custom_pwd.c \
+		builtins/custom_export.c \
 		err_mngment/err_stx.c \
 		ft_arg_div.c \
 		ft_ent_var.c \
@@ -19,10 +21,9 @@ SRCS =	builtins/echo.c \
 		pruebas/prueba_ft_strjoin.c \
 		ft_executor.c \
 		ft_mini-utils.c \
-		ft_exec_child.c \
 		ft_all_children.c \
 		ft_exec_files.c \
-		ft_exec_builtins.c \
+		ft_exec_cmds.c \
 		ft_exec_dups.c
 
 INC = -I libft -lreadline

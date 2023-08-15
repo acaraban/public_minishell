@@ -8,7 +8,7 @@ void	ft_executor(t_content *cont)
 {
     int i;
     pid_t pid;
-    int num_of_commands; // tmp
+    int num_of_commands;
     int num;
 
     i = 0;
@@ -32,3 +32,8 @@ void	ft_executor(t_content *cont)
         i++;
     }
 }
+// ************* POR HACER *************
+
+/* se podria mejorar poniendo los perror de los pipe y de los fork
+pero entonces me paso de lineas y hay que quitar todas las inicializaciones
+del principio y ponerlas en otra funcion */

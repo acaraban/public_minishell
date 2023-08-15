@@ -1,6 +1,7 @@
 #include "minishell.h"
 
 /*
+    REDIRECTIONS:
     Child reads from different sources depending on the situation:
     - from the standard input
     - from the pipe of previous child
@@ -31,6 +32,8 @@ void manage_infiles(t_content *cont, int i)
     else if (cont[i].nfl == 2)// me habrian pasado <<
     {
         printf("me han pasado <<, no se que hacer");
+        // ejecutarlo igual que 1 pero borrar el archivo infile
+        // usar unlink ?
     }
 
 }

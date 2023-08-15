@@ -17,3 +17,10 @@ el resultado se imprime en la misma linea donde pone minishell, creo que en verd
 
 
 
+echo con la opción -n.
+◦ cd solo con una ruta relativa o absoluta.
+◦ pwd sin opciones.
+◦ export sin opciones.
+◦ unset sin opciones.
+◦ env sin opciones o argumentos.
+◦ exit sin opciones.

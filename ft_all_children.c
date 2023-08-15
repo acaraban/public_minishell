@@ -1,6 +1,27 @@
 #include "minishell.h"
 
 /*
+    Function to execute commands. 
+    It has different functionality depending on the child.
+*/
+
+void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
+{
+    if (i == 0)
+    {
+        execute_first_child(cont, i, fds, num);
+    }
+    else if (i > 0 && i < cont[i].global->num_cmd -1)
+    {
+        execute_middle_children(cont, i, fds, num);
+    }
+    else if (i == cont[i].global->num_cmd - 1)
+    {
+        execute_last_child(cont, i, fds, num);
+    }
+}
+
+/*
     Execute this function only if it is the first child.
     Check if the command received is a builtin before redirecting output.
 */
@@ -58,10 +79,9 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
     execute_command(cont, i);
 }
 
-// si es el ultimo child, que escriba en la salida estandar o en el outfile
 /*
     Execute this function only for the last child.
-    Check if the command received is a builtin before redirecting output. 
+    Check if the command received is a builtin before redirecting output.
 */
 
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
@@ -81,11 +101,9 @@ void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
     {
         cont[i].builtin = 1;
     }
-    // si hubiera outfile, que salga por ahi
     if (cont[i].outfile)
     {
         manage_outfiles(cont, i);
-    }
-    // sino tiene outfile, saldra por la salida estandar xq es el ultimo                
+    }               
     execute_command(cont, num);
 }

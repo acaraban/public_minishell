@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/12 19:25:21 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:20:50 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,3 @@ char	**ft_command_extract(char *cmd)
 	result = ft_split(cmd, ' ');
 	return (result);
 }
-
-/*int	ft_infile_valid(char **argv)
-{
-	if (access(argv[1], R_OK | F_OK) != 0)
-	{
-		perror(argv[1]);
-	}
-	return (0);
-}*/

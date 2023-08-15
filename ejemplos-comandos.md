@@ -3,6 +3,8 @@
 pwd | cat -e
 pwd | head
 pwd | wc -w | cat -e
+ls | pwd | cat -e
+echo hola | ls
 
 # ejemplo de comandos con builtin y outfile
 ls -l > aquis.md | echo hola | cat -e
