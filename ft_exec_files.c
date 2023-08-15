@@ -3,14 +3,14 @@
 
 void manage_infiles(t_content *cont, int i)
 {
-    printf("infile: %s\n", cont[i].infile);
+    //printf("infile: %s\n", cont[i].infile);
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
     if (cont->infile_fd == -1) // controla error del open
     {
         perror("Failed to open the file");
         return ;
     }
-    printf("infile descriptor number %d\n", cont->infile_fd);
+    //printf("infile descriptor number %d\n", cont->infile_fd);
     // comprobar si me pasan fichero sin < o con < (hace lo mismo)
     // lo anterior da error esto:  echo hola > outputi.txt | < outputi.txt grep hola | cat -e
     // se cree que hola en el segundo comando es el infile y son los args    
@@ -33,7 +33,7 @@ void manage_infiles(t_content *cont, int i)
 void manage_outfiles(t_content *cont, int i)
 {
     // if first child
-    printf("outfile is: %s\n", cont[i].outfile);
+    //printf("outfile is: %s\n", cont[i].outfile);
     // if tfl == 0 no hacer nada, dará error
     // abrir en modo append o en modo sobreescribir
     if (cont[i].tfl == 1) // modo sobre escribir

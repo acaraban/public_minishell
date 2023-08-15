@@ -1,11 +1,15 @@
 #include "minishell.h"
 
+/*
+    num = index for the pipes file descriptors
+*/
+
 void	ft_executor(t_content *cont)
 {
     int i;
     pid_t pid;
     int num_of_commands; // tmp
-    int num; // tmp?
+    int num;
 
     i = 0;
     num_of_commands = cont[i].global->num_cmd;
@@ -37,19 +41,8 @@ void	ft_executor(t_content *cont)
             {
                 execute_last_child(cont, i, fds, num);
             }
-            else // quitar esto
-            {
-                perror("No debe llegar\n");
-                exit(-1);
-            }
         }
-        // main, cierra escritura
-        if (i > 0 && i < num_of_commands)
-        {
-            close(fds[i - 1][READ_END]);
-        }
-        if (i < num_of_commands - 1)
-            close(fds[i][WRITE_END]);
+        main_closes_pipes(cont, i, fds, num);
         // waitpid
         waitpid(pid, NULL, 0);
         i++;
