@@ -26,24 +26,8 @@ void	ft_executor(t_content *cont)
         if (pid == -1)
             return ;
         if (pid == 0)
-        {
-            if (i == 0) // si es el primer child
-            {
-                execute_first_child(cont, i, fds, num);
-            }
-            // si NO es el primer child ni el ultimo
-            else if (i > 0 && i < num_of_commands -1)
-            {
-                execute_middle_children(cont, i, fds, num);
-            }
-            // si es el ultimo child, que escriba en la salida estandar o en el outfile
-            else if (i == num_of_commands - 1)
-            {
-                execute_last_child(cont, i, fds, num);
-            }
-        }
+            ft_execute_child(cont, i, fds, num);
         main_closes_pipes(cont, i, fds, num);
-        // waitpid
         waitpid(pid, NULL, 0);
         i++;
     }

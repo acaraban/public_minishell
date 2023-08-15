@@ -16,9 +16,4 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
     {
         execute_last_child(cont, i, fds, num);
     }
-    else // quitar esto
-    {
-        perror("No debe llegar\n");
-        exit(-1);
-    }
 }

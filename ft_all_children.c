@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+/*
+    Execute this function only if it is the first child.
+    Check if the command received is a builtin before redirecting output.
+*/
+
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
 {
     if (cont[i].infile)
@@ -11,10 +16,9 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
     {
         manage_outfiles(cont, i);
     }
-    // comprobar si es builtin antes del dup2 ?? no se seguro si tiene que ser antes del dup2
     if (is_builtin(cont, i) == 0)
     {
-        cont[i].builtin = 1; // esto solo es para marcar ese comando como builtin pero no lo ejecuta
+        cont[i].builtin = 1;
     }
     if ((cont[i].global->num_cmd > 1) && !(cont[i].outfile))
     {
@@ -23,11 +27,14 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
     execute_command(cont, i);
 }
 
+/*
+    Execute this function for any middle child. Not for the first or the last child.
+    Check if the command received is a builtin before redirecting output.
+*/
 
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
 {
     cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-    //printf("access path %s\n", cont[i].access_path); // comprobar builtin o  no
     if (cont[i].infile)
     {
         manage_infiles(cont, i);
@@ -48,6 +55,9 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
     }
     execute_command(cont, i);
 }
+
+// si es el ultimo child, que escriba en la salida estandar o en el outfile
+
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
 {
     //printf("last child\n");
