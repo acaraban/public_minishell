@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+/*
+    Child reads from different sources depending on the situation:
+    - from the standard input
+    - from the pipe of previous child
+    - from the infile if there is one
+*/
 
 void manage_infiles(t_content *cont, int i)
 {
@@ -29,18 +35,25 @@ void manage_infiles(t_content *cont, int i)
 
 }
 
+/*
+    REDIRECTIONS:
+    Child writes in a different place depending on the situation:
+    - in the standard output
+    - in the pipe
+    - in a file
+    Redirections on a file has two cases: > (truncate mode) and >> (append mode)
+*/
 
 void manage_outfiles(t_content *cont, int i)
 {
-    // if first child
     //printf("outfile is: %s\n", cont[i].outfile);
     // if tfl == 0 no hacer nada, dará error
     // abrir en modo append o en modo sobreescribir
-    if (cont[i].tfl == 1) // modo sobre escribir
+    if (cont[i].tfl == 1)
     {
         cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644); // no tengo claro porque RDWR
     }
-    else if (cont[i].tfl == 2) // modo append
+    else if (cont[i].tfl == 2)
     {
         cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
     }

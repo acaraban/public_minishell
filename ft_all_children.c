@@ -12,13 +12,13 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
         manage_infiles(cont, i);
     }
     cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-    if (cont[i].outfile)
-    {
-        manage_outfiles(cont, i);
-    }
     if (is_builtin(cont, i) == 0)
     {
         cont[i].builtin = 1;
+    }
+    if (cont[i].outfile)
+    {
+        manage_outfiles(cont, i);
     }
     if ((cont[i].global->num_cmd > 1) && !(cont[i].outfile))
     {
@@ -29,7 +29,7 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
 
 /*
     Execute this function for any middle child. Not for the first or the last child.
-    Check if the command received is a builtin before redirecting output.
+    Check if the command received is a builtin before redirecting output. 
 */
 
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
@@ -39,17 +39,19 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
     {
         manage_infiles(cont, i);
     }
-    else // sino, que coja info del child anterior
+    else
     {
         read_from_the_pipe(fds, num);
     }
-    // child escribe, y como no es el ultimo, escribe en el end write del siguiente pipe
-    // o en el outfile si lo hubiera
+    if (is_builtin(cont, i) == 0)
+    {
+        cont[i].builtin = 1;
+    }
     if (cont[i].outfile)
     {
         manage_outfiles(cont, i);
     }
-    else // si no hay outfile, escribe en el write end del pipe
+    else
     {
         write_on_the_pipe(fds, num);
     }
@@ -57,6 +59,10 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
 }
 
 // si es el ultimo child, que escriba en la salida estandar o en el outfile
+/*
+    Execute this function only for the last child.
+    Check if the command received is a builtin before redirecting output. 
+*/
 
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
 {
@@ -70,6 +76,10 @@ void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
     else
     {
         read_from_the_pipe(fds, num);
+    }
+    if (is_builtin(cont, i) == 0)
+    {
+        cont[i].builtin = 1;
     }
     // si hubiera outfile, que salga por ahi
     if (cont[i].outfile)

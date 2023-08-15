@@ -1,5 +1,43 @@
 #include "minishell.h"
 
+/* Function to check if comand is a builtin. */
+
+int is_builtin(t_content *cont, int i)
+{
+    //printf("el comando que llega es: %s\n", cont[i].cmd);
+    if (ft_strnstr(cont[i].full_comand[0], "echo", 4) && ft_strnstr(cont[i].full_comand[1], "-n", 2) && cont[i].full_comand[2] && !cont[i].full_comand[3])
+    {
+        printf("dentro de echo\n");
+        cont[i].which_builtin = 1;
+        return (0);
+    }
+    else if (ft_strnstr(cont[i].cmd, "pwd", 3))
+    {
+        //printf("yes, soy built in: %s\n", cont[i].cmd);
+        cont[i].which_builtin = 3;
+        return(0);
+    }
+    return (1);
+}
+
+/* Function to execute the appropiate custom builtin command. */
+
+void exec_builtin(t_content *cont, int i)
+{
+    if (cont[i].which_builtin == 1)
+    {
+        printf("voy a sacar echo\n");
+        custom_echo(cont, i);
+    }
+    else if (cont[i].which_builtin == 3)
+    {
+        printf("custom pwd\n");
+        custom_pwd();
+    }
+    exit (1);
+
+}
+
 void execute_command(t_content *cont, int i)
 {
     if (cont[i].builtin == 1)
@@ -21,43 +59,7 @@ void execute_command(t_content *cont, int i)
     }
 }
 
-/* Function to check if comand is a builtin. */
-
-int is_builtin(t_content *cont, int i)
-{
-    //printf("el comando que llega es: %s\n", cont[i].cmd);
-    if (ft_strnstr(cont[i].full_comand[0], "echo", 4) && ft_strnstr(cont[i].full_comand[1], "-n", 2) && cont[i].full_comand[2] && !cont[i].full_comand[3])
-    {
-        printf("dentro de echo\n");
-        cont[i].which_builtin = 1;
-        return (0);
-    }
-    else if (ft_strnstr(cont[i].cmd, "pwd", 3))
-    {
-        //printf("yes, soy built in: %s\n", cont[i].cmd);
-        cont[i].which_builtin = 3;
-        return(0);
-    }
-    return (1);
-}
-
-void exec_builtin(t_content *cont, int i)
-{
-    if (cont[i].which_builtin == 1)
-    {
-        printf("voy a sacar echo\n");
-        custom_echo(cont, i);
-    }
-    else if (cont[i].which_builtin == 3)
-    {
-        custom_pwd();
-        //exit (1);
-    }
-    exit (1);
-
-}
-
-/* temporales, hay que hacerlos */
+/* temporales, hay que hacerlos y ponerlos en otra pagina */
 
 int	custom_pwd(void)
 {
