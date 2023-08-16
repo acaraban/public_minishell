@@ -75,7 +75,6 @@ int err_redsegred(char **arr, t_content *cont);
 int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
-void echo(char *txt, int flag);
 
 void	ft_executor(t_content *cont);
 char	*ft_access_program(char *environ_path, char *command);
@@ -83,11 +82,6 @@ char	*ft_env_path(char **envp);
 char	*ft_access_program(char *environ_path, char *command);
 void manage_infiles(t_content *cont, int i);
 void manage_outfiles(t_content *cont, int i);
-int is_builtin(t_content *cont, int i);
-void exec_builtin(t_content *cont, int i);
-void execute_command(t_content *cont, int i);
-void custom_echo(t_content *cont, int i);
-int	custom_pwd(void);
 void write_on_the_pipe(int (*fds)[2], int num);
 void read_from_the_pipe(int (*fds)[2], int num);
 void main_closes_pipes(t_content *cont, int i, int (*fds)[2], int num);
@@ -95,5 +89,14 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num);
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num);
+int arg_is_a_path(char *comand_args);
+int is_builtin(t_content *cont, int i);
+void exec_builtin(t_content *cont, int i);
+void execute_command(t_content *cont, int i);
+void custom_echo(t_content *cont, int i);
+void	custom_pwd(void);
+void custom_env(void);
+void custom_exit(void);
+void signal_handler(int signal_num);
 
 #endif

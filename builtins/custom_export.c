@@ -1,6 +1,6 @@
-#include "minishell.h"
+#include "../minishell.h"
 
-void custom_export(t_content *cont)
+/*void custom_export(t_content *cont)
 {
     
-}
+}*/

@@ -1,13 +1,25 @@
 #include "../minishell.h"
 
-/* temporal */
 
-int	custom_pwd(void)
+void custom_pwd(void)
 {
-	char	*buf;
+	char *buff;
+	size_t size;
 
-	buf = getcwd(NULL, 0);
-	ft_putendl_fd(buf, 1);
-	free(buf);
-	return (0);
+	size = 1024;
+	buff = malloc(sizeof(size));
+	if (buff == NULL)
+	{
+		return ;
+	}
+	if (getcwd(buff, size) == NULL)
+	{
+		perror("getcwd");
+		return ;
+	}
+	else
+	{
+		printf("%s\n", buff);
+	}
+	free(buff);
 }
