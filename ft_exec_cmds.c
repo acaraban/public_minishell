@@ -93,7 +93,7 @@ void exec_builtin(t_content *cont, int i)
     else if (cont[i].which_builtin == 7)
     {
         printf("custom exit\n");
-        custom_exit();
+        custom_exit(cont, i);
     }
     exit (1);
 }

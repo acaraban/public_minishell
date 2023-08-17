@@ -35,6 +35,7 @@ typedef struct s_global
 	char	*environ_path;
 	int err_stat;
 	int new_stat;
+	pid_t main_getpid; // pruebas
 }t_global;
 
 typedef struct s_content
@@ -50,6 +51,7 @@ typedef struct s_content
 	int tfl;
 	int builtin;
 	int which_builtin;
+	int signal_sent; // pruebas
 	t_global *global;
 }t_content;
 
@@ -96,7 +98,8 @@ void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void	custom_pwd(void);
 void custom_env(void);
-void custom_exit(void);
+//void custom_exit(void);
+void custom_exit(t_content *cont, int i);
 void signal_handler(int signal_num);
 
 #endif

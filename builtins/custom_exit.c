@@ -15,9 +15,9 @@ void signal_handler(int signal_num)
     exit(signal_num);
 }
 
-void custom_exit(void)
+void custom_exit(t_content *cont, int i)
 {
-    signal(SIGINT, signal_handler);
-}
-
-// esto no funciona bien creo que porque esta comentada la linea rl_replace_line
+    cont[i].signal_sent = 1;
+    //signal(SIGINT, signal_handler);
+    //kill(cont[i].global->main_getpid, SIGTERM);   
+}// esto no funciona bien creo que porque esta comentada la linea rl_replace_line
