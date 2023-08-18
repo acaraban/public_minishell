@@ -25,7 +25,7 @@ void ft_arg_div(char *txt, t_global *glb)
 	}
 	if (ft_strlen(txt) == 0)
 		tam = 0;
-	glb->tam = tam;
+	glb->num_cmd = tam;
 	tam2 = tam;
 	i = 0;
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
