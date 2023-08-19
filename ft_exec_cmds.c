@@ -88,12 +88,13 @@ void exec_builtin(t_content *cont, int i)
     else if (cont[i].which_builtin == 6)
     {
         printf("custom env\n");
-        //custom_env();
+        custom_env(cont, i);
     }
     else if (cont[i].which_builtin == 7)
     {
         printf("custom exit\n");
         custom_exit(cont, i);
+        //custom_exit();
     }
     exit (1);
 }
