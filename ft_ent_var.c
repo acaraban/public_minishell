@@ -76,7 +76,18 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	aux = ft_substr(txt, 0, pos);
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
-		return (NULL);
+	{
+		pos++;
+		free (aux2);
+		while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
+		&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
+			i++;
+		ft_printf("este es i: %d\n", i);
+		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
+		ft_printf("este es substr: %s\n", aux2);
+		add = ft_strjoin(aux, aux2);
+		return (add);
+	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
 	while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \

@@ -3,7 +3,6 @@
 void ft_arg_div(char *txt, t_global *glb)
 {
 	char **final;
-	char ***cmd_str;
 	t_content *cont;
 	char *ot;
 	int tam;
@@ -35,6 +34,10 @@ void ft_arg_div(char *txt, t_global *glb)
 		cont[tam].global = glb;
 		cont[tam].nfl = 0;
 		cont[tam].tfl = 0;
+		cont[tam].infile = NULL;
+		cont[tam].outfile = NULL;
+		cont[tam].full_comand = NULL;
+		cont[tam].cmd = NULL;
 		tam++;
 	}
 	final = ft_specials(txt, cont, 1);
@@ -47,73 +50,68 @@ void ft_arg_div(char *txt, t_global *glb)
 	tam = 0;
 	while (final[tam])
 		tam++;
-	cmd_str = (char ***)calloc(sizeof(char **), tam + 1);
-	cmd_str[tam] = NULL;
+	char **cmd_str;
 	i = 0;
 	h = 0;
-	int r = 0;
+	char **ac;
+
+	ac = NULL;
 	while (final[i])
 	{
 		if (final[i][0] != '<' && final[i][0] != '>' && final[i][0] != '|')
 		{
-			cmd_str[i] = ft_shell_split(final[i], ' ');
-			cont[h].cmd = cmd_str[i][0];
-			cont[h].full_comand = cmd_str[i];
+			cmd_str = ft_shell_split(final[i], ' ', cont);
+			if (cmd_str == NULL)
+				return ;
+			cont[h].cmd = ft_strdup(cmd_str[0]);
+			cont[h].full_comand = ft_dbl_strdup(cmd_str);
+			free_dbl (cmd_str);
 		}
 		else if (final[i][0] == '|')
 			h++;
 		else
 		{
-			cmd_str[i] = &final[i];
 			if (final[i][0] == '<' && final[i][1] == '<')
 			{
+				ac = ft_type_red_entdbl(final, ac, i, h, cont);
+				if (ac == NULL)
+					return ;
+				ft_printf("esto es ac[0]\n", ac[0]);
 				i++;
-				cmd_str[i] = ft_shell_split(final[i], ' ');
-				cont[h].infile = cmd_str[i][0];
-				cont[h].nfl = 2;
-				if (cmd_str[i][1])
-					cont[h].full_comand = ft_xtr_allsz(cont[h].full_comand, cmd_str[i], 1);
 			}
 			else if (final[i][0] == '<')
 			{
-				i++;
-				if (cmd_str[i] != NULL)
-					free_dbl(cmd_str[i]);
-				cmd_str[i] = ft_shell_split(final[i], ' ');
-				while (cmd_str[i][r])
-					r++;
-				cont[h].infile = cmd_str[i][r - 1];
-				cont[h].nfl = 1;
-				r = 0;
+				i = ft_type_red_entsim(final, i, h, cont);
+				if (i < 0)
+					return ;
 			}
+				
 			else if (final[i][0] == '>' && final[i][1] == '>')
 			{
-				i++;
-				cmd_str[i] = ft_shell_split(final[i], ' ');
-				cont[h].outfile = cmd_str[i][0];
-				cont[h].tfl = 2;
-				if (cmd_str[i][1])
-					cont[h].full_comand = ft_xtr_allsz(cont[h].full_comand, cmd_str[i], 1);
+				i = ft_type_red_saldbl(final, i, h, cont);
+				if (i < 0)
+					return ;
 			}
 			else if (final[i][0] == '>')
 			{
-				i++;
-				cmd_str[i] = ft_shell_split(final[i], ' ');
-				cont[h].outfile = cmd_str[i][0];
-				cont[h].tfl = 1;
-				if (cmd_str[i][1])
-					cont[h].full_comand = ft_xtr_allsz(cont[h].full_comand, cmd_str[i], 1);
+				i = ft_type_red_salsim(final, i, h, cont);
+				if (i < 0)
+					return ;
 			}
-				
 		}
 		i++;
 	}
-
+	if (ac)
+	{
+		ft_printf("que llega\n");
+		ft_heredoc(ac);
+		free_dbl(ac);
+	}
 	// aqui ??
-	ft_executor(cont);
+	//ft_executor(cont);
 
 	////////////imprimir el struct //////////////////////
-	/*int l;
+	int l;
 
 	l = 0;
 	while (l < tam2)
@@ -135,7 +133,7 @@ void ft_arg_div(char *txt, t_global *glb)
 			ft_printf("%s\n", cont[l].outfile);
 		ft_printf("\n\n-------------------------------\n");
 		l++;
-	}*/
+	}
 
 
 	//////////////parte del codigo////////////////

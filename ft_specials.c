@@ -43,8 +43,8 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			if (err_red(i, txt, cant))
 				return (NULL);
 			if (i > 1)
-				vue = dobl_prt(vue, txt, cont, i - 1);
-			vue = dobl_prt(vue, txt, i, i + 1);
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
 			cont = i + 1;
 		}
@@ -53,8 +53,8 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			if (err_sim_red(txt, i, cant))
 				return (NULL);
 			if (i > 1)
-				vue = dobl_prt(vue, txt, cont, i - 1);
-			vue = dobl_prt(vue, txt, i, i);
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
 		}
 		else if (txt[i] == '<' && txt[i + 1] == '<')
@@ -62,16 +62,16 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			if (err_red(i, txt, cant))
 				return (NULL);
 			if (i > 1)
-				vue = dobl_prt(vue, txt, cont, i - 1);
-			vue = dobl_prt(vue, txt, i, i + 1);
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
 			cont = i + 1;
 		}
 		else if (txt[i] == '<')
 		{
 			if (i > 1)
-				vue = dobl_prt(vue, txt, cont, i - 1);
-			vue = dobl_prt(vue, txt, i, i);
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
 		}
 		else if (txt[i] == '|')
@@ -79,14 +79,14 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			if (err_dobpip(txt, i, cant))
 				return (NULL);
 			if (i > 1)
-				vue = dobl_prt(vue, txt, cont, i - 1);
-			vue = dobl_prt(vue, txt, i, i);
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
 		}
 		i++;
 	}
 	if (cont < i)
-		vue = dobl_prt(vue, txt, cont, i);
+		vue = dobl_prt_free(vue, txt, cont, i);
 	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
 	{
 		return (NULL);
