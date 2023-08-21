@@ -1,4 +1,6 @@
 #include "minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 void memleaks(void)
 {
@@ -20,17 +22,47 @@ int main(int argc, char **argv, char **env)
 	//atexit(memleaks);
 	char *txt;
 	t_global *glb;
+	int boo;
+	int i;
+	int j;
 
 	(void)argc;
 	(void)argv;
+	j = 0;
 	glb = (t_global *)calloc(sizeof(t_content), 1);
 	signal(2, handle_sigint);
 	glb[0].err_stat = 0;
 	glb[0].new_stat = 0;
-	glb[0].env = env;
-	while ((txt = readline("minishell>")) != NULL)
+	boo = 1;
+	i = 0;
+	while (env[i])
+		i++;
+	glb->env = (char **)calloc(sizeof(char *), i + 1);
+	glb->env[i] = NULL;
+	while (j < i)
 	{
-		add_history(txt);
-		ft_arg_div(txt, glb);
+		glb[0].env[j] = strdup(env[j]);
+		j++;
+	}
+	while (boo)
+	{
+		txt = readline("minishell>");
+		if (txt == NULL)
+		{
+			free(glb->env);
+			free(glb);
+			boo = 0;
+		}
+		if (txt != NULL)
+		{
+			add_history(txt);
+			ft_arg_div(txt, glb);
+		}
+		else
+		{
+			free(txt);
+			ft_printf("exit\n");
+		}
+			
 	}
 }

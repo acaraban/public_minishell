@@ -7,10 +7,12 @@ int find_match(char *txt, int pos, char c)
 	i = 1;
 	while (txt[pos + i] && txt[pos + i] != c)
 		i++;
+	if (txt[pos + i] != c)
+		return (-1);
 	return(i);
 }
 
-static int	numstring(char *s1, char c)
+static int	numstring(char *s1, char c, t_content *cont)
 {
 	int	comp;
 	int	cles;
@@ -24,7 +26,14 @@ static int	numstring(char *s1, char c)
 	while (s1[i] != '\0')
 	{
 		if (s1[i] == '\"' || s1[i] == '\'')
+		{
+			if (find_match(s1, 0, s1[i]) < 0)
+			{
+				err_stx("error sintactico\n", cont);
+				return (-1);
+			}
 			i += find_match(s1, 0, s1[i]);
+		}
 		if (s1[i] == c)
 			cles = 0;
 		else if (cles == 0)
@@ -118,7 +127,7 @@ char *del_char(char *txt, int un)
 	return (aux3);
 }
 
-char	**ft_shell_split(char *s, char c)
+char	**ft_shell_split(char *s, char c, t_content *cont)
 {
 	char	**dst;
 	int		l;
@@ -127,7 +136,9 @@ char	**ft_shell_split(char *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	l = numstring(s, c);
+	l = numstring(s, c, cont);
+	if (l < 0)
+		return (NULL);
 	dst = (char **)malloc(sizeof(char *) * (l + 1));
 	if (dst == NULL)
 		return (NULL);
