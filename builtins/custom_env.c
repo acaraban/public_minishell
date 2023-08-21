@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-void custom_env(void)
+
+
+void custom_env(t_content *cont, int i)
 {
-    printf("get the path\n");
-    getenv("PATH");
-    printf("%s\n", getenv("USER"));
+    ft_dbl_printf("", cont[i].global->env, "\n", 1);
 }

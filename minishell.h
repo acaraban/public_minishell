@@ -108,8 +108,8 @@ int is_builtin(t_content *cont, int i);
 void exec_builtin(t_content *cont, int i);
 void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
-void	custom_pwd(void);
-void custom_env(void);
+void custom_pwd(void);
+void custom_env(t_content *cont, int i);
 void custom_exit(t_content *cont, int i);
 void signal_handler(int signal_num);
 

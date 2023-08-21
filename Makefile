@@ -6,11 +6,14 @@ SRCS =	builtins/custom_echo.c \
 		builtins/custom_env.c \
 		builtins/custom_exit.c \
 		err_mngment/err_stx.c \
+		err_mngment/err_cmd.c \
 		ft_arg_div.c \
 		ft_ent_var.c \
 		ft_minishell.c \
 		ft_shell_split.c \
 		ft_specials.c \
+		dbl_utils/ft_dbl_printf.c \
+		dbl_utils/ft_new_dbl.c \
 		dbl_utils/ft_xtr.c \
 		dbl_utils/ft_xtr_allsz.c \
 		input_err/err_dobpip.c \
@@ -25,15 +28,9 @@ SRCS =	builtins/custom_echo.c \
 		ft_all_children.c \
 		ft_exec_files.c \
 		ft_exec_cmds.c \
-		ft_exec_dups.c
-		ft_exec_opens.c \
-		dbl_utils/ft_new_dbl.c \
+		ft_exec_dups.c \
 		ft_type_red_pars.c \
-		ft_heredoc.c \
-		ft_exec_builtins.c \
-		dbl_utils/ft_dbl_printf.c \
-		builtins/export.c \
-		err_mngment/err_cmd.c
+		ft_heredoc.c
 
 INC = -I libft -I /opt/vagrant/embedded/include
 NAME = minishell.a
