@@ -1,4 +1,7 @@
-#include "minishell.h"
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int find_match(char *txt, int pos, char c)
 {
@@ -7,12 +10,10 @@ int find_match(char *txt, int pos, char c)
 	i = 1;
 	while (txt[pos + i] && txt[pos + i] != c)
 		i++;
-	if (txt[pos + i] != c)
-		return (-1);
 	return(i);
 }
 
-static int	numstring(char *s1, char c, t_content *cont)
+static int	numstring(char *s1, char c)
 {
 	int	comp;
 	int	cles;
@@ -26,14 +27,7 @@ static int	numstring(char *s1, char c, t_content *cont)
 	while (s1[i] != '\0')
 	{
 		if (s1[i] == '\"' || s1[i] == '\'')
-		{
-			if (find_match(s1, 0, s1[i]) < 0)
-			{
-				err_stx("error sintactico\n", cont);
-				return (-1);
-			}
 			i += find_match(s1, 0, s1[i]);
-		}
 		if (s1[i] == c)
 			cles = 0;
 		else if (cles == 0)
@@ -112,8 +106,55 @@ static char	**affect(char *s, char **dst, char c, int l)
 	return (dst);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	stot_len;
+	char	*rtn;
+
+	if (!s1 && !s2)
+		return (strdup(""));
+	if (s1 && !s2)
+		return (strdup(s1));
+	if (!s1 && s2)
+		return (strdup(s2));
+	s1_len = strlen((char *)s1);
+	s2_len = strlen(s2);
+	stot_len = s1_len + s2_len + 1;
+	rtn = malloc(sizeof(char) * stot_len);
+	if (!rtn)
+		return (0);
+	memmove(rtn, s1, s1_len);
+	memmove(rtn + s1_len, s2, s2_len);
+	rtn[stot_len - 1] = '\0';
+	return (rtn);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	i = strlen(s);
+	if (start >= i)
+		start = i;
+	if (i - start < len)
+		len = i - start;
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (str)
+	{
+		memcpy(str, (void *)&s[start], len);
+		str[len] = '\0';
+	}
+	return (str);
+}
+
 char *del_char(char *txt, int un)
 {
+	int i;
 	char *aux1;
 	char *aux2;
 	char *aux3;
@@ -127,7 +168,7 @@ char *del_char(char *txt, int un)
 	return (aux3);
 }
 
-char	**ft_shell_split(char *s, char c, t_content *cont)
+char	**ft_split(char *s, char c)
 {
 	char	**dst;
 	int		l;
@@ -136,14 +177,11 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 
 	if (s == NULL)
 		return (NULL);
-	l = numstring(s, c, cont);
-	if (l < 0)
-		return (NULL);
+	l = numstring(s, c);
 	dst = (char **)malloc(sizeof(char *) * (l + 1));
 	if (dst == NULL)
 		return (NULL);
 	dst = affect(s, dst, c, l);
-	l = 0;
 	l = 0;
 	while (dst[l])
 	{
@@ -162,4 +200,19 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 		l++;
 	}
 	return (dst);
+}
+
+int main(void)
+{
+	int i;
+	char **arr;
+
+	i = 0;
+	char jc[] = "hola que tal \"ercoki\"ercoki";
+	arr = ft_split(jc, ' ');
+	while (arr[i])
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
 }

@@ -1,4 +1,6 @@
 #include "../minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 char **start_end_pip(char **vue, t_content *cont)
 {
@@ -25,7 +27,7 @@ char **start_end_pip(char **vue, t_content *cont)
 			new = ft_specials(readli, cont, 0);
 			if (new == NULL)
 				return (NULL);
-			aux = ft_xtr_allsz(vue, new, 0);
+			aux = ft_xtr_allsz_free(vue, new, 0);
 			free_dbl(vue);
 			vue = aux;
 			while (vue[i])
