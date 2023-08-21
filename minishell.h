@@ -5,12 +5,14 @@
 #include "get_next_line/get_next_line.h"
 #include "ft_printf/ft_printf.h"
 #include <signal.h>
-#include <sys/ioctl.h>
 #include <string.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+#include <dirent.h>
+#include <sys/ioctl.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include <stdlib.h>
 #include <errno.h>
 

@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/16 10:22:43 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:27:22 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,22 @@ char	**ft_command_extract(char *cmd)
 	return (result);
 }
 
-// comprobar si el argumento es un path valido
-// si empieza por / es una ruta absoluta
-// relativa ya es mas comprobaciones
+/*
+	Check if argument received is a valid path.
+	The opendir function takes a single argument: the name of the directory
+	you want to open. 	It returns a pointer to a DIR structure, which is an
+	opaque data type representing the 	opened directory stream. 
+	If the directory cannot be opened, it returns a NULL pointer.
+*/
 
 int arg_is_a_path(char *comand_args)
 {
-	printf("comand arg es: %s\n", comand_args);
-	if (ft_strcmp(comand_args, "/") == 0)
+	if (opendir(comand_args) == NULL)
 	{
-		printf("this is an absolute path\n");
+		printf("error opening dir\n");
+		return (1); // si da error, la funcion is_builtin ya no lo considera builtin
+		// y saldra el error del execve ejecutando cd
 	}
+	printf("success opening dir\n");
 	return (0);
 }
