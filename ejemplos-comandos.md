@@ -1,47 +1,32 @@
-# ejemplo 2 comandos con builtin
+# ejemplo de comandos con builtin
 
 pwd | cat -e
 pwd | head
-
 pwd | wc -w | cat -e
+ls | pwd | cat -e
+echo hola | ls
+
+# ejemplo de comandos con builtin y outfile
 ls -l > aquis.md | echo hola | cat -e
 
 
-****************************************************************************
-
- ejemplos de comandos "sin infile ni outfile"
- solo 3 comandos
-
-*****************************************************************************
-
-
+# ejemplos de comandos "sin infile ni outfile"
 ls -l | grep mini | cat -e
+ping -c 5 claudiajuan.com | grep round-trip | cat -e
+
+
+ )))))))) )))))))) )))))))) )))))))) )))))))) )))))))) ))))))))
+# ejemplos de comandos "con infile" pero no outfile
 echo hola > outputi.txt | < outputi.txt grep hola | cat -e
 # este falla
 
-ping -c 5 claudiajuan.com | grep rtt | cat -e
-
-# resultados ok, pero tarda mucho en cerrarse y volver a salir minishell>
-
-# puede que sea porque no tengo puestos los waitpid
-# hecho!! :)
-
-
-****************************************************************************
-
-# ejemplos de comandos "con infile" pero no outfile
-# solo 3 comandos
-
-*****************************************************************************
 
 # infile en primer comando
 grep estamos < forever.md | wc -l | cat -e
 
-
 # infile en segundo comando
 ls | grep feria < forever.md | wc -w
 ls | grep feria < forever.md | wc -w | cat -e
-
 
 # infile en primer y segundo comandos
 grep hoy < forever.md | grep feria < forever.md | wc -w
@@ -54,13 +39,13 @@ wc -l < forever.md | grep minni < forever.md | wc -w | cat -e
 # infile en los 4 comandos
 
 grep hoy < forever.md | grep feria < forever.md | grep gusta < forever.md | wc -w
+# error soluciona acaraban
 
-
-# outfile en comandos
-# con 3 comandos
-
+grep hoy < forever.md | < forever.md grep feria | grep gusta < forever.md | wc -w
+# error soluciona acaraban
 
 ls -l > probando.md | grep ft < probando.md | cat -e
+# esto no funciona acaraban, cuando el infile viene detras
 # ok resultado pero bash avisa de que no existia el fichero
 # y minishell no avisa, lo hace todo
 
@@ -75,21 +60,9 @@ bash: mas.md: No such file or directory
 
 grep hoy < forever.md >> mas.md | grep feria < mas.md | grep gusta < mas.md >> quepasa.md
 
+# el infile del segundo comando sin < signo
 
-
-
-
-
-
-
-ping -c 5 claudiajuan.com | grep rtt | cat -e
-
-
-
-
-
-
-
+grep hoy < forever.md >> mas.md | grep feria mas.md | grep gusta < mas.md >> quepasa.md
 
 grep hoy < forever.md | grep feria < forever.md | wc -w | cat -e
 
@@ -102,57 +75,32 @@ grep hoy < forever.md | grep feria < forever.md | grep semana < forever.md | gre
 
 xx en el ultimo un infile
 grep hoy < forever.md | grep feria < forever.md | grep semana < forever.md
-
-****************************************************************************
-
-# ejemplos de comandos "con infile" pero no outfile
-# con 4 comandos
-
-*****************************************************************************
-
-grep hoy < forever.md | grep feria < forever.md | wc -w | cat -e
-
 # funciona perfe (pero no ha comprobado el segundo)
 
 
 
-****************************************************************************
-
 # ejemplos de comandos "con infiles y outfiles"
 # con 3 y 4 comandos
-
-*******************************
-
 ls -l > resultado.txt | grep mini < resultado.txt | grep ft < resultado.txt > final.txt
 
+ ))))))))
 
 
-
-
-
-****************************************************************************
 
 # ejemplo "con outfile"
 # con 2 comandos
 
-*******************************
-
 ls -l | grep mini > otro.txt
-
 ls -l > otro.txt | wc -l < otro.txt
 
 
-***********************************************************
-
-
-
-
-
+****************************************************************************
 ****************************************************************************
 
 # ejemplos de comandos con fallos a proposito para que saquen error 
 
 *****************************************************************************
+****************************************************************************
 
 
 wc -l < forever.md | grep minni < forever.md | cati -e

@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/12 19:25:21 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:22:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,16 @@ char	**ft_command_extract(char *cmd)
 	return (result);
 }
 
-/*int	ft_infile_valid(char **argv)
+// comprobar si el argumento es un path valido
+// si empieza por / es una ruta absoluta
+// relativa ya es mas comprobaciones
+
+int arg_is_a_path(char *comand_args)
 {
-	if (access(argv[1], R_OK | F_OK) != 0)
+	printf("comand arg es: %s\n", comand_args);
+	if (ft_strcmp(comand_args, "/") == 0)
 	{
-		perror(argv[1]);
+		printf("this is an absolute path\n");
 	}
 	return (0);
-}*/
+}

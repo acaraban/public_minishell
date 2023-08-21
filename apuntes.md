@@ -16,6 +16,25 @@ The constant O_TRUNC is a flag used with the open() function in C to specify tha
 
 // Open a file for writing, and if it exists, truncate its contents
 
-fd = open("example.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+fd = open("example.txt", O_TRUNC | O_CREAT | O_RDWR, 0644);
+
+
+
+## ######################### 
+
+# ABOUT BUILT-INS
+
+## #########################
+
+
+
+Builtin 	Description 	Options 	Parameters 	Helpful Functions
+echo 	Prints arguments separated with a space followed by a new line 	-n 	:heavy_check_mark: 	write
+cd 	Changes current working directory, updating PWD and OLDPWD 	:x: 	:heavy_check_mark: 	chdir
+pwd 	Prints current working directory 	:x: 	:x: 	getcwd
+env 	Prints environment 	:x: 	:x: 	write
+export 	Adds/replaces variable in environment 	:x: 	:heavy_check_mark: 	:x:
+unset 	Removes variable from environment 	:x: 	:heavy_check_mark: 	:x:
+
 
 

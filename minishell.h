@@ -12,6 +12,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+#include <errno.h>
 
 //valido
 # define VLD 0
@@ -25,19 +26,14 @@
 # define WRITE_END 1
 
 
-/*typedef struct s_builtins
-{
-	int which_cmd;
-
-}t_builtins;*/
-
 typedef struct s_global
 {
-	int tam;
+	int num_cmd;
 	char **env;
 	char	*environ_path;
 	int err_stat;
 	int new_stat;
+	pid_t main_getpid; // pruebas
 }t_global;
 
 typedef struct s_content
@@ -47,13 +43,13 @@ typedef struct s_content
 	char **full_comand;
 	char *infile;
 	char *outfile;
-	int infile_fd; // coge valor con el open
+	int infile_fd;
     int outfile_fd;
 	int nfl;
 	int tfl;
 	int builtin;
-	//t_builtins *builtins;
 	int which_builtin;
+	int signal_sent; // pruebas
 	t_global *global;
 }t_content;
 
@@ -79,7 +75,6 @@ int err_redsegred(char **arr, t_content *cont);
 int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
-void echo(char *txt, int flag);
 int     ft_type_red_entsim(char **final, int i, int h, t_content *cont);
 int     ft_type_red_salsim(char **final, int i, int h, t_content *cont);
 int     ft_type_red_saldbl(char **final, int i, int h, t_content *cont);
@@ -95,17 +90,29 @@ int bef_str(char *txt);
 int export(t_content *cont, int i);
 void err_cmd(char *txt, t_content *cont);
 
+
 void	ft_executor(t_content *cont);
 char	*ft_env_path(char **envp);
 char	*ft_access_program(char *environ_path, char *command);
 void manage_infiles(t_content *cont, int i);
 void manage_outfiles(t_content *cont, int i);
+void write_on_the_pipe(int (*fds)[2], int num);
+void read_from_the_pipe(int (*fds)[2], int num);
+void main_closes_pipes(t_content *cont, int i, int (*fds)[2], int num);
+void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num);
+void execute_first_child(t_content *cont, int i, int (*fds)[2], int num);
+void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num);
+void execute_last_child(t_content *cont, int i, int (*fds)[2], int num);
+int arg_is_a_path(char *comand_args);
 int is_builtin(t_content *cont, int i);
-//void exec_builtin(void);
 void exec_builtin(t_content *cont, int i);
-int	custom_pwd(void);
-void custom_echo(t_content *cont, int i);
 void execute_command(t_content *cont, int i);
+void custom_echo(t_content *cont, int i);
+void	custom_pwd(void);
+void custom_env(void);
+void custom_exit(t_content *cont, int i);
+void signal_handler(int signal_num);
+
 
 
 #endif
