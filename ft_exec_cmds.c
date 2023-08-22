@@ -3,26 +3,40 @@
 
 /* 
     Function to check if the command is a built-in without redirs.
-    cd
+    cd : check if command is cd and if args for cd are valid or included in the built-in
+         if yes, execute custom_cd function
+         if not, execute cd command with execve
     exit
 */
 
 int is_builtin_noredir(t_content *cont, int i)
 {
     printf("inside function is_builtin_noredir\n");
-    if ((ft_strcmp(cont[i].full_comand[0], "cd") == 0 && arg_is_a_path(cont[i].full_comand[1]) == 0))
+    if (ft_strcmp(cont[i].full_comand[0], "cd") == 0) // si el comando es cd
     {
         printf("dentro del builtin cd\n");
-        //cont[i].which_builtin = 2;
+        // comprueba si cd tiene argumento
+        if (cont[i].full_comand[1])
+        {
+            // y si es valido
+            if (arg_is_valid(cont[i].full_comand[1]) == 0)
+            {
+                printf("hay un argumento para cd\n");
+                custom_cd(cont[i].full_comand[1]);
+            }
+        }
+        // si no tiene argumento cd, me lo han pasado a secas
+        else
+        {
+            printf("sin argumento para cd\n");
+            cont[i].full_comand[1] = ""; // como no tiene, lo creo pero vacio
+        }
+        custom_cd(cont[i].full_comand[1]);
         return (0);
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
     {
-        //printf("dentro de builtin exit, no tiene flags\n");
-        //cont[i].which_builtin = 7;
-        // ejecutar comando directamente
-        exit(0); // 0 para salir sin dar mensaje
-        //return (0);
+        exit(0);
     }
     printf("no es ningun builtin_noredir\n");
     return (1);
@@ -36,8 +50,8 @@ Function to check if the command is a built-in.
 ◦ pwd sin opciones.  -------hecho
 ◦ export sin opciones. 
 ◦ unset sin opciones.
-◦ env sin opciones o argumentos.
-◦ exit sin opciones.
+◦ env sin opciones o argumentos. -------hecho
+◦ exit sin opciones. -------hecho
 */
 
 int is_builtin(t_content *cont, int i)
@@ -83,11 +97,6 @@ void exec_builtin(t_content *cont, int i)
         printf("execute custom echo\n");
         custom_echo(cont, i);
     }
-    if (cont[i].which_builtin == 2)
-    {
-        printf("custom cd\n"); // lo quito?
-        //custom_cd();
-    }
     else if (cont[i].which_builtin == 3)
     {
         printf("custom pwd\n");
@@ -107,12 +116,6 @@ void exec_builtin(t_content *cont, int i)
     {
         printf("custom env\n");
         custom_env(cont, i);
-    }
-    else if (cont[i].which_builtin == 7) // lo quito?
-    {
-        printf("custom exit\n");
-        //custom_exit(cont, i);
-        //custom_exit();
     }
     exit (1);
 }

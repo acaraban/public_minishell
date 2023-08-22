@@ -26,6 +26,8 @@ void	ft_executor(t_content *cont)
             printf("just started: es un builtin with no redires\n");
             // enviar el comando a una funcion, que es el builtin tal cual, 
             // ejecutandose en el padre directamente
+            // aqui llega desde el custom_cd, y debe parar, no seguir para abajo
+            return ;
         }
         // antes del fork, comprobar que builtins no tienen redirecciones y cuales si 
         // ejecutar algunos builtins (cd, pwd, exit) y tener en cuenta los dups

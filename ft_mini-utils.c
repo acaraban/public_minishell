@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/21 16:27:22 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:08:36 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,59 @@ char	**ft_command_extract(char *cmd)
 
 int arg_is_a_path(char *comand_args)
 {
+	// comprobar si comand_args esta vacio
+	/*if (ft_strcmp(comand_args, "") == 0)
+	{
+		printf("cd sin nada\n");
+	}*/
+	// porque "cd" podria ir solo, para llevarte al principio
 	if (opendir(comand_args) == NULL)
 	{
 		printf("error opening dir\n");
 		return (1); // si da error, la funcion is_builtin ya no lo considera builtin
 		// y saldra el error del execve ejecutando cd
+		// ese error no exactamente igual
+		// bash dice : bash: cd: algo: No such file or directory
+		// minishell dice: /usr/bin/cd: line 4: cd: algo: No such file or directory
+		// esto gestionarlo mejor, porque si es un builtin, lo que esta mal es la ruta
+		
 	}
 	printf("success opening dir\n");
+	return (0);
+}
+/*
+	Function to check if arg for cd is valid.
+	Success returns 0.
+	After checking if arg is valid, custom cd is executed.
+	And after need to update env var PWD
+*/
+
+int arg_is_valid(char *command_arg)
+{
+	printf("comprobar args are valid\n");
+	printf("imprimo el comand arg: %s\n", command_arg);
+	
+	// si arg es ~ es valido
+	if (ft_strcmp(command_arg, "~") == 0)
+	{
+		printf("dentro de la virgulilla\n");
+		return (0); 
+	}
+	// si arg es - es valido
+	if (ft_strcmp(command_arg, "-") == 0)
+	{
+		printf("dentro del guion\n");
+		return (0);
+	}
+	// valid path, absolute or relative
+	// else
+	if (arg_is_a_path(command_arg) == 0)
+	{
+		custom_cd(command_arg);
+		//printf("getenv PWD me da: %s\n", getenv("PWD")); 
+		// este no dice bien la ruta aunque el chdir se hace
+		// porque creo que las variables de entorno no se actualizan
+	}
+	
 	return (0);
 }

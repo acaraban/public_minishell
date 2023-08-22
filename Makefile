@@ -4,7 +4,6 @@ SRCS =	builtins/custom_echo.c \
 		builtins/custom_export.c \
 		builtins/custom_unset.c \
 		builtins/custom_env.c \
-		builtins/custom_exit_nousar.c \
 		err_mngment/err_stx.c \
 		err_mngment/err_cmd.c \
 		ft_arg_div.c \

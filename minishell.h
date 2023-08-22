@@ -35,7 +35,6 @@ typedef struct s_global
 	char	*environ_path;
 	int err_stat;
 	int new_stat;
-	pid_t main_getppid; // pruebas
 }t_global;
 
 typedef struct s_content
@@ -90,6 +89,7 @@ int pos_char(char *txt, char c);
 int bef_str(char *txt);
 int export(t_content *cont, int i);
 void err_cmd(char *txt, t_content *cont);
+int arg_is_valid(char *comand_args);
 
 
 void	ft_executor(t_content *cont);
@@ -104,17 +104,14 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num);
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num);
-int arg_is_a_path(char *comand_args);
+int is_builtin_noredir(t_content *cont, int i);
 int is_builtin(t_content *cont, int i);
+int arg_is_a_path(char *comand_args);
 void exec_builtin(t_content *cont, int i);
 void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void custom_pwd(void);
 void custom_env(t_content *cont, int i);
-//void custom_exit(t_content *cont, int i);
-//void custom_exit(void);
-//void signal_handler(int signal_num);
-//void custom_sigaction(int signal_num, siginfo_t *info, void *context);
-int is_builtin_noredir(t_content *cont, int i);
+void custom_cd(char *command_arg);
 
 #endif
