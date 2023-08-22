@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+
 /*
     num = index for the pipes file descriptors
 */
@@ -15,8 +17,18 @@ void	ft_executor(t_content *cont)
     num_of_commands = cont[i].global->num_cmd;
     int fds[num_of_commands][2];
     cont->global->environ_path = ft_env_path(cont->global->env);
+    
     while (i < num_of_commands)
     {
+        // check if command is builtin without redirs
+        if (is_builtin_noredir(cont, i) == 0)
+        {
+            printf("just started: es un builtin with no redires\n");
+            // enviar el comando a una funcion, que es el builtin tal cual, 
+            // ejecutandose en el padre directamente
+        }
+        // antes del fork, comprobar que builtins no tienen redirecciones y cuales si 
+        // ejecutar algunos builtins (cd, pwd, exit) y tener en cuenta los dups
         cont[i].builtin = 0;  // se podria iniciar estas en funcion aparte
         cont[i].which_builtin = 0;
         num = i;

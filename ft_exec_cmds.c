@@ -1,10 +1,38 @@
 #include "minishell.h"
 
 
+/* 
+    Function to check if the command is a built-in without redirs.
+    cd
+    exit
+*/
+
+int is_builtin_noredir(t_content *cont, int i)
+{
+    printf("inside function is_builtin_noredir\n");
+    if ((ft_strcmp(cont[i].full_comand[0], "cd") == 0 && arg_is_a_path(cont[i].full_comand[1]) == 0))
+    {
+        printf("dentro del builtin cd\n");
+        //cont[i].which_builtin = 2;
+        return (0);
+    }
+    else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
+    {
+        //printf("dentro de builtin exit, no tiene flags\n");
+        //cont[i].which_builtin = 7;
+        // ejecutar comando directamente
+        exit(0); // 0 para salir sin dar mensaje
+        //return (0);
+    }
+    printf("no es ningun builtin_noredir\n");
+    return (1);
+}
+
+
 /*
 Function to check if the command is a built-in. 
 ◦ echo con la opción -n. -------hecho
-◦ cd solo con una ruta relativa o absoluta. -------hecho, falta como comprobar que es un path
+◦ cd solo con una ruta relativa o absoluta. -------hecho, falta que el mensaje de error del execve coincida con bash
 ◦ pwd sin opciones.  -------hecho
 ◦ export sin opciones. 
 ◦ unset sin opciones.
@@ -18,11 +46,6 @@ int is_builtin(t_content *cont, int i)
     {
         printf("dentro de echo, son iguales y el segundo arg es -n\n");
         cont[i].which_builtin = 1;
-    }
-    else if ((ft_strcmp(cont[i].full_comand[0], "cd") == 0 && arg_is_a_path(cont[i].full_comand[1]) == 0))
-    {
-        printf("dentro del builtin cd\n");
-        cont[i].which_builtin = 2;
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "pwd") == 0) && (cont[i].full_comand[1] == NULL))
     {
@@ -44,11 +67,6 @@ int is_builtin(t_content *cont, int i)
         printf("dentro de env, no tiene flags\n");
         cont[i].which_builtin = 6;
     }
-    else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
-    {
-        printf("dentro de exit, no tiene flags\n");
-        cont[i].which_builtin = 7;
-    }
     else
     {
         return (1);
@@ -67,7 +85,7 @@ void exec_builtin(t_content *cont, int i)
     }
     if (cont[i].which_builtin == 2)
     {
-        printf("custom cd\n");
+        printf("custom cd\n"); // lo quito?
         //custom_cd();
     }
     else if (cont[i].which_builtin == 3)
@@ -90,10 +108,10 @@ void exec_builtin(t_content *cont, int i)
         printf("custom env\n");
         custom_env(cont, i);
     }
-    else if (cont[i].which_builtin == 7)
+    else if (cont[i].which_builtin == 7) // lo quito?
     {
         printf("custom exit\n");
-        custom_exit(cont, i);
+        //custom_exit(cont, i);
         //custom_exit();
     }
     exit (1);
