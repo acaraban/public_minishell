@@ -87,7 +87,7 @@ void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
 int bef_str(char *txt);
-int export(t_content *cont, int i);
+int	custom_export(t_content *cont, int i); // le cambie el nombre xq solo export podria dar error, tenia otro color
 void err_cmd(char *txt, t_content *cont);
 int arg_is_valid(char *comand_args);
 
@@ -111,7 +111,9 @@ void exec_builtin(t_content *cont, int i);
 void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void custom_pwd(void);
+char *custom_return_pwd(void);
 void custom_env(t_content *cont, int i);
-void custom_cd(char *command_arg);
+void custom_cd(t_content *cont, int i);
+void update_environment(t_content *cont, int i, char *new_pwd);
 
 #endif

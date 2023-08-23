@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/23 13:37:07 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:25:25 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,26 @@ int arg_is_valid(char *command_arg)
 		return (0);
 	}
 	return (0);
+}
+
+/*
+	new_pwd es la ruta actualizada cogida con getcwd en funcion anterior
+	
+	Function to find the PWD environment variable and set the new value.
+*/
+
+void update_environment(t_content *cont, int i, char *new_pwd)
+{
+	int j;
+
+	j = 0;
+	while(cont[i].global->env[j])
+	{
+		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
+		{
+			cont[i].global->env[j] = "";
+			cont[i].global->env[j] = ft_strjoin("PWD=", new_pwd);
+		}
+		j++;
+	}
 }

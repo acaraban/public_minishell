@@ -38,7 +38,7 @@ int is_builtin_noredir(t_content *cont, int i)
             printf("sin argumento para cd\n");
             cont[i].full_comand[1] = ""; // como no tiene, lo creo pero vacio
         }
-        custom_cd(cont[i].full_comand[1]);
+        custom_cd(cont, i);
         return (0);
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
