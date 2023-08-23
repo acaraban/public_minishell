@@ -11,6 +11,12 @@
 
 int is_builtin_noredir(t_content *cont, int i)
 {
+    char *extra;
+    size_t size;
+
+    extra = malloc(sizeof(size));
+	size = 1024;
+    
     printf("inside function is_builtin_noredir\n");
     if (ft_strcmp(cont[i].full_comand[0], "cd") == 0) // si el comando es cd
     {
@@ -22,7 +28,8 @@ int is_builtin_noredir(t_content *cont, int i)
             if (arg_is_valid(cont[i].full_comand[1]) == 0)
             {
                 printf("hay un argumento para cd\n");
-                custom_cd(cont[i].full_comand[1]);
+                //custom_cd(cont[i].full_comand[1]);
+                //return (0);
             }
         }
         // si no tiene argumento cd, me lo han pasado a secas

@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/22 17:08:36 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:37:07 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,6 @@ char	**ft_command_extract(char *cmd)
 
 int arg_is_a_path(char *comand_args)
 {
-	// comprobar si comand_args esta vacio
-	/*if (ft_strcmp(comand_args, "") == 0)
-	{
-		printf("cd sin nada\n");
-	}*/
-	// porque "cd" podria ir solo, para llevarte al principio
 	if (opendir(comand_args) == NULL)
 	{
 		printf("error opening dir\n");
@@ -119,7 +113,6 @@ int arg_is_valid(char *command_arg)
 {
 	printf("comprobar args are valid\n");
 	printf("imprimo el comand arg: %s\n", command_arg);
-	
 	// si arg es ~ es valido
 	if (ft_strcmp(command_arg, "~") == 0)
 	{
@@ -132,15 +125,12 @@ int arg_is_valid(char *command_arg)
 		printf("dentro del guion\n");
 		return (0);
 	}
-	// valid path, absolute or relative
-	// else
 	if (arg_is_a_path(command_arg) == 0)
 	{
-		custom_cd(command_arg);
 		//printf("getenv PWD me da: %s\n", getenv("PWD")); 
 		// este no dice bien la ruta aunque el chdir se hace
 		// porque creo que las variables de entorno no se actualizan
+		return (0);
 	}
-	
 	return (0);
 }

@@ -3,6 +3,11 @@
 /*
     El command_arg ya es algo valido cuando llega aqui
     Function to execute the chdir -- change directory
+
+    Impt: chdir cambia el directorio pero hay que actualizar
+    la variable de entorno OLDPWD
+    Cuando cd navega a un sitio, guarda esa ruta en PWD 
+    y en OLDPWD se esta guardando la ultima visitada
 */
 
 void custom_cd(char *command_arg)
@@ -21,11 +26,14 @@ void custom_cd(char *command_arg)
         command_arg = getenv("OLDPWD");
     }
 
-
-//
     if (chdir(command_arg) == 0)
     {
         printf("succes changing dir\n");
+        // cuando cambie de directorio debe:
+        // actualizar las variables de entorno
+        // PWD y OLDPWD
+        // se puede recorrer como un array todas las env
+        // y accediendo a cada una para sobreescribirle el valor
         printf("chdir dice command arg es: %s\n", command_arg);
     }
     else
@@ -34,7 +42,3 @@ void custom_cd(char *command_arg)
     }
     return ;
 }
-
-
-
-
