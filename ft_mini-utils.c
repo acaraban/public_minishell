@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/23 17:25:25 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:32:10 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,23 @@ int arg_is_valid(char *command_arg)
 	Function to find the PWD environment variable and set the new value.
 */
 
-void update_environment(t_content *cont, int i, char *new_pwd)
+void update_environment_old(t_content *cont, int i, char *old_pwd)
+{
+	int j;
+	
+
+	j = 0;
+	while(cont[i].global->env[j])
+	{
+		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
+		{
+			cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
+		}
+		j++;
+	}
+}
+
+void update_environment_new(t_content *cont, int i, char *new_pwd)
 {
 	int j;
 
@@ -150,7 +166,6 @@ void update_environment(t_content *cont, int i, char *new_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
 		{
-			cont[i].global->env[j] = "";
 			cont[i].global->env[j] = ft_strjoin("PWD=", new_pwd);
 		}
 		j++;

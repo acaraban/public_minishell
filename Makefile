@@ -37,6 +37,7 @@ OBJS = $(SRCS:.c=.o)
 LIBFT = ./libft/libft.a
 PRINTF = ./ft_printf/libftprintf.a
 GNLINE = ./get_next_line/get_next_line.a
+#CFLAGS = -g -Wall -Wextra -Werror $(INC)
 CFLAGS = -Wall -Wextra -Werror $(INC)
 LIBS	= -lreadline -L/opt/vagrant/embedded/lib
 

@@ -49,6 +49,6 @@ char *custom_return_pwd(void)
 	{
 		printf("%s\n", buff);
 	}
-	free(buff);
+	//free(buff);
 	return (buff);
 }

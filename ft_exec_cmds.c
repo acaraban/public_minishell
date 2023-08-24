@@ -28,8 +28,6 @@ int is_builtin_noredir(t_content *cont, int i)
             if (arg_is_valid(cont[i].full_comand[1]) == 0)
             {
                 printf("hay un argumento para cd\n");
-                //custom_cd(cont[i].full_comand[1]);
-                //return (0);
             }
         }
         // si no tiene argumento cd, me lo han pasado a secas

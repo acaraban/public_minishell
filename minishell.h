@@ -114,6 +114,7 @@ void custom_pwd(void);
 char *custom_return_pwd(void);
 void custom_env(t_content *cont, int i);
 void custom_cd(t_content *cont, int i);
-void update_environment(t_content *cont, int i, char *new_pwd);
+void update_environment_new(t_content *cont, int i, char *new_pwd);
+void update_environment_old(t_content *cont, int i, char *old_pwd);
 
 #endif
