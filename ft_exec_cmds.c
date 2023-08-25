@@ -3,10 +3,9 @@
 
 /* 
     Function to check if the command is a built-in without redirs.
-    cd : check if command is cd and if args for cd are valid or included in the built-in
-         if yes, execute custom_cd function
-         if not, execute cd command with execve
-    exit
+    cd : check if command is cd and args are valid or included in the built-in
+         if so, execute custom_cd function; if not, execute cd command with execve
+    exit : exit main process with 0 for a clean exit
 */
 
 int is_builtin_noredir(t_content *cont, int i)
@@ -16,37 +15,22 @@ int is_builtin_noredir(t_content *cont, int i)
 
     extra = malloc(sizeof(size));
 	size = 1024;
-    
-    //printf("inside function is_builtin_noredir\n");
     if (ft_strcmp(cont[i].full_comand[0], "cd") == 0) // si el comando es cd
     {
-        //printf("dentro del builtin cd\n");
-        // comprueba si cd tiene argumento
         if (cont[i].full_comand[1])
         {
-            // y si es valido
-            if (arg_is_valid(cont[i].full_comand[1]) == 0)
-            {
-                printf("hay un argumento para cd\n");
-            }
+            if (arg_is_valid(cont[i].full_comand[1]) != 0)
+                return (1);
         }
-        // si no tiene argumento cd, me lo han pasado a secas
         else
-        {
-            //printf("sin argumento para cd\n");
-            cont[i].full_comand[1] = ""; // como no tiene, lo creo pero vacio
-        }
+            cont[i].full_comand[1] = "";
         custom_cd(cont, i);
         return (0);
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
-    {
         exit(0);
-    }
-    //printf("no es ningun builtin_noredir\n");
     return (1);
 }
-
 
 /*
 Function to check if the command is a built-in. 
@@ -63,12 +47,10 @@ int is_builtin(t_content *cont, int i)
 {
     if ((ft_strcmp(cont[i].full_comand[0], "echo") == 0) && (strcmp(cont[i].full_comand[1], "-n") == 0))
     {
-        printf("dentro de echo, son iguales y el segundo arg es -n\n");
         cont[i].which_builtin = 1;
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "pwd") == 0) && (cont[i].full_comand[1] == NULL))
     {
-        //printf("dentro de pwd, no tiene flags\n");
         cont[i].which_builtin = 3;
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
@@ -83,7 +65,6 @@ int is_builtin(t_content *cont, int i)
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "env") == 0) && (cont[i].full_comand[1] == NULL))
     {
-        printf("dentro de env, no tiene flags\n");
         cont[i].which_builtin = 6;
     }
     else
@@ -99,7 +80,7 @@ void exec_builtin(t_content *cont, int i)
 {
     if (cont[i].which_builtin == 1)
     {
-        printf("execute custom echo\n");
+        //printf("execute custom echo\n");
         custom_echo(cont, i);
     }
     else if (cont[i].which_builtin == 3)

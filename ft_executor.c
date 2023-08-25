@@ -3,7 +3,10 @@
 
 
 /*
-    num = index for the pipes file descriptors
+    num = index for the pipes' file descriptors.
+    1st -- Check if command is a built-in without redirs. Execute in parent.
+    2nd -- Fork process for every command found. Execute command in the child
+    process with a custom built-in function or with the execve.
 */
 
 void	ft_executor(t_content *cont)
@@ -17,20 +20,14 @@ void	ft_executor(t_content *cont)
     num_of_commands = cont[i].global->num_cmd;
     int fds[num_of_commands][2];
     cont->global->environ_path = ft_env_path(cont->global->env);
-    
     while (i < num_of_commands)
     {
-        // check if command is builtin without redirs
         if (is_builtin_noredir(cont, i) == 0)
-        {
-            //printf("just started: es un builtin with no redires\n");
-            // enviar el comando a una funcion, que es el builtin tal cual, 
-            // ejecutandose en el padre directamente
-            // aqui llega desde el custom_cd, y debe parar, no seguir para abajo
             return ;
-        }
         // antes del fork, comprobar que builtins no tienen redirecciones y cuales si 
-        // ejecutar algunos builtins (cd, pwd, exit) y tener en cuenta los dups
+        // por ahora cd, exit.
+        // ejecutar los builtins que si permiten redir (pwd, ..) 
+        // y tener en cuenta los dups
         cont[i].builtin = 0;  // se podria iniciar estas en funcion aparte
         cont[i].which_builtin = 0;
         num = i;
