@@ -17,10 +17,10 @@ int is_builtin_noredir(t_content *cont, int i)
     extra = malloc(sizeof(size));
 	size = 1024;
     
-    printf("inside function is_builtin_noredir\n");
+    //printf("inside function is_builtin_noredir\n");
     if (ft_strcmp(cont[i].full_comand[0], "cd") == 0) // si el comando es cd
     {
-        printf("dentro del builtin cd\n");
+        //printf("dentro del builtin cd\n");
         // comprueba si cd tiene argumento
         if (cont[i].full_comand[1])
         {
@@ -33,7 +33,7 @@ int is_builtin_noredir(t_content *cont, int i)
         // si no tiene argumento cd, me lo han pasado a secas
         else
         {
-            printf("sin argumento para cd\n");
+            //printf("sin argumento para cd\n");
             cont[i].full_comand[1] = ""; // como no tiene, lo creo pero vacio
         }
         custom_cd(cont, i);
@@ -43,7 +43,7 @@ int is_builtin_noredir(t_content *cont, int i)
     {
         exit(0);
     }
-    printf("no es ningun builtin_noredir\n");
+    //printf("no es ningun builtin_noredir\n");
     return (1);
 }
 
@@ -68,7 +68,7 @@ int is_builtin(t_content *cont, int i)
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "pwd") == 0) && (cont[i].full_comand[1] == NULL))
     {
-        printf("dentro de pwd, no tiene flags\n");
+        //printf("dentro de pwd, no tiene flags\n");
         cont[i].which_builtin = 3;
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
@@ -104,7 +104,7 @@ void exec_builtin(t_content *cont, int i)
     }
     else if (cont[i].which_builtin == 3)
     {
-        printf("custom pwd\n");
+        //printf("custom pwd\n");
         custom_pwd();
     }
     else if (cont[i].which_builtin == 4)

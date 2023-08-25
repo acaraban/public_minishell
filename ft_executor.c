@@ -23,7 +23,7 @@ void	ft_executor(t_content *cont)
         // check if command is builtin without redirs
         if (is_builtin_noredir(cont, i) == 0)
         {
-            printf("just started: es un builtin with no redires\n");
+            //printf("just started: es un builtin with no redires\n");
             // enviar el comando a una funcion, que es el builtin tal cual, 
             // ejecutandose en el padre directamente
             // aqui llega desde el custom_cd, y debe parar, no seguir para abajo

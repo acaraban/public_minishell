@@ -7,7 +7,7 @@ void custom_pwd(void)
 	size_t size;
 
 	size = 1024;
-	buff = malloc(sizeof(size));
+	buff = malloc(size);
 	if (buff == NULL)
 	{
 		return ;
@@ -35,7 +35,7 @@ char *custom_return_pwd(void)
 	size_t size;
 
 	size = 1024;
-	buff = malloc(sizeof(size));
+	buff = malloc(size);
 	if (buff == NULL)
 	{
 		return (NULL);
@@ -45,10 +45,10 @@ char *custom_return_pwd(void)
 		perror("getcwd");
 		return (NULL);
 	}
-	else
+	/*else
 	{
 		printf("%s\n", buff);
-	}
+	}*/
 	//free(buff);
 	return (buff);
 }

@@ -4,6 +4,7 @@ SRCS =	builtins/custom_echo.c \
 		builtins/custom_export.c \
 		builtins/custom_unset.c \
 		builtins/custom_env.c \
+		builtins/custom-cd_utils.c \
 		err_mngment/err_stx.c \
 		err_mngment/err_cmd.c \
 		ft_arg_div.c \
@@ -37,8 +38,8 @@ OBJS = $(SRCS:.c=.o)
 LIBFT = ./libft/libft.a
 PRINTF = ./ft_printf/libftprintf.a
 GNLINE = ./get_next_line/get_next_line.a
-#CFLAGS = -g -Wall -Wextra -Werror $(INC)
-CFLAGS = -Wall -Wextra -Werror $(INC)
+CFLAGS = -g -Wall -Wextra -Werror $(INC)
+# CFLAGS = -Wall -Wextra -Werror $(INC)
 LIBS	= -lreadline -L/opt/vagrant/embedded/lib
 
 all: $(NAME)
