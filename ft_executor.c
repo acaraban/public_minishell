@@ -24,8 +24,6 @@ void	ft_executor(t_content *cont)
     {
         if (is_builtin_noredir(cont, i) == 0)
             return ;
-        // antes del fork, comprobar que builtins no tienen redirecciones y cuales si 
-        // por ahora cd, exit.
         // ejecutar los builtins que si permiten redir (pwd, ..) 
         // y tener en cuenta los dups
         cont[i].builtin = 0;  // se podria iniciar estas en funcion aparte

@@ -23,7 +23,7 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
 
 /*
     Execute this function only if it is the first child.
-    Check if the command received is a builtin before redirecting output.
+    Check if the command received is a built-in before redirecting output.
 */
 
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
@@ -50,7 +50,7 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
 
 /*
     Execute this function for any middle child. Not for the first or the last child.
-    Check if the command received is a builtin before redirecting output. 
+    Check if the command received is a built-in before redirecting output. 
 */
 
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
@@ -86,9 +86,7 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
 
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
 {
-    //printf("last child\n");
     cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-    //printf("access path %s\n", cont[i].access_path); // built in or not
     if (cont[i].infile)
     {
         manage_infiles(cont, i);

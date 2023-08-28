@@ -6,36 +6,28 @@
     - from the standard input
     - from the pipe of previous child
     - from the infile if there is one
+    If there is no infile, program does not reach this function
 */
 
 void manage_infiles(t_content *cont, int i)
 {
-    //printf("infile: %s\n", cont[i].infile);
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
     if (cont->infile_fd == -1) // controla error del open
     {
-        perror("Failed to open the file");
+        //perror("Failed to open the file");
         return ;
     }
-    //printf("infile descriptor number %d\n", cont->infile_fd);
-    // comprobar si me pasan fichero sin < o con < (hace lo mismo)
-    // lo anterior da error esto:  echo hola > outputi.txt | < outputi.txt grep hola | cat -e
-    // se cree que hola en el segundo comando es el infile y son los args    
-    //if (cont->infile_fd && (cont[i].nfl == 0 || cont[i].nfl == 1)) 
-    // si == 0 significa que no tiene infile
-    // si == 2 hacer lo mismo que == 1 pero luego borrar el archivo que me han pasado
     if (cont->infile_fd && cont[i].nfl == 1)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
     }
-    else if (cont[i].nfl == 2)// me habrian pasado <<
+    else if (cont->infile_fd && cont[i].nfl == 2) // me habrian pasado <<
     {
-        printf("me han pasado <<, no se que hacer");
-        // ejecutarlo igual que 1 pero borrar el archivo infile
-        // usar unlink ?
+        dup2(cont->infile_fd, STDIN_FILENO);
+        close(cont->infile_fd);
+        unlink(cont[i].infile);
     }
-
 }
 
 /*
