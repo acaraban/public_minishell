@@ -26,7 +26,8 @@ void manage_infiles(t_content *cont, int i)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
-        unlink(cont[i].infile);
+        if (unlink(cont[i].infile) != 0)
+            perror("Error unlinking the file");
     }
 }
 
