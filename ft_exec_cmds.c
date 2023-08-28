@@ -1,6 +1,24 @@
 #include "minishell.h"
 
 
+
+int cmd_has_path(t_content *cont, int i)
+{
+    int j;
+
+    j = 0;
+    if ((cont[i].cmd[j]) == '/') // si el primer caracter es: / --> ruta absoluta
+    {
+        printf("ruta absoluta: %c\n", cont[i].cmd[j]);
+        return (1); // si tiene path: /bin/ls 
+    }
+    else
+    {
+        return (0); // viene el comando suelto: ls
+    }
+
+}
+
 /* 
     Function to check if the command is a built-in without redirs.
     cd : check if command is cd and args are valid or included in the built-in
@@ -116,8 +134,9 @@ void execute_command(t_content *cont, int i)
     }
     else
     {
-        //printf("comando normal\n"); /bin/ls
-        // controlar error de este
+        // comprobar commando, viene con ruta o suelto
+        printf("access path: %s\n", cont[i].access_path);
+        printf("full_comand: %s\n", cont[i].full_comand[1]);
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
             printf("errno sería: %d\n", errno);

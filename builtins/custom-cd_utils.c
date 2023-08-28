@@ -18,9 +18,9 @@ char * get_the_oldpwd(t_content *cont, int i)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
-			old_pwd = strcpy(old_pwd, cont[i].global->env[j]);
+			old_pwd = ft_strcpy(old_pwd, cont[i].global->env[j]); // funcionaba con strcpy
 			//printf("cogiendo old pwd: %s\n", old_pwd);
-			old_pwd = strchr(old_pwd, '/');
+			old_pwd = ft_strchr(old_pwd, '/');
 			//printf("recortando old pwd: %s\n", old_pwd);
 		}
 		j++;

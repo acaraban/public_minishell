@@ -24,6 +24,7 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
 /*
     Execute this function only if it is the first child.
     Check if the command received is a built-in before redirecting output.
+    Check if the command has an absolute path, otherwise get the path.
 */
 
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
@@ -32,7 +33,16 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
     {
         manage_infiles(cont, i);
     }
-    cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
+    if (cmd_has_path(cont, i) == 1) // ej. /bin/ls , guardar el commando tal cual
+    {
+        cont[i].access_path = cont[i].cmd;
+        //printf("el access path es when cmd_has_path: %s\n", cont[i].access_path);
+    }
+    else // ej. ls, saca la ruta del comando
+    {
+        cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
+        //printf("el access path es: %s\n", cont[i].access_path);
+    }
     if (is_builtin(cont, i) == 0)
     {
         cont[i].builtin = 1;
