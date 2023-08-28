@@ -1,22 +1,37 @@
 #include "minishell.h"
 
-
+/*
+    If cmd starts with '/' its considered an absolute path and returns 1.
+    Returns 0 if cmd is just the command without path. E.g. ls
+*/
 
 int cmd_has_path(t_content *cont, int i)
 {
     int j;
 
     j = 0;
-    if ((cont[i].cmd[j]) == '/') // si el primer caracter es: / --> ruta absoluta
+    if ((cont[i].cmd[j]) == '/')
     {
-        printf("ruta absoluta: %c\n", cont[i].cmd[j]);
-        return (1); // si tiene path: /bin/ls 
+        return (1);
+    }
+    return (0);
+}
+
+/*
+    Function to check if command received has an absolute path or not.
+    It not, get the path to access the program from the environment vars.
+*/
+
+void check_for_path(t_content *cont, int i)
+{
+    if (cmd_has_path(cont, i) == 1)
+    {
+        cont[i].access_path = cont[i].cmd;
     }
     else
     {
-        return (0); // viene el comando suelto: ls
+        cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
     }
-
 }
 
 /* 
@@ -135,19 +150,16 @@ void execute_command(t_content *cont, int i)
     else
     {
         // comprobar commando, viene con ruta o suelto
-        printf("access path: %s\n", cont[i].access_path);
-        printf("full_comand: %s\n", cont[i].full_comand[1]);
+        //printf("access path: %s\n", cont[i].access_path);
+        //printf("full_comand: %s\n", cont[i].full_comand[1]);
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
             printf("errno sería: %d\n", errno);
             handle_execve_error_message(errno, cont, i);
             //perror("execve"); // this prints a descriptive error message
             // Handle the error appropriately
-            
         }
         exit(EXIT_FAILURE);
-        
-        //return ;
     }
 }
 

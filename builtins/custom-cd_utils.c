@@ -18,10 +18,8 @@ char * get_the_oldpwd(t_content *cont, int i)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
-			old_pwd = ft_strcpy(old_pwd, cont[i].global->env[j]); // funcionaba con strcpy
-			//printf("cogiendo old pwd: %s\n", old_pwd);
+			old_pwd = ft_strcpy(old_pwd, cont[i].global->env[j]);
 			old_pwd = ft_strchr(old_pwd, '/');
-			//printf("recortando old pwd: %s\n", old_pwd);
 		}
 		j++;
 	}
@@ -41,7 +39,6 @@ void update_environment_old(t_content *cont, int i, char *old_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
-			//printf("update OLDPWD\n");
 			cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
 		}
 		j++;
@@ -62,7 +59,6 @@ void update_environment_new(t_content *cont, int i, char *new_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
 		{
-			//printf("update PWD\n");
 			cont[i].global->env[j] = ft_strjoin("PWD=", new_pwd);
 		}
 		j++;
@@ -81,16 +77,8 @@ int arg_is_a_path(char *comand_args)
 {
 	if (opendir(comand_args) == NULL)
 	{
-		printf("error opening dir\n");
 		return (1); // si da error, la funcion is_builtin ya no lo considera builtin
-		// y saldra el error del execve ejecutando cd
-		// ese error no exactamente igual
-		// bash dice : bash: cd: algo: No such file or directory
-		// minishell dice: /usr/bin/cd: line 4: cd: algo: No such file or directory
-		// esto gestionarlo mejor, porque si es un builtin, lo que esta mal es la ruta
-		
 	}
-	printf("success opening dir\n");
 	return (0);
 }
 /*

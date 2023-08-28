@@ -33,16 +33,7 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
     {
         manage_infiles(cont, i);
     }
-    if (cmd_has_path(cont, i) == 1) // ej. /bin/ls , guardar el commando tal cual
-    {
-        cont[i].access_path = cont[i].cmd;
-        //printf("el access path es when cmd_has_path: %s\n", cont[i].access_path);
-    }
-    else // ej. ls, saca la ruta del comando
-    {
-        cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
-        //printf("el access path es: %s\n", cont[i].access_path);
-    }
+    check_for_path(cont, i);
     if (is_builtin(cont, i) == 0)
     {
         cont[i].builtin = 1;
@@ -65,7 +56,7 @@ void execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
 
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
 {
-    cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
+    check_for_path(cont, i);
     if (cont[i].infile)
     {
         manage_infiles(cont, i);
@@ -96,7 +87,7 @@ void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
 
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
 {
-    cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
+    check_for_path(cont, i);
     if (cont[i].infile)
     {
         manage_infiles(cont, i);

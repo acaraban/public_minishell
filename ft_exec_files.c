@@ -14,15 +14,15 @@ void manage_infiles(t_content *cont, int i)
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
     if (cont->infile_fd == -1) // controla error del open
     {
-        //perror("Failed to open the file");
-        return ;
+        printf("minishell: %s: No such file or directory\n", cont[i].infile);
+        exit (EXIT_FAILURE);
     }
     if (cont->infile_fd && cont[i].nfl == 1)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
     }
-    else if (cont->infile_fd && cont[i].nfl == 2) // me habrian pasado <<
+    else if (cont->infile_fd && cont[i].nfl == 2)
     {
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
@@ -31,6 +31,7 @@ void manage_infiles(t_content *cont, int i)
     }
 }
 
+
 /*
     REDIRECTIONS:
     Child writes in a different place depending on the situation:
@@ -38,13 +39,11 @@ void manage_infiles(t_content *cont, int i)
     - in the pipe
     - in a file
     Redirections on a file has two cases: > (truncate mode) and >> (append mode)
+    If tfl == 0 no need to do any redir.
 */
 
 void manage_outfiles(t_content *cont, int i)
 {
-    //printf("outfile is: %s\n", cont[i].outfile);
-    // if tfl == 0 no hacer nada, dará error
-    // abrir en modo append o en modo sobreescribir
     if (cont[i].tfl == 1)
     {
         cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644); // no tengo claro porque RDWR
@@ -53,9 +52,8 @@ void manage_outfiles(t_content *cont, int i)
     {
         cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
     }
-    // como ha habido outfile, tiene que escribir en el fichero de salida
     dup2(cont->outfile_fd, STDOUT_FILENO);
-    close(cont->outfile_fd); // cierra duplicado
+    close(cont->outfile_fd);
 }
 
 
