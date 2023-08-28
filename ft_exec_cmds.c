@@ -15,7 +15,7 @@ int is_builtin_noredir(t_content *cont, int i)
 
     extra = malloc(sizeof(size));
 	size = 1024;
-    if (ft_strcmp(cont[i].full_comand[0], "cd") == 0) // si el comando es cd
+    if (ft_strcmp(cont[i].full_comand[0], "cd") == 0)
     {
         if (cont[i].full_comand[1])
         {
@@ -100,7 +100,7 @@ void exec_builtin(t_content *cont, int i)
     }
     else if (cont[i].which_builtin == 6)
     {
-        printf("custom env\n");
+        //printf("custom env\n");
         custom_env(cont, i);
     }
     exit (1);
@@ -117,14 +117,17 @@ void execute_command(t_content *cont, int i)
     else
     {
         //printf("comando normal\n"); /bin/ls
-        execve(cont[i].access_path, cont[i].full_comand, cont->global->env);
         // controlar error de este
-        // perror("command not found"); // hardcodeado
-        printf("Error: %s\n", strerror(errno));
-        //ft_putstr_fd("%s: command not found\n", 2);
-
+        if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
+        {
+            printf("errno sería: %d\n", errno);
+            handle_execve_error_message(errno, cont, i);
+            //perror("execve"); // this prints a descriptive error message
+            // Handle the error appropriately
+            
+        }
         exit(EXIT_FAILURE);
-        //ft_putstr_fd("Error: Command does not exist.\n", 2);
+        
         //return ;
     }
 }

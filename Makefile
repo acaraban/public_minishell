@@ -17,6 +17,7 @@ SRCS =	builtins/custom_echo.c \
 		dbl_utils/ft_xtr.c \
 		dbl_utils/ft_xtr_allsz.c \
 		input_err/err_dobpip.c \
+		input_err/err_execve.c \
 		input_err/err_nolstpar.c \
 		input_err/err_red.c \
 		input_err/err_redsegred.c \

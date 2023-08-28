@@ -1,35 +1,5 @@
 #include "minishell.h"
 
-/*void start_pipe_and_fork(t_content *cont, int i, int (*fds)[2], int num)
-{
-    if (pipe(fds[i]) == -1)
-    {
-        perror("Error in pipe\n");
-        return ;
-    }
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("Error in fork\n");
-        return ;
-    }
-    if (pid == 0)
-        ft_execute_child(cont, i, fds, num);
-}*/
-
-/*int start_fork(pid_t pid)
-{
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("Error in fork\n");
-        return (1);
-    }
-    if (pid == 0)
-        return (0);
-    return (0);
-}*/
-
 void init_builtins(t_content *cont, int i)
 {
     cont[i].builtin = 0;
@@ -76,5 +46,4 @@ void	ft_executor(t_content *cont)
 
 /* se podria mejorar poniendo los perror de los pipe y de los fork
 pero entonces me paso de lineas 
-num of commands y num tienen valores repetidos, como reducir lineas?
 */
