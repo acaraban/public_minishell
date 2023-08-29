@@ -14,7 +14,9 @@ void manage_infiles(t_content *cont, int i)
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
     if (cont->infile_fd == -1) // controla error del open
     {
-        printf("minishell: %s: No such file or directory\n", cont[i].infile);
+        printf("minishell: %s: No such file or directory\n", cont[i].infile); // esto se imprime en algun sitio?
+        // sino poner esto: x la salida de error
+        // e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
         exit (EXIT_FAILURE);
     }
     if (cont->infile_fd && cont[i].nfl == 1)
@@ -42,6 +44,7 @@ void manage_infiles(t_content *cont, int i)
     If tfl == 0 no need to do any redir.
     If the file for the output redirection does not exist or does not have 
     writing permissions, handle error appropiately.
+    e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
 */
 
 void manage_outfiles(t_content *cont, int i)
@@ -59,18 +62,17 @@ void manage_outfiles(t_content *cont, int i)
         }
         else if (access(cont[i].outfile, W_OK) != 0)
         {
-            //printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
             ft_putstr_fd("minishell: ", 2);
             perror(cont[i].outfile);
             exit(1);
         }
+    }
     else if (cont[i].tfl == 2)
     {
         cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
     }
     dup2(cont->outfile_fd, STDOUT_FILENO);
     close(cont->outfile_fd);
-    }
 }
 
 
