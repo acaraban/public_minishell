@@ -17,5 +17,5 @@ void handle_execve_error_message(int error_number, t_content *cont, int i)
         printf("minishell: %s: command not found\n", cont[i].cmd);
         //bash: foo: command not found
     }
-    else if (error_number == )
+    //else if (error_number == )
 }

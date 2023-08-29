@@ -7,6 +7,7 @@ SRCS =	builtins/custom_echo.c \
 		builtins/custom-cd_utils.c \
 		err_mngment/err_stx.c \
 		err_mngment/err_cmd.c \
+		err_mngment/err_execve.c \
 		ft_arg_div.c \
 		ft_ent_var.c \
 		ft_minishell.c \
@@ -17,7 +18,6 @@ SRCS =	builtins/custom_echo.c \
 		dbl_utils/ft_xtr.c \
 		dbl_utils/ft_xtr_allsz.c \
 		input_err/err_dobpip.c \
-		input_err/err_execve.c \
 		input_err/err_nolstpar.c \
 		input_err/err_red.c \
 		input_err/err_redsegred.c \

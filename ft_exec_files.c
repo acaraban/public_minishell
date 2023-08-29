@@ -40,20 +40,37 @@ void manage_infiles(t_content *cont, int i)
     - in a file
     Redirections on a file has two cases: > (truncate mode) and >> (append mode)
     If tfl == 0 no need to do any redir.
+    If the file for the output redirection does not exist or does not have 
+    writing permissions, handle error appropiately.
 */
 
 void manage_outfiles(t_content *cont, int i)
 {
     if (cont[i].tfl == 1)
     {
-        cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644); // no tengo claro porque RDWR
-    }
+        if (access(cont[i].outfile, F_OK) != 0 || access(cont[i].outfile, W_OK) == 0)
+        {
+            cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644);
+            if (cont->outfile_fd == -1)
+            {
+                perror("open");
+                exit (EXIT_FAILURE);
+            }
+        }
+        else if (access(cont[i].outfile, W_OK) != 0)
+        {
+            //printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
+            ft_putstr_fd("minishell: ", 2);
+            perror(cont[i].outfile);
+            exit(1);
+        }
     else if (cont[i].tfl == 2)
     {
         cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
     }
     dup2(cont->outfile_fd, STDOUT_FILENO);
     close(cont->outfile_fd);
+    }
 }
 
 
