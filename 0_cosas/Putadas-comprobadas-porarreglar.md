@@ -69,4 +69,71 @@ echo prueba > /Users/msintas-/Documents/Cursus42/
 
 ## fail
 >
+>>
 debe dar error sintactico
+>>>
+>>>>
+sacamos error pero el mensaje no esta igual
+
+## ok
+echo bonjour "> out"
+echo hola "> que tal" > bonjour
+
+## fail
+cat <<< "hola que tal"
+esto no es error sintactico, debe funcionar
+
+## fail
+cat << < bar
+debe dar error sintactico y nos da segmentation fault
+
+
+# Variables entorno: # y # CMD && Status #
+no compruebo todavia, ver con acaraban
+
+
+------------------
+# Builtin / CD #
+------------------
+
+## ok
+Cd ..
+cd ..
+cd .
+cd
+# comprobar esto
+siempre salen con $?=0
+# por hacer
+OLDPWD al iniciar minishell no debe existir y generarse al cambiar de dierctorio además de actualizar PWD
+
+
+------------------
+# Builtin / echo #
+------------------
+
+### fail
+echo a '' b '' c '' d | cat -e
+echo -n bonjour -n 
+le falta el ultimo -n
+echo '' '' ''
+al probar con echo '' '' '' | cat -e , se ve que no ha puesto los espacios
+
+## ok
+echo lalalala                lalalalal      alalalalal
+echo bonjour -n
+echo -n bonjour -n
+
+## sin probar
+[EXPORTS PATH='/bin:/usr/bin'] Echo bonjour     expected: bonjour$
+[UNSET PATH] Echo bonjour               expected: minishell: Echo: command not found $?=127
+
+
+
+-------------------
+# Builtin / Exit #
+-------------------
+
+## fail
+exit ' 3'
+exit '3 '
+exit '3\r'
