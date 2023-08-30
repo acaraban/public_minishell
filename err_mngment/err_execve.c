@@ -9,13 +9,23 @@
 
 void handle_execve_error_message(int error_number, t_content *cont, int i)
 {
-    if (error_number == EFAULT) // 14 -- Bad address
+    // 14 -- Bad address PERO yo quiero sacar otro mensaje distinto
+    if (error_number == EFAULT) 
     {
-        //ft_putstr_fd("este sería tipo de errror 14 EFAULT\n", 2);
-        //perror("Errrrror");
-        //printf("%s\n", strerror(error_number));
-        printf("minishell: %s: command not found\n", cont[i].cmd);
         //bash: foo: command not found
+        printf("minishell: %s: command not found\n", cont[i].cmd);
     }
-    //else if (error_number == )
+    else if (error_number == ENOENT) // 2 ???
+    {
+        // bash: cd: kfjasldja: No such file or directory
+        printf("minishell: %s: ", cont[i].infile);
+        printf("%s\n", strerror(error_number));
+    }
+    else if (error_number == EACCES) // 13 -- Permission denied
+    {
+        // bash: entrada.md: Permission denied
+        printf("minishell: %s: ", cont[i].infile);
+        printf("%s\n", strerror(error_number));
+    }
+    exit (EXIT_FAILURE);
 }

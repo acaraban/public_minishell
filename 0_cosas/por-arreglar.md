@@ -1,4 +1,4 @@
-# OLDPWD esta desde el principio
+# OLDPWD esta en las variables de entorno desde el principio
 cuando inicie minishell ejecutar algo que lo quite
 
 
@@ -34,25 +34,6 @@ builtins con redirecciones: export y unset
 el mensaje de error debe ser distinto
 https://vscode.dev/github/acaraban/public_minishell/blob/cf5e5544b2f3249e3917f0f97c1f49b158b9235c/err_mngment/err_stx.c#L10
 
-https://vscode.dev/github/acaraban/public_minishell/blob/737f95d260ff59bb5de6bc7e497cbbdb0ff688b6/builtins/custom_cd.c#L14
-
-
-
-https://vscode.dev/github/acaraban/public_minishell/blob/737f95d260ff59bb5de6bc7e497cbbdb0ff688b6/ft_exec_cmds.c#L123
-
-
-
-https://vscode.dev/github/acaraban/public_minishell/blob/737f95d260ff59bb5de6bc7e497cbbdb0ff688b6/builtins/custom-cd_utils.c#L87
-
-
-
-# 4
-
-haciendo esto:
-minishell>cd ~
-minishell>cd -
-
-despues de la virgulilla no actualiza bien el oldpath
 
 
 # Builtin / CD #
@@ -73,7 +54,6 @@ exit '3\r'                          expected: minishell: exit: 3\r: numeric argu
 ft_specials.c
 
 # 6 minishell dentro de minishell
-
 hay que hacerlo??
 
 # de la hoja de evaluacion 

@@ -12,11 +12,10 @@
 void manage_infiles(t_content *cont, int i)
 {
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
-    if (cont->infile_fd == -1) // controla error del open
+    if (cont->infile_fd == -1)
     {
-        printf("minishell: %s: No such file or directory\n", cont[i].infile); // esto se imprime en algun sitio?
-        // sino poner esto: x la salida de error
-        // e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
+        printf("errorrrr number: %d\n", errno);
+        handle_execve_error_message(errno, cont, i);
         exit (EXIT_FAILURE);
     }
     if (cont->infile_fd && cont[i].nfl == 1)
@@ -29,7 +28,7 @@ void manage_infiles(t_content *cont, int i)
         dup2(cont->infile_fd, STDIN_FILENO);
         close(cont->infile_fd);
         if (unlink(cont[i].infile) != 0)
-            perror("Error unlinking the file");
+            perror("unlink");
     }
 }
 
@@ -66,18 +65,21 @@ void manage_outfiles(t_content *cont, int i)
         {
             cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644);
             if (cont->outfile_fd == -1)
-            {
                 print_outfile_error(cont, i);
-            }
         }
         else if (access(cont[i].outfile, W_OK) != 0)
-        {
             print_outfile_error(cont, i);
-        }
     }
     else if (cont[i].tfl == 2)
     {
-        cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
+        if (access(cont[i].outfile, F_OK) != 0 || access(cont[i].outfile, W_OK) == 0)
+        {
+            cont->outfile_fd = open(cont[i].outfile, O_APPEND | O_CREAT | O_RDWR, 0644);
+            if (cont->outfile_fd == -1)
+                print_outfile_error(cont, i);
+        }
+        else if (access(cont[i].outfile, W_OK) != 0)
+            print_outfile_error(cont, i);
     }
     dup2(cont->outfile_fd, STDOUT_FILENO);
     close(cont->outfile_fd);
