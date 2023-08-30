@@ -18,13 +18,36 @@ int cmd_has_path(t_content *cont, int i)
 }
 
 /*
+    Function to check if command received is actually a program.
+    e.g. ./program-name
+*/
+
+int cmd_is_program(t_content *cont, int i)
+{
+    int j;
+
+    j = 0;
+    if (cont[i].cmd[0] == '.' && cont[i].cmd[1] == '/')
+    {
+        return (1);
+    }
+    return (0);
+}
+
+/*
     Function to check if command received has an absolute path or not.
     It not, get the path to access the program from the environment vars.
+    Check also if instead of a path, there is a program e.g: ./program-name
 */
 
 void check_for_path(t_content *cont, int i)
 {
-    if (cmd_has_path(cont, i) == 1)
+    if (cmd_is_program(cont, i) == 1)
+    {
+        cont[i].access_path = cont[i].cmd;
+        cont[i].full_comand[0] = cont[i].cmd;
+    }
+    else if (cmd_has_path(cont, i) == 1)
     {
         cont[i].access_path = cont[i].cmd;
     }
@@ -62,6 +85,7 @@ int is_builtin_noredir(t_content *cont, int i)
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
         exit(0);
+        //custom_exit();
     return (1);
 }
 
