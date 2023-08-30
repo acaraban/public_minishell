@@ -11,7 +11,9 @@ void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *
         update_environment_new(cont, i, current_pwd);
     }
     else
-        printf("error dir\n");
+    {
+        printf("minishell: %s: %s: No such file or directory\n", cont[i].cmd, cont[i].full_comand[1]);
+    }
     free(current_pwd);
 }
 

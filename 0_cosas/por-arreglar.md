@@ -1,6 +1,6 @@
-# falta hacer que se ejecuten programas
-./programa
-da error y debe ejecutarse
+# OLDPWD esta desde el principio
+cuando inicie minishell ejecutar algo que lo quite
+
 
 
 # resultados diferentes en bash y en minishell
