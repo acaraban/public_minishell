@@ -33,6 +33,18 @@ void manage_infiles(t_content *cont, int i)
     }
 }
 
+/*
+    Print message when error in outfile.
+    Another way to print the same:
+    e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
+*/
+
+void print_outfile_error(t_content *cont, int i)
+{
+    ft_putstr_fd("minishell: ", 2);
+    perror(cont[i].outfile);
+    exit (EXIT_FAILURE);
+}
 
 /*
     REDIRECTIONS:
@@ -44,7 +56,6 @@ void manage_infiles(t_content *cont, int i)
     If tfl == 0 no need to do any redir.
     If the file for the output redirection does not exist or does not have 
     writing permissions, handle error appropiately.
-    e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
 */
 
 void manage_outfiles(t_content *cont, int i)
@@ -56,15 +67,12 @@ void manage_outfiles(t_content *cont, int i)
             cont->outfile_fd = open(cont[i].outfile, O_TRUNC | O_CREAT | O_RDWR, 0644);
             if (cont->outfile_fd == -1)
             {
-                perror("open");
-                exit (EXIT_FAILURE);
+                print_outfile_error(cont, i);
             }
         }
         else if (access(cont[i].outfile, W_OK) != 0)
         {
-            ft_putstr_fd("minishell: ", 2);
-            perror(cont[i].outfile);
-            exit(1);
+            print_outfile_error(cont, i);
         }
     }
     else if (cont[i].tfl == 2)
@@ -74,5 +82,3 @@ void manage_outfiles(t_content *cont, int i)
     dup2(cont->outfile_fd, STDOUT_FILENO);
     close(cont->outfile_fd);
 }
-
-
