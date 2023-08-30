@@ -27,6 +27,7 @@ SRCS =	builtins/custom_echo.c \
 		ft_executor.c \
 		ft_mini-utils.c \
 		ft_all_children.c \
+		ft_check_cmds.c \
 		ft_exec_files.c \
 		ft_exec_cmds.c \
 		ft_exec_dups.c \
