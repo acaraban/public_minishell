@@ -1,11 +1,50 @@
+
+cuando hay varias redirecciones de salida hay que crear archivos vacios
+cuando hay error cambiar la variable err_stat
+imprimir los errores con la funcion perror o sterror
+redireccion de salida al principio del comando no va > loquesea
 # OLDPWD esta en las variables de entorno desde el principio
 cuando inicie minishell ejecutar algo que lo quite
+# Using a variable that is not defined
+echo $undefined_variable
+
+tabulador
+
+
+builtins con redirecciones: export y unset
 
 
 
 # resultados diferentes en bash y en minishell
 echo "Hello
 (faltan las >) y luego no cierra con Ctrl + D
+
+
+
+## voy por :
+https://chat.openai.com/c/ddd2925d-21f9-4172-a935-2c572d16edab
+
+# Redirecting output of a non-existent command
+non_existent_command > output.txt
+## no consigo hacer un print de esto por la salida de error
+https://vscode.dev/github/acaraban/public_minishell/blob/42625720e0c92c7cdf17681058feedfa1d7d7766/err_mngment/err_execve.c#L17
+
+
+
+###
+shell level de bash y minishell
+
+
+
+
+
+
+###################
+
+
+
+
+
 
 #
 ls >
@@ -16,8 +55,8 @@ minishell deberia decir que hay error sintactico
 bash-3.2$ ls >
 bash: syntax error near unexpected token `newline'
 
-# esto hay que mirarlo ?? 1> y 2>
-ls non_existent_directory 1> output.txt 2> error.txt
+
+
 
 
 
@@ -25,8 +64,6 @@ ls non_existent_directory 1> output.txt 2> error.txt
 
 
 
-# 2
-builtins con redirecciones: export y unset
 
 
 # 3 Imprimir mensajes de errores
