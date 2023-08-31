@@ -94,11 +94,11 @@ void exec_builtin(t_content *cont, int i)
         //printf("custom pwd\n");
         custom_pwd();
     }
-    else if (cont[i].which_builtin == 4)
+   /* else if (cont[i].which_builtin == 4)
     {
         printf("custom export\n");
         //custom_export();
-    }
+    }*/
     else if (cont[i].which_builtin == 5)
     {
         printf("custom unset\n");
