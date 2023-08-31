@@ -28,6 +28,10 @@ int is_builtin_noredir(t_content *cont, int i)
         custom_cd(cont, i);
         return (0);
     }
+    else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
+    {
+        custom_export(cont, i);
+    }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
         exit(0);
         //custom_exit();
@@ -55,11 +59,11 @@ int is_builtin(t_content *cont, int i)
     {
         cont[i].which_builtin = 3;
     }
-    else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
+    /*else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
     {
         printf("dentro de export, no tiene flags\n");
         cont[i].which_builtin = 4;
-    }
+    }*/
     else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0) && (cont[i].full_comand[1] == NULL))
     {
         printf("dentro de unset, no tiene flags\n");
@@ -119,15 +123,16 @@ void execute_command(t_content *cont, int i)
     else
     {
         // comprobar commando, viene con ruta o suelto
+        printf("he llegado aqui\n");
         //printf("access path: %s\n", cont[i].access_path);
         //printf("full_comand: %s\n", cont[i].full_comand[1]);
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
             printf("errno sería: %d\n", errno);
+            ft_putstr_fd("para saber que estoy aqui\n", 2);
             handle_execve_error_message(errno, cont, i);
-            //perror("execve"); // this prints a descriptive error message
-            // Handle the error appropriately
         }
+        ft_putstr_fd("he llegado al final\n", 2);
         exit(EXIT_FAILURE);
     }
 }
