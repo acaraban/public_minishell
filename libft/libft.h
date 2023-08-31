@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:58:02 by acaraban          #+#    #+#             */
-/*   Updated: 2023/08/15 18:25:51 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:46:35 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	*ft_memset(void *s, int v, size_t n);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlcat(char *dest, const char *src, size_t nb);
+char	*ft_strcpy(char *dest, char *src);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *src);
 int		ft_strcmp(const char *s1, const char *s2);

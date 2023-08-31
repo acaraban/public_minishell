@@ -5,12 +5,14 @@
 #include "get_next_line/get_next_line.h"
 #include "ft_printf/ft_printf.h"
 #include <signal.h>
-#include <sys/ioctl.h>
 #include <string.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+#include <dirent.h>
+#include <sys/ioctl.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include <stdlib.h>
 #include <errno.h>
 
@@ -33,7 +35,6 @@ typedef struct s_global
 	char	*environ_path;
 	int err_stat;
 	int new_stat;
-	pid_t main_getpid; // pruebas
 }t_global;
 
 typedef struct s_content
@@ -49,13 +50,11 @@ typedef struct s_content
 	int tfl;
 	int builtin;
 	int which_builtin;
-	int signal_sent; // pruebas
 	t_global *global;
 }t_content;
 
 int frst_chr(char *txt, char car);
 int all_chr(char *txt, int pos);
-void free_dbl(char **new);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
 char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
@@ -87,8 +86,9 @@ void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
 int bef_str(char *txt);
-int export(t_content *cont, int i);
+int	custom_export(t_content *cont, int i); // le cambie el nombre xq solo export podria dar error, tenia otro color
 void err_cmd(char *txt, t_content *cont);
+int arg_is_valid(char *comand_args);
 
 
 void	ft_executor(t_content *cont);
@@ -103,16 +103,22 @@ void ft_execute_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_first_child(t_content *cont, int i, int (*fds)[2], int num);
 void execute_middle_children(t_content *cont, int i, int (*fds)[2], int num);
 void execute_last_child(t_content *cont, int i, int (*fds)[2], int num);
-int arg_is_a_path(char *comand_args);
+int is_builtin_noredir(t_content *cont, int i);
 int is_builtin(t_content *cont, int i);
+int arg_is_a_path(char *comand_args);
 void exec_builtin(t_content *cont, int i);
 void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void custom_pwd(void);
+char *custom_return_pwd(void);
 void custom_env(t_content *cont, int i);
-void custom_exit(t_content *cont, int i);
-void signal_handler(int signal_num);
-
-
+void custom_cd(t_content *cont, int i);
+void update_environment_new(t_content *cont, int i, char *new_pwd);
+void update_environment_old(t_content *cont, int i, char *old_pwd);
+char * get_the_oldpwd(t_content *cont, int i);
+void handle_execve_error_message(int error_number, t_content *cont, int i);
+int cmd_has_path(t_content *cont, int i);
+void check_for_path(t_content *cont, int i);
+int cmd_is_program(t_content *cont, int i);
 
 #endif

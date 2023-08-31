@@ -36,7 +36,7 @@ int bef_str(char *txt)
 	return (0);
 }
 
-int export(t_content *cont, int i)
+int custom_export(t_content *cont, int i)
 {
 	int j;
 
