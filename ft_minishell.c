@@ -63,6 +63,7 @@ int main(int argc, char **argv, char **env)
 			free(txt);
 			ft_printf("exit\n");
 		}
-			
+		glb[0].new_stat = glb[0].err_stat;
+		glb[0].err_stat = 0;
 	}
 }
