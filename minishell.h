@@ -123,6 +123,6 @@ void handle_execve_error_message(t_content *cont, int i);
 int cmd_has_path(t_content *cont, int i);
 void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
-void ft_delete_env_oldpwd(t_content *cont);
+void ft_delete_env_oldpwd(char **environment);
 
 #endif

@@ -3,28 +3,35 @@
 /*
     When minishell starts, environment variables should not include OLDPWD.
     Function to search for it and delete it.
+    Before deletion and modifing all other item indexes, reorder to send
     After that modify all the other items indexes to make the array shorter.
 */
 
-void ft_delete_env_oldpwd(t_content *cont)
+void ft_delete_env_oldpwd(char **environment)
 {
     int index;
     int j;
 	
 	j = 0;
-    while(cont->global->env[j])
+    while(environment[j])
     {
         
-        if (ft_strncmp(cont->global->env[j], "OLDPWD", 6) == 0)
+        if (ft_strncmp(environment[j], "OLDPWD", 6) == 0)
         {
-            free(cont->global->env[j]);
+            free(environment[j]);
             index = j;
         }
         j++;
     }
-    while(cont->global->env[index])
+    while(environment[index])
     {
-        cont->global->env[index] = cont->global->env[index + 1];
+        environment[index] = environment[index + 1];
         index++;
     }
+    /*j = 0;
+    while(environment[j])
+    {
+        printf("dime: %s\n", environment[j]);
+        j++;
+    }*/
 }

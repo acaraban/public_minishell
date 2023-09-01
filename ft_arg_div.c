@@ -134,8 +134,7 @@ void ft_arg_div(char *txt, t_global *glb)
 		ft_printf("\n\n-------------------------------\n");
 		l++;
 	}*/
-	// recorrer variables de entorno de la minishell, no del mac, y eliminar OLDPWD
-	ft_delete_env_oldpwd(cont);
+	
 	//
 	ft_executor(cont);
 
