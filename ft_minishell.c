@@ -44,6 +44,8 @@ int main(int argc, char **argv, char **env)
 		glb[0].env[j] = strdup(env[j]);
 		j++;
 	}
+	// recorrer variables de entorno de la minishell, no del mac, y eliminar OLDPWD
+	ft_delete_env_oldpwd(glb->env);
 	while (boo)
 	{
 		txt = readline("minishell>");

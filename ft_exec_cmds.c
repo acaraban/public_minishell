@@ -123,16 +123,16 @@ void execute_command(t_content *cont, int i)
     else
     {
         // comprobar commando, viene con ruta o suelto
-        //printf("he llegado aqui\n");
+        printf("he llegado aqui\n");
         //printf("access path: %s\n", cont[i].access_path);
         //printf("full_comand: %s\n", cont[i].full_comand[1]);
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
-            //printf("errno sería: %d\n", errno);
-            //ft_putstr_fd("para saber que estoy aqui\n", 2);
+            printf("errno sería: %d\n", errno);
+            ft_putstr_fd("para saber que estoy aqui\n", 2);
             handle_execve_error_message(cont, i);
         }
-        //ft_putstr_fd("he llegado al final\n", 2);
+        ft_putstr_fd("he llegado al final\n", 2);
         exit(EXIT_FAILURE);
     }
 }

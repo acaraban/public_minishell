@@ -21,6 +21,10 @@ char * get_the_oldpwd(t_content *cont, int i)
 			old_pwd = ft_strcpy(old_pwd, cont[i].global->env[j]);
 			old_pwd = ft_strchr(old_pwd, '/');
 		}
+		else
+		{
+			printf("no hay OLDPWD\n");
+		}
 		j++;
 	}
 	return (old_pwd);
