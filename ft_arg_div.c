@@ -106,10 +106,12 @@ void ft_arg_div(char *txt, t_global *glb)
 		ft_heredoc(ac);
 		free_dbl(ac);
 	}
+
 	ft_executor(cont);
 
-	/*////////////imprimir el struct //////////////////////
-	int l;
+
+	////////////imprimir el struct //////////////////////
+	/*int l;
 
 	l = 0;
 	while (l < tam2)
@@ -131,8 +133,11 @@ void ft_arg_div(char *txt, t_global *glb)
 			ft_printf("%s\n", cont[l].outfile);
 		ft_printf("\n\n-------------------------------\n");
 		l++;
-	}
-
+	}*/
+	// recorrer variables de entorno de la minishell, no del mac, y eliminar OLDPWD
+	ft_delete_env_oldpwd(cont);
+	//
+	ft_executor(cont);
 
 	//////////////parte del codigo////////////////*/
 	

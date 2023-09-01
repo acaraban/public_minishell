@@ -119,9 +119,10 @@ void custom_cd(t_content *cont, int i);
 void update_environment_new(t_content *cont, int i, char *new_pwd);
 void update_environment_old(t_content *cont, int i, char *old_pwd);
 char * get_the_oldpwd(t_content *cont, int i);
-void handle_execve_error_message(int error_number, t_content *cont, int i);
+void handle_execve_error_message(t_content *cont, int i);
 int cmd_has_path(t_content *cont, int i);
 void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
+void ft_delete_env_oldpwd(t_content *cont);
 
 #endif

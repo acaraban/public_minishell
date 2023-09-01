@@ -131,9 +131,9 @@ void execute_command(t_content *cont, int i)
         //printf("full_comand: %s\n", cont[i].full_comand[1]);
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
-            handle_execve_error_message(errno, cont, i);
+            handle_execve_error_message(cont, i);
         }
-        ft_putstr_fd("he llegado al final\n", 2);
+        //ft_putstr_fd("he llegado al final\n", 2);
         exit(EXIT_FAILURE);
     }
 }
