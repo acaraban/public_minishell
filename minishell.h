@@ -89,6 +89,9 @@ int bef_str(char *txt);
 int	custom_export(t_content *cont, int i); // le cambie el nombre xq solo export podria dar error, tenia otro color
 void err_cmd(char *txt, t_content *cont);
 int arg_is_valid(char *comand_args);
+int err_dobcom(char *txt, t_content *cont);
+int custom_unset(t_content *cont, int i);
+int  coincidence(t_content *cont, char *txt);
 
 
 void	ft_executor(t_content *cont);

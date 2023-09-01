@@ -103,10 +103,12 @@ void ft_arg_div(char *txt, t_global *glb)
 	}
 	if (ac)
 	{
-		ft_printf("que llega\n");
 		ft_heredoc(ac);
 		free_dbl(ac);
 	}
+
+	ft_executor(cont);
+
 
 	////////////imprimir el struct //////////////////////
 	/*int l;
@@ -137,8 +139,6 @@ void ft_arg_div(char *txt, t_global *glb)
 	//
 	ft_executor(cont);
 
-	//////////////parte del codigo////////////////
-	cont[0].global[0].new_stat = cont[0].global[0].err_stat;
-	cont[0].global[0].err_stat = 0;
+	//////////////parte del codigo////////////////*/
 	
 }
