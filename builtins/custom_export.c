@@ -14,6 +14,32 @@ int pos_char(char *txt, char c)
 	return (-1);
 }
 
+int  eq_combination(t_content *cont, char *txt)
+{
+	char **env;
+	int i;
+	int j;
+
+	env = cont->global->env;
+	i = 0;
+	j = 0;
+	while (env[i])
+	{
+		while (txt[j] && env[i][j] && env[i][j] == txt[j])
+		{
+			if (env[i][j] == '=' && txt[j] == '=')
+			{
+				free (env[i]);
+				env[i] = ft_strdup(txt);
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int bef_str(char *txt)
 {
 	char *aux;
@@ -45,8 +71,16 @@ int custom_export(t_content *cont, int i)
 	{
 		while (cont[i].full_comand[j])
 		{
-			if (bef_str(cont[i].full_comand[j]))
+			if (eq_combination(cont, cont[i].full_comand[j]))
+			{
+				j++;
+				continue;
+			}
+			else if (bef_str(cont[i].full_comand[j]))
+			{
 				cont->global->env = dobl_prt_free(cont->global->env, cont[i].full_comand[j], 0, strlen(cont[i].full_comand[j]));
+				//ft_dbl_printf("", cont->global->env, "\n", 0);
+			}
 			else
 				err_cmd("formato invalido\n", cont);
 			j++;
