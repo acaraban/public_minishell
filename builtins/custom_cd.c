@@ -1,5 +1,11 @@
 #include "../minishell.h"
 
+/*
+    When changing directory there are different errors to print.
+    e.g. cd non_existing_dir
+    e.g. cd dir_without_permissions
+    Handle this error messages with perror() function.
+*/
 
 void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *current_pwd)
 {
@@ -12,7 +18,8 @@ void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *
     }
     else
     {
-        printf("minishell: %s: %s: No such file or directory\n", cont[i].cmd, cont[i].full_comand[1]);
+        ft_putstr_fd("minishell: ", 2);
+        perror(ft_strjoin(ft_strjoin(cont[i].cmd, ": "), cont[i].full_comand[1]));
     }
     free(current_pwd);
 }
