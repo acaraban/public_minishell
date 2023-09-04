@@ -6,16 +6,12 @@ void init_builtins(t_content *cont, int i)
     cont[i].which_builtin = 0;
 }
 
-
 /*
     num = index for the pipes' file descriptors.
     1st -- Check if command is a built-in without redirs. Execute in parent.
     2nd -- Fork process for every command found. Execute command in the child
     process with a custom built-in function or with the execve.
 */
-
-// ejecutar los builtins que si permiten redir (pwd, ..) after fork
-// y tener en cuenta los dups
 
 void	ft_executor(t_content *cont)
 {
@@ -45,9 +41,3 @@ void	ft_executor(t_content *cont)
         i++;
     }
 }
-
-// ************* POR HACER *************
-
-/* se podria mejorar poniendo los perror de los pipe y de los fork
-pero entonces me paso de lineas 
-*/

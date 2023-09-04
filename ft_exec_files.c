@@ -14,7 +14,6 @@ void manage_infiles(t_content *cont, int i)
     cont->infile_fd = open(cont[i].infile, O_RDONLY); 
     if (cont->infile_fd == -1)
     {
-        //printf("errorrrr number: %d\n", errno);
         handle_execve_error_message(cont, i);
         exit (EXIT_FAILURE);
     }

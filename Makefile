@@ -1,9 +1,10 @@
 SRCS =	builtins/custom_echo.c \
-		builtins/custom_cd.c \
-		builtins/custom_pwd.c \
-		builtins/custom_export.c \
-		builtins/custom_unset.c \
 		builtins/custom_env.c \
+		builtins/custom_export.c \
+		builtins/custom_exit.c \
+		builtins/custom_pwd.c \
+		builtins/custom_unset.c \
+		builtins/custom_cd.c \
 		builtins/custom-cd_utils.c \
 		err_mngment/err_stx.c \
 		err_mngment/err_cmd.c \
