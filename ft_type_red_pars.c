@@ -29,6 +29,8 @@ int	ft_type_red_entsim(char **final, int i, int h, t_content *cont)
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
+		else
+			return (-1);
 	}
 	free_dbl(cmd_str);
 	cont[h].nfl = 1;
@@ -52,25 +54,26 @@ int	ft_type_red_salsim(char **final, int i, int h, t_content *cont)
 		if (cont[h].outfile)
 			free (cont[h].outfile);
 		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (!new_arch(cont[h].outfile))
+			return (-1);
 		if (cmd_str[1])
-		{
-			ft_dbl_printf("este es full.comand", cont[h].full_comand, "\n", 0);
 			cont[h].full_comand = ft_xtr_allsz_free(cont[h].full_comand, cmd_str, 1);
-			ft_dbl_printf("este es full.comand", cont[h].full_comand, "\n", 0);
-		}
-			
 	}
 	else
 	{
 		if (cont[h].outfile)
 			free (cont[h].outfile);
 		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (!new_arch(cont[h].outfile))
+			return (-1);
+		cmd_str = ft_elim_str_free(cmd_str, 0);
 		if (cmd_str[1])
 		{
-			cmd_str = ft_elim_str_free(cmd_str, 0);
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
+		else
+			return (-1);
 	}
 	free_dbl(cmd_str);
 	cont[h].tfl = 1;
@@ -94,6 +97,8 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 		if (cont[h].outfile)
 			free (cont[h].outfile);
 		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (!new_arch(cont[h].outfile))
+			return (-1);
 		if (cmd_str[1])
 			cont[h].full_comand = ft_xtr_allsz_free(cont[h].full_comand, cmd_str, 1);
 	}
@@ -102,13 +107,18 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 		if (cont[h].outfile)
 			free (cont[h].outfile);
 		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (!new_arch(cont[h].outfile))
+			return (-1);
 		if (cmd_str[1])
 		{
 			cmd_str = ft_elim_str_free(cmd_str, 0);
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
+		else
+			return (-1);
 	}
+	cmd_str = ft_shell_split(final[i], ' ', cont);
 	free_dbl(cmd_str);
 	cont[h].tfl = 2;
 	return (i);
@@ -156,6 +166,8 @@ char	**ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
+		else
+			return (NULL);
 	}
 	free_dbl(cmd_str);
 	cont[h].nfl = 2;

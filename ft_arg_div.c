@@ -132,8 +132,9 @@ void ft_arg_div(char *txt, t_global *glb)
 			ft_printf("%s\n", cont[l].outfile);
 		ft_printf("\n\n-------------------------------\n");
 		l++;
-	}*/
-	
-	//////////////parte del codigo////////////////*/
+	}
+
+
+	//////////////parte del codigo///////////////*/
 	
 }

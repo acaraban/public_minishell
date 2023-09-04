@@ -155,9 +155,12 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 			if (dst[l][r] == '\'' || dst[l][r] == '\"')
 			{
 				j = r + find_match(dst[l], r, dst[l][r]);
+				ft_printf("este es r: %c\n", dst[l][r]);
+				ft_printf("este es j: %c\n", dst[l][j]);
 				dst[l] = del_char(dst[l], r);
 				dst[l] = del_char(dst[l], j - 1);
 				r = j;
+				r -= 2;
 			}
 			r++;
 		}

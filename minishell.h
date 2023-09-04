@@ -92,6 +92,7 @@ int arg_is_valid(char *comand_args);
 int err_dobcom(char *txt, t_content *cont);
 int custom_unset(t_content *cont, int i);
 int  coincidence(t_content *cont, char *txt);
+int new_arch(char *name);
 
 
 void	ft_executor(t_content *cont);
