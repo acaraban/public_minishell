@@ -109,7 +109,6 @@ void ft_arg_div(char *txt, t_global *glb)
 
 	ft_executor(cont);
 
-
 	////////////imprimir el struct //////////////////////
 	/*int l;
 
@@ -135,9 +134,6 @@ void ft_arg_div(char *txt, t_global *glb)
 		l++;
 	}*/
 	
-	//
-	ft_executor(cont);
-
 	//////////////parte del codigo////////////////*/
 	
 }
