@@ -17,7 +17,7 @@ int err_redsegred(char **arr, t_content *cont)
 		}
 		if (arr[i][0] == '<')
 		{
-			if (!arr[i + 1] || (arr[i + 1][0] == '<' || arr[i + 1][0] == '>' || arr[i + 1][0] == '|' || arr[i + 1]))
+			if (!arr[i + 1] || (arr[i + 1][0] == '<' || arr[i + 1][0] == '>' || arr[i + 1][0] == '|' || !arr[i + 1][0]))
 			{
 				err_stx("error sintactico\n", cont);
 				return (2);
