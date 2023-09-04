@@ -121,5 +121,6 @@ int cmd_has_path(t_content *cont, int i);
 void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
 void ft_delete_env_oldpwd(char **environment);
+void check_options(char *options, char *cmd);
 
 #endif

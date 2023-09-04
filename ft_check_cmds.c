@@ -56,3 +56,32 @@ void check_for_path(t_content *cont, int i)
         cont[i].access_path = ft_access_program(cont->global->environ_path, cont[i].cmd);
     }
 }
+
+/*
+    Function to check if the options received when exit is called are numeric.
+    And handle error appropiately.
+    e.g. bash: exit: algo: numeric argument required
+*/
+
+void check_options(char *options, char *cmd)
+{
+    int i;
+
+    i = 0;
+    while(options[i])
+    {
+        if (ft_isdigit(options[i]) == 1)
+        {
+            printf("exit\n");
+            exit (0);
+        }
+        else
+        {
+            printf("exit\n");
+            ft_putstr_fd("minishell: ", 2);
+            ft_putstr_fd(ft_strjoin(ft_strjoin(ft_strjoin(cmd, ": "), options), ": numeric argument required\n"), 2);
+            exit (EXIT_FAILURE);
+        }
+        i++;
+    }
+}
