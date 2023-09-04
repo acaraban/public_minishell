@@ -28,10 +28,4 @@ void ft_delete_env_oldpwd(char **environment)
         environment[index] = environment[index + 1];
         index++;
     }
-    /*j = 0;
-    while(environment[j])
-    {
-        printf("dime: %s\n", environment[j]);
-        j++;
-    }*/
 }

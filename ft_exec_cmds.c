@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-
-
 /* 
     Function to check if the command is a built-in without redirs.
     cd : check if command is cd and args are valid or included in the built-in
@@ -32,13 +30,19 @@ int is_builtin_noredir(t_content *cont, int i)
     {
         custom_export(cont, i);
     }
-	else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0))
+    else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0))
+    {
+        if (cont[i].full_comand[1])
+        {
+            check_options(cont[i].full_comand[1], cont[i].cmd);
+        }
+        printf("exit\n");
+        exit(0);
+    }
+	  else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0))
     {
         custom_unset(cont, i);
     }
-    else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0) && (cont[i].full_comand[1] == NULL))
-        exit(0);
-        //custom_exit();
     return (1);
 }
 
