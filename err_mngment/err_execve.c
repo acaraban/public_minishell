@@ -12,24 +12,23 @@
                       e.g. wc -l < input.txt
     errno 13 EACCES -- Permission denied
                        e.g. bash: entrada.md: Permission denied
-                            bash: cd: carpeta/: Permission denied
+                            bash: cd: carpeta/: Permission denied --> 1
+                            ./a.out file_without_permissions ---> 126
 */
 
 void handle_execve_error_message(t_content *cont, int i)
 {
     if (errno == EFAULT) //14
     {
-        ft_putstr_fd("minishelli: ", 2);
+        ft_putstr_fd("minishell: ", 2);
         ft_putstr_fd(ft_strjoin(cont[i].cmd, ": command not found\n"), 2);
-        // update exit status after executing command
-        //cont->global->err_stat = 127; // esto no actualiza nada
-        // hay que hacer este cambio en el padre (main)
 		exit(127);
     }
     else if (errno == ENOENT) // 2
     {
         ft_putstr_fd("minishell: ", 2);
         perror(cont[i].infile);
+        exit(1);
     }
     else if (errno == EACCES) 
     {
@@ -37,10 +36,12 @@ void handle_execve_error_message(t_content *cont, int i)
         if (cont[i].infile)
         {
             perror(cont[i].infile);
+            exit(1);
         }
         else
         {
             perror(cont[i].cmd);
+            exit(126);
         }
     }
 }

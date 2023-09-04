@@ -20,6 +20,7 @@ void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *
     {
         ft_putstr_fd("minishell: ", 2);
         perror(ft_strjoin(ft_strjoin(cont[i].cmd, ": "), cont[i].full_comand[1]));
+        cont->global->err_stat = 1;
     }
     free(current_pwd);
 }
