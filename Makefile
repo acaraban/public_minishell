@@ -24,6 +24,7 @@ SRCS =	builtins/custom_echo.c \
 		input_err/err_sim_red.c \
 		input_err/start_end_pip.c \
 		input_err/start_end_red.c \
+		ft_start_stuff.c \
 		ft_executor.c \
 		ft_mini-utils.c \
 		ft_all_children.c \

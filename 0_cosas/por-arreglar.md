@@ -8,7 +8,7 @@ cuando inicie minishell ejecutar algo que lo quite
 # Using a variable that is not defined
 echo $undefined_variable
 
-tabulador
+
 
 
 builtins con redirecciones: export y unset
@@ -41,7 +41,7 @@ shell level de bash y minishell
 
 ###################
 
-
+echo hola | exit
 
 
 

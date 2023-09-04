@@ -106,10 +106,11 @@ void ft_arg_div(char *txt, t_global *glb)
 		ft_heredoc(ac);
 		free_dbl(ac);
 	}
+
 	ft_executor(cont);
 
-	/*////////////imprimir el struct //////////////////////
-	int l;
+	////////////imprimir el struct //////////////////////
+	/*int l;
 
 	l = 0;
 	while (l < tam2)

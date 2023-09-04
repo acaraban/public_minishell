@@ -27,21 +27,29 @@ char * get_the_oldpwd(t_content *cont, int i)
 
 }
 /*	
-	Function to find the OLDPWD environment variable and set the new value.
+	Function to find the OLDPWD environment variable and update with new value.
+	If there is not a OLDPWD variable, create it and set its value.
 */
 
 void update_environment_old(t_content *cont, int i, char *old_pwd)
 {
 	int j;
+	int has_oldpwd;
 	
 	j = 0;
+	has_oldpwd = 0;
 	while(cont[i].global->env[j])
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
 			cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
+			has_oldpwd = 1;
 		}
 		j++;
+	}
+	if (has_oldpwd == 0)
+	{
+		cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
 	}
 }
 
