@@ -67,11 +67,6 @@ int is_builtin(t_content *cont, int i)
     {
         cont[i].which_builtin = 3;
     }
-    /*else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0) && (cont[i].full_comand[1] == NULL))
-    {
-        printf("dentro de export, no tiene flags\n");
-        cont[i].which_builtin = 4;
-    }*/
     else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0) && (cont[i].full_comand[1] == NULL))
     {
         printf("dentro de unset, no tiene flags\n");
@@ -94,23 +89,13 @@ void exec_builtin(t_content *cont, int i)
 {
     if (cont[i].which_builtin == 1)
     {
-        //printf("execute custom echo\n");
+        printf("execute custom echo\n");
         custom_echo(cont, i);
     }
     else if (cont[i].which_builtin == 3)
     {
         //printf("custom pwd\n");
         custom_pwd();
-    }
-   /* else if (cont[i].which_builtin == 4)
-    {
-        printf("custom export\n");
-        //custom_export();
-    }*/
-    else if (cont[i].which_builtin == 5)
-    {
-        printf("custom unset\n");
-        //custom_unset();
     }
     else if (cont[i].which_builtin == 6)
     {
