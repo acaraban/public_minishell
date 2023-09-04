@@ -1,7 +1,5 @@
 #include "../minishell.h"
 
-/* de acaraban */
-
 int pos_char(char *txt, char c)
 {
 	int i;
