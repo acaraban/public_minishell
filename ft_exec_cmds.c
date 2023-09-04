@@ -22,11 +22,17 @@ int is_builtin_noredir(t_content *cont, int i)
         return (0);
     }
     else if ((ft_strcmp(cont[i].full_comand[0], "export") == 0))
+    {
         custom_export(cont, i);
+        return (0);
+    }
     else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0))
         custom_exit(cont, i);
 	else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0))
+    {
         custom_unset(cont, i);
+        return (0);
+    }
     return (1);
 }
 
@@ -84,6 +90,7 @@ void exec_builtin(t_content *cont, int i)
 /* Function to execute the bash command or the custom built-in. */
 
 void execute_command(t_content *cont, int i)
+//void execute_command(int (*fds)[2], t_content *cont, int i)
 {
     if (cont[i].builtin == 1)
     {
@@ -94,6 +101,9 @@ void execute_command(t_content *cont, int i)
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
             handle_execve_error_message(cont, i);
+            //handle_execve_error_message(fds, cont, i);
+            // antes de hacer el exit, si ha dado error, que guarde el errno
+
         }
         exit(EXIT_FAILURE);
     }
