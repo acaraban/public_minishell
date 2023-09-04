@@ -17,6 +17,7 @@ void	ft_executor(t_content *cont)
 {
     int i;
     pid_t pid;
+	int	status;
 
     i = 0;
     int fds[cont->global->num_cmd][2];
@@ -37,7 +38,10 @@ void	ft_executor(t_content *cont)
         if (pid == 0)
             ft_execute_child(cont, i, fds, i);
         main_closes_pipes(cont, i, fds, i);
-        waitpid(pid, NULL, 0);
+        waitpid(pid, &status, 0);
+		// int final_status = WEXITSTATUS(status);
+		cont->global->err_stat = WEXITSTATUS(status);
+		//printf("status: %d\n", cont->global->err_stat);
         i++;
     }
 }
