@@ -97,11 +97,5 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		if (vue == NULL)
 			return (NULL);
 	}
-	int rj = 0;
-	ft_printf("este es vue: \n");
-	while (vue [rj])
-	{
-		ft_printf("%s\n", vue[rj++]);
-	}
 	return (vue);
 }

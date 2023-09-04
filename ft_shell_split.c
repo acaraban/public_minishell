@@ -136,6 +136,8 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 
 	if (s == NULL)
 		return (NULL);
+	if (err_dobcom(s, cont) < 0)
+		return (NULL);
 	l = numstring(s, c, cont);
 	if (l < 0)
 		return (NULL);
