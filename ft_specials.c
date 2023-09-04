@@ -42,7 +42,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		{
 			if (err_red(i, txt, cant))
 				return (NULL);
-			if (i > 1)
+			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
@@ -52,7 +52,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		{
 			if (err_sim_red(txt, i, cant))
 				return (NULL);
-			if (i > 1)
+			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
@@ -61,7 +61,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		{
 			if (err_red(i, txt, cant))
 				return (NULL);
-			if (i > 1)
+			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
@@ -69,7 +69,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		}
 		else if (txt[i] == '<')
 		{
-			if (i > 1)
+			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
@@ -78,7 +78,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		{
 			if (err_dobpip(txt, i, cant))
 				return (NULL);
-			if (i > 1)
+			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
 			cont = i + 1;
@@ -97,5 +97,6 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		if (vue == NULL)
 			return (NULL);
 	}
+	//ft_dbl_printf("este es vue: \n", vue, "\n", 0);
 	return (vue);
 }

@@ -134,6 +134,6 @@ void ft_arg_div(char *txt, t_global *glb)
 	}
 
 
-	//////////////parte del codigo////////////////*/
+	//////////////parte del codigo///////////////*/
 	
 }
