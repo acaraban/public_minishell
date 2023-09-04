@@ -1,2 +1,0 @@
-	if (!strrchr(cont[i].full_comand[j], ' ') && !strrchr(cont[i].full_comand[j], '\"') && !strrchr(cont[i].full_comand[j], '$') && !strrchr(cont[i].full_comand[j], '\'') \
-			&& !strrchr(cont[i].full_comand[j], '>') && !strrchr(cont[i].full_comand[j], '<') && !strrchr(cont[i].full_comand[j], '|'))

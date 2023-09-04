@@ -97,6 +97,5 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		if (vue == NULL)
 			return (NULL);
 	}
-	//ft_dbl_printf("este es vue: \n", vue, "\n", 0);
 	return (vue);
 }

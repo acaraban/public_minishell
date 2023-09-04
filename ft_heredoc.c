@@ -17,7 +17,7 @@ void	ft_heredoc(char **arr)
 	boo = 0;
 	new = (char *)calloc(sizeof(char), 1);
 	val = (char *)calloc(sizeof(char), 1);
-	ft_dbl_printf("este es arr: \n", arr, "\n", 0);
+	//ft_dbl_printf("este es arr: \n", arr, "\n", 0);
 	while (arr[i])
 	{
 		if (arr[i + 1] == NULL)
@@ -48,7 +48,7 @@ void	ft_heredoc(char **arr)
 			i++;
 	}
 	free (val);
-	ft_printf("este es new: %s\n", new);
+	//ft_printf("este es new: %s\n", new);
 	fd = open(".awdrgyj123.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	write(fd, new, ft_strlen(new));
 	close(fd);

@@ -146,7 +146,7 @@ char	**ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont
 			ac = ft_dbl_strdup_str(cmd_str[0]);
 		else
 			ac = dobl_prt_free(ac, cmd_str[0], 0, ft_strlen(cmd_str[0]));
-		ft_dbl_printf("este es ac", ac, "\n", 0);
+		//ft_dbl_printf("este es ac", ac, "\n", 0);
 		cont[h].infile = ft_strdup(".awdrgyj123.txt");
 		if (cmd_str[1])
 			cont[h].full_comand = ft_xtr_allsz_free(cont[h].full_comand, cmd_str, 1);

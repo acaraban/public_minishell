@@ -1,21 +1,24 @@
 #include "minishell.h"
 
-void ft_arg_div(char *txt, t_global *glb)
+void	ft_arg_div(char *txt, t_global *glb)
 {
-	char **final;
-	t_content *cont;
-	char *ot;
-	int tam;
-	int tam2;
-	int h;
-	int i;
+	char		**final;
+	t_content	*cont;
+	char		*ot;
+	int			tam;
+	int			tam2;
+	int			h;
+	int			i;
+	char		**cmd_str;
+	char		**ac;
+	//int			cm;
 
 	tam = 1;
 	i = 0;
 	ot = ft_strdup(txt);
 	free(txt);
 	txt = ft_strtrim(ot, " ");
-	free (ot);
+	free(ot);
 	while (txt[i])
 	{
 		if (txt[i] == '|')
@@ -42,19 +45,12 @@ void ft_arg_div(char *txt, t_global *glb)
 	}
 	final = ft_specials(txt, cont, 1);
 	if (final == NULL)
-		return;
-
-
-
-
+		return ;
 	tam = 0;
 	while (final[tam])
 		tam++;
-	char **cmd_str;
 	i = 0;
 	h = 0;
-	char **ac;
-
 	ac = NULL;
 	while (final[i])
 	{
@@ -65,7 +61,7 @@ void ft_arg_div(char *txt, t_global *glb)
 				return ;
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
-			free_dbl (cmd_str);
+			free_dbl(cmd_str);
 		}
 		else if (final[i][0] == '|')
 			h++;
@@ -85,7 +81,6 @@ void ft_arg_div(char *txt, t_global *glb)
 				if (i < 0)
 					return ;
 			}
-				
 			else if (final[i][0] == '>' && final[i][1] == '>')
 			{
 				i = ft_type_red_saldbl(final, i, h, cont);
@@ -106,18 +101,15 @@ void ft_arg_div(char *txt, t_global *glb)
 		ft_heredoc(ac);
 		free_dbl(ac);
 	}
-
 	ft_executor(cont);
-
 	////////////imprimir el struct //////////////////////
 	/*int l;
-
 	l = 0;
 	while (l < tam2)
 	{
 		ft_printf("este es el comando: %s", cont[l].cmd);
 		ft_printf("\neste es el comando completo:\n");
-		int cm = 0;
+		cm = 0;
 		while (cont[l].full_comand[cm])
 		{
 			ft_printf("%s\n", cont[l].full_comand[cm]);
@@ -133,8 +125,5 @@ void ft_arg_div(char *txt, t_global *glb)
 		ft_printf("\n\n-------------------------------\n");
 		l++;
 	}
-
-
 	//////////////parte del codigo///////////////*/
-	
 }
