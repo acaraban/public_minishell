@@ -17,13 +17,14 @@
 
 void handle_execve_error_message(t_content *cont, int i)
 {
-    if (errno == EFAULT) 
+    if (errno == EFAULT) //14
     {
         ft_putstr_fd("minishelli: ", 2);
         ft_putstr_fd(ft_strjoin(cont[i].cmd, ": command not found\n"), 2);
         // update exit status after executing command
-        cont->global->err_stat = 127; // esto no actualiza nada
+        //cont->global->err_stat = 127; // esto no actualiza nada
         // hay que hacer este cambio en el padre (main)
+		exit(127);
     }
     else if (errno == ENOENT) // 2
     {
