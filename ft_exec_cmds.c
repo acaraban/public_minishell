@@ -90,7 +90,6 @@ void exec_builtin(t_content *cont, int i)
 /* Function to execute the bash command or the custom built-in. */
 
 void execute_command(t_content *cont, int i)
-//void execute_command(int (*fds)[2], t_content *cont, int i)
 {
     if (cont[i].builtin == 1)
     {
@@ -101,11 +100,7 @@ void execute_command(t_content *cont, int i)
         if (execve(cont[i].access_path, cont[i].full_comand, cont->global->env) == -1)
         {
             handle_execve_error_message(cont, i);
-            //handle_execve_error_message(fds, cont, i);
-            // antes de hacer el exit, si ha dado error, que guarde el errno
-
         }
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE); // esto es 1
     }
 }
-
