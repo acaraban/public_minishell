@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom-cd_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/05 19:01:19 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /*
@@ -5,16 +17,16 @@
 	getenv() function gets the OLDPWD of the mac.
 */
 
-char * get_the_oldpwd(t_content *cont, int i)
+char	*get_the_oldpwd(t_content *cont, int i)
 {
-	char *old_pwd;
-	int j;
-	
+	char	*old_pwd;
+	int		j;
+
 	j = 0;
 	old_pwd = calloc(sizeof(char), 100);
-    if (!old_pwd)
-        return (NULL);
-	while(cont[i].global->env[j])
+	if (!old_pwd)
+		return (NULL);
+	while (cont[i].global->env[j])
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
@@ -24,21 +36,21 @@ char * get_the_oldpwd(t_content *cont, int i)
 		j++;
 	}
 	return (old_pwd);
-
 }
+
 /*	
 	Function to find the OLDPWD environment variable and update with new value.
 	If there is not a OLDPWD variable, create it and set its value.
 */
 
-void update_environment_old(t_content *cont, int i, char *old_pwd)
+void	update_environment_old(t_content *cont, int i, char *old_pwd)
 {
-	int j;
-	int has_oldpwd;
-	
+	int	j;
+	int	has_oldpwd;
+
 	j = 0;
 	has_oldpwd = 0;
-	while(cont[i].global->env[j])
+	while (cont[i].global->env[j])
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
@@ -58,12 +70,12 @@ void update_environment_old(t_content *cont, int i, char *old_pwd)
 	new_pwd is the updated path after chdir
 */
 
-void update_environment_new(t_content *cont, int i, char *new_pwd)
+void	update_environment_new(t_content *cont, int i, char *new_pwd)
 {
-	int j;
+	int	j;
 
 	j = 0;
-	while(cont[i].global->env[j])
+	while (cont[i].global->env[j])
 	{
 		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
 		{
@@ -82,7 +94,7 @@ void update_environment_new(t_content *cont, int i, char *new_pwd)
 	Return 1 if it is not a path. Not a path = Not a built-in_noredir
 */
 
-int arg_is_a_path(char *comand_args)
+int	arg_is_a_path(char *comand_args)
 {
 	if (opendir(comand_args) == NULL)
 	{
@@ -90,6 +102,7 @@ int arg_is_a_path(char *comand_args)
 	}
 	return (0);
 }
+
 /*
 	Function to check if arg for cd is valid.
 	Success returns 0.
@@ -97,11 +110,11 @@ int arg_is_a_path(char *comand_args)
 	And after need to update env var PWD
 */
 
-int arg_is_valid(char *command_arg)
+int	arg_is_valid(char *command_arg)
 {
 	if (ft_strcmp(command_arg, "~") == 0)
 	{
-		return (0); 
+		return (0);
 	}
 	if (ft_strcmp(command_arg, "-") == 0)
 	{

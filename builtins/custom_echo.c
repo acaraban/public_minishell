@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_echo.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 19:10:37 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/05 19:10:39 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void custom_echo(t_content *cont, int i)
+void	custom_echo(t_content *cont, int i)
 {
-    ft_printf("%s", cont[i].full_comand[2]);
+	ft_printf("%s", cont[i].full_comand[2]);
 }

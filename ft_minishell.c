@@ -16,12 +16,6 @@ void	handle_sigint(int sig)
 		rl_on_new_line();
 	}
 }
-
-void handle_sigquit(int sig)
-{
-	printf("Quit: %d\n", sig);
-}
-
 /*
 	ft_delete_env_oldpwd()
 	This function searches for the OLDPWD environment var in the minishell program 
@@ -42,7 +36,7 @@ int main(int argc, char **argv, char **env)
 	j = 0;
 	glb = (t_global *)calloc(sizeof(t_content), 1);
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 	glb[0].err_stat = 0;
 	glb[0].new_stat = 0;
 	boo = 1;
