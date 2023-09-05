@@ -44,26 +44,22 @@ void update_last_pwd(t_content *cont, int i, char *last_pwd)
 
 void custom_cd(t_content *cont, int i)
 {
-    char *command_arg;
-    char *last_pwd;
-    char *current_pwd;
-
     cont->custom = (t_custom *)malloc(sizeof(t_custom) * 1);
-    command_arg = cont[i].full_comand[1];
-    last_pwd = calloc(256, sizeof(char));
+    cont->custom->command_arg = cont[i].full_comand[1];
+    cont->custom->last_pwd = calloc(256, sizeof(char));
     cont->custom->is_switch = 0;
-    if (!last_pwd)
+    if (!cont->custom->last_pwd)
         return ;
-    current_pwd = calloc(256, sizeof(char));
-    if (!current_pwd)
+    cont->custom->current_pwd = calloc(256, sizeof(char));
+    if (!cont->custom->current_pwd)
         return ;
-    if (ft_strcmp(command_arg, "") == 0 || ft_strcmp(command_arg, "~") == 0)
-        command_arg = getenv("HOME");
-    if (ft_strcmp(command_arg, "-") == 0)
+    if (ft_strcmp(cont->custom->command_arg, "") == 0 || ft_strcmp(cont->custom->command_arg, "~") == 0)
+        cont->custom->command_arg = getenv("HOME");
+    if (ft_strcmp(cont->custom->command_arg, "-") == 0)
     {
-        current_pwd = custom_return_pwd();
-        command_arg = get_the_oldpwd(cont, i);
-        if (ft_strcmp(command_arg, "") == 0)
+        cont->custom->current_pwd = custom_return_pwd();
+        cont->custom->command_arg = get_the_oldpwd(cont, i);
+        if (ft_strcmp(cont->custom->command_arg, "") == 0)
         {
             ft_putstr_fd(ft_strjoin("minishell: ", ft_strjoin(cont[i].cmd, ": OLDPWD not set\n")), 2);
             return;
@@ -71,7 +67,7 @@ void custom_cd(t_content *cont, int i)
         cont->custom->is_switch = 1;
     }
     else
-        update_last_pwd(cont, i, last_pwd);
-    change_dir(cont, i, command_arg, cont->custom->is_switch, current_pwd);
+        update_last_pwd(cont, i, cont->custom->last_pwd);
+    change_dir(cont, i, cont->custom->command_arg, cont->custom->is_switch, cont->custom->current_pwd);
     return ;
 }
