@@ -79,13 +79,14 @@ void update_environment_new(t_content *cont, int i, char *new_pwd)
 	you want to open. It returns a pointer to a DIR structure, which is an
 	opaque data type representing the opened directory stream. 
 	If the directory cannot be opened, it returns a NULL pointer.
+	Return 1 if it is not a path. Not a path = Not a built-in_noredir
 */
 
 int arg_is_a_path(char *comand_args)
 {
 	if (opendir(comand_args) == NULL)
 	{
-		return (1); // si da error, la funcion is_builtin ya no lo considera builtin
+		return (1);
 	}
 	return (0);
 }

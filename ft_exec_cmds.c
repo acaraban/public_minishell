@@ -5,6 +5,7 @@
     cd : check if command is cd and args are valid or included in the built-in
          if so, execute custom_cd function; if not, execute cd command with execve
     exit : exit main process with 0 for a clean exit
+    Return 0 --> it is a built-in without redir
 */
 
 int is_builtin_noredir(t_content *cont, int i)

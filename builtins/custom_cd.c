@@ -38,6 +38,8 @@ void update_last_pwd(t_content *cont, int i, char *last_pwd)
     Before chdir, saving current pwd as oldpwd and update OLDPWD env.
     After chdir, get current pwd and update PWD environment variable.
     IMPT: free last_pwd after use, to avoid segmentation faults.
+    If cd - gets executed before changing dir, there is no OLDPWD yet.
+    e.g. bash: cd: OLDPWD not set
 */
 
 void custom_cd(t_content *cont, int i)
@@ -61,12 +63,9 @@ void custom_cd(t_content *cont, int i)
     {
         current_pwd = custom_return_pwd();
         command_arg = get_the_oldpwd(cont, i);
-        // si ejecuto cd - antes de cambiar de directorio, no hay OLDPWD todavia
         if (ft_strcmp(command_arg, "") == 0)
         {
-            // bash: cd: OLDPWD not set
-            ft_putstr_fd("minishell: ", 2);
-            ft_putstr_fd(ft_strjoin(cont[i].cmd, ": OLDPWD not set\n"), 2);
+            ft_putstr_fd(ft_strjoin("minishell: ", ft_strjoin(cont[i].cmd, ": OLDPWD not set\n")), 2);
             return;
         }
         is_switch = 1;
