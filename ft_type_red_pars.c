@@ -167,9 +167,16 @@ char	**ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
 		else
-			return (NULL);
+		{
+			cont[h].full_comand = (char **)malloc(sizeof(char *) * 1);
+			cont[h].full_comand[0] = (char *)malloc(sizeof(char) * 1);
+			cont[h].full_comand[0] = NULL;
+			cont[h].cmd = (char *)malloc(sizeof(char) * 1);
+			cont[h].cmd = NULL;
+		}
 	}
-	free_dbl(cmd_str);
+	if (cont[h].cmd)
+		free_dbl(cmd_str);
 	cont[h].nfl = 2;
 	return (ac);
 }

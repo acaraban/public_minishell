@@ -2,7 +2,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void	ft_heredoc(char **arr)
+int	ft_heredoc(char **arr)
 {
 	char *val;
 	char *new;
@@ -17,6 +17,7 @@ void	ft_heredoc(char **arr)
 	boo = 0;
 	new = (char *)calloc(sizeof(char), 1);
 	val = (char *)calloc(sizeof(char), 1);
+	signal(2, handle_sigint);
 	//ft_dbl_printf("este es arr: \n", arr, "\n", 0);
 	while (arr[i])
 	{
@@ -44,6 +45,12 @@ void	ft_heredoc(char **arr)
 		}
 		free (val);
 		val = readline(">");
+		if (!val)
+		{
+			free(val);
+			ft_printf("exit\n");
+			return (0);
+		}
 		if (!strcmp(arr[i], val))
 			i++;
 	}
@@ -52,4 +59,5 @@ void	ft_heredoc(char **arr)
 	fd = open(".awdrgyj123.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	write(fd, new, ft_strlen(new));
 	close(fd);
+	return (1);
 }

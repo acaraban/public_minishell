@@ -81,7 +81,7 @@ char    **ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *c
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
-void	ft_heredoc(char **arr);
+int	ft_heredoc(char **arr);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
@@ -93,6 +93,8 @@ int err_dobcom(char *txt, t_content *cont);
 int custom_unset(t_content *cont, int i);
 int  coincidence(t_content *cont, char *txt);
 int new_arch(char *name);
+int ft_tam_args(char *txt, t_content *cont);
+void	handle_sigint(int sig);
 
 
 void	ft_executor(t_content *cont);

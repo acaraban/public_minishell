@@ -35,7 +35,7 @@ int str_cmp(char *txt, int pos, char *cmp, char car)
 		lstpos = ft_strlen(txt);
 	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i] != car)
 		i++;
-	if (!txt[i + pos] || (cmp[i] == car && i + pos == lstpos))
+	if (!txt[i + pos] && (cmp[i] == car && i + pos == lstpos))
 		return (i + 1);
 	return (0);
 }
@@ -51,7 +51,11 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 		return (ft_itoa(cont[0].global[0].new_stat));
 	else if (txt[pos + 1] == ' ' || txt[pos + 1] == '\"' || txt[pos + 1] == '$' \
 	|| txt[pos + 1] == '\'' || txt[pos + 1] == '>' ||txt[pos + 1] == '<' || txt[pos + 1] == '|' || !txt[pos + 1])
+	{
+		if (txt[pos + 1] == '$')
+			return (ft_strdup("$$"));
 		return (ft_strdup("$"));
+	}
 	else
 	{
 		while (env[i] && !par)
