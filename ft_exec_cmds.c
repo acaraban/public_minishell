@@ -84,7 +84,7 @@ void exec_builtin(t_content *cont, int i)
     {
         custom_env(cont, i);
     }
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 /* Function to execute the bash command or the custom built-in. */
@@ -101,6 +101,6 @@ void execute_command(t_content *cont, int i)
         {
             handle_execve_error_message(cont, i);
         }
-        exit(EXIT_FAILURE); // esto es 1
+        exit(EXIT_FAILURE);
     }
 }
