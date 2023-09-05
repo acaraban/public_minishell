@@ -47,11 +47,11 @@ void custom_cd(t_content *cont, int i)
     char *command_arg;
     char *last_pwd;
     char *current_pwd;
-    int is_switch;
 
+    cont->custom = (t_custom *)malloc(sizeof(t_custom) * 1);
     command_arg = cont[i].full_comand[1];
     last_pwd = calloc(256, sizeof(char));
-    is_switch = 0;
+    cont->custom->is_switch = 0;
     if (!last_pwd)
         return ;
     current_pwd = calloc(256, sizeof(char));
@@ -68,10 +68,10 @@ void custom_cd(t_content *cont, int i)
             ft_putstr_fd(ft_strjoin("minishell: ", ft_strjoin(cont[i].cmd, ": OLDPWD not set\n")), 2);
             return;
         }
-        is_switch = 1;
+        cont->custom->is_switch = 1;
     }
     else
         update_last_pwd(cont, i, last_pwd);
-    change_dir(cont, i, command_arg, is_switch, current_pwd);
+    change_dir(cont, i, command_arg, cont->custom->is_switch, current_pwd);
     return ;
 }

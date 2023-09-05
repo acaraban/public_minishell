@@ -31,10 +31,7 @@ void	ft_executor(t_content *cont)
             return ;
         pid = fork();
         if (pid == -1)
-        {
-            perror("fork");
             return ;
-        }
         if (pid == 0)
             ft_execute_child(cont, i, fds, i);
         main_closes_pipes(cont, i, fds, i);
