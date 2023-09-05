@@ -7,14 +7,14 @@
     Handle this error messages with perror() function.
 */
 
-void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *current_pwd)
+void change_dir(t_content *cont, int i)
 {
-    if (chdir(command_arg) == 0)
+    if (chdir(cont->custom->command_arg) == 0)
     {
-        if (is_switch == 1)
-            update_environment_old(cont, i, current_pwd);
-        current_pwd = custom_return_pwd();
-        update_environment_new(cont, i, current_pwd);
+        if (cont->custom->is_switch == 1)
+            update_environment_old(cont, i, cont->custom->current_pwd);
+        cont->custom->current_pwd = custom_return_pwd();
+        update_environment_new(cont, i, cont->custom->current_pwd);
     }
     else
     {
@@ -22,14 +22,14 @@ void change_dir(t_content *cont, int i, char *command_arg, int is_switch, char *
         perror(ft_strjoin(ft_strjoin(cont[i].cmd, ": "), cont[i].full_comand[1]));
         cont->global->err_stat = 1;
     }
-    free(current_pwd);
+    free(cont->custom->current_pwd);
 }
 
-void update_last_pwd(t_content *cont, int i, char *last_pwd)
+void update_last_pwd(t_content *cont, int i)
 {
-    last_pwd = custom_return_pwd();
-    update_environment_old(cont, i, last_pwd);
-    free(last_pwd);
+    cont->custom->last_pwd = custom_return_pwd();
+    update_environment_old(cont, i, cont->custom->last_pwd);
+    free(cont->custom->last_pwd);
 }
 
 /*
@@ -67,7 +67,7 @@ void custom_cd(t_content *cont, int i)
         cont->custom->is_switch = 1;
     }
     else
-        update_last_pwd(cont, i, cont->custom->last_pwd);
-    change_dir(cont, i, cont->custom->command_arg, cont->custom->is_switch, cont->custom->current_pwd);
+        update_last_pwd(cont, i);
+    change_dir(cont, i);
     return ;
 }
