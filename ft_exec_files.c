@@ -33,7 +33,7 @@ void manage_infiles(t_content *cont, int i)
 
 /*
     Print message when error in outfile.
-    Another way to print the same:
+    Another way to print the same: (but not in the error output)
     e.g. printf("minishell: %s: %s\n", cont[i].outfile, strerror(errno));
 */
 
