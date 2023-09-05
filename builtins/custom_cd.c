@@ -32,6 +32,18 @@ void update_last_pwd(t_content *cont, int i)
     free(cont->custom->last_pwd);
 }
 
+void init_custom_cd_values(t_content *cont, int i)
+{
+    cont->custom->command_arg = cont[i].full_comand[1];
+    cont->custom->last_pwd = calloc(256, sizeof(char));
+    cont->custom->is_switch = 0;
+    if (!cont->custom->last_pwd)
+        return ;
+    cont->custom->current_pwd = calloc(256, sizeof(char));
+    if (!cont->custom->current_pwd)
+        return ;
+}
+
 /*
     Function to execute the chdir -- change directory.
     "command_arg" is already valid if reaches this function.
@@ -45,14 +57,7 @@ void update_last_pwd(t_content *cont, int i)
 void custom_cd(t_content *cont, int i)
 {
     cont->custom = (t_custom *)malloc(sizeof(t_custom) * 1);
-    cont->custom->command_arg = cont[i].full_comand[1];
-    cont->custom->last_pwd = calloc(256, sizeof(char));
-    cont->custom->is_switch = 0;
-    if (!cont->custom->last_pwd)
-        return ;
-    cont->custom->current_pwd = calloc(256, sizeof(char));
-    if (!cont->custom->current_pwd)
-        return ;
+    init_custom_cd_values(cont, i);
     if (ft_strcmp(cont->custom->command_arg, "") == 0 || ft_strcmp(cont->custom->command_arg, "~") == 0)
         cont->custom->command_arg = getenv("HOME");
     if (ft_strcmp(cont->custom->command_arg, "-") == 0)
