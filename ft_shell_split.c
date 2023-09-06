@@ -27,12 +27,12 @@ static int	numstring(char *s1, char c, t_content *cont)
 	{
 		if (s1[i] == '\"' || s1[i] == '\'')
 		{
-			if (find_match(s1, 0, s1[i]) < 0)
+			if (find_match(s1, i, s1[i]) < 0)
 			{
 				err_stx("error sintactico\n", cont);
 				return (-1);
 			}
-			i += find_match(s1, 0, s1[i]);
+			i += find_match(s1, i, s1[i]);
 		}
 		if (s1[i] == c)
 			cles = 0;
