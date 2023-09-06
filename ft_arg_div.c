@@ -1,14 +1,5 @@
 #include "minishell.h"
 
-void	handle_sigint(int sig)
-{
-	if (sig == 2)
-	{
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
-}
 
 void	ft_arg_div(char *txt, t_global *glb)
 {

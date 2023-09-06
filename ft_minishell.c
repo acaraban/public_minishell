@@ -2,11 +2,16 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void memleaks(void)
+void	handle_sigint(int sig)
 {
-	system("valgrind ./minishell");
+	if (sig == 2)
+	{
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
 }
-void ft_minishell_bucle(int boo, char *txt, t_global *glb)
+void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 {
 	while (boo)
 	{
@@ -26,13 +31,14 @@ void ft_minishell_bucle(int boo, char *txt, t_global *glb)
 		glb[0].err_stat = 0;
 	}
 }
+
 /*
 	Function to save a copy of all environment vars in our struct.
 */
 
-void ft_dup_envs(t_global *glb, int i, char **env)
+void	ft_dup_envs(t_global *glb, int i, char **env)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < i)
@@ -41,7 +47,8 @@ void ft_dup_envs(t_global *glb, int i, char **env)
 		j++;
 	}
 }
-void ft_init_vars(int argc, char **argv, t_global *glb)
+
+void	ft_init_vars(int argc, char **argv, t_global *glb)
 {
 	(void)argc;
 	(void)argv;
@@ -50,19 +57,19 @@ void ft_init_vars(int argc, char **argv, t_global *glb)
 	glb[0].err_stat = 0;
 	glb[0].new_stat = 0;
 }
+
 /*
 	ft_delete_env_oldpwd()
 	This function searches for the OLDPWD environment var in the minishell program 
 	(not the mac) and deletes it.
 */
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	//atexit(memleaks);
-	char *txt;
-	t_global *glb;
-	int boo;
-	int i;
+	char		*txt;
+	t_global	*glb;
+	int			boo;
+	int			i;
 
 	glb = (t_global *)ft_calloc(sizeof(t_content), 1);
 	ft_init_vars(argc, argv, glb);
