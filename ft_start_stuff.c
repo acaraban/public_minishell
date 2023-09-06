@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_start_stuff.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 11:49:26 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/06 11:51:48 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -7,25 +19,24 @@
     After that modify all the other items indexes to make the array shorter.
 */
 
-void ft_delete_env_oldpwd(char **environment)
+void	ft_delete_env_oldpwd(char **environment)
 {
-    int index;
-    int j;
-	
+	int	index;
+	int	j;
+
 	j = 0;
-    while(environment[j])
-    {
-        
-        if (ft_strncmp(environment[j], "OLDPWD", 6) == 0)
-        {
-            free(environment[j]);
-            index = j;
-        }
-        j++;
-    }
-    while(environment[index])
-    {
-        environment[index] = environment[index + 1];
-        index++;
-    }
+	while (environment[j])
+	{
+		if (ft_strncmp(environment[j], "OLDPWD", 6) == 0)
+		{
+			free(environment[j]);
+			index = j;
+		}
+		j++;
+	}
+	while (environment[index])
+	{
+		environment[index] = environment[index + 1];
+		index++;
+	}
 }

@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_env.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 19:11:12 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/05 19:40:02 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-
-
-void custom_env(t_content *cont, int i)
+void	custom_env(t_content *cont, int i)
 {
-    ft_dbl_printf("", cont[i].global->env, "\n", 1);
+	ft_dbl_printf("", cont[i].global->env, "\n", 1);
 }

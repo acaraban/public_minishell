@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/05 19:09:08 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:36:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	update_last_pwd(t_content *cont, int i)
 void	init_custom_cd_values(t_content *cont, int i)
 {
 	cont->custom->command_arg = cont[i].full_comand[1];
-	cont->custom->last_pwd = calloc(256, sizeof(char));
+	cont->custom->last_pwd = ft_calloc(256, sizeof(char));
 	cont->custom->is_switch = 0;
 	if (!cont->custom->last_pwd)
 		return ;
-	cont->custom->current_pwd = calloc(256, sizeof(char));
+	cont->custom->current_pwd = ft_calloc(256, sizeof(char));
 	if (!cont->custom->current_pwd)
 		return ;
 }
@@ -89,5 +89,6 @@ void	custom_cd(t_content *cont, int i)
 	else
 		update_last_pwd(cont, i);
 	change_dir(cont, i);
+	free(cont->custom);
 	return ;
 }

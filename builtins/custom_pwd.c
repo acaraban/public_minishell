@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_pwd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 19:41:52 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/06 12:37:49 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../minishell.h"
 
-
-void custom_pwd(void)
+void	custom_pwd(void)
 {
-	char *buff;
-	size_t size;
+	char	*buff;
+	size_t	size;
 
 	size = 1024;
 	buff = malloc(size);
@@ -24,15 +36,14 @@ void custom_pwd(void)
 	free(buff);
 }
 
-
 /*
 	Function to get the pwd as a string
 */
 
-char *custom_return_pwd(void)
+char	*custom_return_pwd(void)
 {
-	char *buff;
-	size_t size;
+	char	*buff;
+	size_t	size;
 
 	size = 1024;
 	buff = malloc(size);
@@ -45,6 +56,5 @@ char *custom_return_pwd(void)
 		perror("getcwd");
 		return (NULL);
 	}
-	//free(buff);
-	return (buff);
+	return (buff); // cuando se libera buff
 }
