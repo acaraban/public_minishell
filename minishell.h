@@ -28,6 +28,15 @@
 # define WRITE_END 1
 
 
+typedef struct s_custom
+{
+	char *command_arg;
+    char *last_pwd;
+    char *current_pwd;
+    int is_switch;
+}t_custom;
+
+
 typedef struct s_global
 {
 	int num_cmd;
@@ -51,6 +60,7 @@ typedef struct s_content
 	int builtin;
 	int which_builtin;
 	t_global *global;
+	t_custom *custom;
 }t_content;
 
 int frst_chr(char *txt, char car);

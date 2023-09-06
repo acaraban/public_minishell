@@ -26,7 +26,7 @@ void custom_pwd(void)
 
 
 /*
-	otra para coger el resultado
+	Function to get the pwd as a string
 */
 
 char *custom_return_pwd(void)
@@ -45,10 +45,6 @@ char *custom_return_pwd(void)
 		perror("getcwd");
 		return (NULL);
 	}
-	/*else
-	{
-		printf("%s\n", buff);
-	}*/
 	//free(buff);
 	return (buff);
 }

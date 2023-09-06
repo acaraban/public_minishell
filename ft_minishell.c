@@ -16,6 +16,11 @@ void	handle_sigint(int sig)
 		rl_on_new_line();
 	}
 }
+/*
+	ft_delete_env_oldpwd()
+	This function searches for the OLDPWD environment var in the minishell program 
+	(not the mac) and deletes it.
+*/
 
 int main(int argc, char **argv, char **env)
 {
@@ -30,7 +35,8 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	j = 0;
 	glb = (t_global *)calloc(sizeof(t_content), 1);
-	signal(2, handle_sigint);
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 	glb[0].err_stat = 0;
 	glb[0].new_stat = 0;
 	boo = 1;
@@ -44,7 +50,6 @@ int main(int argc, char **argv, char **env)
 		glb[0].env[j] = strdup(env[j]);
 		j++;
 	}
-	// recorrer variables de entorno de la minishell, no del mac, y eliminar OLDPWD
 	ft_delete_env_oldpwd(glb->env);
 	while (boo)
 	{
