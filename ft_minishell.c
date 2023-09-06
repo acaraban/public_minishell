@@ -11,6 +11,7 @@ void	handle_sigint(int sig)
 		rl_on_new_line();
 	}
 }
+
 void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 {
 	while (boo)
