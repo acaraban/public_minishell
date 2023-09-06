@@ -1,5 +1,22 @@
 #include "minishell.h"
 
+void init_cont_vars(t_global *glb, t_content *cont)
+{
+	int			tam;
+	
+	tam = 0;
+	while (tam < glb->num_cmd)
+	{
+		cont[tam].global = glb;
+		cont[tam].nfl = 0;
+		cont[tam].tfl = 0;
+		cont[tam].infile = NULL;
+		cont[tam].outfile = NULL;
+		cont[tam].full_comand = NULL;
+		cont[tam].cmd = NULL;
+		tam++;
+	}
+}
 
 void	ft_arg_div(char *txt, t_global *glb)
 {
@@ -19,32 +36,12 @@ void	ft_arg_div(char *txt, t_global *glb)
 	free(txt);
 	txt = ft_strtrim(ot, " ");
 	free(ot);
-	// while (txt[i])
-	// {
-	// 	if (txt[i] == '|')
-	// 		tam++;
-	// 	i++;
-	// }
-	// if (ft_strlen(txt) == 0)
-	// 	tam = 0;
-	// tam2 = tam;
-	// i = 0;
+	
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
 	if (ft_tam_args(txt, cont) < 0)
 		return ;
 	glb->num_cmd = ft_tam_args(txt, cont);
-	tam = 0;
-	while (tam < glb->num_cmd)
-	{
-		cont[tam].global = glb;
-		cont[tam].nfl = 0;
-		cont[tam].tfl = 0;
-		cont[tam].infile = NULL;
-		cont[tam].outfile = NULL;
-		cont[tam].full_comand = NULL;
-		cont[tam].cmd = NULL;
-		tam++;
-	}
+	init_cont_vars(glb, cont);
 	final = ft_specials(txt, cont, 1);
 	if (final == NULL)
 		return ;
