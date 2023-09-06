@@ -17,7 +17,7 @@ int	ft_heredoc(char **arr)
 	boo = 0;
 	new = (char *)calloc(sizeof(char), 1);
 	val = (char *)calloc(sizeof(char), 1);
-	signal(2, handle_sigint);
+	signal(SIGINT, handle_sigint);
 	//ft_dbl_printf("este es arr: \n", arr, "\n", 0);
 	while (arr[i])
 	{
