@@ -27,7 +27,7 @@ char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
 		i++;
 	while (add[h + posadd])
 		h++;
-	jj = (char **)calloc(sizeof(char *), i + h + 1);
+	jj = (char **)ft_calloc(sizeof(char *), i + h + 1);
 	jj[h + i] = NULL;
 	while (l < h + i)
 	{
@@ -54,9 +54,9 @@ char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
 	char **fin;
 
 	i = 0;
-	jj = (char **)calloc(sizeof(char *), 4);
+	jj = (char **)ft_calloc(sizeof(char *), 4);
 	jj[3] = NULL;
-	arr = (char **)calloc(sizeof(char *), 5);
+	arr = (char **)ft_calloc(sizeof(char *), 5);
 	arr[4] = NULL;
 	jj[0] = strdup("primera linea jj");
 	jj[1] = strdup("segunda linea jj");
