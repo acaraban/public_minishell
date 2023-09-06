@@ -6,17 +6,6 @@ void memleaks(void)
 {
 	system("valgrind ./minishell");
 }
-
-void	handle_sigint(int sig)
-{
-	if (sig == 2)
-	{
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
-}
-
 void ft_minishell_bucle(int boo, char *txt, t_global *glb)
 {
 	while (boo)
@@ -37,7 +26,6 @@ void ft_minishell_bucle(int boo, char *txt, t_global *glb)
 		glb[0].err_stat = 0;
 	}
 }
-
 /*
 	Function to save a copy of all environment vars in our struct.
 */
@@ -53,7 +41,6 @@ void ft_dup_envs(t_global *glb, int i, char **env)
 		j++;
 	}
 }
-
 void ft_init_vars(int argc, char **argv, t_global *glb)
 {
 	(void)argc;
