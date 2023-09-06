@@ -97,7 +97,9 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
 	&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
 		i++;
+	free (aux);
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-	add = ft_strjoin(add, aux);
-	return (add);
+	free (aux2);
+	aux2 = ft_strjoin(add, aux);
+	return (aux2);
 }

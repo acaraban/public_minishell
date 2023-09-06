@@ -96,7 +96,6 @@ void	ft_arg_div(char *txt, t_global *glb)
 		}
 		i++;
 	}
-	(void)cmd_str;
 	free_dbl(final);
 	//ft_printf("este es h: %d\n", h);
 	if (ac)
@@ -107,8 +106,8 @@ void	ft_arg_div(char *txt, t_global *glb)
 	}
 	ft_executor(cont);
 	ft_free_cont(cont);
-	/*/ft_printf("pasa executor?\n");
-	//////////////imprimir el struct //////////////////////
+	//ft_printf("pasa executor?\n");
+	/*/////////////imprimir el struct //////////////////////
 	int l;
 	l = 0;
 	int cm = 0;

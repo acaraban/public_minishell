@@ -16,13 +16,25 @@ int	ft_type_red_entsim(char **final, int i, int h, t_content *cont)
 	{
 		if (cont[h].infile)
 			free (cont[h].infile);
-		cont[h].infile = ft_strdup(cmd_str[r - 1]);
+		if (cmd_str[r - 1])
+			cont[h].infile = ft_strdup(cmd_str[r - 1]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 	}
 	else
 	{
 		if (cont[h].infile)
 			free (cont[h].infile);
-		cont[h].infile = ft_strdup(cmd_str[0]);
+		if (cmd_str[0])
+			cont[h].outfile = ft_strdup(cmd_str[0]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 		if (cmd_str[1])
 		{
 			cmd_str = ft_elim_str_free(cmd_str, 0);
@@ -53,7 +65,13 @@ int	ft_type_red_salsim(char **final, int i, int h, t_content *cont)
 	{
 		if (cont[h].outfile)
 			free (cont[h].outfile);
-		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (cmd_str[0])
+			cont[h].outfile = ft_strdup(cmd_str[0]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 		if (!new_arch(cont[h].outfile))
 			return (-1);
 		if (cmd_str[1])
@@ -63,7 +81,13 @@ int	ft_type_red_salsim(char **final, int i, int h, t_content *cont)
 	{
 		if (cont[h].outfile)
 			free (cont[h].outfile);
-		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (cmd_str[0])
+			cont[h].outfile = ft_strdup(cmd_str[0]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 		if (!new_arch(cont[h].outfile))
 			return (-1);
 		cmd_str = ft_elim_str_free(cmd_str, 0);
@@ -96,7 +120,13 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 	{
 		if (cont[h].outfile)
 			free (cont[h].outfile);
-		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (cmd_str[0])
+			cont[h].outfile = ft_strdup(cmd_str[0]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 		if (!new_arch(cont[h].outfile))
 			return (-1);
 		if (cmd_str[1])
@@ -106,7 +136,13 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 	{
 		if (cont[h].outfile)
 			free (cont[h].outfile);
-		cont[h].outfile = ft_strdup(cmd_str[0]);
+		if (cmd_str[0])
+			cont[h].outfile = ft_strdup(cmd_str[0]);
+		else
+		{
+			err_stx("error sintactico\n", cont);
+			return (-1);
+		}
 		if (!new_arch(cont[h].outfile))
 			return (-1);
 		if (cmd_str[1])

@@ -19,7 +19,7 @@ void	handle_sigint(int sig)
 
 int main(int argc, char **argv, char **env)
 {
-	atexit(memleaks);
+	//atexit(memleaks);
 	char *txt;
 	t_global *glb;
 	int boo;
