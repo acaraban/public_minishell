@@ -4,7 +4,7 @@
 
 void memleaks(void)
 {
-	system("valgrind ./minishell");
+	system("leaks -q minishell");
 }
 
 void	handle_sigint(int sig)
@@ -19,6 +19,7 @@ void	handle_sigint(int sig)
 
 int main(int argc, char **argv, char **env)
 {
+	atexit(memleaks);
 	char *txt;
 	t_global *glb;
 	int boo;
@@ -38,9 +39,12 @@ int main(int argc, char **argv, char **env)
 		}
 		else
 		{
+			free (txt);
+			free (glb);
+			free_dbl(glb->env);
 			ft_printf("exit\n");
 			boo = 0;
 		}
-		ft_nrmntt_1(glb, txt);
+		ft_nrmntt_1(glb);
 	}
 }

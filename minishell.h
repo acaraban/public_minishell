@@ -65,6 +65,8 @@ typedef struct s_content
 
 int frst_chr(char *txt, char car);
 t_global *ft_init(t_global *glb, char **env);
+void ft_nrmntt_1(t_global *glb);
+void ft_free_cont(t_content *cont);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);

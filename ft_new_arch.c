@@ -8,7 +8,7 @@
 
 int	new_arch(char *name)
 {
-	const char	*nombrearchivo;
+	char	*nombrearchivo;
 	int			descriptorarchivo;
 
 	nombrearchivo = ft_strdup(name);
@@ -17,8 +17,10 @@ int	new_arch(char *name)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		perror(nombrearchivo);
+		free (nombrearchivo);
 		return (0);
 	}
+	free (nombrearchivo);
 	close(descriptorarchivo);
 	return (1);
 }

@@ -32,9 +32,7 @@ char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
 	while (l < h + i)
 	{
 		if (l < i)
-		{
 			jj[l] = ft_strdup(arr[l]);
-		}
 		else
 		{
 			jj[l] = ft_strdup(add[k + posadd]);

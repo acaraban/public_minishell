@@ -37,7 +37,8 @@ SRCS =	builtins/custom_echo.c \
 		ft_heredoc.c \
 		input_err/err_dobcom.c \
 		ft_new_arch.c \
-		ft_init_args.c
+		ft_init_args.c \
+		ft_norminette.c
 
 INC = -I libft -I /opt/vagrant/embedded/include
 NAME = minishell.a
