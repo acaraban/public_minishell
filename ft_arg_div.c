@@ -31,29 +31,13 @@ char *init_argdiv_vars(char *txt)
 	return (txt);
 }
 
-void	ft_arg_div(char *txt, t_global *glb)
+char **arg_parsing(char **final, t_content *cont)
 {
-	char		**final;
-	t_content	*cont;
-	int			tam;
-	int			h;
 	int			i;
+	int			h;
 	char		**cmd_str;
 	char		**ac;
-
-	tam = 1;
-	txt = init_argdiv_vars(txt);
-	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
-	if (ft_tam_args(txt, cont) < 0)
-		return ;
-	glb->num_cmd = ft_tam_args(txt, cont);
-	init_cont_vars(glb, cont);
-	final = ft_specials(txt, cont, 1);
-	if (final == NULL)
-		return ;
-	tam = 0;
-	while (final[tam])
-		tam++;
+	
 	i = 0;
 	h = 0;
 	ac = NULL;
@@ -63,7 +47,7 @@ void	ft_arg_div(char *txt, t_global *glb)
 		{
 			cmd_str = ft_shell_split(final[i], ' ', cont);
 			if (cmd_str == NULL)
-				return ;
+				return (NULL);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			free_dbl(cmd_str);
@@ -76,30 +60,51 @@ void	ft_arg_div(char *txt, t_global *glb)
 			{
 				ac = ft_type_red_entdbl(final, ac, i, h, cont);
 				if (ac == NULL)
-					return ;
+					return (NULL);
 				i++;
 			}
 			else if (final[i][0] == '<')
 			{
 				i = ft_type_red_entsim(final, i, h, cont);
 				if (i < 0)
-					return ;
+					return (NULL);
 			}
 			else if (final[i][0] == '>' && final[i][1] == '>')
 			{
 				i = ft_type_red_saldbl(final, i, h, cont);
 				if (i < 0)
-					return ;
+					return (NULL);
 			}
 			else if (final[i][0] == '>')
 			{
 				i = ft_type_red_salsim(final, i, h, cont);
 				if (i < 0)
-					return ;
+					return (NULL);
 			}
 		}
 		i++;
 	}
+	return (ac);
+}
+
+void	ft_arg_div(char *txt, t_global *glb)
+{
+	char		**final;
+	t_content	*cont;
+	int			tam;
+	char		**ac;
+
+	tam = 1;
+	txt = init_argdiv_vars(txt);
+	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
+	if (ft_tam_args(txt, cont) < 0)
+		return ;
+	glb->num_cmd = ft_tam_args(txt, cont);
+	init_cont_vars(glb, cont);
+	final = ft_specials(txt, cont, 1);
+	if (final == NULL)
+		return ;
+	ac = arg_parsing(final, cont);
 	//ft_printf("este es h: %d\n", h);
 	if (ac)
 	{
