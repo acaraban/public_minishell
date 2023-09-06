@@ -18,25 +18,31 @@ void init_cont_vars(t_global *glb, t_content *cont)
 	}
 }
 
-void	ft_arg_div(char *txt, t_global *glb)
+char *init_argdiv_vars(char *txt)
 {
-	char		**final;
-	t_content	*cont;
-	char		*ot;
-	int			tam;
-	int			h;
 	int			i;
-	char		**cmd_str;
-	char		**ac;
-	//int			cm;
+	char		*ot;
 
-	tam = 1;
 	i = 0;
 	ot = ft_strdup(txt);
 	free(txt);
 	txt = ft_strtrim(ot, " ");
 	free(ot);
-	
+	return (txt);
+}
+
+void	ft_arg_div(char *txt, t_global *glb)
+{
+	char		**final;
+	t_content	*cont;
+	int			tam;
+	int			h;
+	int			i;
+	char		**cmd_str;
+	char		**ac;
+
+	tam = 1;
+	txt = init_argdiv_vars(txt);
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
 	if (ft_tam_args(txt, cont) < 0)
 		return ;
