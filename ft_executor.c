@@ -33,23 +33,25 @@ void	ft_executor(t_content *cont)
 	int		fds[cont->global->num_cmd][2];
 
 	i = 0;
-	cont->global->environ_path = ft_env_path(cont->global->env);
-	while (i < cont->global->num_cmd)
-	{
-		if (is_builtin_noredir(cont, i) == 0)
-			return ;
-		init_builtins(cont, i);
-		if (pipe(fds[i]) == -1)
-			return ;
-		pid = fork();
-		if (pid == -1)
-			return ;
-		if (pid == 0)
-			ft_execute_child(cont, i, fds, i);
-		main_closes_pipes(cont, i, fds, i);
-		waitpid(pid, &status, 0);
-		cont->global->err_stat = WEXITSTATUS(status);
-        //printf("status: %d\n", cont->global->err_stat);
-		i++;
-	}
+	cont->global->environ_path = ft_env_path(cont->global->env);  
+  while (i < cont->global->num_cmd)
+  {
+    if (cont[i].cmd)
+    {
+        if (is_builtin_noredir(cont, i) == 0)
+            return ;
+        init_builtins(cont, i);
+        if (pipe(fds[i]) == -1)
+            return ;
+        pid = fork();
+        if (pid == -1)
+            return ;
+        if (pid == 0)
+            ft_execute_child(cont, i, fds, i);
+        main_closes_pipes(cont, i, fds, i);
+        waitpid(pid, &status, 0);
+        cont->global->err_stat = WEXITSTATUS(status);
+    }
+    i++;
+    }
 }

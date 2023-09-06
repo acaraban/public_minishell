@@ -54,12 +54,6 @@ int main(int argc, char **argv, char **env)
 	while (boo)
 	{
 		txt = readline("minishell>");
-		if (txt == NULL)
-		{
-			free(glb->env);
-			free(glb);
-			boo = 0;
-		}
 		if (txt != NULL)
 		{
 			add_history(txt);
@@ -69,6 +63,7 @@ int main(int argc, char **argv, char **env)
 		{
 			free(txt);
 			ft_printf("exit\n");
+			boo = 0;
 		}
 		glb[0].new_stat = glb[0].err_stat;
 		glb[0].err_stat = 0;

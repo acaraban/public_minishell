@@ -6,7 +6,6 @@ void	ft_arg_div(char *txt, t_global *glb)
 	t_content	*cont;
 	char		*ot;
 	int			tam;
-	int			tam2;
 	int			h;
 	int			i;
 	char		**cmd_str;
@@ -19,20 +18,22 @@ void	ft_arg_div(char *txt, t_global *glb)
 	free(txt);
 	txt = ft_strtrim(ot, " ");
 	free(ot);
-	while (txt[i])
-	{
-		if (txt[i] == '|')
-			tam++;
-		i++;
-	}
-	if (ft_strlen(txt) == 0)
-		tam = 0;
-	glb->num_cmd = tam;
-	tam2 = tam;
-	i = 0;
+	// while (txt[i])
+	// {
+	// 	if (txt[i] == '|')
+	// 		tam++;
+	// 	i++;
+	// }
+	// if (ft_strlen(txt) == 0)
+	// 	tam = 0;
+	// tam2 = tam;
+	// i = 0;
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
+	if (ft_tam_args(txt, cont) < 0)
+		return ;
+	glb->num_cmd = ft_tam_args(txt, cont);
 	tam = 0;
-	while (tam < tam2)
+	while (tam < glb->num_cmd)
 	{
 		cont[tam].global = glb;
 		cont[tam].nfl = 0;
@@ -72,7 +73,6 @@ void	ft_arg_div(char *txt, t_global *glb)
 				ac = ft_type_red_entdbl(final, ac, i, h, cont);
 				if (ac == NULL)
 					return ;
-				ft_printf("esto es ac[0]\n", ac[0]);
 				i++;
 			}
 			else if (final[i][0] == '<')
@@ -96,16 +96,20 @@ void	ft_arg_div(char *txt, t_global *glb)
 		}
 		i++;
 	}
+	//ft_printf("este es h: %d\n", h);
 	if (ac)
 	{
-		ft_heredoc(ac);
+		if (!ft_heredoc(ac))
+			return ;
 		free_dbl(ac);
 	}
 	ft_executor(cont);
-	////////////imprimir el struct //////////////////////
-	/*int l;
+	/*/ft_printf("pasa executor?\n");
+	//////////////imprimir el struct //////////////////////
+	int l;
 	l = 0;
-	while (l < tam2)
+	int cm = 0;
+	while (l < glb->num_cmd)
 	{
 		ft_printf("este es el comando: %s", cont[l].cmd);
 		ft_printf("\neste es el comando completo:\n");
@@ -125,5 +129,5 @@ void	ft_arg_div(char *txt, t_global *glb)
 		ft_printf("\n\n-------------------------------\n");
 		l++;
 	}
-	//////////////parte del codigo///////////////*/
+	//////////////parte del codigo////////////////*/
 }
