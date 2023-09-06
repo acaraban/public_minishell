@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:41:52 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 11:25:17 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:35:17 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ char	*custom_return_pwd(void)
 		perror("getcwd");
 		return (NULL);
 	}
-	//free(buff);
 	return (buff);
 }

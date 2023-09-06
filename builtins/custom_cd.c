@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 12:17:53 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:36:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ void	custom_cd(t_content *cont, int i)
 	else
 		update_last_pwd(cont, i);
 	change_dir(cont, i);
+	free(cont->custom);
 	return ;
 }
