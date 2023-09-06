@@ -53,6 +53,16 @@ void ft_dup_envs(t_global *glb, int i, char **env)
 		j++;
 	}
 }
+
+void ft_init_vars(int argc, char **argv, t_global *glb)
+{
+	(void)argc;
+	(void)argv;
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	glb[0].err_stat = 0;
+	glb[0].new_stat = 0;
+}
 /*
 	ft_delete_env_oldpwd()
 	This function searches for the OLDPWD environment var in the minishell program 
@@ -67,13 +77,8 @@ int main(int argc, char **argv, char **env)
 	int boo;
 	int i;
 
-	(void)argc; // init vars
-	(void)argv;
-	glb = (t_global *)calloc(sizeof(t_content), 1);
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	glb[0].err_stat = 0;
-	glb[0].new_stat = 0;
+	glb = (t_global *)ft_calloc(sizeof(t_content), 1);
+	ft_init_vars(argc, argv, glb);
 	boo = 1;
 	i = 0;
 	while (env[i])
