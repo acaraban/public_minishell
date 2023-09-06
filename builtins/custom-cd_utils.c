@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/05 19:01:19 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:18:22 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_the_oldpwd(t_content *cont, int i)
 	int		j;
 
 	j = 0;
-	old_pwd = calloc(sizeof(char), 100);
+	old_pwd = ft_calloc(sizeof(char), 100);
 	if (!old_pwd)
 		return (NULL);
 	while (cont[i].global->env[j])
