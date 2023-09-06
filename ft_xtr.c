@@ -10,16 +10,16 @@ char **dobl_prt(char **arr, char *txt, int inicial, int conta)
 	h = 0;
 	if (arr == NULL || arr[0] == NULL)
 	{
-		jj = (char **)calloc(sizeof(char *), 2);
-		jj[0] = (char *)calloc(sizeof(char ), conta - inicial + 1);
+		jj = (char **)ft_calloc(sizeof(char *), 2);
+		jj[0] = (char *)ft_calloc(sizeof(char ), conta - inicial + 1);
 		jj[1] = NULL;
 	}
 	else
 	{
 		while (arr[i])
 			i++;
-		jj = (char **)calloc(sizeof(char *), i + 2);
-		jj[i] = (char *)calloc(sizeof(char ), conta - inicial + 2);
+		jj = (char **)ft_calloc(sizeof(char *), i + 2);
+		jj[i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
 		jj[i + 1] = NULL;
 		while (h < i)
 		{
@@ -48,7 +48,7 @@ char **dobl_prt(char **arr, char *txt, int inicial, int conta)
 	i = 0;
 	char txt[] = "esto es el texto de prueba, donde tengo que comprobar que el texto se corta en las partes adecuadas";
 
-	arr = (char **)calloc(sizeof(char *), 1);
+	arr = (char **)ft_calloc(sizeof(char *), 1);
 	arr[0] = NULL;
 	arr = dobl_prt(arr, txt, 0, 5);
 	arr = dobl_prt(arr, txt, 6, 8);
