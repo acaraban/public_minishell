@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-int pos_char(char *txt, char c)
+int	pos_char(char *txt, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (txt[i] && txt[i] != c)
@@ -12,11 +12,11 @@ int pos_char(char *txt, char c)
 	return (-1);
 }
 
-int  eq_combination(t_content *cont, char *txt)
+int	eq_combination(t_content *cont, char *txt)
 {
-	char **env;
-	int i;
-	int j;
+	char	**env;
+	int		i;
+	int		j;
 
 	env = cont->global->env;
 	i = 0;
@@ -38,11 +38,11 @@ int  eq_combination(t_content *cont, char *txt)
 	return (0);
 }
 
-int bef_str(char *txt)
+int	bef_str(char *txt)
 {
-	char *aux;
-	int tam;
-	int i;
+	char	*aux;
+	int		tam;
+	int		i;
 
 	i = 0;
 	tam = pos_char(txt, '=');
@@ -54,15 +54,16 @@ int bef_str(char *txt)
 		aux[i] = txt[i];
 		i++;
 	}
-	if (!strrchr(aux, ' ') && !strrchr(aux, '\"') && !strrchr(aux, '$') && !strrchr(aux, '\'') \
-    && !strrchr(aux, '>') && !strrchr(aux, '<') && !strrchr(aux, '|'))
+	if (!strrchr(aux, ' ') && !strrchr(aux, '\"') && !strrchr(aux, '$') \
+			&& !strrchr(aux, '\'') && !strrchr(aux, '>') && !strrchr(aux, '<') \
+			&& !strrchr(aux, '|'))
 		return (1);
 	return (0);
 }
 
-int custom_export(t_content *cont, int i)
+int	custom_export(t_content *cont, int i)
 {
-	int j;
+	int	j;
 
 	j = 1;
 	if (!strcmp(cont[i].cmd, "export"))
@@ -72,12 +73,12 @@ int custom_export(t_content *cont, int i)
 			if (eq_combination(cont, cont[i].full_comand[j]))
 			{
 				j++;
-				continue;
+				continue ;
 			}
 			else if (bef_str(cont[i].full_comand[j]))
 			{
-				cont->global->env = dobl_prt_free(cont->global->env, cont[i].full_comand[j], 0, strlen(cont[i].full_comand[j]));
-				//ft_dbl_printf("", cont->global->env, "\n", 0);
+				cont->global->env = dobl_prt_free(cont->global->env, \
+					cont[i].full_comand[j], 0, strlen(cont[i].full_comand[j]));
 			}
 			else
 				err_cmd("formato invalido\n", cont);

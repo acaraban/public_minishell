@@ -1,5 +1,17 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_pwd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 19:41:52 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/05 19:41:58 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+
+#include "../minishell.h"
 
 void custom_pwd(void)
 {
@@ -23,7 +35,6 @@ void custom_pwd(void)
 	}
 	free(buff);
 }
-
 
 /*
 	Function to get the pwd as a string
