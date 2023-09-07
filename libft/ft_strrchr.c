@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_ft_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_ft_strcmp(const char *s, int c)
 {
 	char	*str_end;
 
@@ -28,11 +28,11 @@ char	*ft_strrchr(const char *s, int c)
 // {
 // 	char j = 'j';
 // 	char h[] = "agsdjfasdfnjadfgag";
-// 	printf("%s\n", strrchr(h, j));
+// 	printf("%s\n", ft_strcmp(h, j));
 // 	printf("%s\n", h);
 
 // 	char a = 'j';
 // 	char s[] = "adfadsffjasdfajdfas";
-// 	printf("%s\n", ft_strrchr(s, a));
+// 	printf("%s\n", ft_ft_strcmp(s, a));
 // 	printf("%s", s);
 // }

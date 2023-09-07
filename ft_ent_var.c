@@ -90,6 +90,8 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 		//ft_printf("este es substr: %s\n", aux2);
 		add = ft_strjoin(aux, aux2);
+		free (aux2);
+		free (aux);
 		return (add);
 	}
 	pos++;
@@ -101,5 +103,7 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 	free (aux2);
 	aux2 = ft_strjoin(add, aux);
+	free (add);
+	free (aux);
 	return (aux2);
 }

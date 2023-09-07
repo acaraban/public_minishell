@@ -154,7 +154,6 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 		else
 			return (-1);
 	}
-	cmd_str = ft_shell_split(final[i], ' ', cont);
 	free_dbl(cmd_str);
 	cont[h].tfl = 2;
 	return (i);

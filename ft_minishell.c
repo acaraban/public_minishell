@@ -40,11 +40,12 @@ int main(int argc, char **argv, char **env)
 		else
 		{
 			free (txt);
-			free (glb);
 			free_dbl(glb->env);
+			free (glb);
 			ft_printf("exit\n");
 			boo = 0;
 		}
-		ft_nrmntt_1(glb);
+		if (boo == 1)
+			ft_nrmntt_1(glb);
 	}
 }

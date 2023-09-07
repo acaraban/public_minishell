@@ -54,10 +54,14 @@ int	bef_str(char *txt)
 		aux[i] = txt[i];
 		i++;
 	}
-	if (!strrchr(aux, ' ') && !strrchr(aux, '\"') && !strrchr(aux, '$') \
-			&& !strrchr(aux, '\'') && !strrchr(aux, '>') && !strrchr(aux, '<') \
-			&& !strrchr(aux, '|'))
+	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
+			&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && pos_char(aux, '<') < 0 \
+			&& pos_char(aux, '|') < 0)
+	{
+		free (aux);
 		return (1);
+	}
+	free (aux);
 	return (0);
 }
 
