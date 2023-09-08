@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ent_var.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/07 16:04:57 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/07 16:18:46 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "minishell.h"
 
 int frst_chr(char *txt, char car)
@@ -58,7 +71,7 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	else
 	{
-		while (env[i] && !par)
+		while (env[i] && !par) // env[++i]
 		{
 			par = str_cmp(txt, pos + 1, env[i], '=');
 			i++;
@@ -81,6 +94,7 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
 	{
+		//ft_aux_is_null(aux, aux2, pos, txt);
 		pos++;
 		free (aux2);
 		while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
