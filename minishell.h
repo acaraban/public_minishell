@@ -93,7 +93,7 @@ char    **ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *c
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
-int	ft_heredoc(char **arr);
+int	ft_heredoc(char **arr, t_content *cont);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);

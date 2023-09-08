@@ -48,7 +48,7 @@ int	bef_str(char *txt)
 	tam = pos_char(txt, '=');
 	if (tam < 0)
 		return (0);
-	aux = (char *)ft_calloc(sizeof(char), tam + 1);
+	aux = (char *)ft_calloc(sizeof(char), tam + 2);
 	while (i < tam + 1)
 	{
 		aux[i] = txt[i];

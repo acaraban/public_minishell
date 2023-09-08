@@ -62,7 +62,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			if (err_red(i, txt, cant))
 				return (NULL);
 			if (i > 1 && cont < i - 1)
+			{
+				ft_printf("en el primero entra?\n");
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			}
+			ft_printf("en el segundo si entra no?\n");
 			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
 			cont = i + 1;

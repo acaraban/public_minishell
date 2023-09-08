@@ -29,12 +29,12 @@ int	custom_unset(t_content *cont, int i)
 	char	*aux;
 
 	j = 1;
-	if (!strcmp(cont[i].cmd, "unset"))
+	if (!ft_strcmp(cont[i].cmd, "unset"))
 	{
 		aux = cont[i].full_comand[j];
-		if (!(!ft_strcmp(aux, " ") && !ft_strcmp(aux, "\"") && !ft_strcmp(aux, "$") \
-					&& !ft_strcmp(aux, "\'") && !ft_strcmp(aux, ">") && \
-					!ft_strcmp(aux, "<") && !ft_strcmp(aux, "|")))
+		if (!(pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
+					&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
+					pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0))
 		{
 			err_cmd("formato invalido\n", cont);
 			return (0);

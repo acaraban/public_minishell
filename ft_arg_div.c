@@ -97,10 +97,9 @@ void	ft_arg_div(char *txt, t_global *glb)
 		i++;
 	}
 	free_dbl(final);
-	//ft_printf("este es h: %d\n", h);
 	if (ac)
 	{
-		if (!ft_heredoc(ac))
+		if (!ft_heredoc(ac, cont))
 			return ;
 		free_dbl(ac);
 	}
