@@ -2,9 +2,9 @@
 
 int	err_red(int i, char *txt, t_content *cont)
 {
-	int h;
-	char a;
-	char b;
+	int		h;
+	char	a;
+	char	b;
 
 	a = '<';
 	b = '>';
