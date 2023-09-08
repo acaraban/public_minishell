@@ -4,9 +4,11 @@ int	ft_type_red_entsim(char **final, int i, int h, t_content *cont)
 {
 	int r;
 	char **cmd_str;
+	int fd;
 
 	i++;
 	r = 0;
+	fd = 0;
 	cmd_str = ft_shell_split(final[i], ' ', cont);
 	if (cmd_str == NULL)
 		return (-1);
@@ -29,7 +31,7 @@ int	ft_type_red_entsim(char **final, int i, int h, t_content *cont)
 		if (cont[h].infile)
 			free (cont[h].infile);
 		if (cmd_str[0])
-			cont[h].outfile = ft_strdup(cmd_str[0]);
+			cont[h].infile = ft_strdup(cmd_str[0]);
 		else
 		{
 			err_stx("error sintactico\n", cont);
@@ -42,7 +44,16 @@ int	ft_type_red_entsim(char **final, int i, int h, t_content *cont)
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
 		else
-			return (-1);
+		{
+			fd = open(cont[h].infile, O_RDONLY); 
+			if (fd == -1)
+			{
+				ft_printf("bash: %s: No such file or directory\n", cont[h].infile);
+				cont->global->err_stat = 1;
+			}
+			else
+				close (fd);
+		}
 	}
 	free_dbl(cmd_str);
 	cont[h].nfl = 1;
@@ -91,13 +102,11 @@ int	ft_type_red_salsim(char **final, int i, int h, t_content *cont)
 		if (!new_arch(cont[h].outfile))
 			return (-1);
 		cmd_str = ft_elim_str_free(cmd_str, 0);
-		if (cmd_str[1])
+		if (cmd_str[0] && cmd_str[1])
 		{
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
-		else
-			return (-1);
 	}
 	free_dbl(cmd_str);
 	cont[h].tfl = 1;
@@ -151,8 +160,6 @@ int	ft_type_red_saldbl(char **final, int i, int h, t_content *cont)
 			cont[h].full_comand = ft_dbl_strdup(cmd_str);
 			cont[h].cmd = ft_strdup(cmd_str[0]);
 		}
-		else
-			return (-1);
 	}
 	free_dbl(cmd_str);
 	cont[h].tfl = 2;

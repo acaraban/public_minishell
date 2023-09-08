@@ -10,7 +10,6 @@ void	ft_arg_div(char *txt, t_global *glb)
 	int			i;
 	char		**cmd_str;
 	char		**ac;
-	//int			cm;
 
 	tam = 1;
 	i = 0;
@@ -18,20 +17,12 @@ void	ft_arg_div(char *txt, t_global *glb)
 	free(txt);
 	txt = ft_strtrim(ot, " ");
 	free(ot);
-	// while (txt[i])
-	// {
-	// 	if (txt[i] == '|')
-	// 		tam++;
-	// 	i++;
-	// }
-	// if (ft_strlen(txt) == 0)
-	// 	tam = 0;
-	// tam2 = tam;
-	// i = 0;
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
 	if (ft_tam_args(txt, cont) < 0)
 		return ;
 	glb->num_cmd = ft_tam_args(txt, cont);
+	free (cont);
+	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
 	tam = 0;
 	while (tam < glb->num_cmd)
 	{
@@ -105,11 +96,17 @@ void	ft_arg_div(char *txt, t_global *glb)
 	}
 	ft_executor(cont);
 	ft_free_cont(cont);
-	//ft_printf("pasa executor?\n");
 	/*/////////////imprimir el struct //////////////////////
 	int l;
 	l = 0;
 	int cm = 0;
+	while (cm < glb->num_cmd)
+	{
+		ft_printf("este es env[0] en: %d", cm); 
+		ft_printf(": %s\n", cont[cm].cmd);
+		cm ++;
+	}
+	cm = 0;
 	while (l < glb->num_cmd)
 	{
 		ft_printf("este es el comando: %s", cont[l].cmd);

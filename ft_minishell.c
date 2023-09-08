@@ -2,6 +2,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+int err_status = 0;
+
 void memleaks(void)
 {
 	system("leaks -q minishell");
@@ -14,6 +16,7 @@ void	handle_sigint(int sig)
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
+		err_status = 1;
 	}
 }
 
@@ -27,11 +30,13 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	glb = NULL;
-	glb = ft_init(glb, env);
+	glb = ft_init(glb, env, err_status);
 	boo = 1;
 	while (boo)
 	{
-		txt = readline("minishell>");
+		glb->new_stat = err_status;
+		err_status = 0;
+		txt = readline("minishell> ");
 		if (txt != NULL)
 		{
 			add_history(txt);

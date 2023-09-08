@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:52:41 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/05 20:01:13 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/08 21:45:25 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ Function to check if the command is a built-in.
 int	is_builtin(t_content *cont, int i)
 {
 	if ((ft_strcmp(cont[i].full_comand[0], "echo") == 0) && \
-			(strcmp(cont[i].full_comand[1], "-n") == 0))
+			(ft_strcmp(cont[i].full_comand[1], "-n") == 0))
 	{
 		cont[i].which_builtin = 1;
 	}

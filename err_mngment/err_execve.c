@@ -18,10 +18,13 @@
 
 void handle_execve_error_message(t_content *cont, int i)
 {
+	char *aux;
     if (errno == EFAULT) //14
     {
+		aux = ft_strjoin(cont[i].cmd, ": command not found\n");
         ft_putstr_fd("minishell: ", 2);
-        ft_putstr_fd(ft_strjoin(cont[i].cmd, ": command not found\n"), 2);
+        ft_putstr_fd(aux, 2);
+		free(aux);
 		exit(127);
     }
     else if (errno == ENOENT) // 2

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 13:53:57 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:22:15 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	ft_executor(t_content *cont)
             if (pid == 0)
                 ft_execute_child(cont, i, fds, i);
             main_closes_pipes(cont, i, fds, i);
-            waitpid(pid, &status, 0);
+			//if (i == cont->global->num_cmd - 1)
+            	waitpid(pid, &status, 0);
             cont->global->err_stat = WEXITSTATUS(status);
         }
-        else
+        else if (cont[i].nfl == 2)
         {
-            //printf("infile es: %s\n", cont[i].infile);
             if (unlink(cont[i].infile) != 0)
-            perror("unlink");
+            	perror("unlink");
         }
         i++;
     }

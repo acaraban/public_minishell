@@ -67,10 +67,10 @@ int	ft_heredoc(char **arr, t_content *cont)
 			i++;
 	}
 	free (val);
-	free (new);
 	//ft_printf("este es new: %s\n", new);
 	fd = open(".awdrgyj123.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	write(fd, new, ft_strlen(new));
+	free (new);
 	close(fd);
 	return (1);
 }
