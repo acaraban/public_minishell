@@ -6,16 +6,15 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:04:57 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/07 16:18:46 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:11:08 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int frst_chr(char *txt, char car)
+int	frst_chr(char *txt, char car)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (txt[i] != car && txt[i])
@@ -25,9 +24,9 @@ int frst_chr(char *txt, char car)
 	return (i);
 }
 
-int all_chr(char *txt, int pos)
+int	all_chr(char *txt, int pos)
 {
-	int m;
+	int	m;
 
 	m = 0;
 	while (txt[pos + m] != ' ' && txt[pos + m] != '\"' && txt[pos + m] != '\'' \
@@ -37,10 +36,10 @@ int all_chr(char *txt, int pos)
 	return (m + pos);
 }
 
-int str_cmp(char *txt, int pos, char *cmp, char car)
+int	str_cmp(char *txt, int pos, char *cmp, char car)
 {
-	int i;
-	int lstpos;
+	int	i;
+	int	lstpos;
 
 	i = 0;
 	lstpos = all_chr(txt, pos);
@@ -53,17 +52,17 @@ int str_cmp(char *txt, int pos, char *cmp, char car)
 	return (0);
 }
 
-char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
+char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 {
-	int i;
-	int par;
+	int	i;
+	int	par;
 
 	i = 0;
 	par = 0;
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
-	else if (txt[pos + 1] == ' ' || txt[pos + 1] == '\"' || txt[pos + 1] == '$' \
-	|| txt[pos + 1] == '\'' || txt[pos + 1] == '>' ||txt[pos + 1] == '<' || txt[pos + 1] == '|' || !txt[pos + 1])
+	else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
+			!txt[pos + 1])
 	{
 		if (txt[pos + 1] == '$')
 			return (ft_strdup("$$"));
@@ -71,7 +70,7 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	else
 	{
-		while (env[i] && !par) // env[++i]
+		while (env[i] && !par)
 		{
 			par = str_cmp(txt, pos + 1, env[i], '=');
 			i++;
@@ -81,35 +80,38 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	return (NULL);
 }
+/*
+else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
+			!txt[pos + 1])
 
-char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
+while (txt[pos + i] && strchr(" $'\"<>|", txt[pos + i]) == NULL)
+    i++;
+
+*/
+
+char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
-	int i;
-	char *aux;
-	char *aux2;
-	char *add;
+	int		i;
+	char	*aux;
+	char	*aux2;
+	char	*add;
 
 	i = 0;
 	aux = ft_substr(txt, 0, pos);
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
 	{
-		//ft_aux_is_null(aux, aux2, pos, txt);
 		pos++;
 		free (aux2);
-		while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
-		&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
+		while (txt[pos + i] && ft_strchr(' \"$\'><|', txt[pos + i]) == NULL)
 			i++;
-		//ft_printf("este es i: %d\n", i);
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-		//ft_printf("este es substr: %s\n", aux2);
 		add = ft_strjoin(aux, aux2);
 		return (add);
 	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
-	while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
-	&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
+	while (txt[pos + i] && ft_strchr(' \"$\'><|', txt[pos + i]) == NULL)
 		i++;
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 	add = ft_strjoin(add, aux);
