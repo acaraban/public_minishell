@@ -27,12 +27,12 @@ static int	numstring(char *s1, char c, t_content *cont)
 	{
 		if (s1[i] == '\"' || s1[i] == '\'')
 		{
-			if (find_match(s1, 0, s1[i]) < 0)
+			if (find_match(s1, i, s1[i]) < 0)
 			{
 				err_stx("error sintactico\n", cont);
 				return (-1);
 			}
-			i += find_match(s1, 0, s1[i]);
+			i += find_match(s1, i, s1[i]);
 		}
 		if (s1[i] == c)
 			cles = 0;
@@ -124,6 +124,7 @@ char *del_char(char *txt, int un)
 	aux3 = ft_strjoin(aux1, aux2);
 	free (aux1);
 	free (aux2);
+	free (txt);
 	return (aux3);
 }
 
@@ -155,8 +156,6 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 			if (dst[l][r] == '\'' || dst[l][r] == '\"')
 			{
 				j = r + find_match(dst[l], r, dst[l][r]);
-				//ft_printf("este es r: %c\n", dst[l][r]);
-				//ft_printf("este es j: %c\n", dst[l][j]);
 				dst[l] = del_char(dst[l], r);
 				dst[l] = del_char(dst[l], j - 1);
 				r = j;
