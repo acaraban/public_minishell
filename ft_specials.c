@@ -1,28 +1,39 @@
 #include "minishell.h"
 
+void init_specials(t_specials *special, char *old_txt)
+{
+	special->i = 0;
+	special->boo = 0;
+	special->count = 0;
+	special->txt = ft_strtrim(old_txt, " ");
+	free (old_txt);
+	special->vue = (char **)calloc(sizeof(char *), 1);
+	special->vue[0] = NULL;
+}
+
+void varent_at_start(char *old_txt, t_specials *special)
+{
+	free (special->txt);
+	special->txt = strdup(old_txt);
+	free (old_txt);
+}
+/*
+	Function to check for $ at start
+*/
+
 char **ft_specials(char *old_txt, t_content *cont, int errors)
 {
 	t_specials special;
 
-	//special = ft_calloc(sizeof(t_specials), 1);
-	special.i = 0;
-	special.count = 0;
-	special.boo = 0;
-	special.txt = ft_strtrim(old_txt, " ");
-	
-	free (old_txt);
+	init_specials(&special, old_txt);
 	if (!special.txt || ft_strlen(special.txt) == 0)
 		return (NULL);
-	special.vue = (char **)calloc(sizeof(char *), 1);
-	special.vue[0] = NULL;
 	while (special.txt[special.i])
 	{
 		if ((special.boo == 1 || special.boo == 0) && special.txt[special.i] == '$')
 		{
 			old_txt = ft_add_varent(special.txt, special.i, cont[0].global[0].env, cont);
-			free (special.txt);
-			special.txt = strdup(old_txt);
-			free (old_txt);
+			varent_at_start(old_txt, &special);
 			if (special.txt == NULL)
 				return (NULL);
 		}
