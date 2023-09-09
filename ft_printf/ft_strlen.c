@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:29:16 by acaraban          #+#    #+#             */
-/*   Updated: 2023/02/02 20:28:26 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/09 22:47:37 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,3 @@ size_t	ft_strlen_3(const char *str)
 	}
 	return (tam);
 }
-
-// int main(void)
-// {
-// 	char kj[] = "ffadfkkjhafd";
-
-// 	printf("%lu", strlen(kj));
-// }
