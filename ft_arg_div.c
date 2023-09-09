@@ -31,113 +31,34 @@ char *init_argdiv_vars(char *txt)
 	return (txt);
 }
 
-char **arg_parsing(char **final, t_content *cont)
+int	cmd_str_cont(t_content *cont, char **cmd_str, int h)
 {
-	int			i;
-	int			h;
-	char		**cmd_str;
-	char		**ac;
-	
-	i = 0;
-	h = 0;
-	ac = NULL;
-	while (final[i])
-	{
-		if (final[i][0] != '<' && final[i][0] != '>' && final[i][0] != '|')
-		{
-			cmd_str = ft_shell_split(final[i], ' ', cont);
-			if (cmd_str == NULL)
-				return (NULL);
-			cont[h].cmd = ft_strdup(cmd_str[0]);
-			cont[h].full_comand = ft_dbl_strdup(cmd_str);
-			free_dbl(cmd_str);
-		}
-		else if (final[i][0] == '|')
-			h++;
-		else
-		{
-			if (final[i][0] == '<' && final[i][1] == '<')
-			{
-				ac = ft_type_red_entdbl(final, ac, i, h, cont);
-				if (ac == NULL)
-					return (NULL);
-				i++;
-			}
-			else if (final[i][0] == '<')
-			{
-				i = ft_type_red_entsim(final, i, h, cont);
-				if (i < 0)
-					return (NULL);
-			}
-			else if (final[i][0] == '>' && final[i][1] == '>')
-			{
-				i = ft_type_red_saldbl(final, i, h, cont);
-				if (i < 0)
-					return (NULL);
-			}
-			else if (final[i][0] == '>')
-			{
-				i = ft_type_red_salsim(final, i, h, cont);
-				if (i < 0)
-					return (NULL);
-			}
-		}
-		i++;
-	}
-	return (ac);
+	if (cmd_str == NULL)
+		return (0);
+	cont[h].cmd = ft_strdup(cmd_str[0]);
+	cont[h].full_comand = ft_dbl_strdup(cmd_str);
+	free_dbl(cmd_str);
+	return (1);
 }
 
-void	ft_arg_div(char *txt, t_global *glb)
+int mini_all_type_1(t_typered *type, char **final, t_content *cont)
 {
-	char		**final;
-	t_content	*cont;
-	int			tam;
-	char		**ac;
+	type->i = ft_type_red_entsim(final, type, cont);
+	if (type->i < 0)
+	{
+		ft_free_cont(cont);
+		return (0);
+	}
+	return (1);
+}
 
-	tam = 1;
-	txt = init_argdiv_vars(txt);
-	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
-	if (ft_tam_args(txt, cont) < 0)
-		return ;
-	glb->num_cmd = ft_tam_args(txt, cont);
-	free (cont);
-	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
-	init_cont_vars(glb, cont);
-	final = ft_specials(txt, cont, 1);
-	if (final == NULL)
-		return ;
-	ac = arg_parsing(final, cont);
-	if (ac)
+int mini_all_type_2(t_typered *type, char **final, t_content *cont)
+{
+	type->i = ft_type_red_saldbl(final, type, cont);
+	if (type->i < 0)
 	{
-		if (!ft_heredoc(ac))
-			return ;
-		free_dbl(ac);
+		ft_free_cont(cont);
+		return (0);
 	}
-	ft_executor(cont);
-	/*/ft_printf("pasa executor?\n");
-	//////////////imprimir el struct //////////////////////
-	int l;
-	l = 0;
-	int cm = 0;
-	while (l < glb->num_cmd)
-	{
-		ft_printf("este es el comando: %s", cont[l].cmd);
-		ft_printf("\neste es el comando completo:\n");
-		cm = 0;
-		while (cont[l].full_comand[cm])
-		{
-			ft_printf("%s\n", cont[l].full_comand[cm]);
-			cm++;
-		}
-		ft_printf("infile: %d ", cont[l].nfl);
-		if (cont[l].nfl)
-			ft_printf("%s", cont[l].infile);
-		ft_printf("\n");
-		ft_printf("outfile: %d ", cont[l].tfl);
-		if (cont[l].tfl)
-			ft_printf("%s\n", cont[l].outfile);
-		ft_printf("\n\n-------------------------------\n");
-		l++;
-	}
-	//////////////parte del codigo////////////////*/
+	return (1);
 }
