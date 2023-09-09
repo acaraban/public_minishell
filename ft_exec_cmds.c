@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:52:41 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/07 15:31:36 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:04:57 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ Function to check if the command is a built-in.
 int	is_builtin(t_content *cont, int i)
 {
 	if ((ft_strcmp(cont[i].full_comand[0], "echo") == 0) && \
-			(strcmp(cont[i].full_comand[1], "-n") == 0))
+			(ft_strcmp(cont[i].full_comand[1], "-n") == 0))
 	{
 		cont[i].which_builtin = 1;
 	}

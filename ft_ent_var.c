@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_ent_var.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 16:04:57 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 16:47:55 by msintas-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -56,9 +45,19 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 {
 	int	i;
 	int	par;
+	char *aux;
 
 	i = 0;
 	par = 0;
+	aux = NULL;
+	if (pos > 0 && txt[pos - 1] == '\"')
+	{
+		if (ft_strchr(txt + pos, '\"'))
+			aux = ft_substr(txt, pos, pos_char(txt + pos, '\"'));
+		else
+			aux = ft_substr(txt, pos, ft_strlen(txt + pos) - 1);
+		
+	}
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
 	else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
@@ -72,9 +71,14 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	{
 		while (env[i] && !par)
 		{
-			par = str_cmp(txt, pos + 1, env[i], '=');
+			if (aux)
+				par = str_cmp(aux, 1, env[i], '=');
+			else
+				par = str_cmp(txt, pos + 1, env[i], '=');
 			i++;
 		}
+		if (aux)
+			free (aux);
 		if (par)
 			return (ft_substr(env[i - 1], par, ft_strlen(env[i - 1]) - 1));
 	}
@@ -99,13 +103,19 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 			i++;
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 		add = ft_strjoin(aux, aux2);
+		free (aux2);
+		free (aux);
 		return (add);
 	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
 	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 		i++;
+	free (aux);
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-	add = ft_strjoin(add, aux);
-	return (add);
+	free (aux2);
+	aux2 = ft_strjoin(add, aux);
+	free (add);
+	free (aux);
+	return (aux2);
 }

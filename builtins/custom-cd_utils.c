@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 12:18:22 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:42:13 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 {
 	int	j;
 	int	has_oldpwd;
+	char *aux;
 
 	j = 0;
 	has_oldpwd = 0;
@@ -54,6 +55,7 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
+			free(cont[i].global->env[j]);
 			cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
 			has_oldpwd = 1;
 		}
@@ -61,7 +63,9 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 	}
 	if (has_oldpwd == 0)
 	{
-		cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
+		aux = ft_strjoin("OLDPWD=", old_pwd);
+		cont[i].global->env = dobl_prt_free(cont[i].global->env, aux, 0, ft_strlen(aux));
+		free (aux);
 	}
 }
 
@@ -79,6 +83,7 @@ void	update_environment_new(t_content *cont, int i, char *new_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
 		{
+			free (cont[i].global->env[j]);
 			cont[i].global->env[j] = ft_strjoin("PWD=", new_pwd);
 		}
 		j++;
@@ -96,10 +101,17 @@ void	update_environment_new(t_content *cont, int i, char *new_pwd)
 
 int	arg_is_a_path(char *comand_args)
 {
-	if (opendir(comand_args) == NULL)
+	DIR	*aux;
+
+	aux = opendir(comand_args);
+	if (aux == NULL)
 	{
+		free (aux->__dd_buf);
+		free (aux);
 		return (1);
 	}
+	free (aux->__dd_buf);
+	free (aux);
 	return (0);
 }
 
