@@ -1,15 +1,15 @@
 #include "minishell.h"
 
-char **ft_specials(char *old_txt, t_content *cant, int errors)
+char **ft_specials(char *old_txt, t_content *cont, int errors)
 {
 	int i;
-	int cont;
+	int count;
 	int boo;
 	char *txt;
 	char **vue;
 
 	i = 0;
-	cont = 0;
+	count = 0;
 	boo = 0;
 	txt = ft_strtrim(old_txt, " ");
 	free (old_txt);
@@ -21,7 +21,7 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 	{
 		if ((boo == 1 || boo == 0) && txt[i] == '$')
 		{
-			old_txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
+			old_txt = ft_add_varent(txt, i, cont[0].global[0].env, cont);
 			free (txt);
 			txt = strdup(old_txt);
 			free (old_txt);
@@ -40,60 +40,60 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			boo = boo + 1 - 1;
 		else if (txt[i] == '>' && txt[i + 1] == '>')
 		{
-			if (err_red(i, txt, cant))
+			if (err_red(i, txt, cont))
 				return (NULL);
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			if (i > 1 && count < i - 1)
+				vue = dobl_prt_free(vue, txt, count, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
-			cont = i + 1;
+			count = i + 1;
 		}
 		else if (txt[i] == '>')
 		{
-			if (err_sim_red(txt, i, cant))
+			if (err_sim_red(txt, i, cont))
 				return (NULL);
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			if (i > 1 && count < i - 1)
+				vue = dobl_prt_free(vue, txt, count, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
+			count = i + 1;
 		}
 		else if (txt[i] == '<' && txt[i + 1] == '<')
 		{
-			if (err_red(i, txt, cant))
+			if (err_red(i, txt, cont))
 				return (NULL);
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			if (i > 1 && count < i - 1)
+				vue = dobl_prt_free(vue, txt, count, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
 			i++;
-			cont = i + 1;
+			count = i + 1;
 		}
 		else if (txt[i] == '<')
 		{
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			if (i > 1 && count < i - 1)
+				vue = dobl_prt_free(vue, txt, count, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
+			count = i + 1;
 		}
 		else if (txt[i] == '|')
 		{
-			if (err_dobpip(txt, i, cant))
+			if (err_dobpip(txt, i, cont))
 				return (NULL);
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			if (i > 1 && count < i - 1)
+				vue = dobl_prt_free(vue, txt, count, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
+			count = i + 1;
 		}
 		i++;
 	}
-	if (cont < i)
-		vue = dobl_prt_free(vue, txt, cont, i);
-	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
+	if (count < i)
+		vue = dobl_prt_free(vue, txt, count, i);
+	if (err_redsegred(vue, cont) || start_end_red(vue, cont))
 	{
 		return (NULL);
 	}
 	if (errors)
 	{
-		vue = start_end_pip(vue, cant);
+		vue = start_end_pip(vue, cont);
 		if (vue == NULL)
 			return (NULL);
 	}

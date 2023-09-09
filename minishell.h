@@ -26,6 +26,27 @@
 # define READ_END 0
 // write end of pipe
 # define WRITE_END 1
+// truncate mode
+//# define O_TRUNC | O_CREAT | O_RDWR"
+
+
+typedef struct s_red
+{
+	char		**cmd_str;
+	char		**ac;
+}t_red;
+
+
+
+typedef struct s_xtr
+{
+	char **jj;
+	int i;
+	int h;
+	int l;
+	int k;
+
+}t_xtr;
 
 
 typedef struct s_custom
@@ -36,6 +57,13 @@ typedef struct s_custom
     int is_switch;
 }t_custom;
 
+
+/*typedef struct s_executor
+{
+	pid_t	pid;
+	int		status;
+	
+}t_executor;*/
 
 typedef struct s_global
 {
@@ -61,6 +89,7 @@ typedef struct s_content
 	int which_builtin;
 	t_global *global;
 	t_custom *custom;
+	//t_executor *executor;
 }t_content;
 
 int frst_chr(char *txt, char car);
@@ -72,7 +101,7 @@ int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 int main(int argc, char **argv, char **env);
-char **ft_specials(char *old_txt, t_content *cant, int errors);
+char **ft_specials(char *old_txt, t_content *cont, int errors);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void ft_arg_div(char *txt, t_global *glb);
 void err_stx(char *txt, t_content *cont);
@@ -139,5 +168,6 @@ void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
 void ft_delete_env_oldpwd(char **environment);
 void check_options(char *options, char *cmd);
+void find_slash_comillas(int *j, int *r, char **dst, int *l);
 
 #endif
