@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:32:30 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:39:51 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,9 @@ int	arg_is_a_path(char *comand_args)
 {
 	DIR	*aux;
 
-	ft_printf("aqui si llega\n");
 	aux = opendir(comand_args);
 	if (aux == NULL)
 	{
-		ft_printf("aqui no llega\n");
 		return (1);
 	}
 	free (aux->__dd_buf);
