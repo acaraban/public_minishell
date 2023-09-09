@@ -1,111 +1,132 @@
 #include "minishell.h"
 
-void init_specials(t_specials *special, char *old_txt)
+char **ft_specials(char *old_txt, t_content *cant, int errors)
 {
-	special->i = 0;
-	special->boo = 0;
-	special->count = 0;
-	special->txt = ft_strtrim(old_txt, " ");
+	int i;
+	int cont;
+	int boo;
+	char *txt;
+	char **vue;
+
+	i = 0;
+	cont = 0;
+	boo = 0;
+	txt = ft_strtrim(old_txt, " ");
 	free (old_txt);
-	special->vue = (char **)calloc(sizeof(char *), 1);
-	special->vue[0] = NULL;
-}
-
-void varent_at_start(char *old_txt, t_specials *special)
-{
-	free (special->txt);
-	special->txt = strdup(old_txt);
-	free (old_txt);
-}
-/*
-	Function to check for $ at start
-*/
-
-char **ft_specials(char *old_txt, t_content *cont, int errors)
-{
-	t_specials special;
-
-	init_specials(&special, old_txt);
-	if (!special.txt || ft_strlen(special.txt) == 0)
+	if (!txt || ft_strlen(txt) == 0)
+	{
+		free (txt);
 		return (NULL);
-	while (special.txt[special.i])
-	{
-		if ((special.boo == 1 || special.boo == 0) && special.txt[special.i] == '$')
-		{
-			old_txt = ft_add_varent(special.txt, special.i, cont[0].global[0].env, cont);
-			varent_at_start(old_txt, &special);
-			if (special.txt == NULL)
-				return (NULL);
-		}
-		else if (special.boo == 1 && (special.txt[special.i] == '\"'))
-			special.boo = 0;
-		else if (special.boo == 2 && (special.txt[special.i] == '\''))
-			special.boo = 0;
-		else if (!special.boo && (special.txt[special.i] == '\"'))
-			special.boo = 1;
-		else if (!special.boo && (special.txt[special.i] == '\''))
-			special.boo = 2;
-		else if (special.boo)
-			special.boo = special.boo + 1 - 1;
-		else if (special.txt[special.i] == '>' && special.txt[special.i + 1] == '>')
-		{
-			if (err_red(special.i, special.txt, cont))
-				return (NULL);
-			if (special.i > 1 && special.count < special.i - 1)
-				special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i - 1);
-			special.vue = dobl_prt_free(special.vue, special.txt, special.i, special.i + 1);
-			special.i++;
-			special.count = special.i + 1;
-		}
-		else if (special.txt[special.i] == '>')
-		{
-			if (err_sim_red(special.txt, special.i, cont))
-				return (NULL);
-			if (special.i > 1 && special.count < special.i - 1)
-				special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i - 1);
-			special.vue = dobl_prt_free(special.vue, special.txt, special.i, special.i);
-			special.count = special.i + 1;
-		}
-		else if (special.txt[special.i] == '<' && special.txt[special.i + 1] == '<')
-		{
-			if (err_red(special.i, special.txt, cont))
-				return (NULL);
-			if (special.i > 1 && special.count < special.i - 1)
-				special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i - 1);
-			special.vue = dobl_prt_free(special.vue, special.txt, special.i, special.i + 1);
-			special.i++;
-			special.count = special.i + 1;
-		}
-		else if (special.txt[special.i] == '<')
-		{
-			if (special.i > 1 && special.count < special.i - 1)
-				special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i - 1);
-			special.vue = dobl_prt_free(special.vue, special.txt, special.i, special.i);
-			special.count = special.i + 1;
-		}
-		else if (special.txt[special.i] == '|')
-		{
-			if (err_dobpip(special.txt, special.i, cont))
-				return (NULL);
-			if (special.i > 1 && special.count < special.i - 1)
-				special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i - 1);
-			special.vue = dobl_prt_free(special.vue, special.txt, special.i, special.i);
-			special.count = special.i + 1;
-		}
-		special.i++;
 	}
-	if (special.count < special.i)
-		special.vue = dobl_prt_free(special.vue, special.txt, special.count, special.i);
-	if (err_redsegred(special.vue, cont) || start_end_red(special.vue, cont))
+	vue = (char **)calloc(sizeof(char *), 1);
+	vue[0] = NULL;
+	while (txt[i])
 	{
+		if ((boo == 1 || boo == 0) && txt[i] == '$')
+		{
+			old_txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
+			free (txt);
+			txt = strdup(old_txt);
+			free (old_txt);
+			if (txt == NULL)
+			{
+				free_dbl(vue);
+				free (txt);
+				return (NULL);
+			}
+		}
+		else if (boo == 1 && (txt[i] == '\"'))
+			boo = 0;
+		else if (boo == 2 && (txt[i] == '\''))
+			boo = 0;
+		else if (!boo && (txt[i] == '\"'))
+			boo = 1;
+		else if (!boo && (txt[i] == '\''))
+			boo = 2;
+		else if (boo)
+			boo = boo + 1 - 1;
+		else if (txt[i] == '>' && txt[i + 1] == '>')
+		{
+			if (err_red(i, txt, cant))
+			{
+				free_dbl(vue);
+				free (txt);
+				return (NULL);
+			}
+			if (i > 1 && cont < i - 1)
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i + 1);
+			i++;
+			cont = i + 1;
+		}
+		else if (txt[i] == '>')
+		{
+			if (err_sim_red(txt, i, cant))
+			{
+				free_dbl(vue);
+				free (txt);
+				return (NULL);
+			}
+			if (i > 1 && cont < i - 1)
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
+			cont = i + 1;
+		}
+		else if (txt[i] == '<' && txt[i + 1] == '<')
+		{
+			if (err_red(i, txt, cant))
+			{
+				free_dbl(vue);
+				free (txt);
+				return (NULL);
+			}
+			if (i > 1 && cont < i - 1)
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i + 1);
+			i++;
+			cont = i + 1;
+		}
+		else if (txt[i] == '<')
+		{
+			if (i > 1 && cont < i - 1)
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
+			cont = i + 1;
+		}
+		else if (txt[i] == '|')
+		{
+			if (err_dobpip(txt, i, cant))
+			{
+				free_dbl(vue);
+				free (txt);
+				return (NULL);
+			}
+			if (i > 1 && cont < i - 1)
+				vue = dobl_prt_free(vue, txt, cont, i - 1);
+			vue = dobl_prt_free(vue, txt, i, i);
+			cont = i + 1;
+		}
+		i++;
+	}
+	if (cont < i)
+		vue = dobl_prt_free(vue, txt, cont, i);
+	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
+	{
+		free_dbl(vue);
+		free (txt);
 		return (NULL);
 	}
 	if (errors)
 	{
-		special.vue = start_end_pip(special.vue, cont);
-		if (special.vue == NULL)
+		vue = start_end_pip(vue, cant);
+		if (vue == NULL)
+		{
+			free_dbl(vue);
+			free (txt);
 			return (NULL);
+		}
 	}
-	//ft_dbl_printf("este es special.vue: \n", special.vue, "\n", 0);
-	return (special.vue);
+	free (txt);
+	vue = convert_str_trim(vue);
+	return (vue);
 }
