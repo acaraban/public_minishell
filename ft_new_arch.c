@@ -8,22 +8,24 @@
 
 int	new_arch(char *name)
 {
-	const char	*nombrearchivo;
-	int			descriptorarchivo;
+	char	*namfile;
+	int			descfile;
 
-	nombrearchivo = ft_strdup(name);
-	descriptorarchivo = open(nombrearchivo, O_WRONLY | O_CREAT, 0644);
-	if (descriptorarchivo == -1)
+	namfile = ft_strdup(name);
+	descfile = open(namfile, O_WRONLY | O_CREAT, 0644);
+	if (descfile == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		perror(nombrearchivo);
+		perror(namfile);
+		free (namfile);
 		return (0);
 	}
-	close(descriptorarchivo);
+	free (namfile);
+	close(descfile);
 	return (1);
 }
 
-int ft_tam_args(char *txt, t_content *cont)
+int ft_tam_args(char *txt, t_global *glb)
 {
 	int i;
 	int tam;
@@ -38,7 +40,8 @@ int ft_tam_args(char *txt, t_content *cont)
 		{
 			if (find_match(txt, i, txt[i]) < 0)
 			{
-				err_stx("error sintactico\n", cont);
+				ft_printf("error sintactico\n");
+				glb->err_stat = STX_ERR;
 				return (-1);
 			}
 			i += find_match(txt, i, txt[i]);
@@ -46,4 +49,21 @@ int ft_tam_args(char *txt, t_content *cont)
 		i++;
 	}
 	return (tam);
+}
+
+char **convert_str_trim(char **vue)
+{
+	int i;
+	char *aux;
+	
+	i = 0;
+	while (vue[i])
+	{
+		aux = ft_strdup(vue[i]);
+		free (vue[i]);
+		vue[i] = ft_strtrim(aux, " ");
+		free (aux);
+		i++;
+	}
+	return (vue);
 }
