@@ -26,8 +26,8 @@
 # define READ_END 0
 // write end of pipe
 # define WRITE_END 1
-// truncate mode
-//# define O_TRUNC | O_CREAT | O_RDWR"
+
+
 
 
 typedef struct s_red
@@ -47,6 +47,15 @@ typedef struct s_xtr
 	int k;
 
 }t_xtr;
+
+typedef struct s_specials
+{
+	int i;
+	int count;
+	int boo;
+	char *txt;
+	char **vue;
+}t_specials;
 
 
 typedef struct s_custom
@@ -89,7 +98,6 @@ typedef struct s_content
 	int which_builtin;
 	t_global *global;
 	t_custom *custom;
-	//t_executor *executor;
 }t_content;
 
 int frst_chr(char *txt, char car);
