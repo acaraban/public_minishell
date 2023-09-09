@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:04:57 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 16:12:35 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:47:55 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	{
 		pos++;
 		free (aux2);
-		while (txt[pos + i] && ft_strchr(' \"$\'><|', txt[pos + i]) == NULL)
+		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 			i++;
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 		add = ft_strjoin(aux, aux2);
@@ -103,7 +103,7 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
-	while (txt[pos + i] && ft_strchr(' \"$\'><|', txt[pos + i]) == NULL)
+	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 		i++;
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 	add = ft_strjoin(add, aux);
