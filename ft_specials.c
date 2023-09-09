@@ -14,7 +14,10 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 	txt = ft_strtrim(old_txt, " ");
 	free (old_txt);
 	if (!txt || ft_strlen(txt) == 0)
+	{
+		free (txt);
 		return (NULL);
+	}
 	vue = (char **)calloc(sizeof(char *), 1);
 	vue[0] = NULL;
 	while (txt[i])
@@ -26,7 +29,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			txt = strdup(old_txt);
 			free (old_txt);
 			if (txt == NULL)
+			{
+				free_dbl(vue);
+				free (txt);
 				return (NULL);
+			}
 		}
 		else if (boo == 1 && (txt[i] == '\"'))
 			boo = 0;
@@ -41,7 +48,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		else if (txt[i] == '>' && txt[i + 1] == '>')
 		{
 			if (err_red(i, txt, cant))
+			{
+				free_dbl(vue);
+				free (txt);
 				return (NULL);
+			}
 			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
@@ -51,7 +62,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		else if (txt[i] == '>')
 		{
 			if (err_sim_red(txt, i, cant))
+			{
+				free_dbl(vue);
+				free (txt);
 				return (NULL);
+			}
 			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
@@ -60,7 +75,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		else if (txt[i] == '<' && txt[i + 1] == '<')
 		{
 			if (err_red(i, txt, cant))
+			{
+				free_dbl(vue);
+				free (txt);
 				return (NULL);
+			}
 			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i + 1);
@@ -77,7 +96,11 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		else if (txt[i] == '|')
 		{
 			if (err_dobpip(txt, i, cant))
+			{
+				free_dbl(vue);
+				free (txt);
 				return (NULL);
+			}
 			if (i > 1 && cont < i - 1)
 				vue = dobl_prt_free(vue, txt, cont, i - 1);
 			vue = dobl_prt_free(vue, txt, i, i);
@@ -89,13 +112,19 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 		vue = dobl_prt_free(vue, txt, cont, i);
 	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
 	{
+		free_dbl(vue);
+		free (txt);
 		return (NULL);
 	}
 	if (errors)
 	{
 		vue = start_end_pip(vue, cant);
 		if (vue == NULL)
+		{
+			free_dbl(vue);
+			free (txt);
 			return (NULL);
+		}
 	}
 	free (txt);
 	vue = convert_str_trim(vue);

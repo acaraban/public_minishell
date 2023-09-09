@@ -38,10 +38,10 @@ void	ft_arg_div(char *txt, t_global *glb)
 	}
 	final = ft_specials(txt, cont, 1);
 	if (final == NULL)
-		{
-			ft_free_cont(cont);
-			return ;
-		}
+	{
+		ft_free_cont(cont);
+		return ;
+	}
 	tam = 0;
 	while (final[tam])
 		tam++;

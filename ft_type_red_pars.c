@@ -176,8 +176,6 @@ char	**ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont
 	cmd_str = ft_shell_split(final[i], ' ', cont);
 	if (cmd_str == NULL)
 		return (NULL);
-	if (cmd_str == NULL)
-		return (NULL);
 	while (cmd_str[r])
 		r++;
 	if (cont[h].cmd)

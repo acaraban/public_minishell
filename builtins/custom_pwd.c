@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:41:52 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 17:52:15 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:23:41 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	custom_pwd(void)
 	size = 1024;
 	buff = malloc(size);
 	if (buff == NULL)
-	{
 		return ;
-	}
 	if (getcwd(buff, size) == NULL)
 	{
 		free (buff);
@@ -31,9 +29,7 @@ void	custom_pwd(void)
 		return ;
 	}
 	else
-	{
 		printf("%s\n", buff);
-	}
 	free(buff);
 }
 
@@ -54,6 +50,7 @@ char	*custom_return_pwd(void)
 	}
 	if (getcwd(buff, size) == NULL)
 	{
+		free (buff);
 		perror("getcwd");
 		return (NULL);
 	}

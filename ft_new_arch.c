@@ -8,20 +8,20 @@
 
 int	new_arch(char *name)
 {
-	char	*nombrearchivo;
-	int			descriptorarchivo;
+	char	*namfile;
+	int			descfile;
 
-	nombrearchivo = ft_strdup(name);
-	descriptorarchivo = open(nombrearchivo, O_WRONLY | O_CREAT, 0644);
-	if (descriptorarchivo == -1)
+	namfile = ft_strdup(name);
+	descfile = open(namfile, O_WRONLY | O_CREAT, 0644);
+	if (descfile == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		perror(nombrearchivo);
-		free (nombrearchivo);
+		perror(namfile);
+		free (namfile);
 		return (0);
 	}
-	free (nombrearchivo);
-	close(descriptorarchivo);
+	free (namfile);
+	close(descfile);
 	return (1);
 }
 
