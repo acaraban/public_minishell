@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:38:21 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:43:39 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 23:51:56 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
                             ./a.out file_without_permissions ---> 126
 */
 
-void handle_eacces_errno(t_content *cont, int i)
+void	handle_eacces_errno(t_content *cont, int i)
 {
 	ft_putstr_fd("minishellss: ", 2);
 	if (cont[i].infile)
@@ -46,7 +46,8 @@ void handle_eacces_errno(t_content *cont, int i)
 
 void	handle_execve_error_message(t_content *cont, int i)
 {
-	char *aux;
+	char	*aux;
+
 	if (errno == EFAULT)
 	{
 		aux = ft_strjoin(cont[i].cmd, ": command not found\n");
@@ -58,7 +59,7 @@ void	handle_execve_error_message(t_content *cont, int i)
 	else if (errno == ENOENT)
 	{
 		ft_putstr_fd("minishell: ", 2);
-        perror(cont[i].infile);
+		perror(cont[i].infile);
 		exit(1);
 	}
 	else if (errno == EACCES)
