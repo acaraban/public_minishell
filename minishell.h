@@ -27,7 +27,38 @@
 // write end of pipe
 # define WRITE_END 1
 
+typedef struct s_red
+{
+	char		**cmd_str;
+	char		**ac;
+}t_red;
 
+typedef struct s_typered
+{
+	char		**cmd_str;
+	char		**ac;
+	int			i;
+	int			h;
+}t_typered;
+
+typedef struct s_xtr
+{
+	char **jj;
+	int i;
+	int h;
+	int l;
+	int k;
+
+}t_xtr;
+
+typedef struct s_specials
+{
+	int i;
+	int count;
+	int boo;
+	char *txt;
+	char **vue;
+}t_specials;
 
 typedef struct s_custom
 {
@@ -64,10 +95,8 @@ typedef struct s_content
 	t_custom *custom;
 }t_content;
 
-int frst_chr(char *txt, char car);
 t_global *ft_init(t_global *glb, char **env, int err_status);
-int ft_nrmntt_1(t_global *glb);
-void ft_free_cont(t_content *cont);
+int frst_chr(char *txt, char car);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
@@ -88,10 +117,10 @@ int err_redsegred(char **arr, t_content *cont);
 int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
-int     ft_type_red_entsim(char **final, int i, int h, t_content *cont);
-int     ft_type_red_salsim(char **final, int i, int h, t_content *cont);
-int     ft_type_red_saldbl(char **final, int i, int h, t_content *cont);
-char    **ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont);
+int     ft_type_red_entsim(char **final, t_typered *type, t_content *cont);
+int     ft_type_red_salsim(char **final, t_typered *type, t_content *cont);
+int     ft_type_red_saldbl(char **final, t_typered *type, t_content *cont);
+char    **ft_type_red_entdbl(char **final, t_typered *type, t_content *cont);
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
@@ -110,6 +139,8 @@ int new_arch(char *name);
 int ft_tam_args(char *txt, t_global *glb);
 void	handle_sigint(int sig);
 char **convert_str_trim(char **vue);
+int ft_nrmntt_1(t_global *glb);
+void ft_free_cont(t_content *cont);
 
 
 void	ft_executor(t_content *cont);

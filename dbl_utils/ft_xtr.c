@@ -49,9 +49,10 @@ char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
 	char **arr;
 	int i;
 	i = 0;
-	char txt[] = "esto es el texto de prueba, donde tengo que comprobar que el texto se corta en las partes adecuadas";
+	char txt[] = "esto es el texto de prueba, donde tengo que comprobar \
+	que el texto se corta en las partes adecuadas";
 
-	arr = (char **)calloc(sizeof(char *), 1);
+	arr = (char **)ft_calloc(sizeof(char *), 1);
 	arr[0] = NULL;
 	arr = dobl_prt(arr, txt, 0, 5);
 	arr = dobl_prt(arr, txt, 6, 8);
