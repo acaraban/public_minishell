@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:04:57 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 16:11:08 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:12:35 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,6 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	return (NULL);
 }
-/*
-else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
-			!txt[pos + 1])
-
-while (txt[pos + i] && strchr(" $'\"<>|", txt[pos + i]) == NULL)
-    i++;
-
-*/
 
 char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
