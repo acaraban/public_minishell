@@ -29,35 +29,6 @@
 
 
 
-
-typedef struct s_red
-{
-	char		**cmd_str;
-	char		**ac;
-}t_red;
-
-
-
-typedef struct s_xtr
-{
-	char **jj;
-	int i;
-	int h;
-	int l;
-	int k;
-
-}t_xtr;
-
-typedef struct s_specials
-{
-	int i;
-	int count;
-	int boo;
-	char *txt;
-	char **vue;
-}t_specials;
-
-
 typedef struct s_custom
 {
 	char *command_arg;
@@ -66,13 +37,6 @@ typedef struct s_custom
     int is_switch;
 }t_custom;
 
-
-/*typedef struct s_executor
-{
-	pid_t	pid;
-	int		status;
-	
-}t_executor;*/
 
 typedef struct s_global
 {
@@ -101,6 +65,9 @@ typedef struct s_content
 }t_content;
 
 int frst_chr(char *txt, char car);
+t_global *ft_init(t_global *glb, char **env, int err_status);
+int ft_nrmntt_1(t_global *glb);
+void ft_free_cont(t_content *cont);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
@@ -109,7 +76,7 @@ int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 int main(int argc, char **argv, char **env);
-char **ft_specials(char *old_txt, t_content *cont, int errors);
+char **ft_specials(char *old_txt, t_content *cant, int errors);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void ft_arg_div(char *txt, t_global *glb);
 void err_stx(char *txt, t_content *cont);
@@ -128,7 +95,7 @@ char    **ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *c
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
-int	ft_heredoc(char **arr);
+int	ft_heredoc(char **arr, t_content *cont);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
@@ -140,8 +107,9 @@ int err_dobcom(char *txt, t_content *cont);
 int custom_unset(t_content *cont, int i);
 int  coincidence(t_content *cont, char *txt);
 int new_arch(char *name);
-int ft_tam_args(char *txt, t_content *cont);
+int ft_tam_args(char *txt, t_global *glb);
 void	handle_sigint(int sig);
+char **convert_str_trim(char **vue);
 
 
 void	ft_executor(t_content *cont);
@@ -176,6 +144,5 @@ void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
 void ft_delete_env_oldpwd(char **environment);
 void check_options(char *options, char *cmd);
-void find_slash_comillas(int *j, int *r, char **dst, int *l);
 
 #endif
