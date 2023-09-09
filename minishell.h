@@ -105,8 +105,9 @@ int err_dobcom(char *txt, t_content *cont);
 int custom_unset(t_content *cont, int i);
 int  coincidence(t_content *cont, char *txt);
 int new_arch(char *name);
-int ft_tam_args(char *txt, t_content *cont);
+int ft_tam_args(char *txt, t_global *glb);
 void	handle_sigint(int sig);
+char **convert_str_trim(char **vue);
 
 
 void	ft_executor(t_content *cont);

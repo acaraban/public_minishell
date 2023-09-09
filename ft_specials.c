@@ -98,5 +98,6 @@ char **ft_specials(char *old_txt, t_content *cant, int errors)
 			return (NULL);
 	}
 	free (txt);
+	vue = convert_str_trim(vue);
 	return (vue);
 }

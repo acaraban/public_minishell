@@ -13,7 +13,7 @@ char **ft_dbl_strdup(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		saf[i] = ft_strdup(arr[i]);
+		saf[i] = strdup(arr[i]);
 		i++;
 	}
 	return (saf);

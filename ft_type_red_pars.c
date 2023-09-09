@@ -210,15 +210,11 @@ char	**ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont
 		}
 		else
 		{
-			cont[h].full_comand = (char **)malloc(sizeof(char *) * 1);
-			cont[h].full_comand[0] = (char *)malloc(sizeof(char) * 1);
-			cont[h].full_comand[0] = NULL;
-			cont[h].cmd = (char *)malloc(sizeof(char) * 1);
+			cont[h].full_comand = NULL;
 			cont[h].cmd = NULL;
 		}
 	}
-	if (cont[h].cmd)
-		free_dbl(cmd_str);
+	free_dbl(cmd_str);
 	cont[h].nfl = 2;
 	return (ac);
 }
