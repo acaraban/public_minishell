@@ -27,11 +27,6 @@
 // write end of pipe
 # define WRITE_END 1
 
-typedef struct s_red
-{
-	char		**cmd_str;
-	char		**ac;
-}t_red;
 
 typedef struct s_typered
 {
@@ -41,7 +36,7 @@ typedef struct s_typered
 	int			h;
 }t_typered;
 
-typedef struct s_xtr
+/*typedef struct s_xtr
 {
 	char **jj;
 	int i;
@@ -49,16 +44,16 @@ typedef struct s_xtr
 	int l;
 	int k;
 
-}t_xtr;
+}t_xtr;*/
 
-typedef struct s_specials
+/*typedef struct s_specials
 {
 	int i;
 	int count;
 	int boo;
 	char *txt;
 	char **vue;
-}t_specials;
+}t_specials;*/
 
 typedef struct s_custom
 {
