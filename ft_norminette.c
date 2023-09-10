@@ -1,15 +1,15 @@
 #include "minishell.h"
 
-int ft_nrmntt_1(t_global *glb)
+int	ft_nrmntt_1(t_global *glb)
 {
 	glb[0].new_stat = glb[0].err_stat;
 	glb[0].err_stat = 0;
 	return (0);
 }
 
-void ft_free_cont(t_content *cont)
+void	ft_free_cont(t_content *cont)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cont->global->num_cmd)

@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-void free_dbl(char **new)
+void	free_dbl(char **new)
 {
-	int h;
+	int	h;
 
 	h = 0;
 	while (new[h])
@@ -11,7 +11,7 @@ void free_dbl(char **new)
 	free(new);
 }
 
-void init_xtrallsz_values(int *i, int *h, int *l, int *k)
+void	init_xtrallsz_values(int *i, int *h, int *l, int *k)
 {
 	i = 0;
 	h = 0;
@@ -19,25 +19,25 @@ void init_xtrallsz_values(int *i, int *h, int *l, int *k)
 	k = 0;
 }
 
-int set_i_value(int *i, char **arr)
+int	set_i_value(int *i, char **arr)
 {
-	int n;
+	int	n;
 
 	n = *i;
-	while (arr[n] )
+	while (arr[n])
 	{
 		i++;
 	}
 	return (n);
 }
 
-char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
+char	**ft_xtr_allsz_free(char **arr, char **add, int posadd)
 {
-	char **jj;
-	int i;
-	int h;
-	int l;
-	int k;
+	char	**jj;
+	int		i;
+	int		h;
+	int		l;
+	int		k;
 
 	init_xtrallsz_values(&i, &h, &l, &k);
 	i = set_i_value(&i, arr);
