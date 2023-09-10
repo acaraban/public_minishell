@@ -41,7 +41,7 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 	return (1);
 }
 
-char **arg_parsing(char **final, t_content *cont)
+char **arg_parsing(char **final, t_content *cont, int *boo)
 {
 	t_typered	*type;
 	
@@ -55,13 +55,21 @@ char **arg_parsing(char **final, t_content *cont)
 		{
 			type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
 			if (!cmd_str_cont(cont, type->cmd_str, type->h))
+			{
+				boo = 0;
 				return (NULL);
+			}
 		}
 		else if (final[type->i][0] == '|')
 			type->h++;
 		else
+		{
 			if (!all_type_red(type, final, cont))
+			{
+				boo = 0;
 				return (NULL);
+			}
+		}
 		type->i++;
 	}
 	return (type->ac);
@@ -85,8 +93,10 @@ void	ft_arg_div(char *txt, t_global *glb)
 	t_content	*cont;
 	int			tam;
 	char		**ac;
+	int			boo;
 
 	tam = 1;
+	boo = 1;
 	txt = init_argdiv_vars(txt);
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
 	if (ft_tam_args(txt, glb) < 0)
@@ -95,9 +105,10 @@ void	ft_arg_div(char *txt, t_global *glb)
 	free (cont);
 	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
-	final = ft_specials(txt, cont, 1);
+	final = ft_specials(txt, cont);
 	if (final == NULL)
 		return ;
-	ac = arg_parsing(final, cont);
-	ft_final_arg(ac, cont);
+	ac = arg_parsing(final, cont, &boo);
+	if (boo)
+		ft_final_arg(ac, cont);
 }

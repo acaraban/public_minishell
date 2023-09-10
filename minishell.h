@@ -105,7 +105,7 @@ int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 int main(int argc, char **argv, char **env);
-char **ft_specials(char *old_txt, t_content *cant, int errors);
+char **ft_specials(char *old_txt, t_content *cant);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void err_stx(char *txt, t_content *cont);
 char **ft_xtr_allsz_free(char **arr, char **add, int posadd);
@@ -147,7 +147,7 @@ int mini_all_type_1(t_typered *type, char **final, t_content *cont);
 int mini_all_type_2(t_typered *type, char **final, t_content *cont);
 int mini_all_type_3(t_typered *type, char **final, t_content *cont);
 int	all_type_red(t_typered *type, char **final, t_content *cont);
-char **arg_parsing(char **final, t_content *cont);
+char **arg_parsing(char **final, t_content *cont, int *boo);
 void	ft_final_arg(char **ac, t_content *cont);
 void	ft_arg_div(char *txt, t_global *glb);
 
