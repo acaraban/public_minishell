@@ -32,7 +32,7 @@ int	custom_unset(t_content *cont, int i)
 	aux = NULL;
 	if (!ft_strcmp(cont[i].cmd, "unset"))
 	{
-		aux = cont[i].full_comand[j];
+		aux = ft_strdup(cont[i].full_comand[j]);
 		if (!(pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
 					&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
 					pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0))
