@@ -54,9 +54,9 @@ int	bef_str(char *txt)
 		aux[i] = txt[i];
 		i++;
 	}
-	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
-			&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && pos_char(aux, '<') < 0 \
-			&& pos_char(aux, '|') < 0)
+	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') \
+			< 0 && pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
+			pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0)
 	{
 		free (aux);
 		return (1);
@@ -92,4 +92,3 @@ int	custom_export(t_content *cont, int i)
 	}
 	return (0);
 }
-

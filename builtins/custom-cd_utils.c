@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:39:51 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/10 18:47:21 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ char	*get_the_oldpwd(t_content *cont, int i)
 
 void	update_environment_old(t_content *cont, int i, char *old_pwd)
 {
-	int	j;
-	int	has_oldpwd;
-	char *aux;
+	int		j;
+	int		has_oldpwd;
+	char	*aux;
 
 	j = 0;
 	has_oldpwd = 0;
@@ -64,7 +64,8 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 	if (has_oldpwd == 0)
 	{
 		aux = ft_strjoin("OLDPWD=", old_pwd);
-		cont[i].global->env = dobl_prt_free(cont[i].global->env, aux, 0, ft_strlen(aux));
+		cont[i].global->env = dobl_prt_free(cont[i].global->env, aux, 0, \
+				ft_strlen(aux));
 		free (aux);
 	}
 }
