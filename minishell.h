@@ -107,7 +107,6 @@ char	**ft_shell_split(char *s, char c, t_content *cont);
 int main(int argc, char **argv, char **env);
 char **ft_specials(char *old_txt, t_content *cant, int errors);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
-void ft_arg_div(char *txt, t_global *glb);
 void err_stx(char *txt, t_content *cont);
 char **ft_xtr_allsz_free(char **arr, char **add, int posadd);
 int	err_sim_red(char *txt, int i, t_content *cont);
@@ -129,7 +128,7 @@ void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
 int bef_str(char *txt);
-int	custom_export(t_content *cont, int i); // le cambie el nombre xq solo export podria dar error, tenia otro color
+int	custom_export(t_content *cont, int i);
 void err_cmd(char *txt, t_content *cont);
 int arg_is_valid(char *comand_args);
 int err_dobcom(char *txt, t_content *cont);
@@ -141,6 +140,16 @@ void	handle_sigint(int sig);
 char **convert_str_trim(char **vue);
 int ft_nrmntt_1(t_global *glb);
 void ft_free_cont(t_content *cont);
+void init_cont_vars(t_global *glb, t_content *cont);
+char *init_argdiv_vars(char *txt);
+int	cmd_str_cont(t_content *cont, char **cmd_str, int h);
+int mini_all_type_1(t_typered *type, char **final, t_content *cont);
+int mini_all_type_2(t_typered *type, char **final, t_content *cont);
+int mini_all_type_3(t_typered *type, char **final, t_content *cont);
+int	all_type_red(t_typered *type, char **final, t_content *cont);
+char **arg_parsing(char **final, t_content *cont);
+void	ft_final_arg(char **ac, t_content *cont);
+void	ft_arg_div(char *txt, t_global *glb);
 
 
 void	ft_executor(t_content *cont);

@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	txt = NULL;
 	glb = NULL;
 	glb = ft_init(glb, env, err_status);
 	boo = 1;

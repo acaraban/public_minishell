@@ -71,7 +71,7 @@ void	ft_final_arg(char **ac, t_content *cont)
 {
 	if (ac)
 	{
-		if (!ft_heredoc(ac))
+		if (!ft_heredoc(ac, cont))
 			return ;
 		free_dbl(ac);
 	}
@@ -89,9 +89,9 @@ void	ft_arg_div(char *txt, t_global *glb)
 	tam = 1;
 	txt = init_argdiv_vars(txt);
 	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
-	if (ft_tam_args(txt, cont) < 0)
+	if (ft_tam_args(txt, glb) < 0)
 		return ;
-	glb->num_cmd = ft_tam_args(txt, cont);
+	glb->num_cmd = ft_tam_args(txt, glb);
 	free (cont);
 	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
