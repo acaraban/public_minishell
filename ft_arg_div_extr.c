@@ -56,7 +56,7 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 			type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
 			if (!cmd_str_cont(cont, type->cmd_str, type->h))
 			{
-				boo = 0;
+				*boo = 0;
 				return (NULL);
 			}
 		}
@@ -66,7 +66,7 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 		{
 			if (!all_type_red(type, final, cont))
 			{
-				boo = 0;
+				*boo = 0;
 				return (NULL);
 			}
 		}
@@ -84,7 +84,7 @@ void	ft_final_arg(char **ac, t_content *cont)
 		free_dbl(ac);
 	}
 	ft_executor(cont);
-	ft_free_cont(cont);
+	ft_free_cont(cont); // esta la lia parda
 }
 
 void	ft_arg_div(char *txt, t_global *glb)
@@ -109,6 +109,7 @@ void	ft_arg_div(char *txt, t_global *glb)
 	if (final == NULL)
 		return ;
 	ac = arg_parsing(final, cont, &boo);
+	ft_printf("este es boo: %d\n", boo);
 	if (boo)
 		ft_final_arg(ac, cont);
 }
