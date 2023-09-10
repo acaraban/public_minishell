@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+
 t_global *ft_init(t_global *glb, char **env, int err_status)
 {
 	int i;

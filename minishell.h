@@ -97,6 +97,7 @@ typedef struct s_content
 
 t_global *ft_init(t_global *glb, char **env, int err_status);
 int frst_chr(char *txt, char car);
+t_global *ft_init(t_global *glb, char **env);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
@@ -104,7 +105,6 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
-int main(int argc, char **argv, char **env);
 char **ft_specials(char *old_txt, t_content *cant, int errors);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void err_stx(char *txt, t_content *cont);
