@@ -1,15 +1,15 @@
 #include "../minishell.h"
 
-int err_redsegred(char **arr, t_content *cont)
+int	err_redsegred(char **arr, t_content *cont)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
 	{
 		if (arr[i][0] == '>')
 		{
-			if (!arr[i + 1] || (arr[i + 1][0] == '<' || arr[i + 1][0] == '>' || arr[i + 1][0] == '|' || !arr[i + 1][0]))
+			if (!arr[i + 1] || ft_strchr("<>|", arr[i + 1][0]))
 			{
 				err_stx("error sintactico\n", cont);
 				return (2);
@@ -17,7 +17,7 @@ int err_redsegred(char **arr, t_content *cont)
 		}
 		if (arr[i][0] == '<')
 		{
-			if (!arr[i + 1] || (arr[i + 1][0] == '<' || arr[i + 1][0] == '>' || arr[i + 1][0] == '|' || !arr[i + 1][0]))
+			if (!arr[i + 1] || ft_strchr("<>|", arr[i + 1][0]))
 			{
 				err_stx("error sintactico\n", cont);
 				return (2);
