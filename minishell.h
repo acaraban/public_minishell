@@ -179,5 +179,6 @@ void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
 void ft_delete_env_oldpwd(char **environment);
 void check_options(char *options, char *cmd);
+int same_char_across(char *str, int pos_ini, int pos_fin, char c);
 
 #endif
