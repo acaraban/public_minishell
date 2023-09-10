@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-int err_nolstpar(char *txt, int pos, t_content *cont)
+int	err_nolstpar(char *txt, int pos, t_content *cont)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (txt[i + pos] != ')' && txt[i + pos])

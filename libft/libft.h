@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:58:02 by acaraban          #+#    #+#             */
-/*   Updated: 2023/08/28 12:46:35 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:23:14 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void*));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
-int ft_num_times(char *str, char c);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void(*del)(void *));
+int		ft_num_times(char *str, char c);
 
 #endif

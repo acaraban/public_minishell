@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:23:29 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 13:30:40 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:32:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
 }
 
 /*
-    Execute this function for any middle child. Not for the first or the last child.
-    Check if the command received is a built-in before redirecting output. 
+Execute this function for any middle child. Not for the first or the last child.
+Check if the command received is a built-in before redirecting output. 
 */
 
 void	execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)

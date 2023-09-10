@@ -10,7 +10,7 @@
 
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!sal && txt)

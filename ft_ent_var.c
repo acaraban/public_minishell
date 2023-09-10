@@ -1,8 +1,9 @@
+
 #include "minishell.h"
 
-int frst_chr(char *txt, char car)
+int	frst_chr(char *txt, char car)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (txt[i] != car && txt[i])
@@ -12,9 +13,9 @@ int frst_chr(char *txt, char car)
 	return (i);
 }
 
-int all_chr(char *txt, int pos)
+int	all_chr(char *txt, int pos)
 {
-	int m;
+	int	m;
 
 	m = 0;
 	while (txt[pos + m] != ' ' && txt[pos + m] != '\"' && txt[pos + m] != '\'' \
@@ -24,10 +25,10 @@ int all_chr(char *txt, int pos)
 	return (m + pos);
 }
 
-int str_cmp(char *txt, int pos, char *cmp, char car)
+int	str_cmp(char *txt, int pos, char *cmp, char car)
 {
-	int i;
-	int lstpos;
+	int	i;
+	int	lstpos;
 
 	i = 0;
 	lstpos = all_chr(txt, pos);
@@ -40,17 +41,27 @@ int str_cmp(char *txt, int pos, char *cmp, char car)
 	return (0);
 }
 
-char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
+char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 {
-	int i;
-	int par;
+	int	i;
+	int	par;
+	char *aux;
 
 	i = 0;
 	par = 0;
+	aux = NULL;
+	if (pos > 0 && txt[pos - 1] == '\"')
+	{
+		if (ft_strchr(txt + pos, '\"'))
+			aux = ft_substr(txt, pos, pos_char(txt + pos, '\"'));
+		else
+			aux = ft_substr(txt, pos, ft_strlen(txt + pos) - 1);
+		
+	}
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
-	else if (txt[pos + 1] == ' ' || txt[pos + 1] == '\"' || txt[pos + 1] == '$' \
-	|| txt[pos + 1] == '\'' || txt[pos + 1] == '>' ||txt[pos + 1] == '<' || txt[pos + 1] == '|' || !txt[pos + 1])
+	else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
+			!txt[pos + 1])
 	{
 		if (txt[pos + 1] == '$')
 			return (ft_strdup("$$"));
@@ -60,21 +71,26 @@ char *ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	{
 		while (env[i] && !par)
 		{
-			par = str_cmp(txt, pos + 1, env[i], '=');
+			if (aux)
+				par = str_cmp(aux, 1, env[i], '=');
+			else
+				par = str_cmp(txt, pos + 1, env[i], '=');
 			i++;
 		}
+		if (aux)
+			free (aux);
 		if (par)
 			return (ft_substr(env[i - 1], par, ft_strlen(env[i - 1]) - 1));
 	}
 	return (NULL);
 }
 
-char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
+char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
-	int i;
-	char *aux;
-	char *aux2;
-	char *add;
+	int		i;
+	char	*aux;
+	char	*aux2;
+	char	*add;
 
 	i = 0;
 	aux = ft_substr(txt, 0, pos);
@@ -83,21 +99,23 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	{
 		pos++;
 		free (aux2);
-		while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
-		&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
+		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 			i++;
-		//ft_printf("este es i: %d\n", i);
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-		//ft_printf("este es substr: %s\n", aux2);
 		add = ft_strjoin(aux, aux2);
+		free (aux2);
+		free (aux);
 		return (add);
 	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
-	while ((txt[pos + i] != ' ' && txt[pos + i] != '\"' && txt[pos + i] != '$' \
-	&& txt[pos + i] != '\'' && txt[pos + i] != '>' && txt[pos + i] != '<' && txt[pos + i] != '|') && txt[pos + i])
+	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 		i++;
+	free (aux);
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-	add = ft_strjoin(add, aux);
-	return (add);
+	free (aux2);
+	aux2 = ft_strjoin(add, aux);
+	free (add);
+	free (aux);
+	return (aux2);
 }

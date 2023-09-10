@@ -29,13 +29,15 @@ int	custom_unset(t_content *cont, int i)
 	char	*aux;
 
 	j = 1;
-	if (!strcmp(cont[i].cmd, "unset"))
+	aux = NULL;
+	if (!ft_strcmp(cont[i].cmd, "unset"))
 	{
 		aux = cont[i].full_comand[j];
-		if (!(!strrchr(aux, ' ') && !strrchr(aux, '\"') && !strrchr(aux, '$') \
-					&& !strrchr(aux, '\'') && !strrchr(aux, '>') && \
-					!strrchr(aux, '<') && !strrchr(aux, '|')))
+		if (!(pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
+					&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
+					pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0))
 		{
+			free (aux);
 			err_cmd("formato invalido\n", cont);
 			return (0);
 		}
@@ -45,5 +47,7 @@ int	custom_unset(t_content *cont, int i)
 			j++;
 		}
 	}
+	if (aux)
+		free (aux);
 	return (1);
 }

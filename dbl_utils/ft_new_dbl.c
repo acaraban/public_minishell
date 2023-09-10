@@ -1,14 +1,14 @@
 #include "../minishell.h"
 
-char **ft_dbl_strdup(char **arr)
+char	**ft_dbl_strdup(char **arr)
 {
-	char **saf;
-	int i;
+	char	**saf;
+	int		i;
 
 	i = 0;
 	while (arr[i])
 		i++;
-	saf = (char **)calloc(sizeof(char *), i + 1);
+	saf = (char **)ft_calloc(sizeof(char *), i + 1);
 	saf[i] = NULL;
 	i = 0;
 	while (arr[i])
@@ -19,27 +19,27 @@ char **ft_dbl_strdup(char **arr)
 	return (saf);
 }
 
-char **ft_dbl_strdup_str(char *txt)
+char	**ft_dbl_strdup_str(char *txt)
 {
-	char **asd;
+	char	**asd;
 
-	asd = (char **)calloc(sizeof(char *), 2);
+	asd = (char **)ft_calloc(sizeof(char *), 2);
 	asd[1] = NULL;
 	asd[0] = ft_strdup(txt);
 	return (asd);
 }
 
-char **ft_elim_str_free(char **arr, int pos)
+char	**ft_elim_str_free(char **arr, int pos)
 {
-	int i;
-	int j;
-	char **asd;
+	int		i;
+	int		j;
+	char	**asd;
 
 	i = 0;
 	j = 0;
 	while (arr[i])
 		i++;
-	asd = (char**)calloc(sizeof(char * ), i);
+	asd = (char **)ft_calloc(sizeof(char *), i);
 	asd[i - 1] = NULL;
 	i = 0;
 	while (arr[i])
@@ -47,7 +47,7 @@ char **ft_elim_str_free(char **arr, int pos)
 		if (i == pos)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		else
 			asd[j] = ft_strdup(arr[i]);

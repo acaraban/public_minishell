@@ -8,22 +8,22 @@ char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
 
 	i = 0;
 	h = 0;
-	if (arr == NULL || arr[0] == NULL)
+	if (arr[0] == NULL)
 	{
-		jj = (char **)calloc(sizeof(char *), 2);
-		jj[0] = (char *)calloc(sizeof(char ), conta - inicial + 1);
+		jj = (char **)ft_calloc(sizeof(char *), 2);
+		jj[0] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
 		jj[1] = NULL;
 	}
 	else
 	{
 		while (arr[i])
 			i++;
-		jj = (char **)calloc(sizeof(char *), i + 2);
-		jj[i] = (char *)calloc(sizeof(char ), conta - inicial + 2);
+		jj = (char **)ft_calloc(sizeof(char *), i + 2);
+		jj[i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
 		jj[i + 1] = NULL;
 		while (h < i)
 		{
-			jj[h] = strdup(arr[h]);
+			jj[h] = ft_strdup(arr[h]);
 			h++;
 		}
 	}
@@ -34,9 +34,12 @@ char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
 		h++;
 	}
 	h = 0;
-	while (h < i + 1)
-		free (arr[h++]);
-	free(arr);
+	if (arr[0] != NULL)
+	{
+		while (h < i + 1)
+			free (arr[h++]);
+	}
+	free (arr);
 	return (jj);
 }
 

@@ -1,16 +1,17 @@
 #include "minishell.h"
 
-t_global *ft_init(t_global *glb, char **env)
+
+t_global *ft_init(t_global *glb, char **env, int err_status)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	glb = (t_global *)calloc(sizeof(t_content), 1);
+	glb = (t_global *)calloc(sizeof(t_global), 1);
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	glb[0].err_stat = 0;
+	glb[0].err_stat = err_status;
 	glb[0].new_stat = 0;
 	while (env[i])
 		i++;

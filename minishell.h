@@ -27,6 +27,38 @@
 // write end of pipe
 # define WRITE_END 1
 
+typedef struct s_red
+{
+	char		**cmd_str;
+	char		**ac;
+}t_red;
+
+typedef struct s_typered
+{
+	char		**cmd_str;
+	char		**ac;
+	int			i;
+	int			h;
+}t_typered;
+
+typedef struct s_xtr
+{
+	char **jj;
+	int i;
+	int h;
+	int l;
+	int k;
+
+}t_xtr;
+
+typedef struct s_specials
+{
+	int i;
+	int count;
+	int boo;
+	char *txt;
+	char **vue;
+}t_specials;
 
 typedef struct s_custom
 {
@@ -63,6 +95,7 @@ typedef struct s_content
 	t_custom *custom;
 }t_content;
 
+t_global *ft_init(t_global *glb, char **env, int err_status);
 int frst_chr(char *txt, char car);
 t_global *ft_init(t_global *glb, char **env);
 int all_chr(char *txt, int pos);
@@ -74,7 +107,6 @@ char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 char **ft_specials(char *old_txt, t_content *cant, int errors);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
-void ft_arg_div(char *txt, t_global *glb);
 void err_stx(char *txt, t_content *cont);
 char **ft_xtr_allsz_free(char **arr, char **add, int posadd);
 int	err_sim_red(char *txt, int i, t_content *cont);
@@ -84,27 +116,40 @@ int err_redsegred(char **arr, t_content *cont);
 int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
-int     ft_type_red_entsim(char **final, int i, int h, t_content *cont);
-int     ft_type_red_salsim(char **final, int i, int h, t_content *cont);
-int     ft_type_red_saldbl(char **final, int i, int h, t_content *cont);
-char    **ft_type_red_entdbl(char **final, char **ac, int i, int h, t_content *cont);
+int     ft_type_red_entsim(char **final, t_typered *type, t_content *cont);
+int     ft_type_red_salsim(char **final, t_typered *type, t_content *cont);
+int     ft_type_red_saldbl(char **final, t_typered *type, t_content *cont);
+char    **ft_type_red_entdbl(char **final, t_typered *type, t_content *cont);
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
-int	ft_heredoc(char **arr);
+int	ft_heredoc(char **arr, t_content *cont);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
 int bef_str(char *txt);
-int	custom_export(t_content *cont, int i); // le cambie el nombre xq solo export podria dar error, tenia otro color
+int	custom_export(t_content *cont, int i);
 void err_cmd(char *txt, t_content *cont);
 int arg_is_valid(char *comand_args);
 int err_dobcom(char *txt, t_content *cont);
 int custom_unset(t_content *cont, int i);
 int  coincidence(t_content *cont, char *txt);
 int new_arch(char *name);
-int ft_tam_args(char *txt, t_content *cont);
+int ft_tam_args(char *txt, t_global *glb);
 void	handle_sigint(int sig);
+char **convert_str_trim(char **vue);
+int ft_nrmntt_1(t_global *glb);
+void ft_free_cont(t_content *cont);
+void init_cont_vars(t_global *glb, t_content *cont);
+char *init_argdiv_vars(char *txt);
+int	cmd_str_cont(t_content *cont, char **cmd_str, int h);
+int mini_all_type_1(t_typered *type, char **final, t_content *cont);
+int mini_all_type_2(t_typered *type, char **final, t_content *cont);
+int mini_all_type_3(t_typered *type, char **final, t_content *cont);
+int	all_type_red(t_typered *type, char **final, t_content *cont);
+char **arg_parsing(char **final, t_content *cont);
+void	ft_final_arg(char **ac, t_content *cont);
+void	ft_arg_div(char *txt, t_global *glb);
 
 
 void	ft_executor(t_content *cont);

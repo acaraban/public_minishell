@@ -48,16 +48,20 @@ int	bef_str(char *txt)
 	tam = pos_char(txt, '=');
 	if (tam < 0)
 		return (0);
-	aux = (char *)ft_calloc(sizeof(char), tam + 1);
+	aux = (char *)ft_calloc(sizeof(char), tam + 2);
 	while (i < tam + 1)
 	{
 		aux[i] = txt[i];
 		i++;
 	}
-	if (!strrchr(aux, ' ') && !strrchr(aux, '\"') && !strrchr(aux, '$') \
-			&& !strrchr(aux, '\'') && !strrchr(aux, '>') && !strrchr(aux, '<') \
-			&& !strrchr(aux, '|'))
+	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
+			&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && pos_char(aux, '<') < 0 \
+			&& pos_char(aux, '|') < 0)
+	{
+		free (aux);
 		return (1);
+	}
+	free (aux);
 	return (0);
 }
 
@@ -89,31 +93,3 @@ int	custom_export(t_content *cont, int i)
 	return (0);
 }
 
-/*int main(int argc, char **argv, char **env)
-{
-	int i;
-	char *ar;
-	t_content *cont;
-	t_global *glb;
-
-	i = 0;
-	glb = (t_global *)ft_calloc(sizeof(t_global), 1);
-	glb->env = ft_dbl_strdup(env);
-	cont = (t_content *)ft_calloc(sizeof(t_content), 3);
-	cont[0].global = glb;
-	cont[0].full_comand = (char **)ft_calloc(sizeof(char *), 3);
-	cont[0].full_comand[0] = strdup("export");
-	cont[0].cmd = strdup("export");
-	cont[0].full_comand[1] = strdup("sa\'da=pe\'ra");
-
-
-	cont[1].full_comand = (char **)ft_calloc(sizeof (char *), 4);
-	cont[1].cmd = strdup("export");
-	cont[1].full_comand[1] = strdup("j\'ugo=limon");
-	cont[1].full_comand[2] = strdup("tuerca=tornillo");
-	printf("devuelto por export: %d\n", export(cont, 0));
-	//printf("devuelto por export: %d\n", export(cont, 1));
-	printf("este es env: \n");
-	while (glb->env[i])
-		printf("%s\n", glb->env[i++]);
-}*/

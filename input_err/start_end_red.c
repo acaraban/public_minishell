@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int start_end_red(char **vue, t_content *cont)
+int	start_end_red(char **vue, t_content *cont)
 {
 	if (vue[0][0] == '|')
 	{
