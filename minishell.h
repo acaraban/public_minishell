@@ -58,14 +58,13 @@ typedef struct s_num
 
 }t_xtr;*/
 
-/*typedef struct s_specials
+typedef struct s_shell
 {
 	int i;
-	int count;
-	int boo;
-	char *txt;
-	char **vue;
-}t_specials;*/
+	int j;
+	int k;
+	int aux;
+}t_shell;
 
 typedef struct s_executor
 {
@@ -109,6 +108,7 @@ typedef struct s_content
 	t_custom *custom;
 }t_content;
 
+int main(int argc, char **argv, char **env);
 t_global *ft_init(t_global *glb, char **env, int err_status);
 int frst_chr(char *txt, char car);
 int all_chr(char *txt, int pos);
@@ -120,7 +120,7 @@ char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 int check_shell_vars(char *s, t_content *cont);
 void shell_split_bucle(char	**dst, int *l, int *j);
-int main(int argc, char **argv, char **env);
+void check_comillas(char *s, char **dst, t_shell *shell);
 char **ft_specials(char *old_txt, t_content *cant);
 char *ft_specials_1(char *old_txt, t_num *num);
 int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant);
@@ -129,7 +129,7 @@ int	ft_specials_4(char *txt, t_num *num, t_content *cant);
 int	ft_specials_5(char *txt, t_num *num, t_content *cant);
 int	ft_specials_6(char *txt, t_num *num, t_content *cant);
 int	ft_specials_7(char *txt, t_num *num, t_content *cant);
-void	ft_specials_8(char *txt, t_num *num);
+void ft_specials_8(char *txt, t_num *num);
 int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt);
 int	ft_specials_10(char *txt, t_num *num, t_content *cant);
 int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt);

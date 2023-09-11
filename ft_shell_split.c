@@ -68,35 +68,27 @@ static char	**freee(char **dst, int j)
 
 static char	**affect(char *s, char **dst, char c, int l)
 {
-	int	i;
-	int	j;
-	int	k;
-	int aux;
+	t_shell shell;
 
-	i = 0;
-	j = 0;
-	while (s[i] != '\0' && j < l)
+	shell.i = 0;
+	shell.j = 0;
+	while (s[shell.i] != '\0' && shell.j < l)
 	{
-		k = 0;
-		while (s[i] == c)
-			i++;
-		dst[j] = (char *)malloc(sizeof(char) * numchar(s, c, i) + 1);
-		if (dst[j] == NULL)
-			return (freee((char **)dst, j));
-		while (s[i] != '\0' && s[i] != c)
+		shell.k = 0;
+		while (s[shell.i] == c)
+			shell.i++;
+		dst[shell.j] = (char *)malloc(sizeof(char) * numchar(s, c, shell.i) + 1);
+		if (dst[shell.j] == NULL)
+			return (freee((char **)dst, shell.j));
+		while (s[shell.i] != '\0' && s[shell.i] != c)
 		{
-			if (s[i] == '\'' || s[i] == '\"')
-			{
-				aux = i + find_match(s, i, s[i]);
-				while (i < aux)
-					dst[j][k++] = s[i++];
-			}
-			dst[j][k++] = s[i++];
+			check_comillas(s, dst, &shell);
+			dst[shell.j][shell.k++] = s[shell.i++];
 		}
-		dst[j][k] = '\0';
-		j++;
+		dst[shell.j][shell.k] = '\0';
+		shell.j++;
 	}
-	dst[j] = 0;
+	dst[shell.j] = 0;
 	return (dst);
 }
 

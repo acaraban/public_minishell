@@ -55,3 +55,13 @@ char *del_char(char *txt, int un)
 	free (txt);
 	return (aux3);
 }
+
+void check_comillas(char *s, char **dst, t_shell *shell)
+{
+    if (s[shell->i] == '\'' || s[shell->i] == '\"')
+    {
+        shell->aux = shell->i + find_match(s, shell->i, s[shell->i]);
+        while (shell->i < shell->aux)
+            dst[shell->j][shell->k++] = s[shell->i++];
+    }
+}
