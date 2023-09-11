@@ -55,6 +55,15 @@ typedef struct s_typered
 	char **vue;
 }t_specials;*/
 
+typedef struct s_executor
+{
+	int		i;
+	pid_t	pid;
+	int		status;
+	int num_of_cmd;
+
+}t_executor;
+
 typedef struct s_custom
 {
 	char *command_arg;

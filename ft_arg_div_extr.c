@@ -109,7 +109,7 @@ void	ft_arg_div(char *txt, t_global *glb)
 	if (final == NULL)
 		return ;
 	ac = arg_parsing(final, cont, &boo);
-	ft_printf("este es boo: %d\n", boo);
+	//ft_printf("este es boo: %d\n", boo);
 	if (boo)
 		ft_final_arg(ac, cont);
 }

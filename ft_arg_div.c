@@ -16,6 +16,7 @@ void init_cont_vars(t_global *glb, t_content *cont)
 		cont[tam].cmd = NULL;
 		tam++;
 	}
+	cont->global->environ_path = ft_env_path(cont->global->env);
 }
 
 char *init_argdiv_vars(char *txt)

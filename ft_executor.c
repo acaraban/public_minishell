@@ -6,16 +6,31 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 23:59:10 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:50:47 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void init_exec_vars(int *i, int *num_cmd, t_content *cont)
+{
+    *i = 0;
+    *num_cmd = cont->global->num_cmd;
+}
+
 void	init_builtins(t_content *cont, int i)
 {
 	cont[i].builtin = 0;
 	cont[i].which_builtin = 0;
+}
+
+void handle_unlink_error_nfl(t_content *cont, int i)
+{
+    //printf("llega aqui\n");
+    if (unlink(cont[i].infile) != 0)
+    {
+        perror("unlink");
+    }
 }
 
 /*
@@ -28,36 +43,34 @@ void	init_builtins(t_content *cont, int i)
 
 void	ft_executor(t_content *cont)
 {
-	int		i;
-	pid_t	pid;
-	int		status;
-	int		fds[cont->global->num_cmd][2];
-
-	i = 0;
-	cont->global->environ_path = ft_env_path(cont->global->env);
-    while (i < cont->global->num_cmd)
+	t_executor  exec;
+	int		fds[exec.num_of_cmd][2];
+    
+    init_exec_vars(&exec.i, &exec.num_of_cmd, cont);
+    //printf("cuanto es exec.i: %d\n", exec.i);
+    //printf("cuanto es exec.num_of_cmd: %d\n", exec.num_of_cmd);
+    /*exec.i = 0;
+    exec.num_of_cmd = cont->global->num_cmd;*/
+    while (exec.i < exec.num_of_cmd)
     {
-        if (cont[i].cmd)
+        if (cont[exec.i].cmd)
         {
-            if (is_builtin_noredir(cont, i) == 0)
-            return ;
-            init_builtins(cont, i);
-            if (pipe(fds[i]) == -1)
+            if (is_builtin_noredir(cont, exec.i) == 0)
                 return ;
-            pid = fork();
-            if (pid == -1)
+            init_builtins(cont, exec.i);
+            if (pipe(fds[exec.i]) == -1)
                 return ;
-            if (pid == 0)
-                ft_execute_child(cont, i, fds, i);
-            main_closes_pipes(cont, i, fds, i);
-            waitpid(pid, &status, 0);
-            cont->global->err_stat = WEXITSTATUS(status);
+            exec.pid = fork();
+            if (exec.pid == -1)
+                return ;
+            if (exec.pid == 0)
+                ft_execute_child(cont, exec.i, fds, exec.i);
+            main_closes_pipes(cont, exec.i, fds, exec.i);
+            waitpid(exec.pid, &exec.status, 0);
+            cont->global->err_stat = WEXITSTATUS(exec.status);
         }
-        else if (cont[i].nfl == 2)
-        {
-            if (unlink(cont[i].infile) != 0)
-            perror("unlink");
-        }
-        i++;
+        else if (cont[exec.i].nfl == 2)
+            handle_unlink_error_nfl(cont, exec.i);
+        exec.i++;
     }
 }
