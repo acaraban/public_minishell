@@ -97,6 +97,7 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
 	{
+		
 		pos++;
 		free (aux2);
 		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)

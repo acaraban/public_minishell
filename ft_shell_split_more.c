@@ -11,7 +11,7 @@ int check_match(char *s1, int *i, t_content *cont)
 {
     if (find_match(s1, *i, s1[*i]) < 0)
     {
-        err_stx("error sintacticooooo\n", cont);
+        err_stx("error sintactico\n", cont);
         return (1);
     }
     return (0);

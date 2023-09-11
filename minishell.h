@@ -48,15 +48,13 @@ typedef struct s_num
 } t_num;
 
 
-/*typedef struct s_xtr
+typedef struct s_xtr
 {
 	char **jj;
 	int i;
 	int h;
-	int l;
-	int k;
 
-}t_xtr;*/
+}t_xtr;
 
 typedef struct s_shell
 {

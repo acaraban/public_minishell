@@ -1,67 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_xtr.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 22:07:43 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/11 22:08:04 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
+char **alloc_when_null(char **jj, int inicial, int conta)
 {
-	char **jj;
-	int i;
-	int h;
-
-	i = 0;
-	h = 0;
-	if (arr[0] == NULL)
-	{
-		jj = (char **)ft_calloc(sizeof(char *), 2);
-		jj[0] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
-		jj[1] = NULL;
-	}
-	else
-	{
-		while (arr[i])
-			i++;
-		jj = (char **)ft_calloc(sizeof(char *), i + 2);
-		jj[i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
-		jj[i + 1] = NULL;
-		while (h < i)
-		{
-			jj[h] = ft_strdup(arr[h]);
-			h++;
-		}
-	}
-	h = 0;
-	while (h + inicial < conta + 1)
-	{
-		jj[i][h] = txt[h + inicial];
-		h++;
-	}
-	h = 0;
-	if (arr[0] != NULL)
-	{
-		while (h < i + 1)
-			free (arr[h++]);
-	}
-	free (arr);
+	jj = (char **)ft_calloc(sizeof(char *), 2);
+	jj[0] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
+	jj[1] = NULL;
 	return (jj);
 }
 
-/*int main(void)
+void alloc_and_copy(t_xtr *xtr, int inicial, int conta, char **arr)
 {
-	atexit(func_free);
-	char **arr;
-	int i;
-	i = 0;
-	char txt[] = "esto es el texto de prueba, donde tengo que comprobar que el texto se corta en las partes adecuadas";
+	xtr->jj[xtr->i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
+	xtr->jj[xtr->i + 1] = NULL;
+	xtr->jj[xtr->i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
+	xtr->jj[xtr->i + 1] = NULL;
+	while (xtr->h < xtr->i)
+	{
+		xtr->jj[xtr->h] = ft_strdup(arr[xtr->h]);
+		xtr->h++;
+	}
+}
 
-	arr = (char **)calloc(sizeof(char *), 1);
-	arr[0] = NULL;
-	arr = dobl_prt(arr, txt, 0, 5);
-	arr = dobl_prt(arr, txt, 6, 8);
-	arr = dobl_prt(arr, txt, 9, 15);
-	arr = dobl_prt(arr, txt, 16, 24);
-	arr = dobl_prt(arr, txt, 25, 30);
-	while (arr[i])
-		printf("%s\n", arr[i++]);
-	i = 0;
-	while (arr[i])
-		free (arr[i++]);
-	free(arr);
-}*/
+void copy_array(int inicial, int conta, t_xtr *xtr, char *txt)
+{
+	int h;
+
+	h = 0;
+	while (h + inicial < conta + 1)
+	{
+		xtr->jj[xtr->i][h] = txt[h + inicial];
+		h++;
+	}
+}
+
+char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
+{
+	t_xtr	xtr;
+
+	xtr.i = 0;
+	xtr.h = 0;
+	xtr.jj = NULL;
+	if (arr[0] == NULL)
+		xtr.jj = alloc_when_null(xtr.jj, inicial, conta);
+	else
+	{
+		while (arr[xtr.i])
+			xtr.i++;
+		xtr.jj = (char **)ft_calloc(sizeof(char *), xtr.i + 2);
+		alloc_and_copy(&xtr, inicial, conta, arr);
+	}
+	copy_array(inicial, conta, &xtr, txt);
+	xtr.h = 0;
+	if (arr[0] != NULL)
+	{
+		while (xtr.h < xtr.i + 1)
+			free (arr[xtr.h++]);
+	}
+	free (arr);
+	return (xtr.jj);
+}
