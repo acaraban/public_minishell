@@ -43,6 +43,7 @@ SRCS =	builtins/custom_echo.c \
 		ft_type_red_pars_entsim.c \
 		ft_type_red_pars_entdbl.c \
 		ft_heredoc.c \
+		ft_heredoc_more.c \
 		input_err/err_dobcom.c \
 		ft_new_arch.c \
 		ft_init_args.c \

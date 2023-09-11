@@ -30,6 +30,17 @@
 #define SHORT cont->global->num_cmd
 
 
+typedef struct s_here
+{
+	char *val;
+	char *new;
+	char *aux;
+	int i;
+	int r;
+	int boo;
+	int fd;
+}t_here;
+
 typedef struct s_red
 {
 	int r;
@@ -166,6 +177,13 @@ char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
 int	ft_heredoc(char **arr, t_content *cont);
+void here_condition(t_here *here);
+void init_here_vars(t_here *here);
+void bucle_here_aux(t_here *here);
+void free_and_copy(t_here *here);
+void free_no_val(t_here *here);
+void val_is_aux(t_here *here);
+void open_and_write(t_here *here);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);

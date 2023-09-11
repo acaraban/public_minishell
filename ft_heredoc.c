@@ -2,7 +2,13 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
+/*void	handle_sigint_here(int sig)
+{
+	if (sig == 2)
+	{ 
+		return ;
+	}
+}*/
 
 void init_here_vars(t_here *here)
 {
@@ -26,39 +32,6 @@ void here_condition(t_here *here)
 	else
 		here->boo = 1;
 }
-
-void free_no_val(t_here *here)
-{
-	free(here->val);
-	free (here->new);
-	ft_printf("exit\n");
-}
-
-void bucle_here_aux(t_here *here)
-{
-	while (here->val[here->r])
-	{
-		here->aux[here->r] = here->val[here->r];
-		here->r++;
-	}
-	here->aux[here->r] = '\n';
-}
-
-void free_and_copy(t_here *here)
-{
-	free (here->val);
-	here->val = ft_strdup(here->aux);
-	free (here->aux);
-	if (here->new)
-		here->aux = ft_strjoin(here->new, here->val);
-	else
-		here->aux = ft_strdup(here->val);
-	free (here->new);
-	here->new = ft_strdup(here->aux);
-	free (here->aux);
-	here->r = 0;
-}
-
 
 int	ft_heredoc(char **arr, t_content *cont)
 {
