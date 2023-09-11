@@ -34,10 +34,8 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 			return (0);
 	}
 	else if (final[type->i][0] == '>')
-	{
 		if (!mini_all_type_3(type, final, cont))
 			return (0);
-	}
 	return (1);
 }
 
@@ -46,12 +44,10 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 	t_typered	*type;
 	
 	type = (t_typered *)malloc(sizeof(t_typered) * 1);
-	type->i = 0;
-	type->h = 0;
-	type->ac = NULL;
+	init_typered(type);
 	while (final[type->i])
 	{
-		if (final[type->i][0] != '<' && final[type->i][0] != '>' && final[type->i][0] != '|')
+		if (!ft_strchr("<>|", final[type->i][0]))
 		{
 			type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
 			if (!cmd_str_cont(cont, type->cmd_str, type->h))
@@ -64,11 +60,8 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 			type->h++;
 		else
 		{
-			if (!all_type_red(type, final, cont))
-			{
-				*boo = 0;
+			if (check_type_red(type, final, cont, boo) == 0)
 				return (NULL);
-			}
 		}
 		type->i++;
 	}
@@ -84,7 +77,7 @@ void	ft_final_arg(char **ac, t_content *cont)
 		free_dbl(ac);
 	}
 	ft_executor(cont);
-	ft_free_cont(cont); // esta la lia parda
+	ft_free_cont(cont);
 }
 
 void	ft_arg_div(char *txt, t_global *glb)
@@ -109,7 +102,6 @@ void	ft_arg_div(char *txt, t_global *glb)
 	if (final == NULL)
 		return ;
 	ac = arg_parsing(final, cont, &boo);
-	//ft_printf("este es boo: %d\n", boo);
 	if (boo)
 		ft_final_arg(ac, cont);
 }

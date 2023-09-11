@@ -10,6 +10,7 @@ SRCS =	builtins/custom_echo.c \
 		err_mngment/err_cmd.c \
 		err_mngment/err_execve.c \
 		ft_arg_div.c \
+		ft_arg_div_more.c \
 		ft_ent_var.c \
 		ft_minishell.c \
 		ft_shell_split.c \
