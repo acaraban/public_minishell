@@ -38,6 +38,16 @@ typedef struct s_typered
 	int			h;
 }t_typered;
 
+typedef struct s_num
+{
+	int i;
+	int cont;
+	int boo;
+	char **vue;
+	int ent;
+} t_num;
+
+
 /*typedef struct s_xtr
 {
 	char **jj;
@@ -110,6 +120,17 @@ char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
 int main(int argc, char **argv, char **env);
 char **ft_specials(char *old_txt, t_content *cant);
+char *ft_specials_1(char *old_txt, t_num *num);
+int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant);
+int	ft_specials_3(char *txt, t_num *num, t_content *cant);
+int	ft_specials_4(char *txt, t_num *num, t_content *cant);
+int	ft_specials_5(char *txt, t_num *num, t_content *cant);
+int	ft_specials_6(char *txt, t_num *num, t_content *cant);
+int	ft_specials_7(char *txt, t_num *num, t_content *cant);
+void	ft_specials_8(char *txt, t_num *num);
+int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt);
+int	ft_specials_10(char *txt, t_num *num, t_content *cant);
+int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void err_stx(char *txt, t_content *cont);
 char **ft_xtr_allsz_free(char **arr, char **add, int posadd);

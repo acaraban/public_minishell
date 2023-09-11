@@ -6,12 +6,11 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 14:56:19 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:08:03 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	init_builtins(t_content *cont, int i)
 {
@@ -19,21 +18,20 @@ void	init_builtins(t_content *cont, int i)
 	cont[i].which_builtin = 0;
 }
 
-void handle_unlink_error_nfl(t_content *cont, int i)
+void	handle_unlink_error_nfl(t_content *cont, int i)
 {
-    if (unlink(cont[i].infile) != 0)
-    {
-        perror("unlink");
-    }
+	if (unlink(cont[i].infile) != 0)
+	{
+		perror("unlink");
+	}
 }
 
-void father_stuff(t_executor *exec, int i, t_content *cont, int (*fds)[2])
+void	father_stuff(t_executor *exec, int i, t_content *cont, int (*fds)[2])
 {
-    main_closes_pipes(cont, i, fds, i);
-    waitpid(exec->pid, &exec->status, 0);
-    cont->global->err_stat = WEXITSTATUS(exec->status);
+	main_closes_pipes(cont, i, fds, i);
+	waitpid(exec->pid, &exec->status, 0);
+	cont->global->err_stat = WEXITSTATUS(exec->status);
 }
-
 
 /*
     num = index for the pipes' file descriptors.
@@ -45,31 +43,29 @@ void father_stuff(t_executor *exec, int i, t_content *cont, int (*fds)[2])
 
 void	ft_executor(t_content *cont)
 {
-	t_executor  exec;
-    int		i;
-	int		fds[SHORT][2];
+	t_executor	exec;
+	int			i;
+	int			fds[SHORT][2];
 
 	i = 0;
-    while (i < cont->global->num_cmd)
-    {
-        if (cont[i].cmd)
-        {
-            if (is_builtin_noredir(cont, i) == 0)
-                return ;
-            init_builtins(cont, i);
-            if (pipe(fds[i]) == -1)
-                return ;
-            exec.pid = fork();
-            if (exec.pid == -1)
-                return ;
-            if (exec.pid == 0)
-                ft_execute_child(cont, i, fds, i);
-            father_stuff(&exec, i, cont, fds);
-        }
-        else if (cont[i].nfl == 2)
-            handle_unlink_error_nfl(cont, i);
-        i++;
-    }
+	while (i < cont->global->num_cmd)
+	{
+		if (cont[i].cmd)
+		{
+			if (is_builtin_noredir(cont, i) == 0)
+				return ;
+			init_builtins(cont, i);
+			if (pipe(fds[i]) == -1)
+				return ;
+			exec.pid = fork();
+			if (exec.pid == -1)
+				return ;
+			if (exec.pid == 0)
+				ft_execute_child(cont, i, fds, i);
+			father_stuff(&exec, i, cont, fds);
+		}
+		else if (cont[i].nfl == 2)
+			handle_unlink_error_nfl(cont, i);
+		i++;
+	}
 }
-
-
