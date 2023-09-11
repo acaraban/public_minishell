@@ -30,6 +30,12 @@
 #define SHORT cont->global->num_cmd
 
 
+typedef struct s_red
+{
+	int r;
+	char **cmd_str;
+}t_red;
+
 typedef struct s_typered
 {
 	char		**cmd_str;
@@ -144,9 +150,18 @@ int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
 int     ft_type_red_entsim(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_entsim_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_entsim_2(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_entsim_3(t_typered *type, t_content *cont);
 int     ft_type_red_salsim(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_salsim_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_salsim_2(t_typered *type, t_content *cont, t_red *red);
 int     ft_type_red_saldbl(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_saldbl_2(t_typered *type, t_content *cont, t_red *red);
 char    **ft_type_red_entdbl(char **final, t_typered *type, t_content *cont);
+void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red);
+void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red);
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
