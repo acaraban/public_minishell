@@ -26,6 +26,8 @@
 # define READ_END 0
 // write end of pipe
 # define WRITE_END 1
+// short for num_of_commands in norminette
+#define SHORT cont->global->num_cmd
 
 
 typedef struct s_typered
@@ -57,10 +59,8 @@ typedef struct s_typered
 
 typedef struct s_executor
 {
-	int		i;
 	pid_t	pid;
 	int		status;
-	int num_of_cmd;
 
 }t_executor;
 
