@@ -41,6 +41,6 @@ char **ft_specials(char *old_txt, t_content *cant)
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
 	if (!ft_specials_3(txt,  num, cant))
 		return (NULL);
-	//ft_dbl_printf("vue: \n-", num->vue, "-\n", 0);
+	ft_dbl_printf("vue: \n-", num->vue, "-\n", 0);
 	return (num->vue);
 }

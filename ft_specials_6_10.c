@@ -8,7 +8,7 @@ int	ft_specials_6(char *txt, t_num *num, t_content *cant)
 		free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1)
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i);
 	num->cont = num->i + 1;
@@ -23,7 +23,7 @@ int	ft_specials_7(char *txt, t_num *num, t_content *cant)
 		free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1)
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i + 1);
 	num->i++;
@@ -33,7 +33,7 @@ int	ft_specials_7(char *txt, t_num *num, t_content *cant)
 
 void	ft_specials_8(char *txt, t_num *num)
 {
-	if (num->i > 1 && num->cont < num->i - 1)
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i);
 	num->cont = num->i + 1;

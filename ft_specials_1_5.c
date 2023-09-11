@@ -58,14 +58,8 @@ int	ft_specials_4(char *txt, t_num *num, t_content *cant)
 		free (txt);
 		return (0);
 	}
-	ft_printf("aqui si llega\n");
-	if (num->i > 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
-	{
-		ft_printf("aqui entra\n");
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
-	}
-		
-	ft_printf("aqui no llega\n");
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i + 1);
 	num->i++;
 	num->cont = num->i + 1;
@@ -80,10 +74,9 @@ int	ft_specials_5(char *txt, t_num *num, t_content *cant)
 		free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1)
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
-	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i + 1);
-	num->i++;
+	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i);
 	num->cont = num->i + 1;
 	return (1);
 }
