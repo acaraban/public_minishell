@@ -118,6 +118,8 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
+void init_numstring_vars(int *comp, int *cles, int *i);
+int check_match(char *s1, int *i, t_content *cont);
 int check_shell_vars(char *s, t_content *cont);
 void shell_split_bucle(char	**dst, int *l, int *j);
 void check_comillas(char *s, char **dst, t_shell *shell);

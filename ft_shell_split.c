@@ -6,20 +6,15 @@ static int	numstring(char *s1, char c, t_content *cont)
 	int	cles;
 	int i;
 
-	comp = 0;
-	cles = 0;
-	i = 0;
+	init_numstring_vars(&comp, &cles, &i);
 	if (*s1 == '\0')
 		return (0);
 	while (s1[i] != '\0')
 	{
 		if (s1[i] == '\"' || s1[i] == '\'')
 		{
-			if (find_match(s1, i, s1[i]) < 0)
-			{
-				err_stx("error sintactico\n", cont);
+			if (check_match(s1, &i, cont) == 1)
 				return (-1);
-			}
 			i += find_match(s1, i, s1[i]);
 		}
 		if (s1[i] == c)
