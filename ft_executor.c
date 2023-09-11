@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 13:50:47 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:16:10 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ void handle_unlink_error_nfl(t_content *cont, int i)
 
 void	ft_executor(t_content *cont)
 {
-	t_executor  exec;
-	int		fds[exec.num_of_cmd][2];
+    t_executor  exec;
+    int         fds[SHORT][2];
     
     init_exec_vars(&exec.i, &exec.num_of_cmd, cont);
     //printf("cuanto es exec.i: %d\n", exec.i);
     //printf("cuanto es exec.num_of_cmd: %d\n", exec.num_of_cmd);
-    /*exec.i = 0;
-    exec.num_of_cmd = cont->global->num_cmd;*/
     while (exec.i < exec.num_of_cmd)
     {
         if (cont[exec.i].cmd)
