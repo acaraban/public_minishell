@@ -118,6 +118,8 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
+int check_shell_vars(char *s, t_content *cont);
+void shell_split_bucle(char	**dst, int *l, int *j);
 int main(int argc, char **argv, char **env);
 char **ft_specials(char *old_txt, t_content *cant);
 char *ft_specials_1(char *old_txt, t_num *num);

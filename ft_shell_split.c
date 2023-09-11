@@ -1,17 +1,5 @@
 #include "minishell.h"
 
-int find_match(char *txt, int pos, char c)
-{
-	int i;
-
-	i = 1;
-	while (txt[pos + i] && txt[pos + i] != c)
-		i++;
-	if (txt[pos + i] != c)
-		return (-1);
-	return(i);
-}
-
 static int	numstring(char *s1, char c, t_content *cont)
 {
 	int	comp;
@@ -112,32 +100,15 @@ static char	**affect(char *s, char **dst, char c, int l)
 	return (dst);
 }
 
-char *del_char(char *txt, int un)
-{
-	char *aux1;
-	char *aux2;
-	char *aux3;
 
-	aux3 = txt;
-	aux1 = ft_substr(aux3, 0, un);
-	aux2 = ft_substr(aux3, un + 1, strlen(aux3) - un);
-	aux3 = ft_strjoin(aux1, aux2);
-	free (aux1);
-	free (aux2);
-	free (txt);
-	return (aux3);
-}
 
 char	**ft_shell_split(char *s, char c, t_content *cont)
 {
 	char	**dst;
 	int		l;
-	int r;
 	int j;
 
-	if (s == NULL)
-		return (NULL);
-	if (err_dobcom(s, cont) < 0)
+	if (check_shell_vars(s, cont) == 1)
 		return (NULL);
 	l = numstring(s, c, cont);
 	if (l < 0)
@@ -147,22 +118,9 @@ char	**ft_shell_split(char *s, char c, t_content *cont)
 		return (NULL);
 	dst = affect(s, dst, c, l);
 	l = 0;
-	l = 0;
 	while (dst[l])
 	{
-		r = 0;
-		while (dst[l][r])
-		{
-			if (dst[l][r] == '\'' || dst[l][r] == '\"')
-			{
-				j = r + find_match(dst[l], r, dst[l][r]);
-				dst[l] = del_char(dst[l], r);
-				dst[l] = del_char(dst[l], j - 1);
-				r = j;
-				r -= 2;
-			}
-			r++;
-		}
+		shell_split_bucle(dst, &l, &j);
 		l++;
 	}
 	return (dst);

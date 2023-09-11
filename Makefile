@@ -13,6 +13,7 @@ SRCS =	builtins/custom_echo.c \
 		ft_ent_var.c \
 		ft_minishell.c \
 		ft_shell_split.c \
+		ft_shell_split_extra.c \
 		ft_specials.c \
 		ft_specials_1_5.c \
 		ft_specials_6_10.c \
@@ -42,8 +43,8 @@ SRCS =	builtins/custom_echo.c \
 		ft_init_args.c \
 		ft_norminette.c \
 		ft_arg_div_extr.c \
-		ft_extra_utils.c 
-		
+		ft_extra_utils.c
+
 
 INC = -I libft -I /opt/vagrant/embedded/include
 NAME = minishell.a
