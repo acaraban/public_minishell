@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:31:16 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 22:04:16 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	custom_cd(t_content *cont, int i)
 	change_dir(cont, i);
 	free(cont->custom->current_pwd);
 	free(cont->custom->last_pwd);
-	free(cont->custom->command_arg);
+	//free(cont->custom->command_arg);
 	free(cont->custom);
 	return ;
 }

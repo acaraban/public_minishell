@@ -13,10 +13,10 @@ void	free_dbl(char **new)
 
 void	init_xtrallsz_values(int *i, int *h, int *l, int *k)
 {
-	i = 0;
-	h = 0;
-	l = 0;
-	k = 0;
+	*i = 0;
+	*h = 0;
+	*l = 0;
+	*k = 0;
 }
 
 int	set_i_value(int *i, char **arr)
@@ -26,7 +26,7 @@ int	set_i_value(int *i, char **arr)
 	n = *i;
 	while (arr[n])
 	{
-		i++;
+		n++;
 	}
 	return (n);
 }
