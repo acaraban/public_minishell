@@ -9,7 +9,8 @@ int	coincidence(t_content *cont, char *txt)
 	j = 0;
 	while (cont->global->env[i])
 	{
-		while (cont->global->env[i][j] && cont->global->env[i][j] == txt[j])
+		j = 0;
+		while (txt[j] && cont->global->env[i][j] && cont->global->env[i][j] == txt[j])
 		{
 			j++;
 		}
@@ -18,6 +19,7 @@ int	coincidence(t_content *cont, char *txt)
 			cont->global->env = ft_elim_str_free(cont->global->env, i);
 			return (1);
 		}
+		
 		i++;
 	}
 	return (0);
