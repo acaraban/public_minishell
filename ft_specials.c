@@ -36,6 +36,7 @@ char **ft_specials(char *old_txt, t_content *cant)
 	num->cont = 0;
 	num->boo = 0;
 	num->ent = 0;
+	num->vue = NULL;
 	txt = ft_specials_1(old_txt, num);
 	if (txt == NULL)
 		return (NULL);
@@ -50,5 +51,5 @@ char **ft_specials(char *old_txt, t_content *cant)
 		return (NULL);
 	vue = num->vue;
 	free (num);
-	return (num->vue);
+	return (vue);
 }

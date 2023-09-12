@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_xtr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:07:43 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 22:08:04 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:54:58 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char **alloc_when_null(char **jj, int inicial, int conta)
 
 void alloc_and_copy(t_xtr *xtr, int inicial, int conta, char **arr)
 {
-	xtr->jj[xtr->i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
-	xtr->jj[xtr->i + 1] = NULL;
 	xtr->jj[xtr->i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
 	xtr->jj[xtr->i + 1] = NULL;
 	while (xtr->h < xtr->i)

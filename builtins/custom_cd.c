@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 09:54:35 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:08:41 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	custom_cd(t_content *cont, int i)
 			|| ft_strcmp(cont->custom->command_arg, "~") == 0)
 	{
 		free (cont->custom->command_arg);
-		cont->custom->command_arg = getenv("HOME");
+		cont->custom->command_arg = ft_strdup(getenv("HOME"));
 	}
 	if (ft_strcmp(cont->custom->command_arg, "-") == 0)
 	{
@@ -109,7 +109,7 @@ void	custom_cd(t_content *cont, int i)
 	change_dir(cont, i);
 	free(cont->custom->current_pwd);
 	free(cont->custom->last_pwd);
-	//free(cont->custom->command_arg);
+	free(cont->custom->command_arg);
 	free(cont->custom);
 	return ;
 }

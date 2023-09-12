@@ -36,6 +36,7 @@ int	ft_specials_3(char *txt, t_num *num, t_content *cant)
 {
 	if (err_redsegred(num->vue, cant) || start_end_red(num->vue, cant))
 	{
+		free_dbl(num->vue);
 		free (txt);
 		return (0);
 	}
