@@ -12,7 +12,7 @@ char *ft_specials_1(char *old_txt, t_num *num)
 		free (txt);
 		return (NULL);
 	}
-	num->vue = (char **)calloc(sizeof(char *), 1);
+	num->vue = (char **)ft_calloc(sizeof(char *), 1);
 	num->vue[0] = NULL;
 	return (txt);
 }
@@ -21,7 +21,7 @@ int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 {
 	old_txt = ft_add_varent(txt, num->i, cant[0].global[0].env, cant);
 	free (txt);
-	txt = strdup(old_txt);
+	txt = ft_strdup(old_txt);
 	free (old_txt);
 	if (txt == NULL)
 	{

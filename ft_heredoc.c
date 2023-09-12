@@ -25,7 +25,7 @@ void here_condition(t_here *here)
 {
 	if (here->boo)
 	{
-		here->aux = (char *)calloc(sizeof(char), ft_strlen(here->val) + 2);
+		here->aux = (char *)ft_calloc(sizeof(char), ft_strlen(here->val) + 2);
 		bucle_here_aux(here);
 		free_and_copy(here);
 	}

@@ -94,7 +94,7 @@ void	ft_arg_div(char *txt, t_global *glb)
 	if (ft_tam_args(txt, glb) < 0)
 		return ;
 	glb->num_cmd = ft_tam_args(txt, glb);
-	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
+	cont = (t_content *)ft_calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
 	final = ft_specials(txt, cont);
 	if (final == NULL)
