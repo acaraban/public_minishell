@@ -42,6 +42,7 @@ int ft_tam_args(char *txt, t_global *glb)
 			{
 				ft_printf("error sintactico\n");
 				glb->err_stat = STX_ERR;
+				free (txt);
 				return (-1);
 			}
 			i += find_match(txt, i, txt[i]);

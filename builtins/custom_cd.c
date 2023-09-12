@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 22:04:16 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/12 09:54:35 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	update_last_pwd(t_content *cont, int i)
 
 void	init_custom_cd_values(t_content *cont, int i)
 {
-	cont->custom->command_arg = ft_strdup(cont[i].full_comand[1]);
+	if (!cont[i].full_comand[1])
+		cont->custom->command_arg = ft_strdup("");
+	else
+		cont->custom->command_arg = ft_strdup(cont[i].full_comand[1]);
 	cont->custom->last_pwd = ft_calloc(256, sizeof(char));
 	cont->custom->is_switch = 0;
 	if (!cont->custom->last_pwd)

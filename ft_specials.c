@@ -8,12 +8,18 @@ int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 	if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
 	{
 		if (!ft_specials_4(txt, num, cant))
+		{
+			free (num);
 			return(0);
+		}
 	}
 	else
 	{
 		if(!ft_specials_10(txt, num, cant))
+		{
+			free (num);
 			return (0);
+		}
 	}
 	num->i++;
 	return (1);
@@ -23,6 +29,7 @@ char **ft_specials(char *old_txt, t_content *cant)
 {
 	t_num *num;
 	char *txt;
+	char **vue;
 
 	num = (t_num *)malloc(sizeof(t_num) * 1);
 	num->i = 0;
@@ -41,6 +48,7 @@ char **ft_specials(char *old_txt, t_content *cant)
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
 	if (!ft_specials_3(txt,  num, cant))
 		return (NULL);
-	ft_dbl_printf("vue: \n-", num->vue, "-\n", 0);
+	vue = num->vue;
+	free (num);
 	return (num->vue);
 }

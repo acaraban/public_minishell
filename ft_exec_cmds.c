@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:52:41 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:04:57 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 09:51:35 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	is_builtin_noredir(t_content *cont, int i)
 			if (arg_is_valid(cont[i].full_comand[1]) != 0)
 				return (1);
 		}
-		else
-			cont[i].full_comand[1] = "";
+			
 		custom_cd(cont, i);
 		return (0);
 	}
