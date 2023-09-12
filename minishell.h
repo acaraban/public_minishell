@@ -28,6 +28,7 @@
 # define WRITE_END 1
 
 
+
 typedef struct s_custom
 {
 	char *command_arg;
@@ -64,7 +65,7 @@ typedef struct s_content
 }t_content;
 
 int frst_chr(char *txt, char car);
-t_global *ft_init(t_global *glb, char **env, int err_status);
+t_global *ft_init(t_global *glb, char **env);
 int ft_nrmntt_1(t_global *glb);
 void ft_free_cont(t_content *cont);
 int all_chr(char *txt, int pos);

@@ -18,7 +18,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 	new = (char *)ft_calloc(sizeof(char), 1);
 	val = (char *)ft_calloc(sizeof(char), 1);
 	fd = 0;
-	signal(SIGINT, handle_sigint);
+	//signal(SIGINT, handle_sigint);
 	while (arr[i])
 	{
 		if (arr[i + 1] == NULL)
@@ -49,7 +49,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 		}
 		free (val);
 		val = readline(">");
-		if (!val)
+		if (!val || cont->global->err_stat == 1)
 		{
 			free(val);
 			free (new);
