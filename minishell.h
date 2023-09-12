@@ -124,7 +124,7 @@ typedef struct s_content
 }t_content;
 
 int main(int argc, char **argv, char **env);
-t_global *ft_init(t_global *glb, char **env, int err_status);
+t_global *ft_init(t_global *glb, char **env);
 int frst_chr(char *txt, char car);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
@@ -181,7 +181,7 @@ void here_condition(t_here *here);
 void init_here_vars(t_here *here);
 void bucle_here_aux(t_here *here);
 void free_and_copy(t_here *here);
-void free_no_val(t_here *here);
+void free_no_val(t_here *here, t_content *cont);
 void val_is_aux(t_here *here);
 void open_and_write(t_here *here);
 void free_dbl(char **new);

@@ -2,13 +2,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-/*void	handle_sigint_here(int sig)
-{
-	if (sig == 2)
-	{ 
-		return ;
-	}
-}*/
 
 void init_here_vars(t_here *here)
 {
@@ -18,7 +11,6 @@ void init_here_vars(t_here *here)
 	here->new = (char *)ft_calloc(sizeof(char), 1);
 	here->val = (char *)ft_calloc(sizeof(char), 1);
 	here->fd = 0;
-	signal(SIGINT, handle_sigint); // no funciona, no sale del heredoc
 }
 
 void here_condition(t_here *here)
@@ -45,9 +37,9 @@ int	ft_heredoc(char **arr, t_content *cont)
 			here_condition(here);
 		free (here->val);
 		here->val = readline(">");
-		if (!here->val)
+		if (!here->val || cont->global->err_stat == 1)
 		{
-			free_no_val(here);
+			free_no_val(here, cont);
 			return (0);
 		}
 		if (pos_char(here->val, '$'))

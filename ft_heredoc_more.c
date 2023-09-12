@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:48:59 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 23:53:23 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:05:36 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ void free_and_copy(t_here *here)
 	here->r = 0;
 }
 
-void free_no_val(t_here *here)
+void free_no_val(t_here *here, t_content *cont)
 {
 	free(here->val);
 	free (here->new);
-	ft_printf("exit\n");
+	if (cont->global->err_stat != 1)
+		ft_printf("exit\n");
 }
 
 void val_is_aux(t_here *here)
