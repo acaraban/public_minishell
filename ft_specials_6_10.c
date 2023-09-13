@@ -43,6 +43,7 @@ char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
 	if ((num->boo == 1 || num->boo == 0) && txt[num->i] == '$')
 	{
+		ft_printf("aqui entro\n");
 		txt = ft_specials_2(txt, old_txt, num, cant);
 		if (txt == NULL)
 		{
@@ -51,18 +52,33 @@ char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 		}
 	}
 	else if (num->boo == 1 && (txt[num->i] == '\"'))
-		num->boo = 0;
-	else if(num->boo == 2 && (txt[num->i] == '\''))
-		num->boo = 0;
-	else if (num->boo && (txt[num->i] == '\"'))
-		num->boo = 1;
-	else if (num->boo && (txt[num->i] == '\''))
-		num->boo = 2;
-	else if(num->boo)
-		num->boo = num->boo + 1 - 1;
-	else
 	{
 		num->ent = 0;
+		num->boo = 0;
+		return (txt);
+	}
+	else if(num->boo == 2 && (txt[num->i] == '\''))
+	{
+		num->ent = 0;
+		num->boo = 0;
+		return (txt);
+	}
+	else if (!num->boo && (txt[num->i] == '\"'))
+	{
+		num->ent = 0;
+		num->boo = 1;
+		return (txt);
+	}
+	else if (!num->boo && (txt[num->i] == '\''))
+	{
+		num->ent = 0;
+		num->boo = 2;
+		return (txt);
+	}
+	else if(num->boo)
+	{
+		num->ent = 0;
+		num->boo = num->boo + 1 - 1;
 		return (txt);
 	}
 	num->ent = 1;

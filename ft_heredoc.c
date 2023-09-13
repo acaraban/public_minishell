@@ -36,6 +36,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 		if (arr[here->i + 1] == NULL)
 			here_condition(here);
 		ft_free (here->val);
+		cont->global->err_stat = 0;
 		here->val = readline(">");
 		if (!here->val || cont->global->err_stat == 1)
 			return (free_no_val(here, cont), 0);

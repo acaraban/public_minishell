@@ -7,7 +7,7 @@ char *ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 		return (NULL);
 	if (num->ent == 1)
 	{
-		if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
+		if (txt[num->i] == '>' && txt[num->i + 1] == '>')
 		{
 			if (!ft_specials_4(txt, num, cant))
 				return(ft_free (num), NULL);

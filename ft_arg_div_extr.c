@@ -118,7 +118,7 @@ void	ft_arg_div(char *txt, t_global *glb)
 		return ;
 	}
 	ac = arg_parsing(final, cont, &boo);
-	//free_dbl(final);
+	free_dbl(final);
 	if (boo)
 		ft_final_arg(ac, cont);
 }
