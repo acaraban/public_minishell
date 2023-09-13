@@ -26,11 +26,25 @@
 # define READ_END 0
 // write end of pipe
 # define WRITE_END 1
+// short for num_of_commands in norminette
+#define SHORT cont->global->num_cmd
+
+
+typedef struct s_here
+{
+	char *val;
+	char *new;
+	char *aux;
+	int i;
+	int r;
+	int boo;
+	int fd;
+}t_here;
 
 typedef struct s_red
 {
-	char		**cmd_str;
-	char		**ac;
+	int r;
+	char **cmd_str;
 }t_red;
 
 typedef struct s_typered
@@ -41,24 +55,38 @@ typedef struct s_typered
 	int			h;
 }t_typered;
 
+typedef struct s_num
+{
+	int i;
+	int cont;
+	int boo;
+	char **vue;
+	int ent;
+} t_num;
+
+
 typedef struct s_xtr
 {
 	char **jj;
 	int i;
 	int h;
-	int l;
-	int k;
 
 }t_xtr;
 
-typedef struct s_specials
+typedef struct s_shell
 {
 	int i;
-	int count;
-	int boo;
-	char *txt;
-	char **vue;
-}t_specials;
+	int j;
+	int k;
+	int aux;
+}t_shell;
+
+typedef struct s_executor
+{
+	pid_t	pid;
+	int		status;
+
+}t_executor;
 
 typedef struct s_custom
 {
@@ -95,7 +123,8 @@ typedef struct s_content
 	t_custom *custom;
 }t_content;
 
-t_global *ft_init(t_global *glb, char **env, int err_status);
+int main(int argc, char **argv, char **env);
+t_global *ft_init(t_global *glb, char **env);
 int frst_chr(char *txt, char car);
 t_global *ft_init(t_global *glb, char **env);
 int all_chr(char *txt, int pos);
@@ -105,7 +134,23 @@ char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
-char **ft_specials(char *old_txt, t_content *cant, int errors);
+void init_numstring_vars(int *comp, int *cles, int *i);
+int check_match(char *s1, int *i, t_content *cont);
+int check_shell_vars(char *s, t_content *cont);
+void shell_split_bucle(char	**dst, int *l, int *j);
+void check_comillas(char *s, char **dst, t_shell *shell);
+char **ft_specials(char *old_txt, t_content *cant);
+char *ft_specials_1(char *old_txt, t_num *num);
+int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant);
+int	ft_specials_3(char *txt, t_num *num, t_content *cant);
+int	ft_specials_4(char *txt, t_num *num, t_content *cant);
+int	ft_specials_5(char *txt, t_num *num, t_content *cant);
+int	ft_specials_6(char *txt, t_num *num, t_content *cant);
+int	ft_specials_7(char *txt, t_num *num, t_content *cant);
+void ft_specials_8(char *txt, t_num *num);
+int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt);
+int	ft_specials_10(char *txt, t_num *num, t_content *cant);
+int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt);
 char **dobl_prt_free(char **arr, char *txt, int inicial, int conta);
 void err_stx(char *txt, t_content *cont);
 char **ft_xtr_allsz_free(char **arr, char **add, int posadd);
@@ -117,13 +162,29 @@ int start_end_red(char **vue, t_content *cont);
 int err_nolstpar(char *txt, int pos, t_content *cont);
 char **start_end_pip(char **vue, t_content *cont);
 int     ft_type_red_entsim(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_entsim_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_entsim_2(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_entsim_3(t_typered *type, t_content *cont);
 int     ft_type_red_salsim(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_salsim_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_salsim_2(t_typered *type, t_content *cont, t_red *red);
 int     ft_type_red_saldbl(char **final, t_typered *type, t_content *cont);
+int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red);
+int	ft_type_red_saldbl_2(t_typered *type, t_content *cont, t_red *red);
 char    **ft_type_red_entdbl(char **final, t_typered *type, t_content *cont);
+void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red);
+void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red);
 char **ft_dbl_strdup(char **arr);
 char **ft_dbl_strdup_str(char *txt);
 char **ft_elim_str_free(char **arr, int pos);
 int	ft_heredoc(char **arr, t_content *cont);
+void here_condition(t_here *here);
+void init_here_vars(t_here *here);
+void bucle_here_aux(t_here *here);
+void free_and_copy(t_here *here);
+void free_no_val(t_here *here, t_content *cont);
+void val_is_aux(t_here *here);
+void open_and_write(t_here *here);
 void free_dbl(char **new);
 void	ft_dbl_printf(char *txt, char **arr, char *ftxt, int sal);
 int pos_char(char *txt, char c);
@@ -147,10 +208,12 @@ int mini_all_type_1(t_typered *type, char **final, t_content *cont);
 int mini_all_type_2(t_typered *type, char **final, t_content *cont);
 int mini_all_type_3(t_typered *type, char **final, t_content *cont);
 int	all_type_red(t_typered *type, char **final, t_content *cont);
-char **arg_parsing(char **final, t_content *cont);
+char **arg_parsing(char **final, t_content *cont, int *boo);
 void	ft_final_arg(char **ac, t_content *cont);
 void	ft_arg_div(char *txt, t_global *glb);
-
+void init_typered(t_typered *type);
+int check_type_red(t_typered *type, char **final, t_content *cont, int *boo);
+void ft_free(void *ttt);
 
 void	ft_executor(t_content *cont);
 char	*ft_env_path(char **envp);
@@ -184,5 +247,6 @@ void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
 void ft_delete_env_oldpwd(char **environment);
 void check_options(char *options, char *cmd);
+int same_char_across(char *str, int pos_ini, int pos_fin, char c);
 
 #endif

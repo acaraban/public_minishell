@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:01:45 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 14:13:53 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:55:58 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	manage_infiles(t_content *cont, int i)
 
 void	print_outfile_error(t_content *cont, int i)
 {
-	ft_putstr_fd("minishelli: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	perror(cont[i].outfile);
 	exit (EXIT_FAILURE);
 }

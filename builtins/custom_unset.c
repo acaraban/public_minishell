@@ -9,7 +9,8 @@ int	coincidence(t_content *cont, char *txt)
 	j = 0;
 	while (cont->global->env[i])
 	{
-		while (cont->global->env[i][j] && cont->global->env[i][j] == txt[j])
+		j = 0;
+		while (txt[j] && cont->global->env[i][j] && cont->global->env[i][j] == txt[j])
 		{
 			j++;
 		}
@@ -18,6 +19,7 @@ int	coincidence(t_content *cont, char *txt)
 			cont->global->env = ft_elim_str_free(cont->global->env, i);
 			return (1);
 		}
+		
 		i++;
 	}
 	return (0);
@@ -32,12 +34,12 @@ int	custom_unset(t_content *cont, int i)
 	aux = NULL;
 	if (!ft_strcmp(cont[i].cmd, "unset"))
 	{
-		aux = cont[i].full_comand[j];
+		aux = ft_strdup(cont[i].full_comand[j]);
 		if (!(pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
 					&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
 					pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0))
 		{
-			free (aux);
+			ft_free (aux);
 			err_cmd("formato invalido\n", cont);
 			return (0);
 		}
@@ -48,6 +50,6 @@ int	custom_unset(t_content *cont, int i)
 		}
 	}
 	if (aux)
-		free (aux);
+		ft_free (aux);
 	return (1);
 }

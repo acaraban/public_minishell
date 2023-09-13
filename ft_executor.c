@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 23:59:10 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:08:03 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@ void	init_builtins(t_content *cont, int i)
 {
 	cont[i].builtin = 0;
 	cont[i].which_builtin = 0;
+}
+
+void	handle_unlink_error_nfl(t_content *cont, int i)
+{
+	if (unlink(cont[i].infile) != 0)
+	{
+		perror("unlink");
+	}
+}
+
+void	father_stuff(t_executor *exec, int i, t_content *cont, int (*fds)[2])
+{
+	main_closes_pipes(cont, i, fds, i);
+	waitpid(exec->pid, &exec->status, 0);
+	cont->global->err_stat = WEXITSTATUS(exec->status);
 }
 
 /*
@@ -28,36 +43,29 @@ void	init_builtins(t_content *cont, int i)
 
 void	ft_executor(t_content *cont)
 {
-	int		i;
-	pid_t	pid;
-	int		status;
-	int		fds[cont->global->num_cmd][2];
+	t_executor	exec;
+	int			i;
+	int			fds[SHORT][2];
 
 	i = 0;
-	cont->global->environ_path = ft_env_path(cont->global->env);
-    while (i < cont->global->num_cmd)
-    {
-        if (cont[i].cmd)
-        {
-            if (is_builtin_noredir(cont, i) == 0)
-            return ;
-            init_builtins(cont, i);
-            if (pipe(fds[i]) == -1)
-                return ;
-            pid = fork();
-            if (pid == -1)
-                return ;
-            if (pid == 0)
-                ft_execute_child(cont, i, fds, i);
-            main_closes_pipes(cont, i, fds, i);
-            waitpid(pid, &status, 0);
-            cont->global->err_stat = WEXITSTATUS(status);
-        }
-        else if (cont[i].nfl == 2)
-        {
-            if (unlink(cont[i].infile) != 0)
-            perror("unlink");
-        }
-        i++;
-    }
+	while (i < cont->global->num_cmd)
+	{
+		if (cont[i].cmd)
+		{
+			if (is_builtin_noredir(cont, i) == 0)
+				return ;
+			init_builtins(cont, i);
+			if (pipe(fds[i]) == -1)
+				return ;
+			exec.pid = fork();
+			if (exec.pid == -1)
+				return ;
+			if (exec.pid == 0)
+				ft_execute_child(cont, i, fds, i);
+			father_stuff(&exec, i, cont, fds);
+		}
+		else if (cont[i].nfl == 2)
+			handle_unlink_error_nfl(cont, i);
+		i++;
+	}
 }

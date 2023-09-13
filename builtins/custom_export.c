@@ -27,7 +27,7 @@ int	eq_combination(t_content *cont, char *txt)
 		{
 			if (env[i][j] == '=' && txt[j] == '=')
 			{
-				free (env[i]);
+				ft_free (env[i]);
 				env[i] = ft_strdup(txt);
 				return (1);
 			}
@@ -54,14 +54,14 @@ int	bef_str(char *txt)
 		aux[i] = txt[i];
 		i++;
 	}
-	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') < 0 \
-			&& pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && pos_char(aux, '<') < 0 \
-			&& pos_char(aux, '|') < 0)
+	if (pos_char(aux, ' ') < 0 && pos_char(aux, '\"') < 0 && pos_char(aux, '$') \
+			< 0 && pos_char(aux, '\'') < 0 && pos_char(aux, '>') < 0 && \
+			pos_char(aux, '<') < 0 && pos_char(aux, '|') < 0)
 	{
-		free (aux);
+		ft_free (aux);
 		return (1);
 	}
-	free (aux);
+	ft_free (aux);
 	return (0);
 }
 
@@ -70,7 +70,7 @@ int	custom_export(t_content *cont, int i)
 	int	j;
 
 	j = 1;
-	if (!strcmp(cont[i].cmd, "export"))
+	if (!ft_strcmp(cont[i].cmd, "export"))
 	{
 		while (cont[i].full_comand[j])
 		{
@@ -82,7 +82,7 @@ int	custom_export(t_content *cont, int i)
 			else if (bef_str(cont[i].full_comand[j]))
 			{
 				cont->global->env = dobl_prt_free(cont->global->env, \
-					cont[i].full_comand[j], 0, strlen(cont[i].full_comand[j]));
+					cont[i].full_comand[j], 0, ft_strlen(cont[i].full_comand[j]));
 			}
 			else
 				err_cmd("formato invalido\n", cont);
@@ -92,4 +92,3 @@ int	custom_export(t_content *cont, int i)
 	}
 	return (0);
 }
-

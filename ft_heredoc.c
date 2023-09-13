@@ -2,74 +2,54 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+
+void init_here_vars(t_here *here)
+{
+	here->i = 0;
+	here->r = 0;
+	here->boo = 0;
+	here->new = (char *)ft_calloc(sizeof(char), 1);
+	here->val = (char *)ft_calloc(sizeof(char), 1);
+	here->fd = 0;
+}
+
+void here_condition(t_here *here)
+{
+	if (here->boo)
+	{
+		here->aux = (char *)ft_calloc(sizeof(char), ft_strlen(here->val) + 2);
+		bucle_here_aux(here);
+		free_and_copy(here);
+	}
+	else
+		here->boo = 1;
+}
+
 int	ft_heredoc(char **arr, t_content *cont)
 {
-	char *val;
-	char *new;
-	char *aux;
-	int i;
-	int r;
-	int boo;
-	int fd;
-
-	i = 0;
-	r = 0;
-	boo = 0;
-	new = (char *)ft_calloc(sizeof(char), 1);
-	val = (char *)ft_calloc(sizeof(char), 1);
-	fd = 0;
-	signal(SIGINT, handle_sigint);
-	while (arr[i])
+	t_here *here;
+	
+	here = (t_here *)ft_calloc(sizeof(t_here), 1);
+	init_here_vars(here);
+	while (arr[here->i])
 	{
-		if (arr[i + 1] == NULL)
+		if (arr[here->i + 1] == NULL)
+			here_condition(here);
+		ft_free (here->val);
+		here->val = readline(">");
+		if (!here->val || cont->global->err_stat == 1)
 		{
-			if (boo)
-			{
-				aux = (char *)calloc(sizeof(char), ft_strlen(val) + 2);
-				while (val[r])
-				{
-					aux[r] = val[r];
-					r++;
-				}
-				aux[r] = '\n';
-				free (val);
-				val = ft_strdup(aux);
-				free (aux);
-				if (new)
-					aux = ft_strjoin(new, val);
-				else
-					aux = ft_strdup(val);
-				free (new);
-				new = ft_strdup(aux);
-				free (aux);
-				r = 0;
-			}
-			else
-				boo = 1;
-		}
-		free (val);
-		val = readline(">");
-		if (!val)
-		{
-			free(val);
-			free (new);
-			ft_printf("exit\n");
+			free_no_val(here, cont);
 			return (0);
 		}
-		if (pos_char(val, '$'))
+		if (pos_char(here->val, '$'))
 		{
-			aux = ft_add_varent(val, pos_char(val, '$'), cont[0].global[0].env, cont);
-			free (val);
-			val = aux;
-			aux = NULL;
+			here->aux = ft_add_varent(here->val, pos_char(here->val, '$'), cont[0].global[0].env, cont);
+			val_is_aux(here);
 		}
-		if (!ft_strcmp(arr[i], val))
-			i++;
+		if (!ft_strcmp(arr[here->i], here->val))
+			here->i++;
 	}
-	free (val);
-	fd = open(".awdrgyj123.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	write(fd, new, ft_strlen(new));
-	free (new);
-	close(fd);
+	open_and_write(here);
 	return (1);
 }

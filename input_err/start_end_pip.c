@@ -14,6 +14,7 @@ char	**start_end_pip(char **vue, t_content *cont)
 	if (vue[i - 1][0] == '|')
 	{
 		err_stx("error sintactico\n", cont);
+		free_dbl(vue);
 		return (NULL);
 	}
 	return (vue);

@@ -1,132 +1,61 @@
 #include "minishell.h"
 
-char **ft_specials(char *old_txt, t_content *cant, int errors)
+int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
-	int i;
-	int cont;
-	int boo;
+	num->ent = ft_specials_9(txt, num, cant, old_txt);
+	if (num->ent == 2)
+		return (0);
+	if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
+	{
+		if (!ft_specials_4(txt, num, cant))
+		{
+			ft_free (num);
+			return(0);
+		}
+	}
+	else
+	{
+		if(!ft_specials_10(txt, num, cant))
+		{
+			ft_free (num);
+			return (0);
+		}
+	}
+	num->i++;
+	return (1);
+}
+
+char **ft_specials(char *old_txt, t_content *cant)
+{
+	t_num *num;
 	char *txt;
 	char **vue;
 
-	i = 0;
-	cont = 0;
-	boo = 0;
-	txt = ft_strtrim(old_txt, " ");
-	free (old_txt);
-	if (!txt || ft_strlen(txt) == 0)
-	{
-		free (txt);
+	num = (t_num *)malloc(sizeof(t_num) * 1);
+	num->i = 0;
+	num->cont = 0;
+	num->boo = 0;
+	num->ent = 0;
+	num->vue = NULL;
+	txt = ft_specials_1(old_txt, num);
+	if (txt == NULL)
 		return (NULL);
-	}
-	vue = (char **)calloc(sizeof(char *), 1);
-	vue[0] = NULL;
-	while (txt[i])
+	while (txt[num->i])
 	{
-		if ((boo == 1 || boo == 0) && txt[i] == '$')
+		if(!ft_specials_11(txt, num, cant, old_txt))
 		{
-			old_txt = ft_add_varent(txt, i, cant[0].global[0].env, cant);
-			free (txt);
-			txt = strdup(old_txt);
-			free (old_txt);
-			if (txt == NULL)
-			{
-				free_dbl(vue);
-				free (txt);
-				return (NULL);
-			}
-		}
-		else if (boo == 1 && (txt[i] == '\"'))
-			boo = 0;
-		else if (boo == 2 && (txt[i] == '\''))
-			boo = 0;
-		else if (!boo && (txt[i] == '\"'))
-			boo = 1;
-		else if (!boo && (txt[i] == '\''))
-			boo = 2;
-		else if (boo)
-			boo = boo + 1 - 1;
-		else if (txt[i] == '>' && txt[i + 1] == '>')
-		{
-			if (err_red(i, txt, cant))
-			{
-				free_dbl(vue);
-				free (txt);
-				return (NULL);
-			}
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
-			vue = dobl_prt_free(vue, txt, i, i + 1);
-			i++;
-			cont = i + 1;
-		}
-		else if (txt[i] == '>')
-		{
-			if (err_sim_red(txt, i, cant))
-			{
-				free_dbl(vue);
-				free (txt);
-				return (NULL);
-			}
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
-			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
-		}
-		else if (txt[i] == '<' && txt[i + 1] == '<')
-		{
-			if (err_red(i, txt, cant))
-			{
-				free_dbl(vue);
-				free (txt);
-				return (NULL);
-			}
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
-			vue = dobl_prt_free(vue, txt, i, i + 1);
-			i++;
-			cont = i + 1;
-		}
-		else if (txt[i] == '<')
-		{
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
-			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
-		}
-		else if (txt[i] == '|')
-		{
-			if (err_dobpip(txt, i, cant))
-			{
-				free_dbl(vue);
-				free (txt);
-				return (NULL);
-			}
-			if (i > 1 && cont < i - 1)
-				vue = dobl_prt_free(vue, txt, cont, i - 1);
-			vue = dobl_prt_free(vue, txt, i, i);
-			cont = i + 1;
-		}
-		i++;
-	}
-	if (cont < i)
-		vue = dobl_prt_free(vue, txt, cont, i);
-	if (err_redsegred(vue, cant) || start_end_red(vue, cant))
-	{
-		free_dbl(vue);
-		free (txt);
-		return (NULL);
-	}
-	if (errors)
-	{
-		vue = start_end_pip(vue, cant);
-		if (vue == NULL)
-		{
-			free_dbl(vue);
-			free (txt);
+			printf("entro en la 11\n");
 			return (NULL);
 		}
 	}
-	free (txt);
-	vue = convert_str_trim(vue);
+	if (num->cont < num->i)
+		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
+	if (!ft_specials_3(txt,  num, cant))
+	{
+		printf("entro en la 3\n");
+		return (NULL);
+	}
+	vue = num->vue;
+	ft_free (num);
 	return (vue);
 }

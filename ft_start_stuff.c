@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_start_stuff.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:49:26 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/06 11:51:48 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:12:30 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_delete_env_oldpwd(char **environment)
 	{
 		if (ft_strncmp(environment[j], "OLDPWD", 6) == 0)
 		{
-			free(environment[j]);
+			ft_free(environment[j]);
 			index = j;
 		}
 		j++;
@@ -39,4 +39,10 @@ void	ft_delete_env_oldpwd(char **environment)
 		environment[index] = environment[index + 1];
 		index++;
 	}
+}
+
+void ft_free(void *ttt)
+{
+	free(ttt);
+	ttt = NULL;
 }

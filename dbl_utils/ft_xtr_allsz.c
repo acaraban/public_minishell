@@ -1,30 +1,50 @@
 #include "../minishell.h"
 
-void free_dbl(char **new)
+void	free_dbl(char **new)
 {
-	int h;
+	int	h;
 
 	h = 0;
-	while (new[h])
-		free (new[h++]);
-	free(new[h]);
-	free(new);
+	if (new)
+	{
+		while (new[h])
+			ft_free (new[h++]);
+		ft_free(new[h]);
+		ft_free(new);
+	}
+	new = NULL;
 }
 
-char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
+void	init_xtrallsz_values(int *i, int *h, int *l, int *k)
 {
-	char **jj;
-	int i;
-	int h;
-	int l;
-	int k;
+	*i = 0;
+	*h = 0;
+	*l = 0;
+	*k = 0;
+}
 
-	i = 0;
-	h = 0;
-	l = 0;
-	k = 0;
-	while (arr[i] )
-		i++;
+int	set_i_value(int *i, char **arr)
+{
+	int	n;
+
+	n = *i;
+	while (arr[n])
+	{
+		n++;
+	}
+	return (n);
+}
+
+char	**ft_xtr_allsz_free(char **arr, char **add, int posadd)
+{
+	char	**jj;
+	int		i;
+	int		h;
+	int		l;
+	int		k;
+
+	init_xtrallsz_values(&i, &h, &l, &k);
+	i = set_i_value(&i, arr);
 	while (add[h + posadd])
 		h++;
 	jj = (char **)ft_calloc(sizeof(char *), i + h + 1);
@@ -32,9 +52,7 @@ char **ft_xtr_allsz_free(char **arr, char **add, int posadd)
 	while (l < h + i)
 	{
 		if (l < i)
-		{
 			jj[l] = ft_strdup(arr[l]);
-		}
 		else
 		{
 			jj[l] = ft_strdup(add[k + posadd]);

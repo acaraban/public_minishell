@@ -17,10 +17,10 @@ int	new_arch(char *name)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		perror(namfile);
-		free (namfile);
+		ft_free (namfile);
 		return (0);
 	}
-	free (namfile);
+	ft_free (namfile);
 	close(descfile);
 	return (1);
 }
@@ -42,6 +42,7 @@ int ft_tam_args(char *txt, t_global *glb)
 			{
 				ft_printf("error sintactico\n");
 				glb->err_stat = STX_ERR;
+				ft_free (txt);
 				return (-1);
 			}
 			i += find_match(txt, i, txt[i]);
@@ -60,9 +61,9 @@ char **convert_str_trim(char **vue)
 	while (vue[i])
 	{
 		aux = ft_strdup(vue[i]);
-		free (vue[i]);
+		ft_free (vue[i]);
 		vue[i] = ft_strtrim(aux, " ");
-		free (aux);
+		ft_free (aux);
 		i++;
 	}
 	return (vue);

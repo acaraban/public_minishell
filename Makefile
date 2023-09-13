@@ -10,10 +10,15 @@ SRCS =	builtins/custom_echo.c \
 		err_mngment/err_cmd.c \
 		err_mngment/err_execve.c \
 		ft_arg_div.c \
+		ft_arg_div_more.c \
 		ft_ent_var.c \
 		ft_minishell.c \
 		ft_shell_split.c \
+		ft_shell_split_extra.c \
+		ft_shell_split_more.c \
 		ft_specials.c \
+		ft_specials_1_5.c \
+		ft_specials_6_10.c \
 		dbl_utils/ft_dbl_printf.c \
 		dbl_utils/ft_new_dbl.c \
 		dbl_utils/ft_xtr.c \
@@ -33,13 +38,19 @@ SRCS =	builtins/custom_echo.c \
 		ft_exec_files.c \
 		ft_exec_cmds.c \
 		ft_exec_dups.c \
-		ft_type_red_pars.c \
+		ft_type_red_pars_salsim.c \
+		ft_type_red_pars_saldbl.c \
+		ft_type_red_pars_entsim.c \
+		ft_type_red_pars_entdbl.c \
 		ft_heredoc.c \
+		ft_heredoc_more.c \
 		input_err/err_dobcom.c \
 		ft_new_arch.c \
 		ft_init_args.c \
 		ft_norminette.c \
-		ft_arg_div_extr.c
+		ft_arg_div_extr.c \
+		ft_extra_utils.c
+
 
 
 INC = -I libft -I /opt/vagrant/embedded/include

@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:55:57 by acaraban          #+#    #+#             */
-/*   Updated: 2022/06/24 15:04:54 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:09:01 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 	len = ft_strlen(s1) + 1;
 	s2 = malloc(len);
 	if (!s2)
-		return (0);
+		return (NULL);
 	ft_memcpy(s2, s1, len);
 	return (s2);
 }

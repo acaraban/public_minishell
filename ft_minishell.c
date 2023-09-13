@@ -2,7 +2,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int err_status = 0;
+t_global *ggg;
+
 void	handle_sigint(int sig)
 {
 	if (sig == 2)
@@ -10,7 +11,7 @@ void	handle_sigint(int sig)
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		err_status = 1;
+		ggg->err_stat = 1;
 	}
 }
 
@@ -18,8 +19,7 @@ void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 {
 	while (boo)
 	{
-		glb->new_stat = err_status;
-		err_status = 0;
+		glb->err_stat = 0;
 		txt = readline("minishell> ");
 		if (txt != NULL)
 		{
@@ -28,9 +28,9 @@ void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 		}
 		else
 		{
-			free(txt);
+			ft_free(txt);
 			free_dbl(glb->env);
-			free (glb);
+			ft_free (glb);
 			ft_printf("exit\n");
 			boo = 0;
 		}
@@ -55,7 +55,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	txt = NULL;
 	glb = NULL;
-	glb = ft_init(glb, env, err_status);
+	glb = ft_init(glb, env);
+	ggg = glb;
 	boo = 1;
 	ft_minishell_bucle(boo, txt, glb);
 }

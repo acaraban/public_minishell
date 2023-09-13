@@ -16,6 +16,7 @@ void init_cont_vars(t_global *glb, t_content *cont)
 		cont[tam].cmd = NULL;
 		tam++;
 	}
+	cont->global->environ_path = ft_env_path(cont->global->env);
 }
 
 char *init_argdiv_vars(char *txt)
@@ -25,9 +26,9 @@ char *init_argdiv_vars(char *txt)
 
 	i = 0;
 	ot = ft_strdup(txt);
-	free(txt);
+	ft_free(txt);
 	txt = ft_strtrim(ot, " ");
-	free(ot);
+	ft_free(ot);
 	return (txt);
 }
 

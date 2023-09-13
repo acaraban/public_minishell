@@ -78,7 +78,7 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 			i++;
 		}
 		if (aux)
-			free (aux);
+			ft_free (aux);
 		if (par)
 			return (ft_substr(env[i - 1], par, ft_strlen(env[i - 1]) - 1));
 	}
@@ -98,24 +98,24 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	if (aux2 == NULL)
 	{
 		pos++;
-		free (aux2);
+		ft_free (aux2);
 		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 			i++;
 		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
 		add = ft_strjoin(aux, aux2);
-		free (aux2);
-		free (aux);
+		ft_free (aux2);
+		ft_free (aux);
 		return (add);
 	}
 	pos++;
 	add = ft_strjoin(aux, aux2);
 	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
 		i++;
-	free (aux);
+	ft_free (aux);
 	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-	free (aux2);
+	ft_free (aux2);
 	aux2 = ft_strjoin(add, aux);
-	free (add);
-	free (aux);
+	ft_free (add);
+	ft_free (aux);
 	return (aux2);
 }

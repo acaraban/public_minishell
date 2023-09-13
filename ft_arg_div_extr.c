@@ -34,37 +34,53 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 			return (0);
 	}
 	else if (final[type->i][0] == '>')
-	{
 		if (!mini_all_type_3(type, final, cont))
 			return (0);
+	return (1);
+}
+
+int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type)
+{
+	type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
+	if (!cmd_str_cont(cont, type->cmd_str, type->h))
+	{
+		*boo = 0;
+		ft_free (type);
+		return (0);
 	}
 	return (1);
 }
 
-char **arg_parsing(char **final, t_content *cont)
+char **arg_parsing(char **final, t_content *cont, int *boo)
 {
 	t_typered	*type;
+	char **ac;
 	
 	type = (t_typered *)malloc(sizeof(t_typered) * 1);
-	type->i = 0;
-	type->h = 0;
-	type->ac = NULL;
+	init_typered(type);
 	while (final[type->i])
 	{
-		if (final[type->i][0] != '<' && final[type->i][0] != '>' && final[type->i][0] != '|')
+		if (!ft_strchr("<>|", final[type->i][0]))
 		{
-			type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
-			if (!cmd_str_cont(cont, type->cmd_str, type->h))
+			if (!arg_parsing_2(final, cont, boo, type))
 				return (NULL);
 		}
 		else if (final[type->i][0] == '|')
 			type->h++;
 		else
-			if (!all_type_red(type, final, cont))
+		{
+			if (check_type_red(type, final, cont, boo) == 0)
+			{
+				*boo = 0;
+				ft_free (type);
 				return (NULL);
+			}
+		}
 		type->i++;
 	}
-	return (type->ac);
+	ac = type->ac;
+	ft_free (type);
+	return (ac);
 }
 
 void	ft_final_arg(char **ac, t_content *cont)
@@ -85,19 +101,24 @@ void	ft_arg_div(char *txt, t_global *glb)
 	t_content	*cont;
 	int			tam;
 	char		**ac;
+	int			boo;
 
 	tam = 1;
+	boo = 1;
 	txt = init_argdiv_vars(txt);
-	cont = (t_content *)calloc(sizeof(t_content), tam + 1);
 	if (ft_tam_args(txt, glb) < 0)
 		return ;
 	glb->num_cmd = ft_tam_args(txt, glb);
-	free (cont);
-	cont = (t_content *)calloc(sizeof(t_content), glb->num_cmd + 1);
+	cont = (t_content *)ft_calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
-	final = ft_specials(txt, cont, 1);
+	final = ft_specials(txt, cont);
 	if (final == NULL)
+	{
+		ft_free_cont(cont);
 		return ;
-	ac = arg_parsing(final, cont);
-	ft_final_arg(ac, cont);
+	}
+	ac = arg_parsing(final, cont, &boo);
+	free_dbl(final);
+	if (boo)
+		ft_final_arg(ac, cont);
 }
