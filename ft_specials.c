@@ -5,17 +5,20 @@ char *ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 	txt = ft_specials_9(txt, num, cant, old_txt);
 	if (num->ent == 2)
 		return (NULL);
-	if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
+	if (num->ent == 1)
 	{
-		if (!ft_specials_4(txt, num, cant))
-			return(ft_free (num), NULL);
-	}
-	else
-	{
-		if(!ft_specials_10(txt, num, cant))
+		if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
 		{
-			ft_free (num);
-			return (NULL);
+			if (!ft_specials_4(txt, num, cant))
+				return(ft_free (num), NULL);
+		}
+		else
+		{
+			if(!ft_specials_10(txt, num, cant))
+			{
+				ft_free (num);
+				return (NULL);
+			}
 		}
 	}
 	num->i++;
