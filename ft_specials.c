@@ -1,28 +1,25 @@
 #include "minishell.h"
 
-int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
+char *ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
-	num->ent = ft_specials_9(txt, num, cant, old_txt);
+	txt = ft_specials_9(txt, num, cant, old_txt);
 	if (num->ent == 2)
-		return (0);
+		return (NULL);
 	if (txt[num->i] == '>' && txt[num->i + 1] == '>' && !num->ent)
 	{
 		if (!ft_specials_4(txt, num, cant))
-		{
-			ft_free (num);
-			return(0);
-		}
+			return(ft_free (num), NULL);
 	}
 	else
 	{
 		if(!ft_specials_10(txt, num, cant))
 		{
 			ft_free (num);
-			return (0);
+			return (NULL);
 		}
 	}
 	num->i++;
-	return (1);
+	return (txt);
 }
 
 char **ft_specials(char *old_txt, t_content *cant)
@@ -42,19 +39,14 @@ char **ft_specials(char *old_txt, t_content *cant)
 		return (NULL);
 	while (txt[num->i])
 	{
-		if(!ft_specials_11(txt, num, cant, old_txt))
-		{
-			printf("entro en la 11\n");
+		txt = ft_specials_11(txt, num, cant, old_txt);
+		if (!txt)
 			return (NULL);
-		}
 	}
 	if (num->cont < num->i)
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
 	if (!ft_specials_3(txt,  num, cant))
-	{
-		printf("entro en la 3\n");
 		return (NULL);
-	}
 	vue = num->vue;
 	ft_free (num);
 	return (vue);

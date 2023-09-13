@@ -38,10 +38,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 		ft_free (here->val);
 		here->val = readline(">");
 		if (!here->val || cont->global->err_stat == 1)
-		{
-			free_no_val(here, cont);
-			return (0);
-		}
+			return (free_no_val(here, cont), 0);
 		if (pos_char(here->val, '$'))
 		{
 			here->aux = ft_add_varent(here->val, pos_char(here->val, '$'), cont[0].global[0].env, cont);

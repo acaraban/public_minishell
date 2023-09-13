@@ -39,13 +39,16 @@ void	ft_specials_8(char *txt, t_num *num)
 	num->cont = num->i + 1;
 }
 
-int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
+char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
 	if ((num->boo == 1 || num->boo == 0) && txt[num->i] == '$')
 	{
-		if (!ft_specials_2(txt, old_txt, num, cant))
-			return (2);
-		ft_printf("este es txt despues: %s\n", txt);
+		txt = ft_specials_2(txt, old_txt, num, cant);
+		if (txt == NULL)
+		{
+			num->ent = 2;
+			return (NULL);
+		}
 	}
 	else if (num->boo == 1 && (txt[num->i] == '\"'))
 		num->boo = 0;
@@ -58,8 +61,12 @@ int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 	else if(num->boo)
 		num->boo = num->boo + 1 - 1;
 	else
-		return (0);
-	return (1);
+	{
+		num->ent = 0;
+		return (txt);
+	}
+	num->ent = 1;
+	return (txt);
 }
 
 int	ft_specials_10(char *txt, t_num *num, t_content *cant)

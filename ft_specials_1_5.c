@@ -17,7 +17,7 @@ char *ft_specials_1(char *old_txt, t_num *num)
 	return (txt);
 }
 
-int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
+char	*ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 {
 	old_txt = ft_add_varent(txt, num->i, cant[0].global[0].env, cant);
 	ft_free (txt);
@@ -28,10 +28,9 @@ int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 		free_dbl(num->vue);
 		ft_free (txt);
 		txt = NULL;
-		return (0);
+		return (NULL);
 	}
-	ft_printf("este es txt antes: %s\n", txt);
-	return (1);
+	return (txt);
 }
 
 int	ft_specials_3(char *txt, t_num *num, t_content *cant)

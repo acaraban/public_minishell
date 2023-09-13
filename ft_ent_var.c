@@ -34,9 +34,9 @@ int	str_cmp(char *txt, int pos, char *cmp, char car)
 	lstpos = all_chr(txt, pos);
 	if (lstpos < 0)
 		lstpos = ft_strlen(txt);
-	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i] != car)
+	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i] != car && i + pos < lstpos)
 		i++;
-	if (!txt[i + pos] && (cmp[i] == car && i + pos == lstpos))
+	if ((!txt[i + pos] && cmp[i] == car) || (i + pos == lstpos && cmp[i] == car))
 		return (i + 1);
 	return (0);
 }
