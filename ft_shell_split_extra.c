@@ -48,7 +48,7 @@ char *del_char(char *txt, int un)
 
 	aux3 = txt;
 	aux1 = ft_substr(aux3, 0, un);
-	aux2 = ft_substr(aux3, un + 1, strlen(aux3) - un);
+	aux2 = ft_substr(aux3, un + 1, ft_strlen(aux3) - un);
 	aux3 = ft_strjoin(aux1, aux2);
 	free (aux1);
 	free (aux2);
