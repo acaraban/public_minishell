@@ -26,9 +26,9 @@ char *init_argdiv_vars(char *txt)
 
 	i = 0;
 	ot = ft_strdup(txt);
-	free(txt);
+	ft_free(txt);
 	txt = ft_strtrim(ot, " ");
-	free(ot);
+	ft_free(ot);
 	return (txt);
 }
 

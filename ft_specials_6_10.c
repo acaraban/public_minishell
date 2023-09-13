@@ -5,7 +5,7 @@ int	ft_specials_6(char *txt, t_num *num, t_content *cant)
 	if (err_sim_red(txt, num->i, cant))
 	{
 		free_dbl(num->vue);
-		free (txt);
+		ft_free (txt);
 		return (0);
 	}
 	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
@@ -20,7 +20,7 @@ int	ft_specials_7(char *txt, t_num *num, t_content *cant)
 	if (err_red(num->i, txt, cant))
 	{
 		free_dbl(num->vue);
-		free (txt);
+		ft_free (txt);
 		return (0);
 	}
 	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
@@ -45,6 +45,7 @@ int	ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 	{
 		if (!ft_specials_2(txt, old_txt, num, cant))
 			return (2);
+		ft_printf("este es txt despues: %s\n", txt);
 	}
 	else if (num->boo == 1 && (txt[num->i] == '\"'))
 		num->boo = 0;

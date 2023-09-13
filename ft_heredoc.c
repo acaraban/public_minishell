@@ -35,7 +35,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 	{
 		if (arr[here->i + 1] == NULL)
 			here_condition(here);
-		free (here->val);
+		ft_free (here->val);
 		here->val = readline(">");
 		if (!here->val || cont->global->err_stat == 1)
 		{

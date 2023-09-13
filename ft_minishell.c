@@ -28,9 +28,9 @@ void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 		}
 		else
 		{
-			free(txt);
+			ft_free(txt);
 			free_dbl(glb->env);
-			free (glb);
+			ft_free (glb);
 			ft_printf("exit\n");
 			boo = 0;
 		}

@@ -9,7 +9,7 @@ int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 	{
 		if (!ft_specials_4(txt, num, cant))
 		{
-			free (num);
+			ft_free (num);
 			return(0);
 		}
 	}
@@ -17,7 +17,7 @@ int	ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 	{
 		if(!ft_specials_10(txt, num, cant))
 		{
-			free (num);
+			ft_free (num);
 			return (0);
 		}
 	}
@@ -43,13 +43,19 @@ char **ft_specials(char *old_txt, t_content *cant)
 	while (txt[num->i])
 	{
 		if(!ft_specials_11(txt, num, cant, old_txt))
+		{
+			printf("entro en la 11\n");
 			return (NULL);
+		}
 	}
 	if (num->cont < num->i)
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
 	if (!ft_specials_3(txt,  num, cant))
+	{
+		printf("entro en la 3\n");
 		return (NULL);
+	}
 	vue = num->vue;
-	free (num);
+	ft_free (num);
 	return (vue);
 }

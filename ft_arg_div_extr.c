@@ -45,7 +45,7 @@ int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type)
 	if (!cmd_str_cont(cont, type->cmd_str, type->h))
 	{
 		*boo = 0;
-		free (type);
+		ft_free (type);
 		return (0);
 	}
 	return (1);
@@ -72,15 +72,15 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 			if (check_type_red(type, final, cont, boo) == 0)
 			{
 				*boo = 0;
-				free (type);
+				ft_free (type);
 				return (NULL);
 			}
 		}
 		type->i++;
 	}
 	ac = type->ac;
-	free (type);
-	return (type->ac);
+	ft_free (type);
+	return (ac);
 }
 
 void	ft_final_arg(char **ac, t_content *cont)

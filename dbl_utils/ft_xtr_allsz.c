@@ -5,10 +5,14 @@ void	free_dbl(char **new)
 	int	h;
 
 	h = 0;
-	while (new[h])
-		free (new[h++]);
-	free(new[h]);
-	free(new);
+	if (new)
+	{
+		while (new[h])
+			ft_free (new[h++]);
+		ft_free(new[h]);
+		ft_free(new);
+	}
+	new = NULL;
 }
 
 void	init_xtrallsz_values(int *i, int *h, int *l, int *k)

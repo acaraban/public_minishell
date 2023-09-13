@@ -3,7 +3,7 @@
 void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red)
 {
 	if (cont[type->h].infile)
-		free (cont[type->h].infile);
+		ft_free (cont[type->h].infile);
 	if (!type->ac)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
@@ -16,7 +16,7 @@ void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red)
 void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red)
 {
 	if (cont[type->h].infile)
-		free (cont[type->h].infile);
+		ft_free (cont[type->h].infile);
 	if (!type->ac)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
@@ -53,6 +53,6 @@ char	**ft_type_red_entdbl(char **final, t_typered *type, t_content *cont)
 		ft_type_red_entdbl_2(type, cont, red);
 	free_dbl(red->cmd_str);
 	cont[type->h].nfl = 2;
-	free (red);
+	ft_free (red);
 	return (type->ac);
 }

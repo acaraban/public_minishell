@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:38:21 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 23:51:56 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	handle_execve_error_message(t_content *cont, int i)
 		aux = ft_strjoin(cont[i].cmd, ": command not found\n");
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(aux, 2);
-		free(aux);
+		ft_free(aux);
 		exit(127);
 	}
 	else if (errno == ENOENT)

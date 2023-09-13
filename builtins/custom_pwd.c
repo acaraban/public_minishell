@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_pwd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:41:52 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/09 20:18:13 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	custom_pwd(void)
 		return ;
 	if (getcwd(buff, size) == NULL)
 	{
-		free (buff);
+		ft_free (buff);
 		perror("getcwd");
 		return ;
 	}
 	else
 		printf("%s\n", buff);
-	free(buff);
+	ft_free(buff);
 }
 
 /*
@@ -49,7 +49,7 @@ char	*custom_return_pwd(void)
 	}
 	if (getcwd(buff, size) == NULL)
 	{
-		free (buff);
+		ft_free (buff);
 		perror("getcwd");
 		return (NULL);
 	}

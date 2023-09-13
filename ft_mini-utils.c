@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mini-utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:53:18 by msintas-          #+#    #+#             */
-/*   Updated: 2023/08/25 09:24:09 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_free_split(char **split)
 	while (split[i])
 	{
 		if (split[i])
-			free(split[i]);
+			ft_free(split[i]);
 		i++;
 	}
-	free(split);
+	ft_free(split);
 }
 
 char	*ft_access_program(char *environ_path, char *command)
@@ -41,13 +41,13 @@ char	*ft_access_program(char *environ_path, char *command)
 	{
 		half_path = ft_strjoin(access_folder[i], "/");
 		final_path = ft_strjoin(half_path, command);
-		free(half_path);
+		ft_free(half_path);
 		if (access(final_path, F_OK) == 0)
 		{
 			ft_free_split(access_folder);
 			return (final_path);
 		}
-		free(final_path);
+		ft_free(final_path);
 		i++;
 	}
 	ft_free_split(access_folder);

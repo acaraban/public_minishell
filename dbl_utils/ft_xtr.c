@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:07:43 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 14:54:58 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
 	if (arr[0] != NULL)
 	{
 		while (xtr.h < xtr.i + 1)
-			free (arr[xtr.h++]);
+			ft_free (arr[xtr.h++]);
 	}
-	free (arr);
+	ft_free (arr);
 	return (xtr.jj);
 }

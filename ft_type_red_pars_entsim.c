@@ -9,7 +9,7 @@ int	ft_type_red_entsim_1(t_typered *type, t_content *cont, t_red *red)
 	if (cont[type->h].cmd)
 	{
 		if (cont[type->h].infile)
-			free (cont[type->h].infile);
+			ft_free (cont[type->h].infile);
 		if (red->cmd_str[red->r - 1])
 			cont[type->h].infile = ft_strdup(red->cmd_str[red->r - 1]);
 		else
@@ -25,7 +25,7 @@ int	ft_type_red_entsim_1(t_typered *type, t_content *cont, t_red *red)
 int	ft_type_red_entsim_2(t_typered *type, t_content *cont, t_red *red)
 {
 	if (cont[type->h].infile)
-		free (cont[type->h].infile);
+		ft_free (cont[type->h].infile);
 	if (red->cmd_str[0])
 		cont[type->h].infile = ft_strdup(red->cmd_str[0]);
 	else
@@ -80,6 +80,6 @@ int	ft_type_red_entsim(char **final, t_typered *type, t_content *cont)
 	}
 	free_dbl(red->cmd_str);
 	cont[type->h].nfl = 1;
-	free (red);
+	ft_free (red);
 	return (type->i);
 }

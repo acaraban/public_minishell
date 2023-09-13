@@ -55,9 +55,9 @@ static char	**freee(char **dst, int j)
 	while (j > 0)
 	{
 		j--;
-		free((void *)dst[j]);
+		ft_free((void *)dst[j]);
 	}
-	free(dst);
+	ft_free(dst);
 	return (NULL);
 }
 

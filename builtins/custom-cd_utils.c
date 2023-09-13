@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 16:08:51 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
-			free(cont[i].global->env[j]);
+			ft_free(cont[i].global->env[j]);
 			cont[i].global->env[j] = ft_strjoin("OLDPWD=", old_pwd);
 			has_oldpwd = 1;
 		}
@@ -66,7 +66,7 @@ void	update_environment_old(t_content *cont, int i, char *old_pwd)
 		aux = ft_strjoin("OLDPWD=", old_pwd);
 		cont[i].global->env = dobl_prt_free(cont[i].global->env, aux, 0, \
 				ft_strlen(aux));
-		free (aux);
+		ft_free (aux);
 	}
 }
 
@@ -84,7 +84,7 @@ void	update_environment_new(t_content *cont, int i, char *new_pwd)
 	{
 		if (ft_strncmp(cont[i].global->env[j], "PWD", 3) == 0)
 		{
-			free (cont[i].global->env[j]);
+			ft_free (cont[i].global->env[j]);
 			cont[i].global->env[j] = ft_strjoin("PWD=", new_pwd);
 		}
 		j++;
@@ -109,8 +109,8 @@ int	arg_is_a_path(char *comand_args)
 	{
 		return (1);
 	}
-	free (aux->__dd_buf);
-	free (aux);
+	ft_free (aux->__dd_buf);
+	ft_free (aux);
 	return (0);
 }
 

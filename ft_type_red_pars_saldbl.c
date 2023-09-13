@@ -5,7 +5,7 @@ int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red)
 	if (cont[type->h].cmd)
 	{
 		if (cont[type->h].outfile)
-			free (cont[type->h].outfile);
+			ft_free (cont[type->h].outfile);
 		if (red->cmd_str[0])
 			cont[type->h].outfile = ft_strdup(red->cmd_str[0]);
 		else
@@ -28,7 +28,7 @@ int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red)
 int	ft_type_red_saldbl_2(t_typered *type, t_content *cont, t_red *red)
 {
 	if (cont[type->h].outfile)
-		free (cont[type->h].outfile);
+		ft_free (cont[type->h].outfile);
 	if (red->cmd_str[0])
 		cont[type->h].outfile = ft_strdup(red->cmd_str[0]);
 	else
@@ -71,6 +71,6 @@ int	ft_type_red_saldbl(char **final, t_typered *type, t_content *cont)
 	}
 	free_dbl(red->cmd_str);
 	cont[type->h].tfl = 2;
-	free (red);
+	ft_free (red);
 	return (type->i);
 }
