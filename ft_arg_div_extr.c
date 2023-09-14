@@ -39,18 +39,6 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 	return (1);
 }
 
-int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type)
-{
-	type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
-	if (!cmd_str_cont(cont, type->cmd_str, type->h))
-	{
-		*boo = 0;
-		ft_free (type);
-		return (0);
-	}
-	return (1);
-}
-
 char **arg_parsing(char **final, t_content *cont, int *boo)
 {
 	t_typered	*type;
