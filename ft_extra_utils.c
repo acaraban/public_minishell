@@ -6,17 +6,15 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:35:37 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/10 22:37:32 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:33:52 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-//#include <stdio.h>
-//#include <string.h>
 
 /*
     Function that checks if a char is the same in every position between two
-    indexes.
+    indexes. It starts at ini position and checks until final position.
     If it is, returns 0.
     It not, returns 1.
 */
@@ -32,30 +30,21 @@ int same_char_across(char *str, int pos_ini, int pos_fin, char c)
     diff = (pos_fin - pos_ini) + 1;
     while(str[i] && (i <= pos_fin))
     {
-        while(i < pos_ini) // mientras que el indice sea menor que la posicion inicial, avanza
-        {
+        while(i < pos_ini)
             i++;
-        }
-        while(i <= pos_fin && count < diff ) // mientras que no llegue a la posicion final, recorro el string
+        while(i <= pos_fin && count < diff )
         {
-            //printf("%c\n", str[i]);
             while(str[i] == c)
             {
-                //printf("encontre el char: %c\n", c);
                 count++;
                 i++;
             }
             i++;
         }
-        //printf("count %d\n", count);
         if (count == diff)
-        {
-            //printf("return 0");
             return (0);
-        }
         i++;
     }
-    //printf("return 1");
     return (1);
 }
 
