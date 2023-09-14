@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:12:35 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,17 @@ void	update_last_pwd(t_content *cont, int i)
 void	init_custom_cd_values(t_content *cont, int i)
 {
 	if (!cont[i].full_comand[1])
+	{
+		//free(cont->custom->command_arg);
 		cont->custom->command_arg = ft_strdup("");
+		
+	}
 	else
+	{
+		//free(cont->custom->command_arg);
 		cont->custom->command_arg = ft_strdup(cont[i].full_comand[1]);
+		
+	}
 	cont->custom->last_pwd = ft_calloc(256, sizeof(char));
 	cont->custom->is_switch = 0;
 	if (!cont->custom->last_pwd)
@@ -75,7 +83,7 @@ void	init_custom_cd_values(t_content *cont, int i)
     e.g. bash: cd: OLDPWD not set
 */
 
-void	custom_cd(t_content *cont, int i)
+int	custom_cd(t_content *cont, int i)
 {
 	char *imp;
 	char *aux;
@@ -89,27 +97,16 @@ void	custom_cd(t_content *cont, int i)
 	}
 	if (ft_strcmp(cont->custom->command_arg, "-") == 0)
 	{
-		ft_free (cont->custom->current_pwd);
-		cont->custom->current_pwd = custom_return_pwd();
-		ft_free (cont->custom->command_arg);
-		cont->custom->command_arg = get_the_oldpwd(cont, i);
+		free_n_update(cont, i);
 		if (ft_strcmp(cont->custom->command_arg, "") == 0)
 		{
 			aux = ft_strjoin(cont[i].cmd, ": OLDPWD not set\n");
 			imp = ft_strjoin("minishell: ", aux);
-			ft_putstr_fd(imp, 2);
-			ft_free (imp);
-			ft_free (aux);
-			return ;
+			return (handle_not_set_oldpwd(aux, imp), 1);
 		}
 		cont->custom->is_switch = 1;
 	}
 	else
 		update_last_pwd(cont, i);
-	change_dir(cont, i);
-	ft_free(cont->custom->current_pwd);
-	ft_free(cont->custom->last_pwd);
-	ft_free(cont->custom->command_arg);
-	ft_free(cont->custom);
-	return ;
+	return (change_dir(cont, i), free_all_at_once(cont), 1);
 }

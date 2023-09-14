@@ -30,6 +30,21 @@
 #define SHORT cont->global->num_cmd
 
 
+typedef struct s_entvar
+{
+	int	i;
+	int	par;
+	char *aux;
+}t_entvar;
+
+typedef struct s_addvarent
+{
+	int		i;
+	char	*aux;
+	char	*add;
+	char	*aux2;
+}t_addvarent;
+
 typedef struct s_here
 {
 	char *val;
@@ -130,6 +145,11 @@ int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
 char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
+void init_ent_vars(t_entvar *entvar);
+void check_aux_set_par(t_entvar *entvar, char **env, char *txt, int pos);
+void set_values_vars(t_addvarent *varent, char *txt, int pos);
+void init_add_varent_vars(t_addvarent	*varent, char *txt, int pos);
+void check_doble_quot(int pos, char *txt, char *aux);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
@@ -208,6 +228,7 @@ int mini_all_type_2(t_typered *type, char **final, t_content *cont);
 int mini_all_type_3(t_typered *type, char **final, t_content *cont);
 int	all_type_red(t_typered *type, char **final, t_content *cont);
 char **arg_parsing(char **final, t_content *cont, int *boo);
+int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type);
 void	ft_final_arg(char **ac, t_content *cont);
 void	ft_arg_div(char *txt, t_global *glb);
 void init_typered(t_typered *type);
@@ -234,13 +255,16 @@ void execute_command(t_content *cont, int i);
 void custom_echo(t_content *cont, int i);
 void custom_pwd(void);
 void custom_env(t_content *cont, int i);
-void custom_cd(t_content *cont, int i);
+int custom_cd(t_content *cont, int i);
 void custom_exit(t_content *cont, int i);
 char *custom_return_pwd(void);
 void update_environment_new(t_content *cont, int i, char *new_pwd);
 void update_environment_old(t_content *cont, int i, char *old_pwd);
 char * get_the_oldpwd(t_content *cont, int i);
 void handle_execve_error_message(t_content *cont, int i);
+void handle_not_set_oldpwd(char *aux, char *imp);
+void free_all_at_once(t_content *cont);
+void free_n_update(t_content *cont, int i);
 int cmd_has_path(t_content *cont, int i);
 void check_for_path(t_content *cont, int i);
 int cmd_is_program(t_content *cont, int i);
