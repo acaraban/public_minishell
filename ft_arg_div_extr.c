@@ -58,17 +58,12 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 		else
 		{
 			if (check_type_red(type, final, cont, boo) == 0)
-			{
-				*boo = 0;
-				ft_free (type);
-				return (NULL);
-			}
+				return (ft_free (type), NULL);
 		}
 		type->i++;
 	}
 	ac = type->ac;
-	ft_free (type);
-	return (ac);
+	return (ft_free (type), ac);
 }
 
 void	ft_final_arg(char **ac, t_content *cont)
