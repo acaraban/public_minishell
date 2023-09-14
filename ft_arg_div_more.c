@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arg_div_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:29:01 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/14 19:08:46 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:33:44 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ int check_type_red(t_typered *type, char **final, t_content *cont, int *boo)
         *boo = 0;
         return (0);
     }
-	*boo = 0;
     return (1);
 }
