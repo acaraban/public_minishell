@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:48:59 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:20:07 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void free_no_val(t_here *here, t_content *cont)
 	ft_free (here->new);
 	if (cont->global->err_stat != 1)
 		ft_printf("exit\n");
+	ft_free (here);
 }
 
 void val_is_aux(t_here *here)
@@ -63,4 +64,5 @@ void open_and_write(t_here *here)
 	write(here->fd, here->new, ft_strlen(here->new));
 	ft_free (here->new);
 	close(here->fd);
+	ft_free (here);
 }
