@@ -25,6 +25,14 @@ char *ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 	return (txt);
 }
 
+void init_specials_vars(t_num *num)
+{
+	num->i = 0;
+	num->cont = 0;
+	num->boo = 0;
+	num->ent = 0;
+}
+
 char **ft_specials(char *old_txt, t_content *cant)
 {
 	t_num *num;
@@ -32,10 +40,7 @@ char **ft_specials(char *old_txt, t_content *cant)
 	char **vue;
 
 	num = (t_num *)malloc(sizeof(t_num) * 1);
-	num->i = 0;
-	num->cont = 0;
-	num->boo = 0;
-	num->ent = 0;
+	init_specials_vars(num);
 	num->vue = NULL;
 	txt = ft_specials_1(old_txt, num);
 	if (txt == NULL)

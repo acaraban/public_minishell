@@ -41,6 +41,7 @@ void	ft_specials_8(char *txt, t_num *num)
 
 char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
+	num->ent = 0;
 	if ((num->boo == 1 || num->boo == 0) && txt[num->i] == '$')
 	{
 		txt = ft_specials_2(txt, old_txt, num, cant);
@@ -51,36 +52,17 @@ char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 		}
 	}
 	else if (num->boo == 1 && (txt[num->i] == '\"'))
-	{
-		num->ent = 0;
 		num->boo = 0;
-		return (txt);
-	}
 	else if(num->boo == 2 && (txt[num->i] == '\''))
-	{
-		num->ent = 0;
 		num->boo = 0;
-		return (txt);
-	}
 	else if (!num->boo && (txt[num->i] == '\"'))
-	{
-		num->ent = 0;
 		num->boo = 1;
-		return (txt);
-	}
 	else if (!num->boo && (txt[num->i] == '\''))
-	{
-		num->ent = 0;
 		num->boo = 2;
-		return (txt);
-	}
 	else if(num->boo)
-	{
-		num->ent = 0;
 		num->boo = num->boo + 1 - 1;
-		return (txt);
-	}
-	num->ent = 1;
+	else
+		num->ent = 1;
 	return (txt);
 }
 
