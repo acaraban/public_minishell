@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_cd_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:16 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/14 18:08:04 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:20:30 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 char	*get_the_oldpwd(t_content *cont, int i)
 {
 	char	*old_pwd;
+	char	*aux;
 	int		j;
 
 	j = 0;
@@ -31,7 +32,10 @@ char	*get_the_oldpwd(t_content *cont, int i)
 		if (ft_strncmp(cont[i].global->env[j], "OLDPWD", 6) == 0)
 		{
 			old_pwd = ft_strcpy(old_pwd, cont[i].global->env[j]);
-			old_pwd = ft_strchr(old_pwd, '/');
+			aux = ft_strdup(old_pwd);
+			free (old_pwd);
+			old_pwd = ft_substr(aux, frst_chr(aux, '/'), ft_strlen(aux) - 7);
+			free (aux);
 		}
 		j++;
 	}
