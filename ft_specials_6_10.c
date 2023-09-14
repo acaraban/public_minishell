@@ -43,7 +43,6 @@ char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
 	if ((num->boo == 1 || num->boo == 0) && txt[num->i] == '$')
 	{
-		ft_printf("aqui entro\n");
 		txt = ft_specials_2(txt, old_txt, num, cant);
 		if (txt == NULL)
 		{

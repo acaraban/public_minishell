@@ -87,35 +87,32 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 
 char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
-	int		i;
-	char	*aux;
+	t_varent	varent;
 	char	*aux2;
-	char	*add;
-
-	i = 0;
-	aux = ft_substr(txt, 0, pos);
+		
+	init_varent_vars(&varent, txt, pos);
 	aux2 = ft_ent_var(txt, pos, env, cont);
 	if (aux2 == NULL)
 	{
 		pos++;
 		ft_free (aux2);
-		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
-			i++;
-		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-		add = ft_strjoin(aux, aux2);
+		while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", txt[pos + varent.i]) == NULL)
+			varent.i++;
+		aux2 = ft_substr(txt, pos + varent.i, ft_strlen(txt) - pos - 1);
+		varent.add = ft_strjoin(varent.aux, aux2);
 		ft_free (aux2);
-		ft_free (aux);
-		return (add);
+		ft_free (varent.aux);
+		return (varent.add);
 	}
 	pos++;
-	add = ft_strjoin(aux, aux2);
-	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
-		i++;
-	ft_free (aux);
-	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
+	varent.add = ft_strjoin(varent.aux, aux2);
+	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", txt[pos + varent.i]) == NULL)
+		varent.i++;
+	ft_free (varent.aux);
+	varent.aux = ft_substr(txt, pos + varent.i, ft_strlen(txt) - pos - 1);
 	ft_free (aux2);
-	aux2 = ft_strjoin(add, aux);
-	ft_free (add);
-	ft_free (aux);
+	aux2 = ft_strjoin(varent.add, varent.aux);
+	ft_free (varent.add);
+	ft_free (varent.aux);
 	return (aux2);
 }

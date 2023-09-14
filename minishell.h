@@ -30,6 +30,13 @@
 #define SHORT cont->global->num_cmd
 
 
+typedef struct s_varent
+{
+	int		i;
+	char	*aux;
+	char	*add;
+}t_varent;
+
 typedef struct s_here
 {
 	char *val;
@@ -130,6 +137,7 @@ int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
 char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
+void init_varent_vars(t_varent	*varent, char *txt, int pos);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
@@ -208,6 +216,7 @@ int mini_all_type_2(t_typered *type, char **final, t_content *cont);
 int mini_all_type_3(t_typered *type, char **final, t_content *cont);
 int	all_type_red(t_typered *type, char **final, t_content *cont);
 char **arg_parsing(char **final, t_content *cont, int *boo);
+int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type);
 void	ft_final_arg(char **ac, t_content *cont);
 void	ft_arg_div(char *txt, t_global *glb);
 void init_typered(t_typered *type);
