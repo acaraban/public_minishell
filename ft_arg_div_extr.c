@@ -71,14 +71,18 @@ void	ft_final_arg(char **ac, t_content *cont)
 	if (ac)
 	{
 		if (!ft_heredoc(ac, cont))
+		{
+			ft_free_cont(cont);
+			free_dbl(ac);
 			return ;
+		}
 		free_dbl(ac);
 	}
 	ft_executor(cont);
 	ft_free_cont(cont);
 }
 
-void	ft_arg_div(char *txt, t_global *glb)
+int	ft_arg_div(char *txt, t_global *glb)
 {
 	char		**final;
 	t_content	*cont;
@@ -90,18 +94,16 @@ void	ft_arg_div(char *txt, t_global *glb)
 	boo = 1;
 	txt = init_argdiv_vars(txt);
 	if (ft_tam_args(txt, glb) < 0)
-		return ;
+		return (1);
 	glb->num_cmd = ft_tam_args(txt, glb);
 	cont = (t_content *)ft_calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
 	final = ft_specials(txt, cont);
 	if (final == NULL)
-	{
-		ft_free_cont(cont);
-		return ;
-	}
+		return (ft_free_cont(cont), 1);
 	ac = arg_parsing(final, cont, &boo);
 	free_dbl(final);
 	if (boo)
-		ft_final_arg(ac, cont);
+		return (ft_final_arg(ac, cont), 1);
+	return (1);
 }

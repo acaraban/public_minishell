@@ -230,7 +230,7 @@ int	all_type_red(t_typered *type, char **final, t_content *cont);
 char **arg_parsing(char **final, t_content *cont, int *boo);
 int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type);
 void	ft_final_arg(char **ac, t_content *cont);
-void	ft_arg_div(char *txt, t_global *glb);
+int	ft_arg_div(char *txt, t_global *glb);
 void init_typered(t_typered *type);
 int check_type_red(t_typered *type, char **final, t_content *cont, int *boo);
 void ft_free(void *ttt);

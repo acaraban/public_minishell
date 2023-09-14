@@ -45,11 +45,15 @@ void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 	(not the mac) and deletes it.
 */
 
+void que (){system("leaks -q minishell");}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*txt;
 	t_global	*glb;
 	int			boo;
+
+	atexit(que);
 
 	(void)argc;
 	(void)argv;
