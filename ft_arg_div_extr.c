@@ -48,8 +48,6 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 	init_typered(type);
 	while (final[type->i])
 	{
-		ft_printf("este es i: %d\n", type->i);
-		ft_printf("final - type-i: %c\n", final[type->i][0]);
 		if (!ft_strchr("<>|", final[type->i][0]))
 		{
 			if (!arg_parsing_2(final, cont, boo, type))
@@ -68,7 +66,6 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 		}
 		type->i++;
 	}
-	ft_printf("aqui no llega\n");
 	ac = type->ac;
 	ft_free (type);
 	return (ac);
