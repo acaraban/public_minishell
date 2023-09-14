@@ -39,18 +39,17 @@ char **ft_specials(char *old_txt, t_content *cant)
 	num->vue = NULL;
 	txt = ft_specials_1(old_txt, num);
 	if (txt == NULL)
-		return (NULL);
+		return (ft_free(num), NULL);
 	while (txt[num->i])
 	{
 		txt = ft_specials_11(txt, num, cant, old_txt);
 		if (!txt)
-			return (NULL);
+			return (ft_free(num), NULL);
 	}
 	if (num->cont < num->i)
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i);
 	if (!ft_specials_3(txt,  num, cant))
-		return (NULL);
+		return (ft_free(num), NULL);
 	vue = num->vue;
-	ft_free (num);
-	return (vue);
+	return (ft_free (num), vue);
 }

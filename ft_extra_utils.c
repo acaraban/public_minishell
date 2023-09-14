@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_extra_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:35:37 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/10 22:37:32 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:31:42 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int same_char_across(char *str, int pos_ini, int pos_fin, char c)
     i = 0;
     count = 0;
     diff = (pos_fin - pos_ini) + 1;
-    while(str[i] && (i <= pos_fin))
+    while((i <= pos_fin) && str[i])
     {
         while(i < pos_ini) // mientras que el indice sea menor que la posicion inicial, avanza
         {

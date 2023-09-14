@@ -44,15 +44,17 @@ char	**ft_type_red_entdbl(char **final, t_typered *type, t_content *cont)
 	red->r = 0;
 	red->cmd_str = ft_shell_split(final[type->i], ' ', cont);
 	if (red->cmd_str == NULL)
-		return (NULL);
+	{
+		type->i--;
+		return (ft_free(red), NULL);
+	}
 	while (red->cmd_str[red->r])
 		red->r++;
 	if (cont[type->h].cmd)
 		ft_type_red_entdbl_1(type, cont, red);
 	else
 		ft_type_red_entdbl_2(type, cont, red);
-	free_dbl(red->cmd_str);
 	cont[type->h].nfl = 2;
-	ft_free (red);
-	return (type->ac);
+	type->i--;
+	return (free_dbl(red->cmd_str), ft_free(red), type->ac);
 }
