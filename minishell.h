@@ -30,12 +30,20 @@
 #define SHORT cont->global->num_cmd
 
 
-typedef struct s_varent
+typedef struct s_entvar
+{
+	int	i;
+	int	par;
+	char *aux;
+}t_entvar;
+
+typedef struct s_addvarent
 {
 	int		i;
 	char	*aux;
 	char	*add;
-}t_varent;
+	char	*aux2;
+}t_addvarent;
 
 typedef struct s_here
 {
@@ -137,7 +145,11 @@ int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
 char *ft_add_varent(char *txt, int pos, char **env, t_content *cont);
-void init_varent_vars(t_varent	*varent, char *txt, int pos);
+void init_ent_vars(t_entvar *entvar);
+void check_aux_set_par(t_entvar *entvar, char **env, char *txt, int pos);
+void set_values_vars(t_addvarent *varent, char *txt, int pos);
+void init_add_varent_vars(t_addvarent	*varent, char *txt, int pos);
+void check_doble_quot(int pos, char *txt, char *aux);
 int find_match(char *txt, int pos, char c);
 char *del_char(char *txt, int un);
 char	**ft_shell_split(char *s, char c, t_content *cont);
