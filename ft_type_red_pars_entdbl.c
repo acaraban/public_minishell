@@ -8,7 +8,7 @@ void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
 		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], 0, ft_strlen(red->cmd_str[0]));
-	cont[type->h].infile = ft_strdup(".awdrgyj123.txt");
+	cont[type->h].infile = ft_strdup(".heredoc.minishell");
 	if (red->cmd_str[1])
 		cont[type->h].full_comand = ft_xtr_allsz_free(cont[type->h].full_comand, red->cmd_str, 1);
 }
@@ -21,7 +21,7 @@ void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
 		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], 0, ft_strlen(red->cmd_str[0]));
-	cont[type->h].infile = ft_strdup(".awdrgyj123.txt");
+	cont[type->h].infile = ft_strdup(".heredoc.minishell");
 	if (red->cmd_str[1])
 	{
 		red->cmd_str = ft_elim_str_free(red->cmd_str, 0);

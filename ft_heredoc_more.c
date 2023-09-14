@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:48:59 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/14 18:20:07 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:16:42 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void val_is_aux(t_here *here)
 void open_and_write(t_here *here)
 {
 	ft_free (here->val);
-	here->fd = open(".awdrgyj123.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	here->fd = open(".heredoc.minishell", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	write(here->fd, here->new, ft_strlen(here->new));
 	ft_free (here->new);
 	close(here->fd);

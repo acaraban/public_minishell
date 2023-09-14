@@ -82,7 +82,8 @@ int	custom_export(t_content *cont, int i)
 			else if (bef_str(cont[i].full_comand[j]))
 			{
 				cont->global->env = dobl_prt_free(cont->global->env, \
-					cont[i].full_comand[j], 0, ft_strlen(cont[i].full_comand[j]));
+					cont[i].full_comand[j], 0, \
+					ft_strlen(cont[i].full_comand[j]));
 			}
 			else
 				err_cmd("formato invalido\n", cont);
