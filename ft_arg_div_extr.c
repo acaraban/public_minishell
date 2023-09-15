@@ -78,7 +78,7 @@ void	ft_final_arg(char **ac, t_content *cont)
 		}
 		free_dbl(ac);
 	}
-	ft_executor(cont);
+	ft_executor(cont, cont->global->num_cmd);
 	ft_free_cont(cont);
 }
 

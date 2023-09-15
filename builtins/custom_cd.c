@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:09:06 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/14 18:12:35 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:54:27 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 
 void	change_dir(t_content *cont, int i)
 {
-	char *dev;
-	char *aux;
+	char	*dev;
+	char	*aux;
+
 	if (chdir(cont->custom->command_arg) == 0)
 	{
 		if (cont->custom->is_switch == 1)
@@ -54,15 +55,11 @@ void	init_custom_cd_values(t_content *cont, int i)
 {
 	if (!cont[i].full_comand[1])
 	{
-		//free(cont->custom->command_arg);
 		cont->custom->command_arg = ft_strdup("");
-		
 	}
 	else
 	{
-		//free(cont->custom->command_arg);
 		cont->custom->command_arg = ft_strdup(cont[i].full_comand[1]);
-		
 	}
 	cont->custom->last_pwd = ft_calloc(256, sizeof(char));
 	cont->custom->is_switch = 0;
@@ -85,8 +82,9 @@ void	init_custom_cd_values(t_content *cont, int i)
 
 int	custom_cd(t_content *cont, int i)
 {
-	char *imp;
-	char *aux;
+	char	*imp;
+	char	*aux;
+
 	cont->custom = (t_custom *)malloc(sizeof(t_custom) * 1);
 	init_custom_cd_values(cont, i);
 	if (ft_strcmp(cont->custom->command_arg, "") == 0 \

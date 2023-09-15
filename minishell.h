@@ -1,25 +1,33 @@
-#ifndef MINISHELL_H
-#define MINISHELL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
+/*   Updated: 2023/09/15 12:28:34 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
-#include "ft_printf/ft_printf.h"
-#include <signal.h>
-#include <string.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include "libft/libft.h"
+# include "get_next_line/get_next_line.h"
+# include "ft_printf/ft_printf.h"
+# include <signal.h>
+# include <string.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-#include <dirent.h>
-#include <sys/ioctl.h>
+# include <dirent.h>
+# include <sys/ioctl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <stdlib.h>
-#include <errno.h>
+# include <errno.h>
 
-//valido
-# define VLD 0
-//comando no encontrado
-# define NOT_FND 127
 //error sintactico
 # define STX_ERR 2
 // read end of pipe
@@ -27,17 +35,16 @@
 // write end of pipe
 # define WRITE_END 1
 // short for num_of_commands in norminette
-#define SHORT cont->global->num_cmd
+# define SHORT cont->global->num_cmd
 
-
-typedef struct s_entvar
+typedef	struct s_entvar
 {
-	int	i;
-	int	par;
-	char *aux;
+	int		i;
+	int		par;
+	char	*aux;
 }t_entvar;
 
-typedef struct s_addvarent
+typedef	struct s_addvarent
 {
 	int		i;
 	char	*aux;
@@ -47,100 +54,99 @@ typedef struct s_addvarent
 
 typedef struct s_here
 {
-	char *val;
-	char *new;
-	char *aux;
-	int i;
-	int r;
-	int boo;
-	int fd;
+	char	*val;
+	char	*new;
+	char	*aux;
+	int		i;
+	int		r;
+	int		boo;
+	int		fd;
 }t_here;
 
-typedef struct s_red
+typedef	struct s_red
 {
-	int r;
-	char **cmd_str;
+	int		r;
+	char	**cmd_str;
 }t_red;
 
-typedef struct s_typered
+typedef	struct s_typered
 {
-	char		**cmd_str;
-	char		**ac;
-	int			i;
-	int			h;
+	char	**cmd_str;
+	char	**ac;
+	int		i;
+	int		h;
 }t_typered;
 
-typedef struct s_num
+typedef	struct s_num
 {
-	int i;
-	int cont;
-	int boo;
-	char **vue;
-	int ent;
+	int		i;
+	int		cont;
+	int		boo;
+	char	**vue;
+	int		ent;
 } t_num;
 
 
-typedef struct s_xtr
+typedef	struct s_xtr
 {
-	char **jj;
-	int i;
-	int h;
+	char	**jj;
+	int		i;
+	int		h;
 
 }t_xtr;
 
-typedef struct s_shell
+typedef	struct s_shell
 {
-	int i;
-	int j;
-	int k;
-	int aux;
+	int	i;
+	int	j;
+	int	k;
+	int	aux;
 }t_shell;
 
-typedef struct s_executor
+typedef	struct s_executor
 {
 	pid_t	pid;
 	int		status;
-
 }t_executor;
 
-typedef struct s_custom
+typedef	struct s_custom
 {
-	char *command_arg;
-    char *last_pwd;
-    char *current_pwd;
-    int is_switch;
+	char	*command_arg;
+    char	*last_pwd;
+    char	*current_pwd;
+    int		is_switch;
 }t_custom;
 
 
-typedef struct s_global
+typedef	struct s_global
 {
-	int num_cmd;
-	char **env;
+	int		num_cmd;
+	char	**env;
 	char	*environ_path;
-	int err_stat;
-	int new_stat;
+	int		err_stat;
+	int		new_stat;
 }t_global;
 
-typedef struct s_content
+typedef	struct s_content
 {
-	char	*access_path;
-	char *cmd;
-	char **full_comand;
-	char *infile;
-	char *outfile;
-	int infile_fd;
-    int outfile_fd;
-	int nfl;
-	int tfl;
-	int builtin;
-	int which_builtin;
-	t_global *global;
-	t_custom *custom;
+	char		*access_path;
+	char		*cmd;
+	char		**full_comand;
+	char		*infile;
+	char		*outfile;
+	int			infile_fd;
+    int			outfile_fd;
+	int			nfl;
+	int			tfl;
+	int			builtin;
+	int			which_builtin;
+	t_global	*global;
+	t_custom	*custom;
 }t_content;
 
-int main(int argc, char **argv, char **env);
-t_global *ft_init(t_global *glb, char **env);
-int frst_chr(char *txt, char car);
+int			main(int argc, char **argv, char **env);
+t_global	*ft_init(t_global *glb, char **env);
+int			frst_chr(char *txt, char car);
 int all_chr(char *txt, int pos);
 int str_cmp(char *txt, int pos, char *cmp, char car);
 char *ft_ent_var(char *txt, int pos, char **env, t_content *cont);
@@ -234,8 +240,7 @@ int	ft_arg_div(char *txt, t_global *glb);
 void init_typered(t_typered *type);
 int check_type_red(t_typered *type, char **final, t_content *cont, int *boo);
 void ft_free(void *ttt);
-
-void	ft_executor(t_content *cont);
+void	ft_executor(t_content *cont, int num);
 char	*ft_env_path(char **envp);
 char	*ft_access_program(char *environ_path, char *command);
 void manage_infiles(t_content *cont, int i);
