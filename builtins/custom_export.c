@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:45:02 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:45:03 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:48:57 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ int	custom_export(t_content *cont, int i)
 	{
 		while (cont[i].full_comand[j])
 		{
-			if (eq_combination(cont, cont[i].full_comand[j]))
+			if (ft_isdigit(cont[i].full_comand[j][0]))
+				err_cmd("formato invalido\n", cont);
+			else if (eq_combination(cont, cont[i].full_comand[j]))
 			{
 				j++;
 				continue ;
@@ -97,8 +99,7 @@ int	custom_export(t_content *cont, int i)
 					cont[i].full_comand[j], 0, \
 					ft_strlen(cont[i].full_comand[j]));
 			}
-			else
-				err_cmd("formato invalido\n", cont);
+			
 			j++;
 		}
 		return (1);

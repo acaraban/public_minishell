@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:26 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 13:37:00 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:41:28 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,7 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
 	else if (ft_strchr(" \"$\'><|", txt[pos + 1]) || !txt[pos + 1])
-	{
-		if (txt[pos + 1] == '$')
-			return (ft_strdup("$$"));
 		return (ft_strdup("$"));
-	}
 	else
 	{
 		check_aux_set_par(&entvar, env, txt, pos);
@@ -86,6 +82,8 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 
 	init_add_varent_vars(&varent, txt, pos);
 	varent.aux2 = ft_ent_var(txt, pos, env, cont);
+	if (varent.aux2[0] == '$')
+		return (ft_free (varent.aux2), ft_free (varent.aux), ft_strdup(txt));
 	if (varent.aux2 == NULL)
 	{
 		pos++;
@@ -98,6 +96,8 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	}
 	pos++;
 	varent.add = ft_strjoin(varent.aux, varent.aux2);
+	if (varent.aux2[0] == '$')
+		varent.i++;
 	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
 	txt[pos + varent.i]) == NULL)
 		varent.i++;

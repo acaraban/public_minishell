@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:48:32 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 16:53:41 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:44:03 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_specials_11(char *txt, t_num *num, t_content *cant, char *old_txt)
 		if (txt[num->i] == '>' && txt[num->i + 1] == '>')
 		{
 			if (!ft_specials_4(txt, num, cant))
-				return (ft_free (num), NULL);
+				return (NULL);
 		}
 		else
 		{
