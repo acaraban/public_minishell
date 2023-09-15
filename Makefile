@@ -54,6 +54,7 @@ SRCS =	builtins/custom_echo.c \
 		ft_extra_utils.c
 
 
+
 INC = -I libft -I /opt/vagrant/embedded/include
 NAME = minishell.a
 OBJS = $(SRCS:.c=.o)
