@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:49:26 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/13 14:12:30 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:33:21 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_delete_env_oldpwd(char **environment)
 	}
 }
 
-void ft_free(void *ttt)
+void	ft_free(void *ttt)
 {
 	free(ttt);
 	ttt = NULL;
