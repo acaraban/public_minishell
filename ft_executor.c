@@ -6,13 +6,11 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 16:01:28 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:23:42 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	init_builtins(t_content *cont, int i)
 {
@@ -45,7 +43,7 @@ void	father_stuff(t_pipes *fds, int i, t_content *cont)
 
 int	ft_executor(t_content *cont, int num)
 {
-	t_pipes 	*fds;
+	t_pipes	*fds;
 
 	fds = (t_pipes *)malloc(sizeof(t_pipes) * num);
 	fds->i = 0;
@@ -71,4 +69,3 @@ int	ft_executor(t_content *cont, int num)
 	}
 	return (ft_free(fds), 0);
 }
-

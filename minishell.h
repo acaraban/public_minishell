@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 16:04:02 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:25:12 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,11 @@ typedef struct s_shell
 
 typedef struct s_pipes
 {
-	int	i;
-	int fd[2];
-	pid_t		pid;
-	int			status;
+	int		i;
+	int		fd[2];
+	pid_t	pid;
+	int		status;
 }t_pipes;
-
 
 typedef struct s_custom
 {
