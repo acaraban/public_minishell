@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:23:29 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/07 15:32:43 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:23:10 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
     It has different functionality depending on the child.
 */
 
-void	ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
+void	ft_execute_child(t_content *cont, int i, t_pipes *fds, int num)
 {
 	if (i == 0)
 	{
@@ -39,7 +39,7 @@ void	ft_execute_child(t_content *cont, int i, int (*fds)[2], int num)
     Check if the command has an absolute path, otherwise get the path.
 */
 
-void	execute_first_child(t_content *cont, int i, int (*fds)[2], int num)
+void	execute_first_child(t_content *cont, int i, t_pipes *fds, int num)
 {
 	if (cont[i].infile)
 	{
@@ -66,7 +66,7 @@ Execute this function for any middle child. Not for the first or the last child.
 Check if the command received is a built-in before redirecting output. 
 */
 
-void	execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
+void	execute_middle_children(t_content *cont, int i, t_pipes *fds, int num)
 {
 	check_for_path(cont, i);
 	if (cont[i].infile)
@@ -97,7 +97,7 @@ void	execute_middle_children(t_content *cont, int i, int (*fds)[2], int num)
     Check if the command received is a builtin before redirecting output.
 */
 
-void	execute_last_child(t_content *cont, int i, int (*fds)[2], int num)
+void	execute_last_child(t_content *cont, int i, t_pipes *fds, int num)
 {
 	check_for_path(cont, i);
 	if (cont[i].infile)

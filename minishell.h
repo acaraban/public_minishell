@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 13:01:19 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:41:18 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,18 @@ typedef struct s_shell
 	int			aux;
 }				t_shell;
 
-typedef struct s_executor
+typedef struct s_pipes
+{
+	int fd[2];
+	pid_t		pid;
+	int			status;
+}t_pipes;
+
+/*typedef struct s_executor
 {
 	pid_t		pid;
 	int			status;
-}				t_executor;
+}				t_executor;*/
 
 typedef struct s_custom
 {
@@ -259,17 +266,17 @@ char			*ft_env_path(char **envp);
 char			*ft_access_program(char *environ_path, char *command);
 void			manage_infiles(t_content *cont, int i);
 void			manage_outfiles(t_content *cont, int i);
-void			write_on_the_pipe(int (*fds)[2], int num);
-void			read_from_the_pipe(int (*fds)[2], int num);
-void			main_closes_pipes(t_content *cont, int i, int (*fds)[2],
+void			write_on_the_pipe(t_pipes *fds, int num);
+void			read_from_the_pipe(t_pipes *fds, int num);
+void			main_closes_pipes(t_content *cont, int i, t_pipes *fds,
 					int num);
-void			ft_execute_child(t_content *cont, int i, int (*fds)[2],
+void			ft_execute_child(t_content *cont, int i, t_pipes *fds,
 					int num);
-void			execute_first_child(t_content *cont, int i, int (*fds)[2],
+void			execute_first_child(t_content *cont, int i, t_pipes *fds,
 					int num);
-void			execute_middle_children(t_content *cont, int i, int (*fds)[2],
+void			execute_middle_children(t_content *cont, int i, t_pipes *fds,
 					int num);
-void			execute_last_child(t_content *cont, int i, int (*fds)[2],
+void			execute_last_child(t_content *cont, int i, t_pipes *fds,
 					int num);
 int				is_builtin_noredir(t_content *cont, int i);
 int				is_builtin(t_content *cont, int i);

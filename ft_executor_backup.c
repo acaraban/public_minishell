@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_executor.c                                      :+:      :+:    :+:   */
+/*   ft_executor_backup.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 15:46:27 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:23:34 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	init_builtins(t_content *cont, int i)
 {
@@ -28,11 +26,11 @@ void	handle_unlink_error_nfl(t_content *cont, int i)
 	}
 }
 
-void	father_stuff(t_pipes *fds, int i, t_content *cont)
+void	father_stuff(t_executor *exec, int i, t_content *cont, t_pipes *fds)
 {
 	main_closes_pipes(cont, i, fds, i);
-	waitpid(fds->pid, &fds->status, 0);
-	cont->global->err_stat = WEXITSTATUS(fds->status);
+	waitpid(exec->pid, &exec->status, 0);
+	cont->global->err_stat = WEXITSTATUS(exec->status);
 }
 
 /*
@@ -45,11 +43,11 @@ void	father_stuff(t_pipes *fds, int i, t_content *cont)
 
 void	ft_executor(t_content *cont, int num)
 {
+	t_executor	exec;
 	int			i;
-	t_pipes 	*fds;
+	int			fds[num][2];
 
 	i = 0;
-	fds = (t_pipes *)malloc(sizeof(t_pipes) * num);
 	while (i < cont->global->num_cmd)
 	{
 		if (cont[i].cmd)
@@ -57,18 +55,17 @@ void	ft_executor(t_content *cont, int num)
 			if (is_builtin_noredir(cont, i) == 0)
 				return ;
 			init_builtins(cont, i);
-			if (pipe(fds[i].fd) == -1)
+			if (pipe(fds[i]) == -1)
 				return ;
-			fds->pid = fork();
-			if (fds->pid == -1)
+			exec.pid = fork();
+			if (exec.pid == -1)
 				return ;
-			if (fds->pid == 0)
+			if (exec.pid == 0)
 				ft_execute_child(cont, i, fds, i);
-			father_stuff(fds, i, cont);
+			father_stuff(&exec, i, cont, fds);
 		}
 		else if (cont[i].nfl == 2)
 			handle_unlink_error_nfl(cont, i);
 		i++;
 	}
 }
-
