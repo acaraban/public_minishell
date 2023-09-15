@@ -6,15 +6,15 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:29:01 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/14 19:33:44 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:37:41 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void init_typered(t_typered *type)
+void	init_typered(t_typered *type)
 {
-    type->i = 0;
+	type->i = 0;
 	type->h = 0;
 	type->ac = NULL;
 }
@@ -31,13 +31,12 @@ int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type)
 	return (1);
 }
 
-
-int check_type_red(t_typered *type, char **final, t_content *cont, int *boo)
+int	check_type_red(t_typered *type, char **final, t_content *cont, int *boo)
 {
-    if (!all_type_red(type, final, cont))
-    {
-        *boo = 0;
-        return (0);
-    }
-    return (1);
+	if (!all_type_red(type, final, cont))
+	{
+		*boo = 0;
+		return (0);
+	}
+	return (1);
 }

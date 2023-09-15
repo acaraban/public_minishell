@@ -6,13 +6,13 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:46 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:49:47 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:35:54 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int mini_all_type_3(t_typered *type, char **final, t_content *cont)
+int	mini_all_type_3(t_typered *type, char **final, t_content *cont)
 {
 	type->i = ft_type_red_salsim(final, type, cont);
 	if (type->i < 0)
@@ -51,11 +51,11 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 	return (1);
 }
 
-char **arg_parsing(char **final, t_content *cont, int *boo)
+char	**arg_parsing(char **final, t_content *cont, int *boo)
 {
 	t_typered	*type;
-	char **ac;
-	
+	char		**ac;
+
 	type = (t_typered *)malloc(sizeof(t_typered) * 1);
 	init_typered(type);
 	while (final[type->i])
