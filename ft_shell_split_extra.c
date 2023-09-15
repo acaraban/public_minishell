@@ -6,13 +6,13 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:48:50 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:48:51 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:14:31 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_shell_vars(char *s, t_content *cont)
+int	check_shell_vars(char *s, t_content *cont)
 {
 	if (s == NULL)
 		return (1);
@@ -21,9 +21,9 @@ int check_shell_vars(char *s, t_content *cont)
 	return (0);
 }
 
-void shell_split_bucle(char	**dst, int *l, int *j)
+void	shell_split_bucle(char	**dst, int *l, int *j)
 {
-	int r;
+	int	r;
 
 	r = 0;
 	while (dst[*l][r])
@@ -40,23 +40,23 @@ void shell_split_bucle(char	**dst, int *l, int *j)
 	}
 }
 
-int find_match(char *txt, int pos, char c)
+int	find_match(char *txt, int pos, char c)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (txt[pos + i] && txt[pos + i] != c)
 		i++;
 	if (txt[pos + i] != c)
 		return (-1);
-	return(i);
+	return (i);
 }
 
-char *del_char(char *txt, int un)
+char	*del_char(char *txt, int un)
 {
-	char *aux1;
-	char *aux2;
-	char *aux3;
+	char	*aux1;
+	char	*aux2;
+	char	*aux3;
 
 	aux3 = txt;
 	aux1 = ft_substr(aux3, 0, un);
@@ -68,12 +68,12 @@ char *del_char(char *txt, int un)
 	return (aux3);
 }
 
-void check_comillas(char *s, char **dst, t_shell *shell)
+void	check_comillas(char *s, char **dst, t_shell *shell)
 {
-    if (s[shell->i] == '\'' || s[shell->i] == '\"')
-    {
-        shell->aux = shell->i + find_match(s, shell->i, s[shell->i]);
-        while (shell->i < shell->aux)
-            dst[shell->j][shell->k++] = s[shell->i++];
-    }
+	if (s[shell->i] == '\'' || s[shell->i] == '\"')
+	{
+		shell->aux = shell->i + find_match(s, shell->i, s[shell->i]);
+		while (shell->i < shell->aux)
+			dst[shell->j][shell->k++] = s[shell->i++];
+	}
 }
