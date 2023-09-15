@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 12:58:24 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:01:19 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define READ_END 0
 // write end of pipe
 # define WRITE_END 1
-// short for num_of_commands in norminette
-# define SHORT cont->global->num_cmd
 
 typedef struct s_entvar
 {
