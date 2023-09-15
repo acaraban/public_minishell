@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_arg_div.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:49:41 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 12:49:42 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void init_cont_vars(t_global *glb, t_content *cont)
+void	init_cont_vars(t_global *glb, t_content *cont)
 {
 	int			tam;
-	
+
 	tam = 0;
 	while (tam < glb->num_cmd)
 	{
@@ -19,7 +31,7 @@ void init_cont_vars(t_global *glb, t_content *cont)
 	cont->global->environ_path = ft_env_path(cont->global->env);
 }
 
-char *init_argdiv_vars(char *txt)
+char	*init_argdiv_vars(char *txt)
 {
 	int			i;
 	char		*ot;
@@ -42,7 +54,7 @@ int	cmd_str_cont(t_content *cont, char **cmd_str, int h)
 	return (1);
 }
 
-int mini_all_type_1(t_typered *type, char **final, t_content *cont)
+int	mini_all_type_1(t_typered *type, char **final, t_content *cont)
 {
 	type->i = ft_type_red_entsim(final, type, cont);
 	if (type->i < 0)
@@ -53,7 +65,7 @@ int mini_all_type_1(t_typered *type, char **final, t_content *cont)
 	return (1);
 }
 
-int mini_all_type_2(t_typered *type, char **final, t_content *cont)
+int	mini_all_type_2(t_typered *type, char **final, t_content *cont)
 {
 	type->i = ft_type_red_saldbl(final, type, cont);
 	if (type->i < 0)

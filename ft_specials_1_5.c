@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_specials_1_5.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:48:41 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:02:43 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-
-char *ft_specials_1(char *old_txt, t_num *num)
+char	*ft_specials_1(char *old_txt, t_num *num)
 {
-	char *txt;
+	char	*txt;
 
 	txt = ft_strtrim(old_txt, " ");
 	ft_free (old_txt);
@@ -17,7 +28,7 @@ char *ft_specials_1(char *old_txt, t_num *num)
 	return (txt);
 }
 
-int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
+char	*ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 {
 	old_txt = ft_add_varent(txt, num->i, cant[0].global[0].env, cant);
 	ft_free (txt);
@@ -25,13 +36,13 @@ int	ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 	ft_free (old_txt);
 	if (txt == NULL)
 	{
+		num->ent = 2;
 		free_dbl(num->vue);
 		ft_free (txt);
 		txt = NULL;
-		return (0);
+		return (NULL);
 	}
-	ft_printf("este es txt antes: %s\n", txt);
-	return (1);
+	return (txt);
 }
 
 int	ft_specials_3(char *txt, t_num *num, t_content *cant)
@@ -62,7 +73,8 @@ int	ft_specials_4(char *txt, t_num *num, t_content *cant)
 		ft_free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, \
+				num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i + 1);
 	num->i++;
@@ -78,7 +90,8 @@ int	ft_specials_5(char *txt, t_num *num, t_content *cant)
 		ft_free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, \
+				num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i);
 	num->cont = num->i + 1;

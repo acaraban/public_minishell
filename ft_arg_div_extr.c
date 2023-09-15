@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_arg_div_extr.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:49:46 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:35:54 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int mini_all_type_3(t_typered *type, char **final, t_content *cont)
+int	mini_all_type_3(t_typered *type, char **final, t_content *cont)
 {
 	type->i = ft_type_red_salsim(final, type, cont);
 	if (type->i < 0)
@@ -39,23 +51,11 @@ int	all_type_red(t_typered *type, char **final, t_content *cont)
 	return (1);
 }
 
-int	arg_parsing_2(char **final, t_content *cont, int *boo, t_typered *type)
-{
-	type->cmd_str = ft_shell_split(final[type->i], ' ', cont);
-	if (!cmd_str_cont(cont, type->cmd_str, type->h))
-	{
-		*boo = 0;
-		ft_free (type);
-		return (0);
-	}
-	return (1);
-}
-
-char **arg_parsing(char **final, t_content *cont, int *boo)
+char	**arg_parsing(char **final, t_content *cont, int *boo)
 {
 	t_typered	*type;
-	char **ac;
-	
+	char		**ac;
+
 	type = (t_typered *)malloc(sizeof(t_typered) * 1);
 	init_typered(type);
 	while (final[type->i])
@@ -70,17 +70,12 @@ char **arg_parsing(char **final, t_content *cont, int *boo)
 		else
 		{
 			if (check_type_red(type, final, cont, boo) == 0)
-			{
-				*boo = 0;
-				ft_free (type);
-				return (NULL);
-			}
+				return (ft_free (type), NULL);
 		}
 		type->i++;
 	}
 	ac = type->ac;
-	ft_free (type);
-	return (ac);
+	return (ft_free (type), ac);
 }
 
 void	ft_final_arg(char **ac, t_content *cont)
@@ -88,14 +83,18 @@ void	ft_final_arg(char **ac, t_content *cont)
 	if (ac)
 	{
 		if (!ft_heredoc(ac, cont))
+		{
+			ft_free_cont(cont);
+			free_dbl(ac);
 			return ;
+		}
 		free_dbl(ac);
 	}
-	ft_executor(cont);
+	ft_executor(cont, cont->global->num_cmd);
 	ft_free_cont(cont);
 }
 
-void	ft_arg_div(char *txt, t_global *glb)
+int	ft_arg_div(char *txt, t_global *glb)
 {
 	char		**final;
 	t_content	*cont;
@@ -107,18 +106,16 @@ void	ft_arg_div(char *txt, t_global *glb)
 	boo = 1;
 	txt = init_argdiv_vars(txt);
 	if (ft_tam_args(txt, glb) < 0)
-		return ;
+		return (1);
 	glb->num_cmd = ft_tam_args(txt, glb);
 	cont = (t_content *)ft_calloc(sizeof(t_content), glb->num_cmd + 1);
 	init_cont_vars(glb, cont);
 	final = ft_specials(txt, cont);
 	if (final == NULL)
-	{
-		ft_free_cont(cont);
-		return ;
-	}
+		return (ft_free_cont(cont), 1);
 	ac = arg_parsing(final, cont, &boo);
 	free_dbl(final);
 	if (boo)
-		ft_final_arg(ac, cont);
+		return (ft_final_arg(ac, cont), 1);
+	return (1);
 }

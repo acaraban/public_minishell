@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_type_red_pars_entsim.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:48:18 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:14:17 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_type_red_entsim_1(t_typered *type, t_content *cont, t_red *red)
@@ -45,9 +57,9 @@ int	ft_type_red_entsim_2(t_typered *type, t_content *cont, t_red *red)
 
 int	ft_type_red_entsim_3(t_typered *type, t_content *cont)
 {
-	int fd;
+	int	fd;
 
-	fd = open(cont[type->h].infile, O_RDONLY); 
+	fd = open(cont[type->h].infile, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_printf("bash: %s: No such file or directory\n", cont[type->h].infile);
@@ -60,8 +72,8 @@ int	ft_type_red_entsim_3(t_typered *type, t_content *cont)
 
 int	ft_type_red_entsim(char **final, t_typered *type, t_content *cont)
 {
-	t_red *red;
-	int res;
+	t_red	*red;
+	int		res;
 
 	red = (t_red *)malloc(sizeof(t_red) * 1);
 	type->i++;

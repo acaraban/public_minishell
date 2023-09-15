@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ent_var.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:49:26 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:37:00 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -34,34 +45,24 @@ int	str_cmp(char *txt, int pos, char *cmp, char car)
 	lstpos = all_chr(txt, pos);
 	if (lstpos < 0)
 		lstpos = ft_strlen(txt);
-	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i] != car)
+	while (txt[i + pos] == cmp[i] && txt[i + pos] && \
+	cmp[i] != car && i + pos < lstpos)
 		i++;
-	if (!txt[i + pos] && (cmp[i] == car && i + pos == lstpos))
+	if ((!txt[i + pos] && cmp[i] == car) || \
+	(i + pos == lstpos && cmp[i] == car))
 		return (i + 1);
 	return (0);
 }
 
 char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 {
-	int	i;
-	int	par;
-	char *aux;
+	t_entvar	entvar;
 
-	i = 0;
-	par = 0;
-	aux = NULL;
-	if (pos > 0 && txt[pos - 1] == '\"')
-	{
-		if (ft_strchr(txt + pos, '\"'))
-			aux = ft_substr(txt, pos, pos_char(txt + pos, '\"'));
-		else
-			aux = ft_substr(txt, pos, ft_strlen(txt + pos) - 1);
-		
-	}
+	init_ent_vars(&entvar);
+	check_doble_quot(pos, txt, entvar.aux);
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
-	else if (txt[pos + 1] == ' ' || ft_strchr("\"$\'><|", txt[pos + 1]) || \
-			!txt[pos + 1])
+	else if (ft_strchr(" \"$\'><|", txt[pos + 1]) || !txt[pos + 1])
 	{
 		if (txt[pos + 1] == '$')
 			return (ft_strdup("$$"));
@@ -69,53 +70,40 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	}
 	else
 	{
-		while (env[i] && !par)
-		{
-			if (aux)
-				par = str_cmp(aux, 1, env[i], '=');
-			else
-				par = str_cmp(txt, pos + 1, env[i], '=');
-			i++;
-		}
-		if (aux)
-			ft_free (aux);
-		if (par)
-			return (ft_substr(env[i - 1], par, ft_strlen(env[i - 1]) - 1));
+		check_aux_set_par(&entvar, env, txt, pos);
+		if (entvar.aux)
+			ft_free (entvar.aux);
+		if (entvar.par)
+			return (ft_substr(env[entvar.i - 1], \
+			entvar.par, ft_strlen(env[entvar.i - 1]) - 1));
 	}
 	return (NULL);
 }
 
 char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
-	int		i;
-	char	*aux;
-	char	*aux2;
-	char	*add;
+	t_addvarent	varent;
 
-	i = 0;
-	aux = ft_substr(txt, 0, pos);
-	aux2 = ft_ent_var(txt, pos, env, cont);
-	if (aux2 == NULL)
+	init_add_varent_vars(&varent, txt, pos);
+	varent.aux2 = ft_ent_var(txt, pos, env, cont);
+	if (varent.aux2 == NULL)
 	{
 		pos++;
-		ft_free (aux2);
-		while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
-			i++;
-		aux2 = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-		add = ft_strjoin(aux, aux2);
-		ft_free (aux2);
-		ft_free (aux);
-		return (add);
+		ft_free (varent.aux2);
+		while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
+		txt[pos + varent.i]) == NULL)
+			varent.i++;
+		set_values_vars(&varent, txt, pos);
+		return (varent.add);
 	}
 	pos++;
-	add = ft_strjoin(aux, aux2);
-	while (txt[pos + i] && ft_strchr(" \"$\'><|", txt[pos + i]) == NULL)
-		i++;
-	ft_free (aux);
-	aux = ft_substr(txt, pos + i, ft_strlen(txt) - pos - 1);
-	ft_free (aux2);
-	aux2 = ft_strjoin(add, aux);
-	ft_free (add);
-	ft_free (aux);
-	return (aux2);
+	varent.add = ft_strjoin(varent.aux, varent.aux2);
+	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
+	txt[pos + varent.i]) == NULL)
+		varent.i++;
+	ft_free (varent.aux);
+	varent.aux = ft_substr(txt, pos + varent.i, ft_strlen(txt) - pos - 1);
+	ft_free (varent.aux2);
+	varent.aux2 = ft_strjoin(varent.add, varent.aux);
+	return (ft_free (varent.add), ft_free (varent.aux), varent.aux2);
 }

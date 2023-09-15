@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:49:07 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:32:19 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
-t_global *ggg;
+t_global	*g_ggg;
 
 void	handle_sigint(int sig)
 {
@@ -11,7 +23,7 @@ void	handle_sigint(int sig)
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		ggg->err_stat = 1;
+		g_ggg->err_stat = 1;
 	}
 }
 
@@ -45,6 +57,8 @@ void	ft_minishell_bucle(int boo, char *txt, t_global *glb)
 	(not the mac) and deletes it.
 */
 
+//void que (){system("leaks -q minishell");}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*txt;
@@ -56,7 +70,7 @@ int	main(int argc, char **argv, char **env)
 	txt = NULL;
 	glb = NULL;
 	glb = ft_init(glb, env);
-	ggg = glb;
+	g_ggg = glb;
 	boo = 1;
 	ft_minishell_bucle(boo, txt, glb);
 }

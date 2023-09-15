@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:49:16 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:22:19 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
-void init_here_vars(t_here *here)
+void	init_here_vars(t_here *here)
 {
 	here->i = 0;
 	here->r = 0;
@@ -13,7 +24,7 @@ void init_here_vars(t_here *here)
 	here->fd = 0;
 }
 
-void here_condition(t_here *here)
+void	here_condition(t_here *here)
 {
 	if (here->boo)
 	{
@@ -27,8 +38,8 @@ void here_condition(t_here *here)
 
 int	ft_heredoc(char **arr, t_content *cont)
 {
-	t_here *here;
-	
+	t_here	*here;
+
 	here = (t_here *)ft_calloc(sizeof(t_here), 1);
 	init_here_vars(here);
 	while (arr[here->i])
@@ -36,15 +47,14 @@ int	ft_heredoc(char **arr, t_content *cont)
 		if (arr[here->i + 1] == NULL)
 			here_condition(here);
 		ft_free (here->val);
+		cont->global->err_stat = 0;
 		here->val = readline(">");
 		if (!here->val || cont->global->err_stat == 1)
-		{
-			free_no_val(here, cont);
-			return (0);
-		}
+			return (free_no_val(here, cont), 0);
 		if (pos_char(here->val, '$'))
 		{
-			here->aux = ft_add_varent(here->val, pos_char(here->val, '$'), cont[0].global[0].env, cont);
+			here->aux = ft_add_varent(here->val, \
+			pos_char(here->val, '$'), cont[0].global[0].env, cont);
 			val_is_aux(here);
 		}
 		if (!ft_strcmp(arr[here->i], here->val))

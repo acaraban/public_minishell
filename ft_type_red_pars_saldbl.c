@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_type_red_pars_saldbl.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:48:15 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:14:46 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red)
@@ -17,9 +29,9 @@ int	ft_type_red_saldbl_1(t_typered *type, t_content *cont, t_red *red)
 			return (-1);
 		if (red->cmd_str[1])
 		{
-			cont[type->h].full_comand = ft_xtr_allsz_free(cont[type->h].full_comand, red->cmd_str, 1);
+			cont[type->h].full_comand = \
+				ft_xtr_allsz_free(cont[type->h].full_comand, red->cmd_str, 1);
 		}
-			
 		return (1);
 	}
 	return (0);
@@ -49,8 +61,8 @@ int	ft_type_red_saldbl_2(t_typered *type, t_content *cont, t_red *red)
 
 int	ft_type_red_saldbl(char **final, t_typered *type, t_content *cont)
 {
-	t_red *red;
-	int res;
+	t_red	*red;
+	int		res;
 
 	red = (t_red *)malloc(sizeof(t_red) * 1);
 	type->i++;

@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/11 15:08:03 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:27:14 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	father_stuff(t_executor *exec, int i, t_content *cont, int (*fds)[2])
     If cmd is null, do not exec any command.
 */
 
-void	ft_executor(t_content *cont)
+void	ft_executor(t_content *cont, int num)
 {
 	t_executor	exec;
 	int			i;
-	int			fds[SHORT][2];
+	int			fds[num][2];
 
 	i = 0;
 	while (i < cont->global->num_cmd)

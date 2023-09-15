@@ -6,13 +6,13 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:07:43 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/12 17:35:34 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:08:45 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char **alloc_when_null(char **jj, int inicial, int conta)
+char	**alloc_when_null(char **jj, int inicial, int conta)
 {
 	jj = (char **)ft_calloc(sizeof(char *), 2);
 	jj[0] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
@@ -20,7 +20,7 @@ char **alloc_when_null(char **jj, int inicial, int conta)
 	return (jj);
 }
 
-void alloc_and_copy(t_xtr *xtr, int inicial, int conta, char **arr)
+void	alloc_and_copy(t_xtr *xtr, int inicial, int conta, char **arr)
 {
 	xtr->jj[xtr->i] = (char *)ft_calloc(sizeof(char ), conta - inicial + 2);
 	xtr->jj[xtr->i + 1] = NULL;
@@ -31,9 +31,9 @@ void alloc_and_copy(t_xtr *xtr, int inicial, int conta, char **arr)
 	}
 }
 
-void copy_array(int inicial, int conta, t_xtr *xtr, char *txt)
+void	copy_array(int inicial, int conta, t_xtr *xtr, char *txt)
 {
-	int h;
+	int	h;
 
 	h = 0;
 	while (h + inicial < conta + 1)
@@ -43,7 +43,7 @@ void copy_array(int inicial, int conta, t_xtr *xtr, char *txt)
 	}
 }
 
-char **dobl_prt_free(char **arr, char *txt, int inicial, int conta)
+char	**dobl_prt_free(char **arr, char *txt, int inicial, int conta)
 {
 	t_xtr	xtr;
 

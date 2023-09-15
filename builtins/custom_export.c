@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_export.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:45:02 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 12:45:03 by acaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	pos_char(char *txt, char c)
@@ -82,7 +94,8 @@ int	custom_export(t_content *cont, int i)
 			else if (bef_str(cont[i].full_comand[j]))
 			{
 				cont->global->env = dobl_prt_free(cont->global->env, \
-					cont[i].full_comand[j], 0, ft_strlen(cont[i].full_comand[j]));
+					cont[i].full_comand[j], 0, \
+					ft_strlen(cont[i].full_comand[j]));
 			}
 			else
 				err_cmd("formato invalido\n", cont);

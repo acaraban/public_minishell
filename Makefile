@@ -5,13 +5,15 @@ SRCS =	builtins/custom_echo.c \
 		builtins/custom_pwd.c \
 		builtins/custom_unset.c \
 		builtins/custom_cd.c \
-		builtins/custom-cd_utils.c \
+		builtins/custom_cd_utils.c \
+		builtins/custom_cd_extra.c \
 		err_mngment/err_stx.c \
 		err_mngment/err_cmd.c \
 		err_mngment/err_execve.c \
 		ft_arg_div.c \
 		ft_arg_div_more.c \
 		ft_ent_var.c \
+		ft_ent_var_more.c \
 		ft_minishell.c \
 		ft_shell_split.c \
 		ft_shell_split_extra.c \

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_shell_split.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:48:44 by acaraban          #+#    #+#             */
+/*   Updated: 2023/09/15 13:12:18 by msintas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	numstring(char *s1, char c, t_content *cont)
 {
 	int	comp;
 	int	cles;
-	int i;
+	int	i;
 
 	init_numstring_vars(&comp, &cles, &i);
 	if (*s1 == '\0')
@@ -32,7 +44,7 @@ static int	numstring(char *s1, char c, t_content *cont)
 static int	numchar(char *s2, char c, int i)
 {
 	int	lenght;
-	int aux;
+	int	aux;
 
 	lenght = 0;
 	aux = i;
@@ -63,7 +75,7 @@ static char	**freee(char **dst, int j)
 
 static char	**affect(char *s, char **dst, char c, int l)
 {
-	t_shell shell;
+	t_shell	shell;
 
 	shell.i = 0;
 	shell.j = 0;
@@ -72,7 +84,8 @@ static char	**affect(char *s, char **dst, char c, int l)
 		shell.k = 0;
 		while (s[shell.i] == c)
 			shell.i++;
-		dst[shell.j] = (char *)malloc(sizeof(char) * numchar(s, c, shell.i) + 1);
+		dst[shell.j] = (char *)malloc(sizeof(char) * \
+				numchar(s, c, shell.i) + 1);
 		if (dst[shell.j] == NULL)
 			return (freee((char **)dst, shell.j));
 		while (s[shell.i] != '\0' && s[shell.i] != c)
@@ -87,13 +100,11 @@ static char	**affect(char *s, char **dst, char c, int l)
 	return (dst);
 }
 
-
-
 char	**ft_shell_split(char *s, char c, t_content *cont)
 {
 	char	**dst;
 	int		l;
-	int j;
+	int		j;
 
 	if (check_shell_vars(s, cont) == 1)
 		return (NULL);
