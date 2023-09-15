@@ -41,15 +41,17 @@ void	ft_specials_8(char *txt, t_num *num)
 
 char *ft_specials_9(char *txt, t_num *num, t_content *cant, char *old_txt)
 {
+	size_t len;
+
 	num->ent = 0;
 	if ((num->boo == 1 || num->boo == 0) && txt[num->i] == '$')
 	{
+		len = ft_strlen(txt);
 		txt = ft_specials_2(txt, old_txt, num, cant);
+		if (ft_strlen (txt) < len)
+			num->i--;
 		if (txt == NULL)
-		{
-			num->ent = 2;
 			return (NULL);
-		}
 	}
 	else if (num->boo == 1 && (txt[num->i] == '\"'))
 		num->boo = 0;

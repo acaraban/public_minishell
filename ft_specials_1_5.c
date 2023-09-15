@@ -25,6 +25,7 @@ char	*ft_specials_2(char *txt, char *old_txt, t_num *num, t_content *cant)
 	ft_free (old_txt);
 	if (txt == NULL)
 	{
+		num->ent = 2;
 		free_dbl(num->vue);
 		ft_free (txt);
 		txt = NULL;
