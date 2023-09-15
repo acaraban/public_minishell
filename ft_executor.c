@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 15:46:27 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:01:28 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,32 @@ void	father_stuff(t_pipes *fds, int i, t_content *cont)
     If cmd is null, do not exec any command.
 */
 
-void	ft_executor(t_content *cont, int num)
+int	ft_executor(t_content *cont, int num)
 {
-	int			i;
 	t_pipes 	*fds;
 
-	i = 0;
 	fds = (t_pipes *)malloc(sizeof(t_pipes) * num);
-	while (i < cont->global->num_cmd)
+	fds->i = 0;
+	while (fds->i < num)
 	{
-		if (cont[i].cmd)
+		if (cont[fds->i].cmd)
 		{
-			if (is_builtin_noredir(cont, i) == 0)
-				return ;
-			init_builtins(cont, i);
-			if (pipe(fds[i].fd) == -1)
-				return ;
+			if (is_builtin_noredir(cont, fds->i, fds) == 0)
+				return (ft_free(fds), 0);
+			init_builtins(cont, fds->i);
+			if (pipe(fds[fds->i].fd) == -1)
+				return (ft_free(fds), 0);
 			fds->pid = fork();
 			if (fds->pid == -1)
-				return ;
+				return (ft_free(fds), 0);
 			if (fds->pid == 0)
-				ft_execute_child(cont, i, fds, i);
-			father_stuff(fds, i, cont);
+				ft_execute_child(cont, fds->i, fds, fds->i);
+			father_stuff(fds, fds->i, cont);
 		}
-		else if (cont[i].nfl == 2)
-			handle_unlink_error_nfl(cont, i);
-		i++;
+		else if (cont[fds->i].nfl == 2)
+			handle_unlink_error_nfl(cont, fds->i);
+		fds->i++;
 	}
+	return (ft_free(fds), 0);
 }
 

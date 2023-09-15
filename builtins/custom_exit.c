@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:11:19 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/05 19:47:00 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:58:58 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ void	check_options(char *options, char *cmd)
 	}
 }
 
-void	custom_exit(t_content *cont, int i)
+void	custom_exit(t_content *cont, int i, t_pipes *fds)
 {
 	if (cont[i].full_comand[1])
 	{
 		check_options(cont[i].full_comand[1], cont[i].cmd);
 	}
 	printf("exit\n");
+	ft_free(fds);
 	exit(0);
 }

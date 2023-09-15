@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:52:41 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 13:33:58 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:02:59 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
     Return 0 --> it is a built-in without redir
 */
 
-int	is_builtin_noredir(t_content *cont, int i)
+int	is_builtin_noredir(t_content *cont, int i, t_pipes *fds)
 {
 	if (ft_strcmp(cont[i].full_comand[0], "cd") == 0)
 	{
@@ -38,7 +38,7 @@ int	is_builtin_noredir(t_content *cont, int i)
 		return (0);
 	}
 	else if ((ft_strcmp(cont[i].full_comand[0], "exit") == 0))
-		custom_exit(cont, i);
+		custom_exit(cont, i, fds);
 	else if ((ft_strcmp(cont[i].full_comand[0], "unset") == 0))
 	{
 		custom_unset(cont, i);
