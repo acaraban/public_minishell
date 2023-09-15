@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:48:23 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:48:24 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:12:54 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	ft_type_red_entdbl_1(t_typered *type, t_content *cont, t_red *red)
 	if (!type->ac)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
-		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], 0, ft_strlen(red->cmd_str[0]));
+		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], 0, \
+		ft_strlen(red->cmd_str[0]));
 	cont[type->h].infile = ft_strdup(".heredoc.minishell");
 	if (red->cmd_str[1])
-		cont[type->h].full_comand = ft_xtr_allsz_free(cont[type->h].full_comand, red->cmd_str, 1);
+		cont[type->h].full_comand = \
+		ft_xtr_allsz_free(cont[type->h].full_comand, red->cmd_str, 1);
 }
 
 void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red)
@@ -32,7 +34,8 @@ void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red)
 	if (!type->ac)
 		type->ac = ft_dbl_strdup_str(red->cmd_str[0]);
 	else
-		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], 0, ft_strlen(red->cmd_str[0]));
+		type->ac = dobl_prt_free(type->ac, red->cmd_str[0], \
+		0, ft_strlen(red->cmd_str[0]));
 	cont[type->h].infile = ft_strdup(".heredoc.minishell");
 	if (red->cmd_str[1])
 	{
@@ -49,7 +52,7 @@ void	ft_type_red_entdbl_2(t_typered *type, t_content *cont, t_red *red)
 
 char	**ft_type_red_entdbl(char **final, t_typered *type, t_content *cont)
 {
-	t_red *red;
+	t_red	*red;
 
 	red = (t_red *)malloc(sizeof(t_red) * 1);
 	type->i++;

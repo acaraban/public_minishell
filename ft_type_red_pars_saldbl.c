@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:48:15 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:48:16 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:14:46 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_type_red_saldbl_2(t_typered *type, t_content *cont, t_red *red)
 int	ft_type_red_saldbl(char **final, t_typered *type, t_content *cont)
 {
 	t_red	*red;
-	int 	res;
+	int		res;
 
 	red = (t_red *)malloc(sizeof(t_red) * 1);
 	type->i++;
