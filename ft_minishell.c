@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:07 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:49:08 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:24:16 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-t_global *ggg;
+t_global	*ggg;
 
 void	handle_sigint(int sig)
 {
@@ -64,8 +64,6 @@ int	main(int argc, char **argv, char **env)
 	char		*txt;
 	t_global	*glb;
 	int			boo;
-
-	//atexit(que);
 
 	(void)argc;
 	(void)argv;

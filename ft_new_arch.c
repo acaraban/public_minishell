@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:04 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:49:05 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:22:34 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int	new_arch(char *name)
 {
 	char	*namfile;
-	int			descfile;
+	int		descfile;
 
 	namfile = ft_strdup(name);
 	descfile = open(namfile, O_WRONLY | O_CREAT, 0644);
@@ -37,10 +37,10 @@ int	new_arch(char *name)
 	return (1);
 }
 
-int ft_tam_args(char *txt, t_global *glb)
+int	ft_tam_args(char *txt, t_global *glb)
 {
-	int i;
-	int tam;
+	int	i;
+	int	tam;
 
 	i = 0;
 	tam = 1;
@@ -64,11 +64,11 @@ int ft_tam_args(char *txt, t_global *glb)
 	return (tam);
 }
 
-char **convert_str_trim(char **vue)
+char	**convert_str_trim(char **vue)
 {
-	int i;
-	char *aux;
-	
+	int		i;
+	char	*aux;
+
 	i = 0;
 	while (vue[i])
 	{
