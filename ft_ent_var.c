@@ -6,10 +6,9 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:26 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:49:27 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:37:00 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -46,9 +45,11 @@ int	str_cmp(char *txt, int pos, char *cmp, char car)
 	lstpos = all_chr(txt, pos);
 	if (lstpos < 0)
 		lstpos = ft_strlen(txt);
-	while (txt[i + pos] == cmp[i] && txt[i + pos] && cmp[i] != car && i + pos < lstpos)
+	while (txt[i + pos] == cmp[i] && txt[i + pos] && \
+	cmp[i] != car && i + pos < lstpos)
 		i++;
-	if ((!txt[i + pos] && cmp[i] == car) || (i + pos == lstpos && cmp[i] == car))
+	if ((!txt[i + pos] && cmp[i] == car) || \
+	(i + pos == lstpos && cmp[i] == car))
 		return (i + 1);
 	return (0);
 }
@@ -73,7 +74,8 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 		if (entvar.aux)
 			ft_free (entvar.aux);
 		if (entvar.par)
-			return (ft_substr(env[entvar.i - 1], entvar.par, ft_strlen(env[entvar.i - 1]) - 1));
+			return (ft_substr(env[entvar.i - 1], \
+			entvar.par, ft_strlen(env[entvar.i - 1]) - 1));
 	}
 	return (NULL);
 }
@@ -81,27 +83,27 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 {
 	t_addvarent	varent;
-		
+
 	init_add_varent_vars(&varent, txt, pos);
 	varent.aux2 = ft_ent_var(txt, pos, env, cont);
 	if (varent.aux2 == NULL)
 	{
 		pos++;
 		ft_free (varent.aux2);
-		while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", txt[pos + varent.i]) == NULL)
+		while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
+		txt[pos + varent.i]) == NULL)
 			varent.i++;
 		set_values_vars(&varent, txt, pos);
 		return (varent.add);
 	}
 	pos++;
 	varent.add = ft_strjoin(varent.aux, varent.aux2);
-	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", txt[pos + varent.i]) == NULL)
+	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
+	txt[pos + varent.i]) == NULL)
 		varent.i++;
 	ft_free (varent.aux);
 	varent.aux = ft_substr(txt, pos + varent.i, ft_strlen(txt) - pos - 1);
 	ft_free (varent.aux2);
 	varent.aux2 = ft_strjoin(varent.add, varent.aux);
-	ft_free (varent.add);
-	ft_free (varent.aux);
-	return (varent.aux2);
+	return (ft_free (varent.add), ft_free (varent.aux), varent.aux2);
 }
