@@ -6,16 +6,15 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:48:41 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 12:48:42 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:02:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char *ft_specials_1(char *old_txt, t_num *num)
+char	*ft_specials_1(char *old_txt, t_num *num)
 {
-	char *txt;
+	char	*txt;
 
 	txt = ft_strtrim(old_txt, " ");
 	ft_free (old_txt);
@@ -74,7 +73,8 @@ int	ft_specials_4(char *txt, t_num *num, t_content *cant)
 		ft_free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, \
+				num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i + 1);
 	num->i++;
@@ -90,7 +90,8 @@ int	ft_specials_5(char *txt, t_num *num, t_content *cant)
 		ft_free (txt);
 		return (0);
 	}
-	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, num->cont, num->i - 1, ' '))
+	if (num->i > 1 && num->cont < num->i - 1 && same_char_across(txt, \
+				num->cont, num->i - 1, ' '))
 		num->vue = dobl_prt_free(num->vue, txt, num->cont, num->i - 1);
 	num->vue = dobl_prt_free(num->vue, txt, num->i, num->i);
 	num->cont = num->i + 1;

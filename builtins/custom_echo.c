@@ -6,22 +6,19 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:10:37 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 12:38:13 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:49:55 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// desde donde se imprime, el 2
-//ft_printf("%s", cont[i].full_comand[2]);
-
 void	custom_echo(t_content *cont, int i)
 {
-	int n;
-	int total;
+	int	n;
+	int	total;
 
 	n = 0;
-	while(cont[i].full_comand[n])
+	while (cont[i].full_comand[n])
 		n++;
 	total = n;
 	n = 2;
@@ -29,7 +26,7 @@ void	custom_echo(t_content *cont, int i)
 		exit(EXIT_SUCCESS);
 	else
 	{
-		while(cont[i].full_comand[n])
+		while (cont[i].full_comand[n])
 		{
 			if (n == 2 || n == total)
 				ft_printf("%s", cont[i].full_comand[n]);
