@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/16 16:02:09 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:52:21 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void			check_aux_set_par(t_entvar *entvar, char **env, char *txt,
 					int pos);
 void			set_values_vars(t_addvarent *varent, char *txt, int pos);
 void			init_add_varent_vars(t_addvarent *varent, char *txt, int pos);
-void			check_doble_quot(int pos, char *txt, char *aux);
+char			*check_doble_quot(int pos, char *txt, char *aux);
 int				find_match(char *txt, int pos, char c);
 char			*del_char(char *txt, int un);
 char			**ft_shell_split(char *s, char c, t_content *cont);
