@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:59:04 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/16 14:24:02 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:25:34 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	father_stuff(t_pipes *fds, int i, t_content *cont)
 	main_closes_pipes(cont, i, fds, i);
 	if (fds->i == cont->global->num_cmd - 1)
 	{
-		//ft_putstr_fd(ft_strjoin(ft_strjoin(cont[fds->i].cmd, ": "), ": soy el ultimo comando\n"), 2);
 		waitpid(fds->pid, &fds->status, 0);
 	}
-	//waitpid(fds->pid, &fds->status, 0);
 	cont->global->err_stat = WEXITSTATUS(fds->status);
 }
 
