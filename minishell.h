@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 16:25:12 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:09:41 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,7 +295,6 @@ int				cmd_has_path(t_content *cont, int i);
 void			check_for_path(t_content *cont, int i);
 int				cmd_is_program(t_content *cont, int i);
 void			ft_delete_env_oldpwd(char **environment);
-void			check_options(char *options, char *cmd);
 int				same_char_across(char *str, int pos_ini, int pos_fin, char c);
 
 #endif
