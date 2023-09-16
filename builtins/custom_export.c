@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:45:02 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 18:48:57 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:01:20 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,8 @@ int	custom_export(t_content *cont, int i)
 			else if (bef_str(cont[i].full_comand[j]))
 			{
 				cont->global->env = dobl_prt_free(cont->global->env, \
-					cont[i].full_comand[j], 0, \
-					ft_strlen(cont[i].full_comand[j]));
+				cont[i].full_comand[j], 0, ft_strlen(cont[i].full_comand[j]));
 			}
-			
 			j++;
 		}
 		return (1);
