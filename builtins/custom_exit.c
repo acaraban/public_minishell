@@ -6,7 +6,7 @@
 /*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:11:19 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/16 14:43:46 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:37:57 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	handle_exit_non_numeric(t_content *cont, int i)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(ft_strjoin(ft_strjoin(ft_strjoin(cont[i].cmd, ": "), \
 				cont[i].full_comand[1]), ": numeric argument required\n"), 2);
-	exit (EXIT_FAILURE);
+	cont->global->err_stat = 255;
+	exit (cont->global->err_stat);
 }
 
 void	handle_exit_digits(t_content *cont, int i)
@@ -41,9 +42,7 @@ int	check_options(t_content *cont, int i)
 	n = 0;
 	if (cont[i].full_comand[2])
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(ft_strjoin(ft_strjoin(cont[i].cmd, ": "), \
-					": too many arguments\n"), 2);
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (2);
 	}
 	while (cont[i].full_comand[1][n])
