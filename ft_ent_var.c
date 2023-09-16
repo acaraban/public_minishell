@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ent_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:26 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 18:41:28 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:01:31 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ char	*ft_add_varent(char *txt, int pos, char **env, t_content *cont)
 	while (txt[pos + varent.i] && ft_strchr(" \"$\'><|", \
 	txt[pos + varent.i]) == NULL)
 		varent.i++;
-	ft_free (varent.aux);
-	varent.aux = ft_substr(txt, pos + varent.i, ft_strlen(txt) - pos - 1);
-	ft_free (varent.aux2);
-	varent.aux2 = ft_strjoin(varent.add, varent.aux);
+	make_varent(&varent, txt, pos);
 	return (ft_free (varent.add), ft_free (varent.aux), varent.aux2);
 }

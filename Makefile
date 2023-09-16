@@ -14,6 +14,7 @@ SRCS =	builtins/custom_echo.c \
 		ft_arg_div_more.c \
 		ft_ent_var.c \
 		ft_ent_var_more.c \
+		ft_ent_var_extra.c \
 		ft_minishell.c \
 		ft_shell_split.c \
 		ft_shell_split_extra.c \
