@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:16 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/15 13:22:19 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:04:24 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_heredoc(char **arr, t_content *cont)
 		here->val = readline(">");
 		if (!here->val || cont->global->err_stat == 1)
 			return (free_no_val(here, cont), 0);
-		if (pos_char(here->val, '$'))
+		if (pos_char(here->val, '$') > -1)
 		{
 			here->aux = ft_add_varent(here->val, \
 			pos_char(here->val, '$'), cont[0].global[0].env, cont);
