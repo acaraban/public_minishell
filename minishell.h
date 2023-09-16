@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:11:48 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/16 16:52:21 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:59:43 by msintas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int				all_chr(char *txt, int pos);
 int				str_cmp(char *txt, int pos, char *cmp, char car);
 char			*ft_ent_var(char *txt, int pos, char **env, t_content *cont);
 char			*ft_add_varent(char *txt, int pos, char **env, t_content *cont);
-void	make_varent(t_addvarent *varent, char *txt, int pos);
+void			make_varent(t_addvarent *varent, char *txt, int pos);
 void			init_ent_vars(t_entvar *entvar);
 void			check_aux_set_par(t_entvar *entvar, char **env, char *txt,
 					int pos);
