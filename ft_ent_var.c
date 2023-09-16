@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ent_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msintas- <msintas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:26 by acaraban          #+#    #+#             */
-/*   Updated: 2023/09/16 16:01:31 by msintas-         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:51:31 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_ent_var(char *txt, int pos, char **env, t_content *cont)
 	t_entvar	entvar;
 
 	init_ent_vars(&entvar);
-	check_doble_quot(pos, txt, entvar.aux);
+	entvar.aux = check_doble_quot(pos, txt, entvar.aux);
 	if (txt[pos + 1] == '?')
 		return (ft_itoa(cont[0].global[0].new_stat));
 	else if (ft_strchr(" \"$\'><|", txt[pos + 1]) || !txt[pos + 1])

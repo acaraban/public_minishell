@@ -6,7 +6,7 @@
 /*   By: acaraban <acaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:23:51 by msintas-          #+#    #+#             */
-/*   Updated: 2023/09/15 13:33:40 by acaraban         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:52:43 by acaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_add_varent_vars(t_addvarent	*varent, char *txt, int pos)
 	varent->aux = ft_substr(txt, 0, pos);
 }
 
-void	check_doble_quot(int pos, char *txt, char *aux)
+char	*check_doble_quot(int pos, char *txt, char *aux)
 {
 	if (pos > 0 && txt[pos - 1] == '\"')
 	{
@@ -34,6 +34,7 @@ void	check_doble_quot(int pos, char *txt, char *aux)
 		else
 			aux = ft_substr(txt, pos, ft_strlen(txt + pos) - 1);
 	}
+	return (aux);
 }
 
 void	check_aux_set_par(t_entvar *entvar, char **env, char *txt, int pos)
